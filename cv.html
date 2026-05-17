@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhishek Karki – CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #eef2f5;
+      font-family: 'Inter', sans-serif;
+      color: #1e2a3e;
+      padding: 2rem;
+      line-height: 1.5;
+    }
+    .cv-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .cv-inner {
+      display: grid;
+      grid-template-columns: 34% 66%;
+    }
+    .sidebar {
+      background: #1a4972;
+      color: white;
+      padding: 2rem 1.8rem;
+      text-align: center;
+    }
+    .profile-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #f4a261;
+      margin-bottom: 1rem;
+      background: #eef2fa;
+    }
+    .name { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .title {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid rgba(255,255,255,0.3);
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.8rem 0;
+      letter-spacing: 1px;
+      border-left: 3px solid #f4a261;
+      padding-left: 0.7rem;
+      text-align: left;
+    }
+    .contact-info p {
+      font-size: 0.8rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-align: left;
+    }
+    .contact-info i { width: 1.2rem; font-size: 0.85rem; }
+    .skill-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.3rem;
+      text-align: left;
+    }
+    .skill-list li {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.4;
+    }
+    .skill-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #f4a261;
+      font-size: 0.75rem;
+    }
+    .main-content { padding: 2rem; }
+    .main-section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a4972;
+      margin: 1.2rem 0 0.8rem 0;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0.3rem;
+      display: inline-block;
+    }
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .job-title { font-size: 0.9rem; color: #0f3455; }
+    .job-date { font-weight: normal; font-size: 0.75rem; color: #5b6e8c; }
+    .company { font-weight: 600; font-size: 0.85rem; color: #2c6e9e; margin-bottom: 0.5rem; }
+    .job-list, .project-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.3rem;
+    }
+    .job-list li, .project-list li {
+      font-size: 0.85rem;
+      margin-bottom: 0.45rem;
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.4;
+    }
+    .job-list li::before, .project-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #1a4972;
+      font-size: 0.7rem;
+    }
+    .project-badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .project-badge {
+      background: #3a86c8;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .edu-detail { margin-top: 0.2rem; font-size: 0.85rem; }
+
+    @media (max-width: 700px) {
+      .cv-inner { grid-template-columns: 1fr; }
+      body { padding: 1rem; }
+      .profile-photo { width: 100px; height: 100px; }
+    }
+  </style>
+</head>
+<body>
+<div class="cv-container">
+  <div class="cv-inner">
+    <div class="sidebar">
+      <img src="assets/profile.jpg" alt="Abhishek Karki" class="profile-photo">
+      <div class="name">Abhishek Karki</div>
+      <div class="title">Civil Engineer | GIS & Remote Sensing </div>
+      
+      <div class="section-title">Contact</div>
+      <div class="contact-info">
+        <p><i class="fas fa-map-marker-alt"></i> Balkot, Bhaktapur, Nepal</p>
+        <p><i class="fas fa-phone-alt"></i> 9860959598</p>
+        <p><i class="fas fa-envelope"></i> abhishekkarki520@gmail.com</p>
+        <p><i class="fab fa-linkedin"></i> linkedin.com/in/abhishek-karki-9b034524a</p>
+        <p><i class="fas fa-passport"></i> Citizenship No: 13-01-74-01921</p>
+      </div>
+
+      <div class="section-title">Professional Membership</div>
+      <div style="text-align: left; font-size: 0.8rem; margin-bottom: 0.5rem;">Nepal Engineering Council (NEC) – Reg. 80593</div>
+
+      <div class="section-title">Core Skills</div>
+      <ul class="skill-list"><li>AutoCAD / Civil 3D</li><li>STAAD Pro / SAP2000</li><li>Primavera P6 / MS Project</li><li>ArcGIS / QGIS</li><li>Google Earth Engine</li><li>HEC-RAS 1D/2D</li><li>GeoStudio</li><li>DGPS / Total Station / UAV Drone</li><li>SketchUp / Revit / NavisWorks</li><li>HAP 6.2</li></ul>
+
+      <div class="section-title">Certifications</div>
+      <ul class="skill-list"><li>SAP Structural Analysis Training</li><li>AutoCAD Drafting & Design</li><li>ABI Pier Structural Design Workshop</li></ul>
+
+      <div class="section-title">Interests</div>
+      <ul class="skill-list"><li>Design & Planning</li><li>Data Analysis</li><li>Disaster Risk Management</li><li>Geospatial analysis</li></ul>
+
+      <div class="section-title">Languages</div>
+      <ul class="skill-list"><li>🇳🇵 Nepali (Native)</li><li>🇬🇧 English (Fluent)</li></ul>
+
+      <div class="section-title">References</div>
+      <div style="font-size: 0.75rem; margin-top: 0.3rem; text-align: left;">
+        <p><strong>Mrs. Suprimsa Shrestha</strong><br>HR Manager, Sigma Con Pvt. Ltd<br>9851159320 | suprimsa@sigmacon.com.np</p>
+        <p style="margin-top: 0.5rem;"><strong>Er. Ghana Raj Lohani</strong><br>Project Manager, Sigma Con Pvt. Ltd<br>9851003080 | grlohani@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="main-section-title">Career Objective</div>
+      <p>Civil Engineer with site experience and growing expertise in GIS, remote sensing, and disaster risk mapping. Skilled in integrating engineering design with data-driven infrastructure monitoring. Committed to delivering practical, innovative solutions.</p>
+
+      <div class="main-section-title">Work Experience</div>
+      <div class="job">
+        <div class="job-header"><span class="job-title">Civil Engineer</span><span class="job-date">Aug 29, 2023 – Jul 14, 2025</span></div>
+        <div class="company">Sigma Con Pvt. Ltd – Transmission & Substation Projects</div>
+        <div><strong>Projects involved:</strong></div>
+        <div class="project-badge-list">
+          <span class="project-badge">Balefi 132kV TL</span>
+          <span class="project-badge">Lalbandi-Salempur 132kV + Substation</span>
+          <span class="project-badge">Dhalkebar-Balganga 132kV</span>
+          <span class="project-badge">Sandikharga–Tamghas–Burtibang 132kV</span>
+          <span class="project-badge">Tamghas Substation</span>
+        </div>
+        <ul class="job-list">
+          <li>Prepared substation layout drawings and individual switchyard components using AutoCAD and Civil 3D; used SketchUp and Revit for 3D modeling to aid visualization and construction planning.</li>
+          <li>Reviewed and performed structural analysis using STAAD Pro for understanding modeling, load analysis, and design criteria.</li>
+          <li>Used ArcGIS to adjust tower locations due to land disputes and allocate right-of-way, managing all related documentation for client submission.</li>
+          <li>Prepared detailed estimates, BOQs, quotations for all project structures; created Bar Bending Schedules (BBS) to ensure structural integrity.</li>
+          <li>Planned and coordinated work schedules using Primavera, maintaining progress and coordinating between subcontractors and clients.</li>
+          <li><strong>Survey tasks:</strong> DGPS (topographic maps, contours, profiles, cross-sections, earthwork volumes); Total Station (stub setting, staking, anchor bolt layout); Auto Level (design levels for staff quarters, control rooms, switchyard).</li>
+          <li>Supervised civil construction works for transmission line tower foundations, staff quarters, control room building, and switchyard structures – ensured quality compliance as per specifications and contract documents.</li>
+          <li>Prepared Interim Payment Certificates (IPC), invoices, and billing documents for clients, linking estimates and field measurements to ensure accurate billing and timely payment.</li>
+          <li>Carried out soil and material tests (concrete, cement, rebar, aggregates) and prepared reports.</li>
+          <li>Recorded day-to-day site progress through photographs and documented daily reports for project tracking.</li>
+        </ul>
+      </div>
+
+      <div class="main-section-title">Academic Projects</div>
+      <ul class="job-list">
+        <li><strong>Survey Camp (5th Semester):</strong> 15‑day field survey using total station and auto level; prepared topographic maps, road alignment, profiles, cross sections, contour maps.</li>
+        <li><strong>ABI Pier Project (4th Semester):</strong> Designed Adjustable Base Isolation Pier system; prototype + seismic load analysis; presented on Earthquake Day (Magh 2).</li>
+        <li><strong>Estimation and Costing (7th Semester):</strong> Cost estimation, rate analysis, detailed BOQ for a 3‑story residential building.</li>
+        <li><strong>Stability Analysis & Mitigation Design of Sisneri Landslide, Solukhumbu (8th semester):</strong> Drone survey + geotechnical analysis; slope slip surface using GeoStudio; hydrological data from GEE; designed gabion walls, drains, soil reinforcements, bioengineering – presented in ArcGIS maps.</li>
+      </ul>
+
+      <div class="main-section-title">Personal & Freelance Projects</div>
+      <ul class="job-list">
+        <li><strong>HVAC System Design & Modeling (2024):</strong> Designed for a laboratory (client: Griffith University student, Australia) – HAP 6.0, component selection, duct sizing, market research, report generation.</li>
+        <li><strong>3D Building Planning & Modeling (2023-2024):</strong> SketchUp and Revit for private clients – detailed architectural visualizations.</li>
+        <li><strong>Structural Analysis for Client Buildings (2024):</strong> STAAD Pro analysis for one of the drafted buildings to ensure structural integrity.</li>
+      </ul>
+
+      <div class="main-section-title">Geospatial & Infrastructure Projects</div>
+      <ul class="job-list">
+        <li><strong>InSAR Time Series for Highway Subsidence:</strong> Processed 13 Sentinel-1 images (SNAP+SNAPHU) – Goldstein filtering, phase unwrapping, A10 highway subsidence profiles & time‑series graph.</li>
+        <li><strong>NDVI Timelapse of Kathmandu Valley:</strong> 28 Landsat/Sentinel-2 images in GEE – cloud masking, NDVI, 5‑class timelapse, exported 1080p MP4.</li>
+        <li><strong>Hospital Accessibility in Colorado:</strong> Network drive-time analysis – 30/60‑min service areas, population coverage 35.6% / 61.3%, spatial disparity mapping.</li>
+        <li><strong>Urban Sprawl of Kathmandu Valley:</strong> Landsat NDBI + ALOS PALSAR slope filtering – validated urban expansion map.</li>
+        <li><strong>UAV Landslide Susceptibility Mapping:</strong> Drone orthomosaic/DEM generation, slope/aspect analysis, weighted overlay hazard zonation.</li>
+        <li><strong>2D Unsteady Flood Inundation:</strong> HEC-RAS 2D unsteady flow, DEM preparation, hydrograph simulation, flood depth/velocity mapping.</li>
+      </ul>
+
+      <div class="main-section-title">Education</div>
+      <div class="job">
+        <div class="job-header"><span class="job-title">MSc Disaster Risk Management (DREM)</span><span class="job-date">2026 – 2028 (Present)</span></div>
+        <div class="edu-detail">Tribhuwan University, IOE Pulchowk Campus</div>
+      </div>
+      <div class="job">
+        <div class="job-header"><span class="job-title">B.E. Civil Engineering</span><span class="job-date">2022</span></div>
+        <div class="edu-detail">Khwopa Engineering College, Libali, Bhaktapur | CGPA 3.43</div>
+        <div class="edu-detail"><strong>🏅 Ranked 1st in 7th and 8th semesters</strong></div>
+      </div>
+      <div class="job">
+        <div class="job-header"><span class="job-title">+2 Science (NEB)</span><span class="job-date">2074 B.S.</span></div>
+        <div class="edu-detail">Sainik Awasiya Mahavidhyalaya, Sallaghari, Bhaktapur</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
