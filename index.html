@@ -194,7 +194,7 @@
       margin-bottom: 0.5rem;
     }
     .project-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: 700; }
-    .project-desc { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .project-desc { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.4; display: -webkit-box; line-clamp: 3; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
     .tech-tag {
       background: #f1f5f9;
@@ -673,13 +673,14 @@
   </div>
 </section>
 
-<!-- Freelance & Personal Projects (including Sisneri with corrected path) -->
+<!-- Freelance & Personal Projects -->
 <section id="freelance" class="section">
   <div class="container">
     <div class="section-header">
       <div class="section-tag">Independent Work</div>
       <h2 class="section-title">Freelance & Personal Projects</h2>
     </div>
+    <!-- Freelance cards (HVAC, 3D, structural, drafting, ABI, Sisneri) – unchanged -->
     <div class="freelance-card" id="freelance-hvac">
       <div class="freelance-header">
         <h3>HVAC System Design & Modeling</h3>
@@ -748,7 +749,7 @@
       <div class="thumbnail-gallery" id="gallery-abi"></div>
     </div>
 
-    <!-- Sisneri Landslide Project (Final Year) – corrected path: assets/portfolio-photos/sisneri-landslide/ -->
+    <!-- Sisneri Landslide Project (Final Year) -->
     <div class="freelance-card" id="freelance-sisneri">
       <div class="freelance-header">
         <h3>Slope Stability & Mitigation Design of Sisneri Landslide</h3>
@@ -798,7 +799,7 @@
 </div>
 
 <script>
-  // ==================== CORE PROJECTS DATA (7 projects) ====================
+  // ==================== CORE PROJECTS DATA (8 projects – added Earthquake) ====================
   const projectsData = [
     {
       title: "InSAR Time Series for Highway Subsidence",
@@ -923,6 +924,20 @@
         { type: "image", src: "Screenshot 2026-05-17 091526.png", caption: "Corridor model" },
         { type: "image", src: "Screenshot 2026-05-17 091539.png", caption: "Quantity takeoff report" },
         { type: "image", src: "Screenshot 2026-05-17 091603.png", caption: "3D visualization of backfill" }
+      ]
+    },
+    // NEW: Earthquake Analysis of Nepal
+    {
+      title: "Earthquake Analysis of Nepal",
+      category: "Seismology / GIS",
+      location: "Nepal (Gorkha 2015 & other events)",
+      shortDesc: "Analysis of major earthquake mainshocks in Nepal using spatial data. Includes animation of seismic events and PDF reports.",
+      tech: ["ArcGIS","Google Earth Engine","Animation"],
+      full: "Compiled and analyzed earthquake mainshock data for Nepal. Created an animated timeline of seismic events, including the 2015 Gorkha earthquake. Prepared detailed PDF reports on mainshock distribution and magnitude analysis.",
+      pdf: "assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf",
+      credits: "",
+      media: [
+        { type: "video", src: "Nepal_EarthQuakes_Animation.mp4", caption: "Animation of earthquake mainshocks in Nepal (timelapse)" }
       ]
     }
   ];
@@ -1055,7 +1070,6 @@
     },
     'abi': { files: ['1.jpeg'], captions: ["Presentation on EarthQuake Day Magh-2 of ABI Pier prototype structure with load testing setup"] },
     'sisneri': {
-      // Correct folder: assets/portfolio-photos/sisneri-landslide/
       files: [
         'Damage due to Landslide.JPG',
         'Group Members.JPG',
@@ -1116,7 +1130,6 @@
   window.openFreelanceGallery=function(catId,startIdx){
     const cat=freelanceImages[catId];
     if(!cat||!cat.files.length) return;
-    // Special handling for sisneri: use portfolio-photos path
     let basePath = `assets/freelance-photos/${catId}/`;
     if (catId === 'sisneri') basePath = `assets/portfolio-photos/${catId}/`;
     const mediaArray=cat.files.map((f,i)=>({ src: basePath + encodeURI(f), caption:(cat.captions&&cat.captions[i])?cat.captions[i]:f.replace(/\.(jpg|png|jpeg)$/i,'').replace(/[_\-]/g,' ') }));
@@ -1139,6 +1152,7 @@
       else if(p.title.includes('UAV')) icon='fa-drone';
       else if(p.title.includes('Flood')) icon='fa-water';
       else if(p.title.includes('Substation')) icon='fa-cubes';
+      else if(p.title.includes('Earthquake')) icon='fa-waveform';
       return `<div class="project-card" onclick="showProject(${idx})"><div class="project-icon"><i class="fas ${icon}"></i></div><div class="project-category">${p.category}</div><h3>${p.title}</h3><p class="project-desc">${p.shortDesc.substring(0,110)}...</p><div class="tech-stack">${p.tech.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div></div>`;
     }).join('');
   }
@@ -1153,7 +1167,8 @@
       'urban-sprawl-analysis-of-kathmandu-valley-2016-2026':'urban-sprawl',
       'uav-landslide-susceptibility-mapping':'uav-landslide',
       'flood-inundation-mapping':'flood',
-      'substation-backfill-volumetric-analysis-civil-3d':'civil3d'
+      'substation-backfill-volumetric-analysis-civil-3d':'civil3d',
+      'earthquake-analysis-of-nepal':'earthquake'
     };
     const actualFolder=folderMap[folderName]||folderName;
     const basePath=`assets/portfolio-photos/${actualFolder}/`;
