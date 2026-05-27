@@ -1,0 +1,32 @@
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.temp
+
+# Node (if used for tooling)
+node_modules/
+npm-debug.log*
+
+# Build artifacts
+dist/
+build/
+
+# Environment
+.env
+.env.local
+
+# Cloned skill repo (not needed for deployment)
+ui-ux-pro-max-skill/

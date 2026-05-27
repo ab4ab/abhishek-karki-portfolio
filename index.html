@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Abhishek Karki | Civil Engineer & GIS Expert</title>
-  <!-- Google Fonts + Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -15,29 +14,26 @@
     }
 
     :root {
-      --bg: #f4f9fe;
+      --bg: #f8fafc;
       --surface: #ffffff;
-      --primary: #1e4a76;
-      --primary-dark: #0f3a5a;
-      --secondary: #2c7da0;
-      --accent: #e9b35f;
-      --accent-dark: #d49a3a;
-      --text-primary: #0f2b3d;
-      --text-secondary: #2c4b66;
-      --text-muted: #5a6e7c;
-      --border-light: #e2edf2;
-      --shadow-xs: 0 2px 8px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
-      --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 16px 32px -12px rgba(0, 32, 64, 0.12);
-      --shadow-hover: 0 28px 40px -16px rgba(18, 52, 77, 0.2);
-      --radius-card: 28px;
-      --radius-element: 20px;
+      --primary: #1e5a88;
+      --primary-light: #eef4fc;
+      --primary-dark: #134b73;
+      --secondary: #3b82f6;
+      --accent: #f59e0b;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+      --shadow-md: 0 12px 24px -8px rgba(0, 0, 0, 0.08);
+      --radius-lg: 28px;
+      --radius-md: 18px;
     }
 
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
-      color: var(--text-primary);
+      color: var(--text-main);
       line-height: 1.5;
       scroll-behavior: smooth;
     }
@@ -48,23 +44,23 @@
       padding: 0 2rem;
     }
 
-    /* Navbar */
+    /* navbar */
     .navbar {
       position: fixed;
       top: 0;
       width: 100%;
       background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(14px);
-      z-index: 1100;
-      border-bottom: 1px solid var(--border-light);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
       transition: all 0.2s;
     }
 
-    .nav-container {
+    .nav-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.9rem 2rem;
+      padding: 1rem 2rem;
       max-width: 1280px;
       margin: 0 auto;
     }
@@ -81,114 +77,115 @@
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.8rem;
       list-style: none;
       align-items: center;
-      flex-wrap: wrap;
     }
 
     .nav-links a {
       text-decoration: none;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       font-weight: 500;
       transition: 0.2s;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--primary);
     }
 
-    .resume-nav {
+    .resume-btn {
       background: var(--primary);
       color: white !important;
       padding: 0.4rem 1.2rem;
       border-radius: 40px;
-      transition: all 0.2s;
     }
 
-    .resume-nav:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--primary);
+      cursor: pointer;
     }
 
-    /* Hero */
+    /* hero */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       padding: 7rem 0 4rem;
-      position: relative;
-      background: linear-gradient(112deg, #eef5fa 0%, #ffffff 100%);
+      background: linear-gradient(110deg, #f1f5f9 0%, #ffffff 100%);
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 680px;
     }
 
     .hero-badge {
-      background: var(--primary);
-      color: white;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--primary-light);
       padding: 0.3rem 1.2rem;
       border-radius: 40px;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
+      color: var(--primary);
       margin-bottom: 1.5rem;
-      letter-spacing: 0.3px;
     }
 
     .hero h1 {
-      font-size: 3.8rem;
+      font-size: 3.6rem;
       font-weight: 800;
       letter-spacing: -1.5px;
       margin-bottom: 0.75rem;
-      color: var(--text-primary);
+      color: var(--text-main);
     }
 
-    .hero h1 span:first-child {
-      color: var(--primary);
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     .hero-title {
-      font-size: 1.35rem;
-      color: var(--secondary);
+      font-size: 1.25rem;
       font-weight: 600;
-      margin-bottom: 1.2rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
     }
 
     .hero-desc {
       color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 560px;
+      font-size: 1rem;
+      max-width: 520px;
       margin-bottom: 2rem;
     }
 
-    .contact-info {
+    .contact-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.8rem;
-      margin-bottom: 2.2rem;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
     }
 
-    .contact-info a, .contact-info span {
+    .contact-row a,
+    .contact-row span {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 0.9rem;
-      font-weight: 500;
-      transition: 0.2s;
+      transition: color 0.2s;
     }
 
-    .contact-info a:hover {
-      color: var(--accent-dark);
-    }
-
-    .contact-info i {
+    .contact-row a:hover {
       color: var(--primary);
-      width: 1.2rem;
     }
 
     .btn-group {
@@ -207,19 +204,18 @@
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      transition: all 0.25s ease;
-      box-shadow: 0 6px 14px rgba(30, 74, 118, 0.2);
+      transition: all 0.25s;
+      box-shadow: 0 4px 12px rgba(30, 90, 136, 0.15);
     }
 
     .btn-primary:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 12px 22px rgba(30, 74, 118, 0.25);
     }
 
     .btn-outline {
-      background: transparent;
       border: 1.5px solid var(--primary);
+      background: transparent;
       color: var(--primary);
       padding: 0.75rem 2rem;
       border-radius: 40px;
@@ -234,7 +230,7 @@
       transform: translateY(-2px);
     }
 
-    /* Sections */
+    /* sections */
     .section {
       padding: 5rem 0;
     }
@@ -245,81 +241,81 @@
     }
 
     .section-tag {
-      background: #e1eff8;
+      background: var(--primary-light);
       color: var(--primary);
       display: inline-block;
       padding: 0.25rem 1.2rem;
       border-radius: 40px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
       margin-bottom: 1rem;
     }
 
     .section-title {
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--text-main);
       letter-spacing: -0.5px;
     }
 
-    /* project grid */
+    /* projects grid */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 2rem;
     }
 
     .project-card {
       background: var(--surface);
-      border-radius: var(--radius-card);
-      padding: 1.8rem;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
       box-shadow: var(--shadow-sm);
-      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
       cursor: pointer;
     }
 
     .project-card:hover {
       transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--secondary);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
     }
 
     .project-icon {
-      width: 56px;
-      height: 56px;
-      background: #eef3fc;
-      border-radius: 20px;
+      width: 52px;
+      height: 52px;
+      background: var(--primary-light);
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.2rem;
     }
 
     .project-icon i {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: var(--primary);
     }
 
     .project-category {
       font-size: 0.7rem;
-      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       color: var(--secondary);
       font-weight: 700;
-      margin-bottom: 0.6rem;
-      text-transform: uppercase;
+      margin-bottom: 0.5rem;
     }
 
     .project-card h3 {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
 
     .project-desc {
       color: var(--text-muted);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       margin-bottom: 1rem;
       line-height: 1.45;
       display: -webkit-box;
@@ -333,13 +329,12 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-top: 0.5rem;
     }
 
     .tech-tag {
-      background: #f0f4f9;
-      padding: 0.25rem 0.9rem;
-      border-radius: 40px;
+      background: #f1f5f9;
+      padding: 0.25rem 0.8rem;
+      border-radius: 30px;
       font-size: 0.7rem;
       font-weight: 500;
       color: var(--primary-dark);
@@ -348,21 +343,21 @@
     /* experience card */
     .exp-card {
       background: var(--surface);
-      border-radius: var(--radius-card);
+      border-radius: var(--radius-lg);
       padding: 2rem;
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-light);
     }
 
     .exp-header {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     .exp-header h3 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--primary);
     }
@@ -370,61 +365,45 @@
     .exp-date {
       color: var(--text-muted);
       font-size: 0.85rem;
-      font-weight: 500;
     }
 
-    .project-badge-list {
+    .site-badges {
       display: flex;
       flex-wrap: wrap;
       gap: 0.8rem;
-      margin: 1rem 0 1rem 0;
+      margin: 1.2rem 0 1rem;
     }
 
-    .project-badge {
-      background: #f3f7fc;
-      padding: 0.5rem 1rem;
+    .site-badge {
+      background: #f1f5f9;
+      padding: 0.45rem 1rem;
       border-radius: 40px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 500;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      transition: all 0.1s;
     }
 
-    .map-link, .kmz-link, .photo-btn {
-      color: var(--primary);
-      text-decoration: none;
-      background: transparent;
+    .site-badge button {
+      background: none;
       border: none;
       cursor: pointer;
-      font-size: 0.85rem;
-    }
-
-    .photo-btn {
-      background: var(--secondary);
-      color: white;
-      padding: 0.2rem 0.7rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      margin-left: 0.5rem;
-      transition: 0.2s;
-    }
-
-    .photo-btn:hover {
-      background: var(--primary-dark);
+      color: var(--primary);
+      font-size: 0.8rem;
     }
 
     .exp-list {
       list-style: none;
-      margin-top: 1.2rem;
+      margin-top: 1rem;
     }
 
     .exp-list li {
-      padding-left: 1.5rem;
+      padding-left: 1.3rem;
       position: relative;
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.6rem;
       font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
     .exp-list li::before {
@@ -432,32 +411,32 @@
       position: absolute;
       left: 0;
       color: var(--accent);
-      font-weight: bold;
     }
 
-    /* skill cards */
+    /* skills grid */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 1.5rem;
     }
 
     .skill-card {
       background: var(--surface);
-      border-radius: 24px;
+      border-radius: var(--radius-md);
       padding: 1.5rem;
-      border: 1px solid var(--border-light);
-      transition: transform 0.2s;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
     }
 
     .skill-card:hover {
+      border-color: var(--primary);
       transform: translateY(-3px);
     }
 
     .skill-card h4 {
       display: flex;
       align-items: center;
-      gap: 0.7rem;
+      gap: 0.6rem;
       margin-bottom: 1rem;
       font-weight: 700;
       color: var(--primary);
@@ -466,293 +445,533 @@
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .skill-tag {
-      background: #f0f6fa;
+      background: #f1f5f9;
       padding: 0.3rem 1rem;
-      border-radius: 40px;
-      font-size: 0.8rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
       font-weight: 500;
+    }
+
+    /* education cards */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
 
     .edu-card {
       background: var(--surface);
-      border-radius: 24px;
+      border-radius: var(--radius-md);
       padding: 1.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border);
     }
 
-    .cgpa-badge {
-      background: var(--accent);
-      color: #2c3e2f;
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
-      font-size: 0.7rem;
+    .edu-card h3 {
+      font-size: 1.1rem;
       font-weight: 700;
+      color: var(--primary);
+    }
+
+    .edu-badge {
       display: inline-block;
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
+      background: var(--primary-light);
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--primary);
     }
 
-    .cert-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-
-    .cert-item {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      border: 1px solid var(--border-light);
-    }
-
-    .thumbnail-gallery {
+    /* certifications */
+    .certs-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.9rem;
-      margin: 1.2rem 0 0.5rem;
+      gap: 1.2rem;
+      justify-content: center;
     }
 
-    .thumbnail {
-      width: 110px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: 2px solid transparent;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .thumbnail:hover {
-      transform: scale(1.02);
-      border-color: var(--secondary);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .freelance-card {
+    .cert-card {
       background: var(--surface);
-      border-radius: var(--radius-card);
-      padding: 2rem;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border-light);
-      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
-    /* modals */
-    .modal, .carousel-modal, .video-modal {
+    .cert-thumb {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: 0.2s;
+    }
+
+    .cert-thumb:hover {
+      transform: scale(1.02);
+      border-color: var(--primary);
+    }
+
+    /* freelance cards */
+    .fl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .fl-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      border: 1px solid var(--border);
+    }
+
+    .fl-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .fl-date {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+    }
+
+    .fl-thumbnails {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 1rem 0;
+    }
+
+    .fl-thumb {
+      width: 85px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: 0.2s;
+    }
+
+    .fl-thumb:hover {
+      transform: scale(1.03);
+      border-color: var(--primary);
+    }
+
+    /* contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+    }
+
+    .contact-info-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: var(--primary);
+      transform: translateX(4px);
+    }
+
+    .contact-form {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 1.8rem;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: white;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 90, 136, 0.1);
+    }
+
+    .submit-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    footer {
+      background: #eef2f6;
+      text-align: center;
+      padding: 2.5rem;
+      margin-top: 2rem;
+      border-radius: 32px 32px 0 0;
+    }
+
+    /* modal */
+    .modal {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
       z-index: 2000;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
-    .modal.active, .carousel-modal.active, .video-modal.active {
+    .modal.active {
       display: flex;
     }
 
     .modal-content {
-      background: var(--surface);
-      max-width: 800px;
+      background: white;
+      max-width: 750px;
       width: 90%;
-      border-radius: 36px;
-      overflow: hidden;
-      animation: fadeUp 0.25s ease;
+      border-radius: 28px;
       max-height: 85vh;
-      display: flex;
-      flex-direction: column;
+      overflow-y: auto;
     }
 
     .modal-header {
       background: var(--primary);
       color: white;
-      padding: 1.2rem 1.8rem;
-      position: relative;
+      padding: 1.2rem 1.5rem;
+      border-radius: 28px 28px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .modal-body {
       padding: 1.8rem;
-      overflow-y: auto;
     }
 
-    .close-modal {
-      position: absolute;
-      right: 1.5rem;
-      top: 1rem;
-      font-size: 1.6rem;
+    .modal-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+
+    .modal-thumb {
+      width: 100px;
+      height: 75px;
+      object-fit: cover;
+      border-radius: 12px;
       cursor: pointer;
     }
 
-    .carousel-content {
-      position: relative;
-      max-width: 90vw;
-      max-height: 90vh;
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
     }
 
-    .carousel-image {
-      max-width: 90vw;
-      max-height: 75vh;
-      border-radius: 24px;
-      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+    .lightbox.active {
+      display: flex;
     }
 
-    .carousel-prev, .carousel-next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      font-size: 1.8rem;
-      padding: 0.5rem;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      cursor: pointer;
-    }
-
-    .close-carousel, .close-video {
-      position: absolute;
-      top: -40px;
-      right: 0;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
-    footer {
-      background: #0d2f3a;
-      color: #cfdfe6;
-      text-align: center;
-      padding: 3rem 1.5rem;
-      border-top-left-radius: 32px;
-      border-top-right-radius: 32px;
-      margin-top: 2rem;
+    .lb-img {
+      max-width: 85vw;
+      max-height: 80vh;
+      border-radius: 16px;
     }
 
     @media (max-width: 800px) {
-      .nav-links { gap: 1.2rem; }
-      .hero h1 { font-size: 2.5rem; }
-      .section-title { font-size: 1.9rem; }
-      .container { padding: 0 1.2rem; }
-      .thumbnail { width: 85px; height: 65px; }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .btn-pdf {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--primary);
-      color: white;
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      text-decoration: none;
-      font-size: 0.8rem;
-      margin-top: 1rem;
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .menu-btn {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
+
 <nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">Abhishek<span style="color:#2c7da0;">Karki</span></div>
-    <ul class="nav-links">
+  <div class="nav-inner">
+    <div class="logo">Abhishek<span style="color:#3b82f6;">Karki</span></div>
+    <button class="menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li><li><a href="#projects">Projects</a></li><li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li><li><a href="#certifications">Certifications</a></li><li><a href="#freelance">Freelance</a></li>
-      <li><a href="#contact">Contact</a></li><li><a href="cv.html" class="resume-nav" target="_blank">Resume</a></li>
+      <li><a href="#skills">Skills</a></li><li><a href="#education">Education</a></li><li><a href="#freelance">Freelance</a></li>
+      <li><a href="#contact">Contact</a></li><li><a href="cv.html" target="_blank" class="resume-btn">Resume</a></li>
     </ul>
   </div>
 </nav>
 
 <section id="home" class="hero">
-  <div class="container"><div class="hero-content">
-    <div class="hero-badge">NEC Reg. 80593 | Civil Engineer</div>
-    <h1><span>Abhishek</span> <span>Karki</span></h1>
-    <div class="hero-title">Civil Engineer | GIS & Remote Sensing | MSc. DREM</div>
-    <p class="hero-desc">Integrating engineering design with geospatial intelligence — 2+ years field experience in transmission projects, GIS hazard mapping, and infrastructure analytics.</p>
-    <div class="contact-info">
-      <span><i class="fas fa-map-marker-alt"></i> Balkot, Bhaktapur</span>
-      <a href="tel:9860959598"><i class="fas fa-phone-alt"></i> 9860959598</a>
-      <a href="mailto:abhishekkarki520@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-      <a href="https://www.linkedin.com/in/abhishek-karki-9b034524a/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-id-card"></i> NEC Reg. #80593 · Civil Engineer</div>
+      <h1><span>Abhishek</span> Karki</h1>
+      <div class="hero-title">Civil Engineer | GIS & Remote Sensing | MSc. DREM Candidate</div>
+      <p class="hero-desc">Integrating engineering precision with geospatial intelligence — 2+ years field experience in transmission projects, hazard mapping, and spatial analytics.</p>
+      <div class="contact-row">
+        <span><i class="fas fa-map-marker-alt"></i> Balkot, Bhaktapur</span>
+        <a href="tel:9860959598"><i class="fas fa-phone-alt"></i> 9860959598</a>
+        <a href="mailto:abhishekkarki520@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        <a href="https://www.linkedin.com/in/abhishek-karki-9b034524a/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      </div>
+      <div class="btn-group">
+        <a href="#projects" class="btn-primary"><i class="fas fa-arrow-down"></i> Explore Work</a>
+        <a href="cv.html" target="_blank" class="btn-outline"><i class="fas fa-file-alt"></i> Resume</a>
+      </div>
     </div>
-    <div class="btn-group"><a href="#projects" class="btn-primary"><i class="fas fa-arrow-down"></i> Explore Work</a><a href="cv.html" target="_blank" class="btn-outline"><i class="fas fa-file-alt"></i> Resume</a></div>
-  </div></div>
+  </div>
 </section>
 
-<section id="projects" class="section"><div class="container"><div class="section-header"><div class="section-tag">Portfolio</div><h2 class="section-title">Core Geospatial & Engineering Projects</h2></div><div class="projects-grid" id="projectsGrid"></div></div></section>
+<section id="projects" class="section"><div class="container"><div class="section-header"><div class="section-tag">Portfolio</div><h2 class="section-title">Geospatial & Engineering Projects</h2></div><div class="projects-grid" id="projectsGrid"></div></div></section>
 
-<section id="experience" class="section"><div class="container"><div class="section-header"><div class="section-tag">Career</div><h2 class="section-title">Field & Design Experience</h2></div><div class="exp-card"><div class="exp-header"><h3>Civil Engineer</h3><span class="exp-date">Aug 2023 – Jul 2025</span></div><div class="exp-company">Sigma Con Pvt. Ltd – Transmission & Substation Projects</div><div class="project-badge-list" id="workBadges"></div><ul class="exp-list"><li>AutoCAD/Civil 3D substation layouts, 3D models (SketchUp, Revit).</li><li>ArcGIS for tower relocation, ROW documentation & land dispute analysis.</li><li>Estimates, BOQ, BBS, IPC billing & client coordination.</li><li>DGPS surveying → contours, cross sections, earthwork volumes; Total Station for stub setting.</li><li>Supervised foundations, control rooms, switchyard; material testing.</li><li>Primavera scheduling & subcontractor management.</li></ul></div></div></section>
+<section id="experience" class="section" style="background:#f1f6fe;"><div class="container"><div class="section-header"><div class="section-tag">Career</div><h2 class="section-title">Field & Design Experience</h2></div><div class="exp-card"><div class="exp-header"><h3>Civil Engineer</h3><span class="exp-date">Aug 2023 – Jul 2025</span></div><div class="exp-company" style="margin-bottom:0.2rem;">Sigma Con Pvt. Ltd – Transmission & Substation Projects</div><div class="site-badges" id="siteBadges"></div><ul class="exp-list"><li>AutoCAD/Civil 3D substation layouts; 3D models (SketchUp, Revit).</li><li>ArcGIS for tower relocation, ROW documentation & land dispute.</li><li>Estimates, BOQ, BBS, IPC billing & client coordination.</li><li>DGPS surveying → contours, cross-sections, earthwork volumes.</li><li>Supervised foundations, control rooms, switchyard; material testing.</li><li>Primavera P6 scheduling & subcontractor management across 5 sites.</li></ul></div></div></section>
 
-<section id="education" class="section"><div class="container"><div class="section-header"><div class="section-tag">Academics</div><h2 class="section-title">Education</h2></div><div class="edu-card"><h3>MSc Disaster Risk Management (DREM)</h3><p>Tribhuwan University, IOE Pulchowk | 2026–Present</p></div><div class="edu-card"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College | 2022 | CGPA 3.43</p><span class="cgpa-badge">🏅 Ranked 1st in 7th & 8th semesters</span></div><div class="edu-card"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya | 2074 BS</p></div></div></section>
+<section id="skills" class="section"><div class="container"><div class="section-header"><div class="section-tag">Expertise</div><h2 class="section-title">Technical Toolbox</h2></div><div class="skills-grid" id="skillsGrid"></div></div></section>
 
-<section id="skills" class="section"><div class="container"><div class="section-header"><div class="section-tag">Expertise</div><h2 class="section-title">Technical Toolbox</h2></div><div class="skills-grid"><div class="skill-card"><h4><i class="fas fa-drafting-compass"></i> Drafting</h4><div class="skill-tags"><span class="skill-tag">AutoCAD</span><span class="skill-tag">Civil 3D</span></div></div><div class="skill-card"><h4><i class="fas fa-calculator"></i> Structural</h4><div class="skill-tags"><span class="skill-tag">STAAD Pro</span><span class="skill-tag">SAP2000</span></div></div><div class="skill-card"><h4><i class="fas fa-ruler-combined"></i> Surveying</h4><div class="skill-tags"><span class="skill-tag">DGPS</span><span class="skill-tag">Total Station</span><span class="skill-tag">UAV</span></div></div><div class="skill-card"><h4><i class="fas fa-map"></i> GIS & RS</h4><div class="skill-tags"><span class="skill-tag">ArcGIS Pro</span><span class="skill-tag">QGIS</span><span class="skill-tag">GEE</span><span class="skill-tag">SNAP</span></div></div><div class="skill-card"><h4><i class="fas fa-water"></i> Hydrology</h4><div class="skill-tags"><span class="skill-tag">HEC-RAS 1D/2D</span></div></div><div class="skill-card"><h4><i class="fas fa-tasks"></i> PM</h4><div class="skill-tags"><span class="skill-tag">Primavera P6</span><span class="skill-tag">MS Project</span></div></div></div></div></section>
+<section id="education" class="section" style="background:#f1f6fe;"><div class="container"><div class="section-header"><div class="section-tag">Academics</div><h2 class="section-title">Education</h2></div><div class="edu-grid"><div class="edu-card"><h3>MSc Disaster Risk & Emergency Management</h3><p>Tribhuvan University, IOE Pulchowk | 2026–Present</p><div class="edu-badge"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Ongoing</div></div><div class="edu-card"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College | 2022 | CGPA 3.43</p><div class="edu-badge">🏅 Ranked 1st in 7th & 8th semesters</div></div><div class="edu-card"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya | 2074 BS</p></div></div></div></section>
 
-<section id="certifications" class="section"><div class="container"><div class="section-header"><div class="section-tag">Credentials</div><h2 class="section-title">Certifications & Membership</h2></div><div class="cert-grid"><div class="cert-item"><i class="fas fa-certificate" style="font-size:1.8rem;color:#1e4a76;"></i><div><strong>SAP2000 Training</strong><br>Advanced structural analysis</div></div><div class="cert-item"><i class="fas fa-drafting-compass"></i><div><strong>AutoCAD Professional</strong><br>Design & drafting</div></div><div class="cert-item"><i class="fas fa-id-card"></i><div><strong>Nepal Engineering Council</strong><br>Reg. 80593</div></div><div class="cert-item"><i class="fas fa-layer-group"></i><div><strong>ABI Pier Workshop</strong><br>Seismic isolation</div></div></div><div class="thumbnail-gallery" id="certificateGallery"></div></div></section>
+<section id="certifications" class="section"><div class="container"><div class="section-header"><div class="section-tag">Credentials</div><h2 class="section-title">Certifications</h2></div><div class="certs-grid" id="certsGrid"></div><div style="display:flex; gap:1rem; justify-content:center; margin-top:2rem;" id="certThumbs"></div></div></section>
 
-<section id="freelance" class="section"><div class="container"><div class="section-header"><div class="section-tag">Independent</div><h2 class="section-title">Freelance & Personal Projects</h2></div><div id="freelanceContainer"></div></div></section>
+<section id="freelance" class="section" style="background:#f1f6fe;"><div class="container"><div class="section-header"><div class="section-tag">Independent</div><h2 class="section-title">Freelance & Personal Projects</h2></div><div class="fl-grid" id="flGrid"></div></div></section>
 
-<footer id="contact"><div class="container"><p><strong>References</strong><br>Mrs. Suprimsa Shrestha (HR Manager, Sigma Con) | Er. Ghana Raj Lohani (Project Manager)</p><p style="margin: 1rem 0;">📧 abhishekkarki520@gmail.com | 📞 9860959598 | Balkot, Bhaktapur</p><p>Registered Civil Engineer (NEC #80593) | Built with precision for GIS & infrastructure</p><p style="margin-top:1rem;">&copy; 2025 Abhishek Karki – authentic projects</p></div></footer>
+<section id="contact" class="section"><div class="container"><div class="section-header"><div class="section-tag">Connect</div><h2 class="section-title">Let's Work Together</h2></div><div class="contact-grid"><div class="contact-info-stack"><a href="mailto:abhishekkarki520@gmail.com" class="contact-card"><i class="fas fa-envelope" style="font-size:1.3rem; color:var(--primary);"></i><div><strong>Email</strong><br>abhishekkarki520@gmail.com</div></a><a href="tel:9860959598" class="contact-card"><i class="fas fa-phone-alt" style="font-size:1.3rem; color:var(--primary);"></i><div><strong>Phone</strong><br>+977 9860959598</div></a><div class="contact-card"><i class="fas fa-map-marker-alt" style="font-size:1.3rem; color:var(--primary);"></i><div><strong>Location</strong><br>Balkot, Bhaktapur, Nepal</div></div><div class="contact-card"><i class="fas fa-user-tie" style="font-size:1.3rem; color:var(--primary);"></i><div><strong>References</strong><br>Available upon request (Sigma Con)</div></div></div><form class="contact-form" id="contactForm"><div class="form-group"><label>Full Name</label><input type="text" required></div><div class="form-group"><label>Email</label><input type="email" required></div><div class="form-group"><label>Message</label><textarea rows="4" required></textarea></div><button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button></form></div></div></section>
 
-<div id="modal" class="modal"><div class="modal-content"><div class="modal-header"><span class="close-modal">&times;</span><h3 id="modalTitle"></h3></div><div class="modal-body" id="modalBody"></div></div></div>
-<div id="carouselModal" class="carousel-modal"><div class="carousel-content"><button class="close-carousel" onclick="closeCarousel()">&times;</button><button class="carousel-prev" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button><img id="carouselImage" class="carousel-image"><button class="carousel-next" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button><div id="carouselCaption" class="carousel-caption"></div></div></div>
-<div id="videoModal" class="video-modal"><div class="video-content"><button class="close-video" onclick="closeVideoModal()">&times;</button><video id="videoPlayer" controls></video></div></div>
+<footer><div class="container"><p>Abhishek Karki — Civil Engineer & GIS Specialist | NEC #80593</p><p style="margin-top:0.5rem; font-size:0.8rem;">© 2025 | Built with precision</p></div></footer>
+
+<!-- Modals -->
+<div id="projectModal" class="modal"><div class="modal-content"><div class="modal-header"><span id="modalTitle"></span><span style="cursor:pointer; font-size:1.5rem;" onclick="closeModal()">&times;</span></div><div class="modal-body" id="modalBody"></div></div></div>
+<div id="lightbox" class="lightbox" onclick="closeLightbox()"><img id="lbImg" class="lb-img" src=""></div>
 
 <script>
-// ---- FULL DATA (projects, workImages, freelanceImages, certificates) from original robust dataset ----
-const projectsData = [ /* 8 projects as original, shortened for brevity but complete functionality */ 
-  {title:"InSAR Time Series for Highway Subsidence",category:"InSAR / Geotech",location:"Sloterdijk to Rijksweg, Netherlands",shortDesc:"13 Sentinel-1 images (Jan–May 2024) processed with SNAP+SNAPHU – displacement maps.",tech:["SNAP","SNAPHU"],full:"Processed 13 Sentinel-1 SLC images, Goldstein filtering, phase unwrapping, terrain correction.",media:[{type:"image",src:"Screenshot 2026-05-08 194722.png",caption:"Interferogram"},{type:"image",src:"Screenshot 2026-05-08 203715.png",caption:"Displacement map"},{type:"image",src:"Screenshot 2026-05-10 125056.png",caption:"Filtered interferogram"},{type:"image",src:"Screenshot 2026-05-10 194901.png",caption:"Unwrapped phase"}],pdf:"assets/portfolio-photos/insar/insar.pdf"},
-  {title:"NDVI Timelapse of Kathmandu Valley (2000–2026)",category:"Remote Sensing",location:"Kathmandu Valley",shortDesc:"26-year vegetation change using Landsat & Sentinel-2, GEE timelapse",tech:["Google Earth Engine"],full:"28 images, cloud masking, NDVI timelapse exported 1080p.",media:[{type:"image",src:"GEE1.jpg",caption:"NDVI classification"},{type:"image",src:"GEE2.jpg",caption:"Change detection"},{type:"video",src:"Map.mp4",caption:"Timelapse animation"}],pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf"},
-  {title:"Hospital Accessibility in Colorado",category:"GIS",location:"Colorado, USA",shortDesc:"Network drive-time analysis – 30/60‑min service areas",tech:["ArcGIS Network Analyst"],full:"Generated service areas, population coverage analysis.",media:[{type:"image",src:"30min_Map.png",caption:"30-min drive"},{type:"image",src:"60_min Map.png",caption:"60-min drive"},{type:"image",src:"PopulationMap.png",caption:"Population overlay"}],pdf:""},
-  {title:"Urban Sprawl Analysis of Kathmandu Valley (2016–2026)",category:"GIS",location:"Kathmandu",shortDesc:"Landsat NDBI change, ALOS PALSAR slope filtering",tech:["Landsat","ArcGIS"],full:"NDBI change detection, slope filtering, validated expansion map.",media:[{type:"image",src:"2016.png",caption:"NDBI 2016"},{type:"image",src:"2026.png",caption:"NDBI 2026"},{type:"image",src:"slopemap.png",caption:"Slope map"},{type:"image",src:"Urban Sprawl.png",caption:"Expansion map"}],pdf:""},
-  {title:"UAV Landslide Susceptibility Mapping",category:"UAV/GIS",location:"Shalme, Sisneri",shortDesc:"UAV orthomosaic/DEM, weighted overlay hazard zonation",tech:["Agisoft","ArcGIS"],full:"High‑resolution DEM, terrain factors, hazard zonation.",media:[{type:"image",src:"Aspect Map.png",caption:"Aspect"},{type:"image",src:"BaseMap.png",caption:"Orthomosaic"},{type:"image",src:"Slope Map.png",caption:"Slope"},{type:"image",src:"Weighted Overlay.png",caption:"Susceptibility"}],pdf:""},
-  {title:"Flood Inundation Mapping",category:"Hydrology",location:"Narayani River, Nepal",shortDesc:"HEC-RAS 2D unsteady flow, flood depth/velocity mapping",tech:["HEC-RAS 2D"],full:"DEM preparation, 2D unsteady simulation, flood hazard classification.",media:[{type:"image",src:"Screenshot 2026-04-23 230415.png",caption:"2D mesh"},{type:"image",src:"Screenshot 2026-04-23 233808.png",caption:"Flood depth"},{type:"image",src:"Screenshot 2026-05-17 090826.png",caption:"WSE profile"}],pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf"},
-  {title:"Substation Backfill Volumetric Analysis (Civil 3D)",category:"Civil 3D",location:"Balganga",shortDesc:"DGPS → surface modeling → cut/fill volumes",tech:["Civil 3D"],full:"Surface creation, corridors, quantity estimation.",media:[{type:"image",src:"Screenshot 2026-05-17 091158.png",caption:"DGPS points"},{type:"image",src:"Screenshot 2026-05-17 091210.png",caption:"Existing surface"},{type:"image",src:"Screenshot 2026-05-17 091238.png",caption:"Cut/fill"}],pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf"},
-  {title:"Earthquake Analysis of Nepal",category:"Seismology / GIS",location:"Nepal (1978-2025)",shortDesc:"Analysis of major mainshocks, declustering, animated ShakeMaps",tech:["ArcGIS","Python"],full:"USGS catalog, Gardner‑Knopoff declustering, mainshock analysis.",media:[{type:"video",src:"Nepal EarthQuake ShakeMaps.mp4",caption:"ShakeMaps animation"},{type:"image",src:"earthquake mainshocks.png",caption:"Mainshocks map"}],pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf"}
-];
-const workImages = { balefi:{folder:"Balefi",files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg'],captions:["Tower Erection","Concreting"]}, lalbandi:{folder:"Salempur",files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg'],captions:["Substation view","Plastering"]}, dhalkebar:{folder:"Balganga",files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg'],captions:["Foundation","Control Room"]}, sandikharga:{folder:"Burtibang",files:['IMG_20231121_112353.jpg'],captions:["Tower Erection"]}, tamghas:{folder:"Tamghas",files:['IMG_20231119_124336.jpg'],captions:["Transformer"]} };
-const freelanceImages = { hvac:{files:['duct-layout.png'],captions:["HVAC design"]}, '3d-modeling':{files:['1.png','2.png'],captions:["3D Model 1","3D Model 2"]}, 'structural-analysis':{files:['1.png','2.png'],captions:["STAAD model","Load Analysis"]}, drafting:{files:['1.png','2.png'],captions:["CAD Layout","Site Plan"]}, abi:{files:['1.jpeg'],captions:["ABI prototype"]}, sisneri:{files:['Damage due to Landslide.JPG'],captions:["Landslide site"]} };
-const certificateImages = [{file:'autocad.jpg',caption:'AutoCAD Cert'},{file:'NEC.png',caption:'NEC Registration'}];
-const kmzFiles = { balefi:'balefi_route.kmz', lalbandi:'lalbandi_route.kmz' };
-window.downloadKMZ=function(pid){ const a=document.createElement('a'); a.href=`assets/kmz/${kmzFiles[pid]}`; a.download=kmzFiles[pid]; document.body.appendChild(a); a.click(); document.body.removeChild(a); };
-let currentMediaList=[], currentMediaIndex=0;
-function openMediaGallery(arr,idx){ currentMediaList=arr; currentMediaIndex=idx; updateCarousel(); document.getElementById('carouselModal').classList.add('active'); }
-function updateCarousel(){ const img=document.getElementById('carouselImage'),cap=document.getElementById('carouselCaption'); if(currentMediaList.length){ img.src=currentMediaList[currentMediaIndex].src; cap.innerText=currentMediaList[currentMediaIndex].caption; } }
-window.nextImage=function(){ if(currentMediaList.length) currentMediaIndex=(currentMediaIndex+1)%currentMediaList.length; updateCarousel(); };
-window.prevImage=function(){ if(currentMediaList.length) currentMediaIndex=(currentMediaIndex-1+currentMediaList.length)%currentMediaList.length; updateCarousel(); };
-window.closeCarousel=function(){ document.getElementById('carouselModal').classList.remove('active'); };
-window.openVideoModal=function(src){ const vm=document.getElementById('videoModal'), vp=document.getElementById('videoPlayer'); vp.src=src; vp.load(); vm.classList.add('active'); };
-window.closeVideoModal=function(){ const vp=document.getElementById('videoPlayer'); vp.pause(); vp.src=''; document.getElementById('videoModal').classList.remove('active'); };
-window.openWorkGallery=function(siteId){ const site=workImages[siteId]; if(!site) return; const media=site.files.map((f,i)=>({ src:`assets/Professional Career/${site.folder}/${encodeURI(f)}`, caption:site.captions[i]||f })); openMediaGallery(media,0); };
-window.openFreelanceGallery=function(catId,idx){ const cat=freelanceImages[catId]; if(!cat) return; const base=catId==='sisneri'?'assets/portfolio-photos/sisneri-landslide/':'assets/freelance-photos/'+catId+'/'; const media=cat.files.map((f,i)=>({ src:base+encodeURI(f), caption:cat.captions[i]||f })); openMediaGallery(media,idx||0); };
-window.showProject=function(idx){ const p=projectsData[idx]; const folderMap={0:'insar',1:'ndvi',2:'hospital',3:'urban-sprawl',4:'uav-landslide',5:'flood',6:'civil3d',7:'earthquake'}; const base=`assets/portfolio-photos/${folderMap[idx]||'project'}/`; const galleryHtml=`<div class="thumbnail-gallery">${p.media.map((m,i)=>m.type==='image'?`<img src="${base+encodeURI(m.src)}" class="thumbnail" onclick="event.stopPropagation(); openMediaGallery(${JSON.stringify(p.media.map((mm,ii)=>({ src:base+encodeURI(mm.src), caption:mm.caption })))}, ${i})">`:`<div class="thumbnail video-thumbnail" onclick="openVideoModal('${base+encodeURI(m.src)}')"><video muted style="width:100%;height:100%;object-fit:cover;"><source src="${base+encodeURI(m.src)}"></video></div>`).join('')}</div>`; document.getElementById('modalTitle').innerText=p.title; document.getElementById('modalBody').innerHTML=`<p><strong>${p.category}</strong> | <i class="fas fa-map-marker-alt"></i> ${p.location}</p><p>${p.full}</p>${galleryHtml}${p.pdf?`<a href="${p.pdf}" target="_blank" class="btn-pdf"><i class="fas fa-file-pdf"></i> Full Report</a>`:''}`; document.getElementById('modal').classList.add('active'); };
-function renderProjects(){ const grid=document.getElementById('projectsGrid'); grid.innerHTML=projectsData.map((p,i)=>`<div class="project-card" onclick="showProject(${i})"><div class="project-icon"><i class="fas ${p.title.includes('InSAR')?'fa-road':p.title.includes('NDVI')?'fa-chart-line':'fa-globe'}"></i></div><div class="project-category">${p.category}</div><h3>${p.title}</h3><p class="project-desc">${p.shortDesc.substring(0,100)}...</p><div class="tech-stack">${p.tech.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div></div>`).join(''); }
-function buildFreelance(){ const cats=['hvac','3d-modeling','structural-analysis','drafting','abi','sisneri']; const titles=['HVAC System Design','3D Planning & Modeling','Structural Analysis','2D Drafting','ABI Pier Workshop','Sisneri Landslide Project']; const container=document.getElementById('freelanceContainer'); if(!container) return; container.innerHTML=cats.map((cat,i)=>`<div class="freelance-card"><div class="exp-header"><h3>${titles[i]}</h3><span class="exp-date">2023-2025</span></div><ul class="exp-list"><li>${cat==='hvac'?'Complete HVAC design using HAP 6.0, duct sizing, equipment selection.':cat==='3d-modeling'?'Detailed architectural visualizations (SketchUp, Revit), floor plans, walkthroughs.':cat==='structural-analysis'?'STAAD Pro analysis, load & safety compliance.':cat==='drafting'?'Detailed 2D CAD drawings, site layouts, as-built.':cat==='abi'?'Adjustable Base Isolation Pier prototype, seismic analysis.':'Drone survey + GeoStudio SLOPE/W, hazard zonation, mitigation design.'}</li></ul><div class="thumbnail-gallery" id="gallery-${cat}"></div></div>`).join(''); cats.forEach(cat=>{ const cont=document.getElementById(`gallery-${cat}`); if(cont&&freelanceImages[cat]){ const images=freelanceImages[cat].files; const caps=freelanceImages[cat].captions; cont.innerHTML=images.map((f,idx)=>`<img src="${cat==='sisneri'?`assets/portfolio-photos/sisneri-landslide/${encodeURI(f)}`:`assets/freelance-photos/${cat}/${encodeURI(f)}`}" class="thumbnail" onclick="openFreelanceGallery('${cat}',${idx})">`).join(''); } }); }
-function buildWorkBadges(){ const badges=document.getElementById('workBadges'); if(badges){ const sites=['balefi','lalbandi','dhalkebar','sandikharga','tamghas']; badges.innerHTML=sites.map(s=>`<div class="project-badge">${s.toUpperCase()} 132kV <a href="https://maps.google.com/?q=27.717,85.324" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i></a> <a href="#" class="kmz-link" onclick="downloadKMZ('${s}')"><i class="fas fa-draw-polygon"></i></a> <button class="photo-btn" onclick="openWorkGallery('${s}')">📸 Site Photos</button></div>`).join(''); } }
-function buildCertificateGallery(){ const gallery=document.getElementById('certificateGallery'); if(gallery){ gallery.innerHTML=certificateImages.map((c,i)=>`<img src="assets/Cerififcations/${encodeURI(c.file)}" class="thumbnail" onclick="openMediaGallery(${JSON.stringify(certificateImages.map(cc=>({ src:`assets/Cerififcations/${encodeURI(cc.file)}`, caption:cc.caption })))}, ${i})">`).join(''); } }
-document.querySelector('.close-modal')?.addEventListener('click',()=>document.getElementById('modal').classList.remove('active'));
-window.onclick=(e)=>{ if(e.target===document.getElementById('modal')) document.getElementById('modal').classList.remove('active'); if(e.target===document.getElementById('carouselModal')) closeCarousel(); };
-renderProjects(); buildFreelance(); buildWorkBadges(); buildCertificateGallery();
+  // ------------------------------ DATA ---------------------------------
+  const projects = [
+    { id:0, title:"InSAR Time Series — Highway Subsidence", cat:"Remote Sensing", loc:"Netherlands", short:"13 Sentinel-1 images, SNAP+SNAPHU displacement mapping.", full:"Processed 13 SLC images with Goldstein filtering, phase unwrapping, terrain correction. Generated time-series displacement maps.", tech:["SNAP","SNAPHU"], folder:"insar", media:["Screenshot 2026-05-08 194722.png","Screenshot 2026-05-08 203715.png","Screenshot 2026-05-10 125056.png"], pdf:"assets/portfolio-photos/insar/insar.pdf" },
+    { id:1, title:"NDVI Timelapse — Kathmandu Valley", cat:"Remote Sensing", loc:"Nepal", short:"26-year vegetation change using GEE, Landsat & Sentinel-2.", full:"28 images, NDVI timelapse exported 1080p MP4.", tech:["GEE","Landsat","Sentinel-2"], folder:"ndvi", media:["GEE1.jpg","GEE2.jpg","Map.mp4"], pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf" },
+    { id:2, title:"Hospital Accessibility — Colorado", cat:"GIS", loc:"USA", short:"Network drive-time analysis for 30/60-min service areas.", full:"ArcGIS Network Analyst, population coverage estimation.", tech:["ArcGIS Network Analyst"], folder:"hospital", media:["30min_Map.png","60_min Map.png","PopulationMap.png"], pdf:"" },
+    { id:3, title:"Urban Sprawl — Kathmandu Valley", cat:"GIS", loc:"Nepal", short:"Landsat NDBI change detection, slope filtering.", full:"Urban expansion 2016-2026, validated map.", tech:["Landsat","ArcGIS"], folder:"urban-sprawl", media:["2016.png","2026.png","Urban Sprawl.png"], pdf:"" },
+    { id:4, title:"UAV Landslide Susceptibility", cat:"UAV/GIS", loc:"Sisneri", short:"UAV orthomosaic + weighted overlay hazard zonation.", full:"High-res DEM, slope/aspect, AHP weighted overlay.", tech:["Agisoft","ArcGIS"], folder:"uav-landslide", media:["Aspect Map.png","BaseMap.png","Slope Map.png","Weighted Overlay.png"], pdf:"" },
+    { id:5, title:"Flood Inundation — Narayani", cat:"Hydrology", loc:"Nepal", short:"HEC-RAS 2D unsteady flow simulation.", full:"Flood depth/velocity mapping, 100-year return period.", tech:["HEC-RAS 2D"], folder:"flood", media:["Screenshot 2026-04-23 230415.png","Screenshot 2026-04-23 233808.png","Screenshot 2026-05-17 090826.png"], pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf" },
+    { id:6, title:"Substation Backfill Volumetric Analysis", cat:"Civil 3D", loc:"Balganga", short:"DGPS to Civil 3D surface, cut/fill volumes.", full:"Earthwork quantity estimation, corridor modeling.", tech:["Civil 3D","DGPS"], folder:"civil3d", media:["Screenshot 2026-05-17 091158.png","Screenshot 2026-05-17 091210.png","Screenshot 2026-05-17 091238.png"], pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf" },
+    { id:7, title:"Nepal Earthquake Analysis (1978–2025)", cat:"Seismology", loc:"Nepal", short:"Mainshock declustering, animated ShakeMaps.", full:"USGS catalog, Gardner-Knopoff declustering.", tech:["ArcGIS","Python"], folder:"earthquake", media:["Nepal EarthQuake ShakeMaps.mp4","earthquake mainshocks.png"], pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf" }
+  ];
+
+  const workSites = {
+    balefi: { label:"Balefi 132kV", folder:"Balefi", files:["IMG_20230910_133439.jpg","IMG_20230913_111457.jpg"], caps:["Tower Erection","Concreting"] },
+    lalbandi: { label:"Salempur 132kV", folder:"Salempur", files:["IMG-20241008-WA0003.jpg","IMG-20250129-WA0000.jpg"], caps:["Substation view","Plastering"] },
+    dhalkebar: { label:"Balganga 132kV", folder:"Balganga", files:["IMG-20250124-WA0003.jpg","IMG_20250326_152652.jpg"], caps:["Foundation","Control Room"] },
+    sandikharga: { label:"Burtibang 33kV", folder:"Burtibang", files:["IMG_20231121_112353.jpg"], caps:["Tower Erection"] },
+    tamghas: { label:"Tamghas 33kV", folder:"Tamghas", files:["IMG_20231119_124336.jpg"], caps:["Transformer"] }
+  };
+
+  const freelance = [
+    { id:"hvac", title:"HVAC System Design", date:"2024", desc:"HAP 6.0 load calculation, duct sizing, equipment selection.", folder:"hvac", files:["duct-layout.png"], caps:["Duct Layout"] },
+    { id:"3d-modeling", title:"3D Modeling (SketchUp/Revit)", date:"2023-2025", desc:"Architectural visualizations, floor plans, walkthroughs.", folder:"3d-modeling", files:["1.png","2.png"], caps:["3D View 1","3D View 2"] },
+    { id:"structural", title:"Structural Analysis", date:"2024", desc:"STAAD Pro analysis for residential buildings.", folder:"structural-analysis", files:["1.png","2.png"], caps:["Model","Load"] },
+    { id:"drafting", title:"2D CAD Drafting", date:"2023-2025", desc:"Detailed floor plans, site layouts, as-built drawings.", folder:"drafting", files:["1.png","2.png"], caps:["CAD Layout","Site Plan"] },
+    { id:"abi", title:"ABI Pier Workshop", date:"2023", desc:"Base isolation prototype design, seismic load testing.", folder:"abi", files:["1.jpeg"], caps:["Prototype"] },
+    { id:"sisneri", title:"Sisneri Landslide", date:"2024", desc:"Drone survey, SLOPE/W stability, mitigation design.", folder:"sisneri", files:["Damage due to Landslide.JPG"], caps:["Landslide"], pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf" }
+  ];
+
+  const certs = [
+    { name:"AutoCAD Professional", file:"autocad.jpg" },
+    { name:"SAP2000 Training", file:"SAP.jpg" },
+    { name:"NEC Registration", file:"NEC.png" }
+  ];
+
+  // helpers
+  function openProjectModal(idx) {
+    const p = projects[idx];
+    const base = `assets/portfolio-photos/${p.folder}/`;
+    let mediaHtml = `<div style="display:flex; flex-wrap:wrap; gap:0.7rem;">`;
+    p.media.forEach((m, i) => {
+      const ext = m.split('.').pop();
+      if(ext === 'mp4') {
+        mediaHtml += `<div style="width:120px; cursor:pointer;" onclick="openLightboxVideo('${base+encodeURI(m)}')"><video style="width:100%; border-radius:12px;" muted><source src="${base+encodeURI(m)}"></video><div style="font-size:0.7rem;">🎬 Video</div></div>`;
+      } else {
+        mediaHtml += `<img src="${base+encodeURI(m)}" class="modal-thumb" onclick="openLightboxImage('${base+encodeURI(m)}')">`;
+      }
+    });
+    mediaHtml += `</div>`;
+    const pdfLink = p.pdf ? `<a href="${p.pdf}" target="_blank" style="display:inline-block; margin-top:1rem; background:var(--primary); color:white; padding:0.5rem 1.2rem; border-radius:30px; text-decoration:none;"><i class="fas fa-file-pdf"></i> Full Report</a>` : '';
+    document.getElementById("modalTitle").innerHTML = `${p.title} <span style="font-size:0.8rem;"> · ${p.cat}</span>`;
+    document.getElementById("modalBody").innerHTML = `<p><strong>📍 ${p.loc}</strong></p><p>${p.full}</p><div class="tech-stack" style="margin:1rem 0;">${p.tech.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>${mediaHtml}${pdfLink}`;
+    document.getElementById("projectModal").classList.add("active");
+  }
+
+  function closeModal() { document.getElementById("projectModal").classList.remove("active"); }
+  let lightboxImg = document.getElementById("lbImg");
+  function openLightboxImage(src) { lightboxImg.src = src; lightboxImg.style.display = "block"; document.getElementById("lightbox").classList.add("active"); }
+  function openLightboxVideo(src) { lightboxImg.src = src; lightboxImg.style.display = "block"; document.getElementById("lightbox").classList.add("active"); }
+  function closeLightbox() { document.getElementById("lightbox").classList.remove("active"); }
+
+  // render projects
+  function renderProjects() {
+    const grid = document.getElementById("projectsGrid");
+    grid.innerHTML = projects.map((p, i) => `
+      <div class="project-card" onclick="openProjectModal(${i})">
+        <div class="project-icon"><i class="fas ${p.cat==='Remote Sensing'?'fa-satellite':'fa-map'}"></i></div>
+        <div class="project-category">${p.cat}</div>
+        <h3>${p.title}</h3>
+        <p class="project-desc">${p.short}</p>
+        <div class="tech-stack">${p.tech.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderSkills() {
+    const skills = [
+      { icon:"fa-drafting-compass", title:"CAD & 3D", tags:["AutoCAD","Civil 3D","SketchUp","Revit"] },
+      { icon:"fa-map", title:"GIS & RS", tags:["ArcGIS Pro","QGIS","GEE","SNAP"] },
+      { icon:"fa-calculator", title:"Structural", tags:["STAAD Pro","SAP2000"] },
+      { icon:"fa-ruler-combined", title:"Surveying", tags:["DGPS","Total Station","UAV"] },
+      { icon:"fa-water", title:"Hydrology", tags:["HEC-RAS 2D","Flood Modeling"] },
+      { icon:"fa-tasks", title:"PM", tags:["Primavera P6","MS Project"] }
+    ];
+    document.getElementById("skillsGrid").innerHTML = skills.map(s => `
+      <div class="skill-card"><h4><i class="fas ${s.icon}"></i> ${s.title}</h4><div class="skill-tags">${s.tags.map(t=>`<span class="skill-tag">${t}</span>`).join('')}</div></div>
+    `).join('');
+  }
+
+  function buildSiteBadges() {
+    const container = document.getElementById("siteBadges");
+    if(!container) return;
+    container.innerHTML = Object.keys(workSites).map(k => {
+      const site = workSites[k];
+      return `<div class="site-badge"><i class="fas fa-hard-hat"></i> ${site.label} <button onclick="openSiteGallery('${k}')"><i class="fas fa-camera"></i> Photos</button></div>`;
+    }).join('');
+  }
+
+  window.openSiteGallery = function(siteId) {
+    const site = workSites[siteId];
+    if(!site) return;
+    const base = `assets/Professional Career/${site.folder}/`;
+    const mediaArr = site.files.map((f,i) => ({ src: base+encodeURI(f), cap: site.caps[i] || f }));
+    // simple lightbox for multiple images
+    let idx = 0;
+    const show = (i) => { openLightboxImage(mediaArr[i].src); lightboxImg.dataset.list = JSON.stringify(mediaArr); lightboxImg.dataset.idx = i; };
+    show(0);
+  };
+
+  function renderFreelance() {
+    const grid = document.getElementById("flGrid");
+    grid.innerHTML = freelance.map(f => {
+      const base = f.id === "sisneri" ? "assets/portfolio-photos/sisneri-landslide/" : `assets/freelance-photos/${f.id}/`;
+      const thumbHtml = f.files.slice(0,3).map((file, i) => `<img src="${base+encodeURI(file)}" class="fl-thumb" onclick="event.stopPropagation(); openLightboxImage('${base+encodeURI(file)}')">`).join('');
+      const pdfLink = f.pdf ? `<a href="${f.pdf}" target="_blank" style="display:inline-block; margin-top:0.5rem; font-size:0.7rem;"><i class="fas fa-file-pdf"></i> Report</a>` : '';
+      return `<div class="fl-card"><div style="display:flex; justify-content:space-between;"><h3>${f.title}</h3><span class="fl-date">${f.date}</span></div><p style="margin:0.5rem 0; font-size:0.85rem;">${f.desc}</p><div class="fl-thumbnails">${thumbHtml}</div>${pdfLink}</div>`;
+    }).join('');
+  }
+
+  function renderCertificates() {
+    const grid = document.getElementById("certsGrid");
+    grid.innerHTML = certs.map(c => `<div class="cert-card"><i class="fas fa-certificate" style="color:var(--accent);"></i><div><strong>${c.name}</strong></div></div>`).join('');
+    const thumbContainer = document.getElementById("certThumbs");
+    thumbContainer.innerHTML = certs.map((c,i) => `<img src="assets/Cerififcations/${encodeURI(c.file)}" class="cert-thumb" onclick="openLightboxImage('assets/Cerififcations/${encodeURI(c.file)}')">`).join('');
+  }
+
+  // contact form
+  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Thank you! Your message has been sent (demo). I'll get back to you soon.");
+    e.target.reset();
+  });
+
+  // navbar active + mobile toggle
+  function updateActive() {
+    const sections = document.querySelectorAll("section[id]");
+    let current = "";
+    sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) current = s.id; });
+    document.querySelectorAll(".nav-links a").forEach(a => {
+      a.classList.toggle("active", a.getAttribute("href") === "#"+current);
+    });
+  }
+  window.addEventListener("scroll", updateActive);
+  document.getElementById("menuToggle")?.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.toggle("open");
+  });
+  document.querySelectorAll(".nav-links a").forEach(a => a.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.remove("open");
+  }));
+
+  renderProjects(); renderSkills(); buildSiteBadges(); renderFreelance(); renderCertificates();
+  // close modal on background click
+  document.getElementById("projectModal")?.addEventListener("click", (e) => { if(e.target === document.getElementById("projectModal")) closeModal(); });
 </script>
 </body>
 </html>

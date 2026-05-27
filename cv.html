@@ -22,6 +22,7 @@
       border-radius: 28px;
       box-shadow: 0 20px 35px rgba(0,0,0,0.05);
       overflow: hidden;
+      position: relative;
     }
     .cv-inner {
       display: grid;
@@ -145,20 +146,52 @@
     }
     .edu-detail { margin-top: 0.2rem; font-size: 0.85rem; }
 
+    .print-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 40px;
+      background: rgba(26, 73, 114, 0.9);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      z-index: 100;
+    }
+    .print-btn:hover {
+      background: #f4a261;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(244,162,97,0.3);
+    }
+    @media print {
+      .print-btn { display: none !important; }
+      body { padding: 0 !important; background: white !important; }
+      .cv-container { box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; margin: 0 !important; }
+    }
+
     @media (max-width: 700px) {
       .cv-inner { grid-template-columns: 1fr; }
       body { padding: 1rem; }
       .profile-photo { width: 100px; height: 100px; }
+      .print-btn { top: 1rem; right: 1rem; padding: 0.5rem 1rem; }
     }
   </style>
 </head>
 <body>
 <div class="cv-container">
+  <button onclick="window.print()" class="print-btn" title="Print Resume"><i class="fas fa-print"></i> Print CV</button>
   <div class="cv-inner">
     <div class="sidebar">
       <img src="assets/profile.jpg" alt="Abhishek Karki" class="profile-photo">
       <div class="name">Abhishek Karki</div>
-      <div class="title">Civil Engineer | GIS & Remote Sensing </div>
+      <div class="title">Civil Engineer | GIS & Remote Sensing Specialist</div>
       
       <div class="section-title">Contact</div>
       <div class="contact-info">
@@ -248,8 +281,8 @@
 
       <div class="main-section-title">Education</div>
       <div class="job">
-        <div class="job-header"><span class="job-title">MSc Disaster Risk Management (DREM)</span><span class="job-date">2026 – 2028 (Present)</span></div>
-        <div class="edu-detail">Tribhuwan University, IOE Pulchowk Campus</div>
+        <div class="job-header"><span class="job-title">MSc. Disaster Risk & Emergency Management (DREM)</span><span class="job-date">2026 – Present</span></div>
+        <div class="edu-detail">Tribhuvan University, IOE Pulchowk Campus</div>
       </div>
       <div class="job">
         <div class="job-header"><span class="job-title">B.E. Civil Engineering</span><span class="job-date">2022</span></div>
