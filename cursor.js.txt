@@ -1,0 +1,31 @@
+// cursor.js
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    // Move dot instantly
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+});
+
+// Animate ring with GSAP
+gsap.ticker.add(() => {
+    const dx = mouseX - ringX;
+    const dy = mouseY - ringY;
+    ringX += dx * 0.15;
+    ringY += dy * 0.15;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+});
+
+// Add hover effect on links and buttons
+const hoverTargets = document.querySelectorAll('a, button, .magnetic, .site-chip, .fl-thumb');
+hoverTargets.forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+});

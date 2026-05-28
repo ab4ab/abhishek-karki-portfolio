@@ -1,1084 +1,324 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhishek Karki | Civil Engineer & GIS</title>
-<meta name="description" content="Civil Engineer & GIS Specialist – Geospatial analysis, InSAR, NDVI, flood mapping, landslide mitigation, and transmission line projects.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-/* ═══════════════════════════════════════════════════════
-   DESIGN SYSTEM — LIGHT THEME (default) with animation tokens
-   ═══════════════════════════════════════════════════════ */
-:root {
-  /* Light Theme Tokens (default) */
-  --c-bg:       #f4f7fc;   
-  --c-surface:  #ffffff;   
-  --c-card:     #ffffff;   
-  --c-border:   rgba(15, 23, 42, 0.08);   
-  --c-border-h: rgba(0, 114, 219, 0.35);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek Karki | Civil Engineer & GIS Expert</title>
+    <meta name="description" content="Portfolio of Abhishek Karki — Civil Engineer, GIS & Remote Sensing Specialist, MSc. DREM.">
 
-  --c-p1: #0072db;   
-  --c-p2: #009ebb;   
-  --c-a1: #b45309;   
-  --c-a2: #b91c1c;   
-  --c-g1: #15803d;   
-  --c-g2: #0f766e;   
-  --c-v1: #6d28d9;   
-  --c-pk: #be185d;   
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
-  --g-primary:  linear-gradient(135deg, #0072db 0%, #009ebb 100%);
-  --g-gold:     linear-gradient(135deg, #b45309, #b91c1c);
-  --g-green:    linear-gradient(135deg, #15803d, #0f766e);
-  --g-violet:   linear-gradient(135deg, #6d28d9, #be185d);
-  --g-card:     linear-gradient(145deg, rgba(15, 23, 42, 0.01), rgba(15, 23, 42, 0.03));
+    <!-- Splitting.js for text scramble -->
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
 
-  --t-primary:   #0f172a;   /* Deep Slate */
-  --t-secondary: #475569;   
-  --t-muted:     #64748b;   
-
-  --sh-glow:    0 0 50px rgba(0, 114, 219, 0.08);
-  --sh-card:    0 20px 45px rgba(15, 23, 42, 0.06);
-  --sh-lift:    0 35px 70px -15px rgba(15, 23, 42, 0.12);
-  --canvas-opacity: 0.75;
-
-  /* Layout Scales */
-  --s-xs:0.5rem; --s-sm:1rem; --s-md:1.5rem; --s-lg:2.5rem; --s-xl:4rem; --s-2xl:6rem;
-  --r-sm:10px; --r-md:16px; --r-lg:24px; --r-xl:32px; --r-full:999px;
-  --ease-out:   cubic-bezier(0.23,1,0.32,1);
-  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
-  --dur-fast:   0.2s;
-  --dur-med:    0.4s;
-  --dur-slow:   0.7s;
-}
-
-html[data-theme="dark"] {
-  /* Dark Theme Tokens */
-  --c-bg:       #04080f;
-  --c-surface:  #080f1e;
-  --c-card:     #0b1423;
-  --c-border:   rgba(255,255,255,0.06);
-  --c-border-h: rgba(79,172,254,0.35);
-  --c-p1: #4facfe;   --c-p2: #00f2fe;   --c-a1: #f7b733;   --c-a2: #fc4a1a;
-  --c-g1: #43e97b;   --c-g2: #38f9d7;   --c-v1: #a855f7;   --c-pk: #f472b6;
-  --g-primary: linear-gradient(135deg,#4facfe 0%,#00f2fe 100%);
-  --g-gold:    linear-gradient(135deg,#f7b733,#fc4a1a);
-  --g-green:   linear-gradient(135deg,#43e97b,#38f9d7);
-  --g-violet:  linear-gradient(135deg,#a855f7,#ec4899);
-  --g-card:    linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));
-  --t-primary:   #f0f6ff;
-  --t-secondary: #8fa5be;
-  --t-muted:     #3d5066;
-  --sh-glow:    0 0 60px rgba(79,172,254,0.12);
-  --sh-card:    0 24px 60px rgba(0,0,0,0.55);
-  --sh-lift:    0 40px 80px -20px rgba(0,0,0,0.7);
-  --canvas-opacity: 0.55;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;font-size:16px;transition: background var(--dur-med) var(--ease-out);}
-body{
-  font-family:'Inter',system-ui,sans-serif;
-  background:var(--c-bg);
-  color:var(--t-primary);
-  overflow-x:hidden;
-  line-height:1.65;
-  transition: background var(--dur-med), color var(--dur-med);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--c-bg);}
-::-webkit-scrollbar-thumb{background:var(--c-p1);border-radius:4px;}
-
-/* Canvas background */
-#bg-canvas{
-  position:fixed;inset:0;z-index:0;
-  pointer-events:none;opacity:var(--canvas-opacity);
-  transition: opacity var(--dur-med);
-}
-
-/* Custom cursor */
-.cr,.cr-f{
-  position:fixed;border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-}
-.cr{
-  width:10px;height:10px;
-  background:var(--c-p1);
-  transition:width .15s,height .15s,background .15s;
-}
-.cr-f{
-  width:32px;height:32px;
-  border:1.5px solid rgba(0, 114, 219, 0.5);
-  background:rgba(0, 114, 219, 0.06);
-  backdrop-filter:blur(2px);
-  transition:all .12s ease;
-}
-body.cursor-hover .cr{width:16px;height:16px;background:var(--c-bg);border:2px solid var(--c-p1);}
-body.cursor-hover .cr-f{width:50px;height:50px;border-color:var(--c-p1);background:rgba(0, 114, 219, 0.08);}
-body.cursor-click .cr{transform:translate(-50%,-50%) scale(0.6);}
-
-/* Loader */
-#loader{
-  position:fixed;inset:0;z-index:99999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-  background:var(--c-bg);
-  transition:opacity .8s var(--ease-out),visibility .8s;
-}
-#loader.out{opacity:0;visibility:hidden;}
-.loader-ring{width:80px;height:80px;position:relative;}
-.loader-ring::before,.loader-ring::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent;}
-.loader-ring::before{border-top-color:var(--c-p1);border-right-color:var(--c-p2);animation:spin 1.2s linear infinite;}
-.loader-ring::after{inset:10px;border-bottom-color:var(--c-v1);animation:spin 0.8s linear infinite reverse;}
-.loader-initials{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;
-  background:var(--g-primary);-webkit-background-clip:text;background-clip:text;color:transparent;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* Scroll progress */
-#progress-bar{
-  position:fixed;top:0;left:0;height:2px;width:0%;
-  background:var(--g-primary);z-index:9998;
-  box-shadow:0 0 10px var(--c-p1);
-  transition:width .1s linear;
-}
-
-/* Navigation */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:1.4rem 2rem;
-  transition:padding var(--dur-med) var(--ease-out),background var(--dur-med);
-}
-nav.scrolled{
-  padding:.8rem 2rem;
-  background:var(--c-surface);
-  backdrop-filter:blur(24px) saturate(180%);
-  border-bottom:1px solid var(--c-border);
-}
-.nav-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo{
-  font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;
-  text-decoration:none;letter-spacing:-0.5px;
-  display:flex;align-items:center;gap:.3rem;
-}
-.nav-logo .l1{background:var(--g-primary);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.nav-links{
-  display:flex;list-style:none;align-items:center;gap:.15rem;
-}
-.nav-links a{
-  color:var(--t-secondary);text-decoration:none;font-size:.83rem;font-weight:500;
-  padding:.4rem .95rem;border-radius:var(--r-full);letter-spacing:.2px;
-  transition:color var(--dur-fast),background var(--dur-fast);position:relative;
-}
-.nav-links a:hover,.nav-links a.active{color:var(--c-p1);}
-.nav-links a.active::after{
-  content:'';position:absolute;bottom:-.2rem;left:50%;transform:translateX(-50%);
-  width:4px;height:4px;border-radius:50%;background:var(--c-p1);
-}
-.nav-cta{
-  background:var(--g-primary)!important;color:var(--c-bg)!important;
-  padding:.42rem 1.2rem!important;font-weight:700!important;
-  box-shadow:0 4px 20px rgba(0, 114, 219, 0.3);
-  transition:transform var(--dur-fast),box-shadow var(--dur-fast)!important;
-}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0, 114, 219, 0.4)!important;}
-.theme-switch-wrapper {
-  display: flex;
-  align-items: center;
-  margin-left: 0.5rem;
-}
-.theme-btn {
-  background: none;
-  border: none;
-  color: var(--t-secondary);
-  font-size: 1.05rem;
-  cursor: pointer;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--dur-fast);
-}
-.theme-btn:hover {
-  background: rgba(0, 114, 219, 0.08);
-  color: var(--c-p1);
-}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;background:none;border:none;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--t-primary);border-radius:2px;transition:var(--dur-med) var(--ease-out);}
-.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
-.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-
-/* Hero */
-.hero{
-  min-height:100vh;display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;gap:3rem;
-  padding:7rem 2rem 4rem;
-  max-width:1320px;margin:0 auto;
-  position:relative;z-index:1;
-}
-.hero-left{display:flex;flex-direction:column;gap:0;}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:.6rem;
-  background:rgba(0, 114, 219, 0.06);
-  border:1px solid rgba(0, 114, 219, 0.15);
-  padding:.35rem 1.1rem;border-radius:var(--r-full);
-  font-size:.72rem;font-weight:700;color:var(--c-p1);
-  letter-spacing:1px;text-transform:uppercase;
-  margin-bottom:1.6rem;width:fit-content;
-}
-.hero-badge .dot{
-  width:6px;height:6px;background:var(--c-p1);border-radius:50%;
-  animation:pulse 2s ease-in-out infinite;
-}
-.hero h1{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(3rem,5.5vw,5.2rem);
-  font-weight:700;line-height:1.0;letter-spacing:-2.5px;
-  margin-bottom:1.1rem;
-}
-.hero h1 .gd{background:var(--g-primary);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.hero-roles{
-  display:flex;align-items:center;gap:.6rem;
-  font-size:1.1rem;color:var(--t-secondary);font-weight:500;
-  margin-bottom:1.4rem;min-height:1.8rem;
-}
-.hero-roles .pipe{color:var(--t-muted);}
-#typed{color:var(--c-p1);font-weight:600;}
-.typed-cursor{color:var(--c-p1);animation:blink 1s infinite;}
-.hero-desc{
-  color:var(--t-secondary);font-size:.95rem;line-height:1.8;
-  max-width:520px;margin-bottom:2rem;
-}
-.hero-stats{
-  display:flex;gap:2.5rem;margin-bottom:2.2rem;
-}
-.stat-num{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:2.4rem;font-weight:700;line-height:1;
-  background:var(--g-primary);-webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.stat-lbl{font-size:.72rem;color:var(--t-muted);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:.25rem;}
-.hero-actions{
-  display:flex;gap:.9rem;flex-wrap:wrap;margin-bottom:2rem;
-}
-.btn{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.78rem 1.7rem;border-radius:var(--r-full);
-  font-weight:600;font-size:.88rem;text-decoration:none;
-  cursor:pointer;border:none;transition:all var(--dur-med) var(--ease-out);
-  position:relative;overflow:hidden;
-}
-.btn::before{
-  content:'';position:absolute;inset:0;background:rgba(255,255,255,0.12);
-  transform:translateX(-100%);transition:transform var(--dur-med) var(--ease-out);
-}
-.btn:hover::before{transform:translateX(0);}
-.btn-p{background:var(--g-primary);color:var(--c-surface);box-shadow:0 8px 28px rgba(0, 114, 219, 0.25);}
-.btn-p:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0, 114, 219, 0.35);}
-.btn-o{background:rgba(255,255,255,0.04);border:1px solid var(--c-border-h);color:var(--t-primary);backdrop-filter:blur(8px);}
-.btn-o:hover{border-color:var(--c-p1);color:var(--c-p1);transform:translateY(-3px);background:rgba(0, 114, 219, 0.05);}
-.hero-socials{display:flex;gap:.6rem;}
-.soc-btn{
-  width:40px;height:40px;border-radius:var(--r-sm);
-  background:var(--g-card);border:1px solid var(--c-border);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--t-secondary);font-size:.9rem;text-decoration:none;
-  transition:all var(--dur-med) var(--ease-out);
-}
-.soc-btn:hover{border-color:var(--c-p1);color:var(--c-p1);transform:translateY(-3px);background:rgba(0, 114, 219, 0.06);box-shadow:0 8px 20px rgba(0, 114, 219, 0.15);}
-
-.profile-wrap{position:relative;width:380px;height:460px;}
-.profile-border{
-  position:absolute;inset:-3px;border-radius:30px;
-  background:conic-gradient(from 0deg,var(--c-p1),var(--c-p2),var(--c-v1),var(--c-pk),var(--c-p1));
-  animation:rotateBorder 5s linear infinite;
-  padding:3px;
-}
-@keyframes rotateBorder{to{background:conic-gradient(from 360deg,var(--c-p1),var(--c-p2),var(--c-v1),var(--c-pk),var(--c-p1));}}
-.profile-card-3d{
-  position:absolute;inset:0;border-radius:28px;overflow:hidden;
-  background:var(--c-card);z-index:1;
-  display:flex;align-items:center;justify-content:center;
-}
-.profile-card-3d .no-img{
-  width:100%;height:100%;
-  background:linear-gradient(135deg,rgba(0, 114, 219, 0.12),rgba(168,85,247,0.08));
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Space Grotesk',sans-serif;font-size:5rem;font-weight:700;
-  color:var(--c-p1);opacity:0.6;letter-spacing:-3px;
-}
-.profile-overlay{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:1.5rem 1.6rem;
-  background:linear-gradient(transparent, var(--c-surface) 85%);
-  z-index:2;
-}
-.f-chip{
-  position:absolute;z-index:3;
-  display:flex;align-items:center;gap:.5rem;
-  background:var(--c-surface);border:1px solid var(--c-border);
-  backdrop-filter:blur(16px) saturate(160%);
-  border-radius:var(--r-md);padding:.6rem 1rem;
-  font-size:.73rem;font-weight:600;white-space:nowrap;
-  box-shadow:var(--sh-card);
-}
-.fc1{top:-18px;right:-20px;animation:floatA 3s ease-in-out infinite;border-color:rgba(0, 114, 219, 0.25);}
-.fc2{bottom:100px;left:-28px;animation:floatB 3.5s ease-in-out infinite;border-color:rgba(67,233,123,0.25);}
-.fc3{top:38%;right:-30px;animation:floatC 4s ease-in-out infinite;border-color:rgba(168,85,247,0.25);}
-.fc4{top:15%;left:-30px;animation:floatB 3s ease-in-out infinite .5s;border-color:rgba(247,183,51,0.25);}
-@keyframes floatA{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-@keyframes floatB{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
-@keyframes floatC{0%,100%{transform:translateX(0);}50%{transform:translateX(6px);}}
-
-/* Sections */
-.sec{position:relative;z-index:1;padding:var(--s-2xl) 0;}
-.sec-dark{background:rgba(15, 23, 42, 0.02); border-top:1px solid var(--c-border); border-bottom:1px solid var(--c-border);}
-html[data-theme="dark"] .sec-dark { background: rgba(8,15,30,0.45); border: none; }
-.container{max-width:1320px;margin:0 auto;padding:0 2rem;}
-.sec-label{
-  display:inline-flex;align-items:center;gap:.7rem;
-  font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--c-p1);margin-bottom:.9rem;
-}
-.sec-label::before,.sec-label::after{content:'';width:24px;height:1px;background:var(--c-p1);opacity:.4;}
-.sec-title{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(2rem,3.5vw,2.9rem);font-weight:700;
-  letter-spacing:-1px;line-height:1.1;margin-bottom:.8rem;
-}
-.sec-sub{color:var(--t-secondary);font-size:.92rem;max-width:580px;line-height:1.75;}
-.sec-hd{margin-bottom:3.5rem;}
-
-/* Projects Grid */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.5rem;}
-.proj-card{
-  background:var(--c-surface);
-  border:1px solid var(--c-border);
-  border-radius:var(--r-xl);overflow:hidden;
-  cursor:pointer;transition:all var(--dur-med) var(--ease-out);
-}
-.proj-card:hover{border-color:var(--c-border-h);box-shadow:var(--sh-glow),var(--sh-card);}
-.proj-thumb{
-  height:196px;overflow:hidden;position:relative;
-  background:linear-gradient(135deg,rgba(0, 114, 219, .06),rgba(168,85,247,.04));
-  display:flex;align-items:center;justify-content:center;
-  font-size:3rem;
-}
-.proj-hover-mask{
-  position:absolute;inset:0;
-  background:rgba(15, 23, 42, 0.85);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity var(--dur-med);
-}
-html[data-theme="dark"] .proj-hover-mask { background: rgba(4,8,15,0.82); }
-.proj-card:hover .proj-hover-mask{opacity:1;}
-.proj-view-btn{
-  display:flex;align-items:center;gap:.5rem;
-  padding:.6rem 1.5rem;border-radius:var(--r-full);
-  background:var(--g-primary);color:var(--c-surface);font-weight:700;font-size:.82rem;
-  transform:translateY(12px);transition:transform var(--dur-med) var(--ease-out);
-}
-.proj-card:hover .proj-view-btn{transform:translateY(0);}
-.proj-body{padding:1.4rem 1.5rem;}
-.proj-cat{font-size:.67rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--c-p1);margin-bottom:.45rem;}
-.proj-body h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:-.3px;margin-bottom:.4rem;}
-.proj-body p{color:var(--t-secondary);font-size:.8rem;line-height:1.6;margin-bottom:.9rem;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.tech-row{display:flex;flex-wrap:wrap;gap:.35rem;}
-.tech-tag{padding:.18rem .65rem;border-radius:var(--r-full);font-size:.65rem;font-weight:600;background:rgba(0, 114, 219, .06);color:var(--c-p1);border:1px solid rgba(0, 114, 219, .15);}
-
-/* Filter */
-.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
-.filter-btn{
-  padding:.38rem 1.1rem;border-radius:var(--r-full);
-  font-size:.78rem;font-weight:600;cursor:pointer;
-  background:var(--c-surface);border:1px solid var(--c-border);
-  color:var(--t-secondary);transition:all var(--dur-fast);
-}
-.filter-btn:hover,.filter-btn.on{border-color:var(--c-p1);color:var(--c-p1);background:rgba(0, 114, 219, .06);}
-
-/* Timeline for Experience */
-.timeline{position:relative;padding-left:3rem;}
-.timeline::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:1px;
-  background:linear-gradient(to bottom,var(--c-p1) 0%,var(--c-v1) 60%,transparent 100%);
-}
-.tl-item{position:relative;margin-bottom:2.5rem;}
-.tl-dot{position:absolute;left:-3.45rem;top:1.8rem;width:14px;height:14px;border-radius:50%;border:2px solid var(--c-bg);background: var(--c-p1);}
-.tl-dot::before{content:'';position:absolute;inset:-4px;border-radius:50%;background: var(--c-p1);animation:ripple 2.5s ease-in-out infinite;}
-@keyframes ripple{0%,100%{opacity:.4;transform:scale(1);}50%{opacity:0;transform:scale(1.8);}}
-.tl-card{
-  background:var(--c-surface);border:1px solid var(--c-border);
-  border-radius:var(--r-xl);padding:2rem;
-  transition:all var(--dur-med) var(--ease-out);
-}
-.tl-card:hover{border-color:var(--c-border-h);transform:translateX(5px);box-shadow:var(--sh-glow);}
-.tl-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:.4rem;}
-.tl-title{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;}
-.tl-company{font-size:.85rem;color:var(--t-secondary);margin-bottom:1rem;}
-.tl-date{
-  padding:.28rem .9rem;border-radius:var(--r-full);font-size:.72rem;font-weight:700;
-  white-space:nowrap;background:rgba(0, 114, 219, .06);color:var(--c-p1);border:1px solid rgba(0, 114, 219, .15);
-}
-.site-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0 1.2rem;}
-.site-chip{
-  display:inline-flex;align-items:center;gap:.45rem;
-  padding:.35rem .8rem;border-radius:var(--r-full);font-size:.72rem;font-weight:600;
-  background:var(--g-card);border:1px solid var(--c-border);
-  transition:all var(--dur-fast);color: var(--t-secondary);
-}
-.site-chip:hover{border-color:var(--c-p1);color:var(--c-p1);cursor:pointer;}
-.tl-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
-.tl-list li{display:flex;gap:.7rem;font-size:.83rem;color:var(--t-secondary);line-height:1.6;}
-.tl-list li::before{content:'▹';color:var(--c-p1);font-weight:700;}
-
-/* Skills Grid */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
-.sk-card{
-  background:var(--c-surface);border:1px solid var(--c-border);
-  border-radius:var(--r-xl);padding:1.8rem;
-  transition:all var(--dur-med) var(--ease-out);
-}
-.sk-card:hover{border-color:var(--c-border-h);transform:translateY(-4px);box-shadow:var(--sh-glow);}
-.sk-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1.2rem;}
-.sk-card h4{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:.8rem;}
-.sk-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
-.sk-tag{padding:.2rem .7rem;border-radius:var(--r-full);font-size:.68rem;font-weight:600;background:var(--g-card);border:1px solid var(--c-border);color:var(--t-secondary);}
-
-/* Freelance Cards */
-.fl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;}
-.fl-card{
-  background:var(--c-surface);border:1px solid var(--c-border);
-  border-radius:var(--r-xl);padding:1.8rem;
-  transition:all var(--dur-med) var(--ease-out);
-}
-.fl-card:hover{border-color:var(--c-border-h);transform:translateY(-4px);box-shadow:var(--sh-glow);}
-.fl-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;}
-.fl-card h3{font-family:'Space Grotesk',sans-serif;font-size:.98rem;font-weight:700;}
-.fl-date{font-size:.7rem;color:var(--t-muted);font-weight:600;padding:.2rem .7rem;background:var(--g-card);border-radius:var(--r-full);border:1px solid var(--c-border);}
-.fl-card p{font-size:.8rem;color:var(--t-secondary);line-height:1.65;margin-bottom:1rem;}
-.fl-thumbs{display:flex;flex-wrap:wrap;gap:.5rem;}
-.fl-thumb{width:76px;height:58px;border-radius:var(--r-sm);overflow:hidden;cursor:pointer;border:1px solid var(--c-border);transition:all var(--dur-med);}
-.fl-thumb:hover{border-color:var(--c-p1);transform:scale(1.07);box-shadow:0 6px 16px rgba(0, 114, 219, .15);}
-.fl-thumb img{width:100%;height:100%;object-fit:cover;}
-
-/* Certifications */
-.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
-.cert-item{
-  display:flex;align-items:center;gap:1.2rem;padding:1.4rem;
-  background:var(--c-surface);border:1px solid var(--c-border);
-  border-radius:var(--r-xl);transition:all var(--dur-med) var(--ease-out);
-}
-.cert-item:hover{border-color:var(--c-border-h);transform:translateY(-3px);box-shadow:var(--sh-glow);}
-.cert-icon{
-  width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
-  justify-content:center;font-size:1.1rem;flex-shrink:0;
-}
-.cert-details{display:flex;flex-direction:column;gap:0.2rem;}
-.cert-details strong{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;font-weight:700;color:var(--t-primary);}
-.cert-details span{font-size:0.78rem;color:var(--t-secondary);}
-
-/* Contact */
-.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:3.5rem;}
-.contact-stack{display:grid;gap:.9rem;}
-.contact-link{
-  display:flex;align-items:center;gap:1rem;
-  padding:1.3rem 1.5rem;border-radius:var(--r-xl);
-  background:var(--c-surface);border:1px solid var(--c-border);
-  text-decoration:none;color:var(--t-primary);
-  transition:all var(--dur-med) var(--ease-out);
-}
-.contact-link:hover{border-color:var(--c-border-h);transform:translateX(5px);box-shadow:var(--sh-glow);}
-.cl-icon{width:46px;height:46px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
-.cl-text strong{display:block;font-size:.83rem;font-weight:700;}
-.cl-text span{font-size:.78rem;color:var(--t-secondary);}
-.contact-form{display:grid;gap:1rem;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.form-gp{display:flex;flex-direction:column;gap:.45rem;}
-.form-gp label{font-size:.72rem;font-weight:700;color:var(--t-muted);letter-spacing:.5px;text-transform:uppercase;}
-.form-gp input,.form-gp textarea{
-  background:var(--c-surface);border:1px solid var(--c-border);
-  border-radius:var(--r-md);padding:.75rem 1rem;font-family:inherit;font-size:.85rem;
-  color:var(--t-primary);transition:all var(--dur-fast);
-}
-.form-gp input:focus,.form-gp textarea:focus{outline:none;border-color:var(--c-p1);box-shadow:0 0 15px rgba(0, 114, 219, 0.1);}
-
-/* Modals & Lightbox */
-.modal{
-  position:fixed;inset:0;z-index:11000;
-  background:rgba(15, 23, 42, 0.6);backdrop-filter:blur(16px);
-  display:flex;align-items:center;justify-content:center;padding:2rem;
-  opacity:0;pointer-events:none;transition:opacity .4s var(--ease-out);
-}
-.modal.on{opacity:1;pointer-events:all;}
-.modal-box{
-  background:var(--c-surface);border:1px solid var(--c-border);
-  border-radius:var(--r-xl);max-width:800px;width:100%;max-height:88vh;
-  overflow-y:auto;position:relative;box-shadow:var(--sh-lift);
-  transform:scale(0.95) translateY(15px);transition:transform .4s var(--ease-spring);
-}
-.modal.on .modal-box{transform:scale(1) translateY(0);}
-.modal-close{
-  position:absolute;top:1.2rem;right:1.2rem;width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,0.04);border:1px solid var(--c-border);
-  color:var(--t-primary);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;
-}
-.modal-close:hover{background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2);}
-
-.lb{
-  position:fixed;inset:0;z-index:12000;background:rgba(4,8,15,0.98);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .3s;
-}
-.lb.on{opacity:1;pointer-events:all;}
-.lb-stage{max-width:85vw;max-height:75vh;position:relative;}
-.lb-stage img,.lb-stage video{max-width:100%;max-height:75vh;border-radius:8px;box-shadow:0 20px 50px rgba(0,0,0,.5);}
-.lb-nav{
-  position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-  border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;
-}
-.lb-nav:hover{background:var(--g-primary);color:#04080f;}
-.lb-prev{left:-4rem;} .lb-next{right:-4rem;}
-.lb-close{position:absolute;top:-3.5rem;right:0;font-size:1.4rem;color:var(--t-secondary);cursor:pointer;}
-.lb-cap{position:absolute;bottom:-3rem;left:0;right:0;text-align:center;font-size:.82rem;color:var(--t-secondary);}
-.btn-top{
-  position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;
-  background:var(--c-surface);border:1px solid var(--c-border);color:var(--t-primary);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:900;
-  opacity:0;transform:translateY(10px);transition:all .3s var(--ease-out);
-}
-.btn-top.on{opacity:1;transform:translateY(0);}
-.btn-top:hover{border-color:var(--c-p1);color:var(--c-p1);transform:translateY(-3px);}
-
-.btn-pdf{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.5rem 1rem;border-radius:var(--r-full);background:rgba(0, 114, 219, 0.1);
-  border:1px solid rgba(0, 114, 219, 0.2);
-  color:var(--c-p1);font-size:.78rem;font-weight:700;text-decoration:none;transition:all .2s;
-}
-.btn-pdf:hover{background:var(--c-p1);color:var(--c-surface);}
-
-@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.4;}}
-@keyframes blink{50%{opacity:0;}}
-
-@media(max-width:1024px){
-  .hero{grid-template-columns:1fr;text-align:center;gap:4rem;padding-top:8rem;}
-  .hero-left{align-items:center;}
-  .hero-desc{max-width:560px;}
-  .contact-grid{grid-template-columns:1fr;gap:3rem;}
-}
-@media(max-width:768px){
-  nav{padding:1rem;}
-  .nav-links{
-    position:fixed;top:0;right:-100%;width:260px;height:100vh;
-    background:var(--c-surface);border-left:1px solid var(--c-border);
-    flex-direction:column;padding:6rem 2rem;align-items:stretch;gap:1rem;
-    transition:right .4s var(--ease-out);box-shadow:var(--sh-lift);
-  }
-  .nav-links.open{right:0;}
-  .hamburger{display:flex;}
-  .profile-wrap{width:310px;height:380px;}
-  .fc4{display:none;}
-  .form-row{grid-template-columns:1fr;}
-}
-</style>
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
-<div id="loader"><div class="loader-ring"><div class="loader-initials">AK</div></div><div class="loader-text">Assembling Environment</div></div>
-<div id="progress-bar"></div>
-<button class="btn-top" id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+    <!-- Custom Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
 
-<nav id="nav">
-  <div class="nav-inner">
-    <a href="#home" class="nav-logo"><span class="l1">Abhishek</span><span class="l2">.</span></a>
-    <div class="theme-switch-wrapper"><button class="theme-btn" id="themeSwitcher"><i class="fas fa-sun"></i></button></div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home" class="active">Home</a></li><li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li><li><a href="#skills">Skills</a></li>
-      <li><a href="#education">Education</a></li><li><a href="#certifications">Certifications</a></li><li><a href="#freelance">Freelance</a></li>
-      <li><a href="#contact">Contact</a></li><li><a href="cv.html" target="_blank" class="nav-cta">Resume</a></li>
-    </ul>
-    <button class="hamburger" id="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
-  </div>
-</nav>
+    <!-- 3D Canvas -->
+    <canvas id="bg-canvas"></canvas>
 
-<section id="home"><div class="hero">
-  <div class="hero-left">
-    <div class="hero-badge"><span class="dot"></span> NEC Reg. #80593 &nbsp;·&nbsp; Civil Engineer</div>
-    <h1><span class="gd">Abhishek</span><br><span>Karki</span></h1>
-    <div class="hero-roles"><span id="typed"></span><span class="typed-cursor">|</span></div>
-    <p class="hero-desc">Civil Engineer & GIS Specialist integrating geospatial intelligence with infrastructure design. 2+ years of field experience across transmission projects, hazard mapping, and spatial analytics in Nepal.</p>
-    <div class="hero-stats"><div class="stat-item"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Years Experience</div></div>
-      <div class="stat-item"><div class="stat-num" data-target="8">0</div><div class="stat-lbl">GIS Projects</div></div>
-      <div class="stat-item"><div class="stat-num" data-target="5">0</div><div class="stat-lbl">Sites Supervised</div></div>
+    <!-- Scroll Progress -->
+    <div id="progress-bar"></div>
+
+    <!-- Back to Top -->
+    <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- NAVBAR -->
+    <nav id="nav">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo"><span class="l1">Abhishek</span><span class="l2">.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#freelance">Freelance</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="cv.html" target="_blank" class="nav-cta">Resume</a></li>
+            </ul>
+            <button class="hamburger" id="hbg" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <div class="hero-left">
+            <div class="hero-badge"><span class="dot"></span> NEC Reg. #80593 · Civil Engineer</div>
+            <h1><span class="gd">Abhishek</span><br><span>Karki</span></h1>
+            <div class="hero-roles">
+                <span id="typed"></span><span class="typed-cursor">|</span>
+            </div>
+            <p class="hero-desc">
+                Civil Engineer & GIS Specialist integrating spatial data with structural infrastructure. Advanced focus in hydraulic modeling, risk analysis, and satellite-based temporal assessments.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item"><div class="stat-num">2</div><div class="stat-lbl">Years Field Work</div></div>
+                <div class="stat-item"><div class="stat-num">8</div><div class="stat-lbl">GIS Case Studies</div></div>
+                <div class="stat-item"><div class="stat-num">15</div><div class="stat-lbl">Consultant Tasks</div></div>
+            </div>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-p magnetic"><i class="fas fa-layer-group"></i> Explore Projects</a>
+                <a href="#contact" class="btn btn-o magnetic"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+            </div>
+            <div class="hero-socials">
+                <a href="https://github.com" target="_blank" class="soc-btn"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/abhishek-karki-9b034524a/" target="_blank" class="soc-btn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="profile-wrap">
+                <div class="profile-border-ring"></div>
+                <div class="profile-border">
+                    <div class="profile-card-3d">
+                        <div class="no-img">AK</div>
+                        <div class="profile-overlay">
+                            <div class="profile-name">Abhishek Karki</div>
+                            <div class="profile-role">MSc. Disaster Risk Management</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="f-chip fc1"><div class="ic"><i class="fas fa-satellite"></i></div> InSAR Specialist</div>
+                <div class="f-chip fc2"><div class="ic"><i class="fas fa-water"></i></div> HEC-RAS 2D</div>
+                <div class="f-chip fc3"><div class="ic"><i class="fas fa-map-marked-alt"></i></div> GIS Analyst</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="sec sec-dark reveal">
+        <div class="container about-grid">
+            <div>
+                <div class="sec-label">Identity</div>
+                <h2 class="sec-title" data-splitting>Bridging Geomatics &<br>Structural Engineering</h2>
+                <p class="sec-sub">
+                    Specialized in processing operational telemetry, multi-spectral configurations, and spatial architectures. Fusing modern coding pipelines with core computational physics models to produce dynamic disaster assessments.
+                </p>
+                <div class="skills-cloud">
+                    <span class="pill pb">ArcGIS Pro</span><span class="pill pb">QGIS</span>
+                    <span class="pill pb">Google Earth Engine</span><span class="pill pb">SNAP/InSAR</span>
+                    <span class="pill pg">AutoCAD</span><span class="pill pg">Civil 3D</span>
+                    <span class="pill pv">HEC-RAS 2D</span><span class="pill pa">DGPS</span>
+                    <span class="pill pp">Python</span><span class="pill pp">MATLAB</span>
+                </div>
+            </div>
+            <div>
+                <div class="info-stack">
+                    <div class="info-row">
+                        <div class="ir-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="ir-text"><strong>Location</strong><span>Balkot, Bhaktapur, Nepal</span></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="ir-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="ir-text"><strong>Education</strong><span>MSc. DRM – Tribhuvan University</span></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="ir-icon"><i class="fas fa-id-card"></i></div>
+                        <div class="ir-text"><strong>License</strong><span>NEC #80593</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="sec reveal">
+        <div class="container">
+            <div class="sec-hd">
+                <div class="sec-label">Portfolio</div>
+                <h2 class="sec-title" data-splitting>Selected Case Studies</h2>
+            </div>
+            <div class="filter-bar">
+                <button class="filter-btn on" onclick="filterProj('all', this)">All</button>
+                <button class="filter-btn" onclick="filterProj('insar', this)">InSAR</button>
+                <button class="filter-btn" onclick="filterProj('gis', this)">GIS & Remote Sensing</button>
+                <button class="filter-btn" onclick="filterProj('hydro', this)">Hydraulics</button>
+                <button class="filter-btn" onclick="filterProj('civil', this)">Civil Design</button>
+            </div>
+            <div class="proj-grid" id="projGrid"></div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="sec sec-dark reveal">
+        <div class="container">
+            <div class="sec-hd">
+                <div class="sec-label">Professional</div>
+                <h2 class="sec-title" data-splitting>Field & Design Experience</h2>
+            </div>
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-card">
+                        <div class="tl-top">
+                            <h3 class="tl-title">Civil Engineer</h3>
+                            <span class="tl-date">Aug 2023 – Jul 2025</span>
+                        </div>
+                        <div class="tl-company">Sigma Con Pvt. Ltd – Transmission & Substation Projects</div>
+                        <div class="site-chips">
+                            <span class="site-chip" onclick="openWorkGallery('balefi')"><i class="fas fa-map-marker-alt"></i> Balefi 132kV TL</span>
+                            <span class="site-chip" onclick="openWorkGallery('lalbandi')"><i class="fas fa-map-marker-alt"></i> Lalbandi-Salempur</span>
+                            <span class="site-chip" onclick="openWorkGallery('dhalkebar')"><i class="fas fa-map-marker-alt"></i> Dhalkebar-Balganga</span>
+                            <span class="site-chip" onclick="openWorkGallery('sandikharga')"><i class="fas fa-map-marker-alt"></i> Sandikharga–Burtibang</span>
+                            <span class="site-chip" onclick="openWorkGallery('tamghas')"><i class="fas fa-map-marker-alt"></i> Tamghas Substation</span>
+                        </div>
+                        <ul class="tl-list">
+                            <li>AutoCAD/Civil 3D substation layouts & 3D models (SketchUp, Revit).</li>
+                            <li>ArcGIS for tower relocation (land disputes) and ROW documentation.</li>
+                            <li>Estimates, BOQ, BBS, IPC billing & client coordination.</li>
+                            <li>DGPS → contours, cross sections, earthwork volumes; Total Station for stub setting.</li>
+                            <li>Supervised foundations, control rooms, switchyard; material testing.</li>
+                            <li>Primavera scheduling & subcontractor management.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="sec reveal">
+        <div class="container">
+            <div class="sec-hd">
+                <div class="sec-label">Toolbox</div>
+                <h2 class="sec-title" data-splitting>Technical Competencies</h2>
+            </div>
+            <div class="skills-grid" id="skillsGrid"></div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="sec sec-dark reveal">
+        <div class="container">
+            <div class="sec-hd">
+                <div class="sec-label">Academics</div>
+                <h2 class="sec-title" data-splitting>Education</h2>
+            </div>
+            <div class="edu-list">
+                <div class="edu-card">
+                    <h3>MSc Disaster Risk Management (DREM)</h3>
+                    <p>Tribhuvan University, IOE Pulchowk | 2026–Present</p>
+                </div>
+                <div class="edu-card">
+                    <h3>B.E. Civil Engineering</h3>
+                    <p>Khwopa Engineering College | 2022 | CGPA 3.43</p>
+                    <p class="honors">🏅 Ranked 1st in 7th & 8th semesters</p>
+                </div>
+                <div class="edu-card">
+                    <h3>+2 Science (NEB)</h3>
+                    <p>Sainik Awasiya Mahavidhyalaya | 2074 BS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="sec reveal">
+        <div class="container">
+            <div class="sec-hd">
+                <div class="sec-label">Credentials</div>
+                <h2 class="sec-title" data-splitting>Certifications & Memberships</h2>
+            </div>
+            <div class="cert-grid" id="certGrid"></div>
+            <div class="cert-thumbs" id="certThumbs"></div>
+        </div>
+    </section>
+
+    <!-- FREELANCE -->
+    <section id="freelance" class="sec sec-dark reveal">
+        <div class="container">
+            <div class="sec-hd">
+                <div class="sec-label">Independent Operations</div>
+                <h2 class="sec-title" data-splitting>Freelance & Academic Projects</h2>
+            </div>
+            <div class="fl-grid" id="flGrid"></div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="sec reveal">
+        <div class="container">
+            <div class="sec-hd">
+                <div class="sec-label">Contact</div>
+                <h2 class="sec-title" data-splitting>Initiate Collaboration</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-stack">
+                    <a href="mailto:abhishekkarki520@gmail.com" class="contact-link">
+                        <div class="cl-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="cl-text"><strong>Email</strong><span>abhishekkarki520@gmail.com</span></div>
+                    </a>
+                    <a href="https://linkedin.com/in/abhishek-karki-9b034524a/" target="_blank" class="contact-link">
+                        <div class="cl-icon"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="cl-text"><strong>LinkedIn</strong><span>Connect with me</span></div>
+                    </a>
+                </div>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Message received.');">
+                    <div class="form-group"><input type="text" placeholder="Your Name" required></div>
+                    <div class="form-group"><input type="email" placeholder="Your Email" required></div>
+                    <div class="form-group"><textarea placeholder="Project Details & Objectives" required></textarea></div>
+                    <button type="submit" class="btn-submit magnetic"><i class="fas fa-bolt"></i> Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('projModal')"><i class="fas fa-times"></i></button>
+            <div class="modal-body">
+                <div id="mHead"></div>
+                <div id="mDesc"></div>
+                <div class="m-gallery" id="mGallery"></div>
+                <div id="mPdf"></div>
+            </div>
+        </div>
     </div>
-    <div class="hero-actions"><a href="#projects" class="btn btn-p">Explore Projects <i class="fas fa-arrow-right"></i></a><a href="#contact" class="btn btn-o">Let's Connect</a></div>
-    <div class="hero-socials"><a href="https://github.com/abhishekkarki" target="_blank" class="soc-btn"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/abhishek-karki-gis/" target="_blank" class="soc-btn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="mailto:abhishekkarki520@gmail.com" class="soc-btn"><i class="fas fa-envelope"></i></a>
+
+    <!-- Carousel & Video Modals -->
+    <div class="carousel-modal" id="carouselModal">
+        <div class="carousel-content">
+            <button class="close-carousel">&times;</button>
+            <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
+            <img id="carouselImage" class="carousel-image" src="">
+            <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
+            <div id="carouselCaption" class="carousel-caption"></div>
+        </div>
     </div>
-  </div>
-  <div class="hero-right"><div class="profile-wrap">
-    <div class="profile-border"></div><div class="profile-card-3d"><div class="no-img">AK</div><div class="profile-overlay"><div class="profile-name">Abhishek Karki</div><div class="profile-role">MSc. Disaster Risk Management Student</div></div></div>
-    <div class="f-chip fc1"><div class="ic"><i class="fas fa-satellite"></i></div>SNAP InSAR</div>
-    <div class="f-chip fc2"><div class="ic"><i class="fas fa-water"></i></div>HEC-RAS 2D</div>
-    <div class="f-chip fc3"><div class="ic"><i class="fas fa-globe-asia"></i></div>ArcGIS Pro</div>
-    <div class="f-chip fc4"><div class="ic"><i class="fas fa-drafting-compass"></i></div>Civil 3D</div>
-  </div></div>
-</div></section>
-
-<section id="projects" class="sec"><div class="container">
-  <div class="sec-hd"><div class="sec-label">Geospatial Portfolio</div><h2 class="sec-title">Selected Projects</h2></div>
-  <div class="filter-bar" id="filterBar"></div>
-  <div class="proj-grid" id="projGrid"></div>
-</div></section>
-
-<section id="experience" class="sec sec-dark"><div class="container">
-  <div class="sec-hd"><div class="sec-label">Milestones</div><h2 class="sec-title">Engineering Experience</h2></div>
-  <div class="timeline"><div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-top"><div><div class="tl-title" style="color:var(--c-g1)">MSc. Researcher — Disaster Risk Management</div><div class="tl-company">Tribhuvan University, IOE Pulchowk</div></div><span class="tl-date">2026 – Present</span></div><ul class="tl-list"><li>Advanced GIS-based multi-hazard risk assessment methodologies.</li><li>Remote sensing data processing for disaster impact and exposure analysis.</li><li>Vulnerability modeling for infrastructure under seismic and hydro-meteorological hazards.</li></ul></div></div>
-    <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><div class="tl-top"><div><div class="tl-title" style="color:var(--c-p1)">Civil Engineer</div><div class="tl-company">Sigma Con Pvt. Ltd. (Aug 2023 – Jul 2025)</div></div><span class="tl-date">2 Years</span></div>
-    <div class="site-chips" id="siteChips"></div>
-    <ul class="tl-list"><li>Supervised construction operations across multiple 132kV and 33kV substations throughout Nepal.</li><li>Managed site calculations, material cross-checks, and field scheduling systems under NEA guidelines.</li></ul></div></div>
-  </div>
-</div></section>
-
-<section id="skills" class="sec"><div class="container">
-  <div class="sec-hd"><div class="sec-label">Expertise</div><h2 class="sec-title">Technical Toolbox</h2></div>
-  <div class="skills-grid"><div class="sk-card"><div class="sk-ic"><i class="fas fa-map"></i></div><h4>GIS & Remote Sensing</h4><div class="sk-tags"><span class="sk-tag">ArcGIS Pro</span><span class="sk-tag">QGIS</span><span class="sk-tag">Google Earth Engine</span><span class="sk-tag">SNAP</span><span class="sk-tag">SNAPHU</span><span class="sk-tag">Agisoft</span></div></div>
-    <div class="sk-card"><div class="sk-ic"><i class="fas fa-drafting-compass"></i></div><h4>CAD & 3D Design</h4><div class="sk-tags"><span class="sk-tag">AutoCAD</span><span class="sk-tag">Civil 3D</span><span class="sk-tag">SketchUp</span><span class="sk-tag">Revit</span></div></div>
-    <div class="sk-card"><div class="sk-ic"><i class="fas fa-calculator"></i></div><h4>Engineering Analysis</h4><div class="sk-tags"><span class="sk-tag">HEC-RAS 2D</span><span class="sk-tag">STAAD Pro</span><span class="sk-tag">SAP2000</span><span class="sk-tag">GeoStudio</span></div></div>
-  </div>
-</div></section>
-
-<section id="education" class="sec sec-dark"><div class="container">
-  <div class="sec-hd"><div class="sec-label">Education</div><h2 class="sec-title">Academic Profile</h2></div>
-  <div class="skills-grid"><div class="sk-card" style="border-left: 3px solid var(--c-g1);"><h4>MSc. Disaster Risk & Emergency Management</h4><p style="font-size:.85rem; color:var(--t-secondary); margin-bottom:0.5rem;">Tribhuvan University, IOE Pulchowk Campus</p><span class="tl-date">2026 – Present</span></div>
-    <div class="sk-card" style="border-left: 3px solid var(--c-p1);"><h4>B.E. Civil Engineering</h4><p style="font-size:.85rem; color:var(--t-secondary); margin-bottom:0.5rem;">Khwopa Engineering College (TU)</p><p style="font-size:.78rem; color:var(--c-p1); margin-bottom:0.5rem;"><i class="fas fa-medal"></i> Ranked 1st in 7th & 8th Semesters (CGPA: 3.43)</p><span class="tl-date">Graduated 2022</span></div>
-  </div>
-</div></section>
-
-<section id="certifications" class="sec"><div class="container">
-  <div class="sec-hd"><div class="sec-label">Credentials</div><h2 class="sec-title">Certifications & Memberships</h2></div>
-  <div class="cert-grid" id="certGrid"></div>
-  <div class="fl-thumbs" id="certThumbs" style="margin-top: 2rem; justify-content: center;"></div>
-</div></section>
-
-<section id="freelance" class="sec sec-dark"><div class="container">
-  <div class="sec-hd"><div class="sec-label">Independent</div><h2 class="sec-title">Freelance Consulting</h2></div>
-  <div class="fl-grid" id="flGrid"></div>
-</div></section>
-
-<section id="contact" class="sec"><div class="container">
-  <div class="sec-hd"><div class="sec-label">Communication</div><h2 class="sec-title">Let's Connect</h2></div>
-  <div class="contact-grid"><div class="contact-stack"><a href="mailto:abhishekkarki520@gmail.com" class="contact-link"><div class="cl-icon"><i class="fas fa-envelope"></i></div><div class="cl-text"><strong>Email</strong><span>abhishekkarki520@gmail.com</span></div></a>
-    <a href="tel:9860959598" class="contact-link"><div class="cl-icon"><i class="fas fa-phone-alt"></i></div><div class="cl-text"><strong>Phone</strong><span>+977 9860959598</span></div></a>
-    <a href="https://www.linkedin.com/in/abhishek-karki-gis/" target="_blank" class="contact-link"><div class="cl-icon"><i class="fab fa-linkedin-in"></i></div><div class="cl-text"><strong>LinkedIn</strong><span>abhishek-karki-gis</span></div></a>
-  </div>
-  <div><form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent (demo).');"><div class="form-row"><div class="form-gp"><label>Name</label><input type="text" placeholder="Your name"></div><div class="form-gp"><label>Email</label><input type="email" placeholder="your@email.com"></div></div><div class="form-gp"><label>Message</label><textarea rows="5" placeholder="Project details..."></textarea></div><button type="submit" class="btn btn-p" style="width:fit-content;">Transmit Message</button></form></div>
-  </div>
-</div></section>
-
-<div class="modal" id="projModal"><div class="modal-box"><button class="modal-close" onclick="closeModal('projModal')">×</button><div style="padding:2.2rem;"><div id="mCat" class="proj-cat"></div><h3 id="mTitle" class="sec-title" style="font-size:1.6rem; margin-bottom:.5rem;"></h3><p id="mLoc" style="font-size:.8rem; color:var(--t-muted); margin-bottom:1.5rem;"><i class="fas fa-map-marker-alt"></i> </p><p id="mFull" style="font-size:.9rem; color:var(--t-secondary); line-height:1.75; margin-bottom:2rem;"></p><h4 style="font-size:.82rem; font-weight:700; margin-bottom:.8rem; text-transform:uppercase;">Media Gallery</h4><div class="fl-thumbs" id="mMedia" style="margin-bottom:2rem;"></div><div id="mPdf"></div></div></div></div>
-
-<div class="lb" id="lb"><span class="lb-close" onclick="closeLB()">×</span><div class="lb-nav lb-prev" onclick="changeLB(-1)">‹</div><div class="lb-stage" id="lbStage"></div><div class="lb-nav lb-next" onclick="changeLB(1)">›</div><div class="lb-cap" id="lbCap"></div></div>
-
-<script>
-// ==================== REAL DATA (from your working portfolio) ====================
-
-// 8 core projects (full data)
-const PROJECTS = [
-  { id:0, title:"InSAR Time Series for Highway Subsidence", cat:"InSAR / Geotech", filter:"remote", loc:"Sloterdijk to Rijksweg, Netherlands",
-    short:"13 Sentinel-1 images (Jan–May 2024) processed with SNAP+SNAPHU – displacement maps, A10 highway profiles.",
-    tech:["SNAP","SNAPHU","Sentinel-1"],
-    full:"Processed 13 Sentinel-1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering (α=0.5), phase unwrapping, and terrain correction (EPSG:28992). Extracted A10 highway profiles and produced a time series graph showing subsidence over 5 months.",
-    pdf:"assets/portfolio-photos/insar/insar.pdf", folder:"insar",
-    media:[
-      {t:"img",src:"Screenshot 2026-05-08 194722.png",cap:"Interferogram – phase difference (Jan–Feb 2024)"},
-      {t:"img",src:"Screenshot 2026-05-08 203715.png",cap:"Displacement map (mm) – A10 highway corridor"},
-      {t:"img",src:"Screenshot 2026-05-10 125056.png",cap:"Goldstein filtered interferogram"},
-      {t:"img",src:"Screenshot 2026-05-10 194901.png",cap:"Unwrapped phase and time series graph"},
-      {t:"img",src:"Screenshot 2026-05-17 090637.png",cap:"Subsidence profile – A10 highway"},
-      {t:"img",src:"Screenshot 2026-05-17 090658.png",cap:"Cumulative displacement (Jan–May 2024)"}
-    ], emoji:"🛰️" },
-  { id:1, title:"NDVI Timelapse of Kathmandu Valley (2000–2026)", cat:"Remote Sensing", filter:"remote", loc:"Kathmandu Valley, Nepal",
-    short:"26-year vegetation change using Landsat & Sentinel-2. 28 images in GEE, 5-class timelapse, exported 1080p MP4.",
-    tech:["Google Earth Engine","Landsat","Sentinel-2"],
-    full:"Processed 28 images in Google Earth Engine – scaling, cloud masking, NDVI calculation, harmonization, median composites. Built 5-class timelapse (built‑up, very thin, low, light forest, dense forest) and exported 1080p MP4.",
-    pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf", folder:"ndvi",
-    media:[
-      {t:"img",src:"GEE1.jpg",cap:"NDVI classification – built‑up (red) and dense forest (dark green)"},
-      {t:"img",src:"GEE2.jpg",cap:"Change detection: vegetation loss from 2000 to 2026"},
-      {t:"video",src:"Map.mp4",cap:"Timelapse animation of NDVI (2000–2026)"}
-    ], emoji:"🏙️" },
-  { id:2, title:"Hospital Accessibility in Colorado", cat:"GIS", filter:"gis", loc:"Colorado, USA",
-    short:"Network drive-time analysis – 30/60‑min service areas, population coverage 35.6% / 61.3%.",
-    tech:["ArcGIS Network Analyst","Population data"],
-    full:"Generated service areas from specialist hospitals, overlaid county population, area‑weighted estimation. Revealed spatial disparities in healthcare access.",
-    pdf:"", folder:"hospital",
-    media:[
-      {t:"img",src:"30min_Map.png",cap:"30‑minute drive time service areas"},
-      {t:"img",src:"60_min Map.png",cap:"60‑minute drive time service areas"},
-      {t:"img",src:"PopulationMap.png",cap:"Population density overlay"},
-      {t:"img",src:"Screenshot 2026-04-27 192541.png",cap:"Network analysis settings"},
-      {t:"img",src:"Screenshot 2026-04-28 114005.png",cap:"Unserved areas identification"},
-      {t:"img",src:"Screenshot 2026-04-28 152454.png",cap:"Coverage statistics: 35.6% (30 min), 61.3% (60 min)"}
-    ], emoji:"🏥" },
-  { id:3, title:"Urban Sprawl Analysis of Kathmandu Valley (2016–2026)", cat:"GIS", filter:"gis", loc:"Kathmandu Valley, Nepal",
-    short:"Landsat 8/9 NDBI change, ALOS PALSAR slope filtering, validated expansion map.",
-    tech:["Landsat","ALOS PALSAR","ArcGIS"],
-    full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain. Validated urban expansion map.",
-    pdf:"", folder:"urban-sprawl",
-    media:[
-      {t:"img",src:"2016.png",cap:"NDBI 2016 – built‑up areas"},
-      {t:"img",src:"2026.png",cap:"NDBI 2026 – urban expansion"},
-      {t:"img",src:"slopemap.png",cap:"Slope filtering (ALOS PALSAR DEM)"},
-      {t:"img",src:"Urban Sprawl.png",cap:"Validated urban expansion map 2016–2026"},
-      {t:"img",src:"urbanchange.png",cap:"Change detection: new built‑up areas (red)"}
-    ], emoji:"🏙️" },
-  { id:4, title:"UAV Landslide Susceptibility Mapping", cat:"UAV/GIS", filter:"gis", loc:"Shalme, Sisneri, Solukhumbu, Nepal",
-    short:"UAV orthomosaic/DEM, slope/aspect analysis, weighted overlay hazard zonation.",
-    tech:["UAV","Agisoft","ArcGIS"],
-    full:"High‑resolution DEM and orthomosaic from drone; derived terrain factors; weighted overlay to classify hazard zones for disaster planning.",
-    pdf:"", folder:"uav-landslide",
-    media:[
-      {t:"img",src:"Aspect Map.png",cap:"Aspect map – slope orientation"},
-      {t:"img",src:"BaseMap.png",cap:"UAV orthomosaic – Sisneri area"},
-      {t:"img",src:"profile.png",cap:"Slope profile along critical section"},
-      {t:"img",src:"Screenshot 2026-04-19 080520.png",cap:"UAV flight planning"},
-      {t:"img",src:"Screenshot 2026-04-19 084508.png",cap:"Point cloud and DEM generation"},
-      {t:"img",src:"Slope Map.png",cap:"Slope map (degrees)"},
-      {t:"img",src:"Weighted Overlay.png",cap:"Landslide susceptibility zonation – high (red), moderate (yellow), low (green)"}
-    ], emoji:"⛰️" },
-  { id:5, title:"Flood Inundation Mapping", cat:"Hydrology", filter:"hydro", loc:"Narayani River, Nepal",
-    short:"HEC-RAS 2D unsteady flow, DEM preparation, hydrograph simulation, flood depth/velocity mapping.",
-    tech:["HEC-RAS 2D","ArcGIS"],
-    full:"DEM preparation and terrain correction; 2D unsteady flow simulation; post‑processing extracted flood depth, velocity, WSE for hazard analysis.",
-    pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf", folder:"flood",
-    media:[
-      {t:"img",src:"Screenshot 2026-04-23 230415.png",cap:"HEC-RAS 2D mesh and boundary conditions"},
-      {t:"img",src:"Screenshot 2026-04-23 233808.png",cap:"Flood depth map – 25‑year return period"},
-      {t:"img",src:"Screenshot 2026-04-24 121835.png",cap:"Velocity distribution"},
-      {t:"img",src:"Screenshot 2026-05-17 090826.png",cap:"Water surface elevation (WSE) profile"},
-      {t:"img",src:"Screenshot 2026-05-17 090841.png",cap:"Flood hazard classification"},
-      {t:"img",src:"Screenshot 2026-05-17 090854.png",cap:"Inundation extent – Narayani River"}
-    ], emoji:"🌊" },
-  { id:6, title:"Substation Backfill Volumetric Analysis (Civil 3D)", cat:"Civil 3D", filter:"civil", loc:"Balganga, Janakpur, Nepal",
-    short:"DGPS → surface modeling → corridors → cut/fill volumes.",
-    tech:["Civil 3D","DGPS"],
-    full:"DGPS survey, surface creation, cross‑sections, corridor modeling, quantity estimation for substation backfill – optimised construction planning.",
-    pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf", folder:"civil3d",
-    media:[
-      {t:"img",src:"Screenshot 2026-05-17 091158.png",cap:"DGPS survey points"},
-      {t:"img",src:"Screenshot 2026-05-17 091210.png",cap:"Existing ground surface (TIN)"},
-      {t:"img",src:"Screenshot 2026-05-17 091226.png",cap:"Proposed design surface"},
-      {t:"img",src:"Screenshot 2026-05-17 091238.png",cap:"Cut/fill analysis – earthwork volumes"},
-      {t:"img",src:"Screenshot 2026-05-17 091511.png",cap:"Cross‑section sample"},
-      {t:"img",src:"Screenshot 2026-05-17 091526.png",cap:"Corridor model"},
-      {t:"img",src:"Screenshot 2026-05-17 091539.png",cap:"Quantity takeoff report"},
-      {t:"img",src:"Screenshot 2026-05-17 091603.png",cap:"3D visualization of backfill"}
-    ], emoji:"📐" },
-  { id:7, title:"Earthquake Analysis of Nepal", cat:"Seismology / GIS", filter:"gis", loc:"Nepal (1978-2025)",
-    short:"Analysis of major earthquake mainshocks using USGS data. Animation and PDF reports.",
-    tech:["ArcGIS","Python","Animation"],
-    full:"Processed USGS catalog (M≥5, 1978‑2025) using Gardner‑Knopoff declustering. Removed aftershocks to keep 58 mainshocks. Outputs: CSV, animated map, timeline plot. Tools: Python, ArcGIS Pro.",
-    pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf", folder:"earthquake",
-    media:[
-      {t:"video",src:"Nepal_EarthQuakes_Animation.mp4",cap:"Animation of earthquake mainshocks in Nepal (1978-2025)"},
-      {t:"img",src:"earthquake mainshocks.png",cap:"Map of Nepal showing mainshocks, histograms and timeline"}
-    ], emoji:"🌍" }
-  ];
-
-// Work experience site data (with actual images and captions)
-const SITES = {
-  balefi: { folder:"Balefi", files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'], caps:["Tower Erection works","Tower Erection Works","Concreting of Chimney after Stub Setting","Completed Tower Erection"] },
-  lalbandi: { folder:"Salempur", files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG-20250130-WA0002.jpg','IMG-20250204-WA0001.jpg','IMG_20231107_104434.jpg','IMG_20231108_172521.jpg','IMG_20240120_112353.jpg','IMG_20240122_113733.jpg','IMG_20240127_131102.jpg','IMG_20240127_223235.jpg','IMG_20240206_140830.jpg','IMG_20240216_123804.jpg','IMG_20240517_144952.jpg','IMG_20240609_174437.jpg','IMG_20240619_134602.jpg','IMG_20240627_191646.jpg','IMG_20241117_144300.jpg','Screenshot 2026-05-16 204535.png','Screenshot 2026-05-16 204630.png'], caps:["Salempur Substation","Plastering works of Staff Quarter","finishing works of Staff Quarter","Salempur Substation Switchyard","Surveying works","Excavation works","Rebar works for Staff Quarter","Rebar works for Control Room","DGPS survey","ROW works","ROW works","Plinth Beam Rebar","Anchor bolt setting","Slab Rebar works","Staff Quarter Building","Gantry Foundation Works","Road Excavation","Tower Locations","Substation layout"] },
-  dhalkebar: { folder:"Balganga", files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','IMG_20250403_113259.jpg','IMG_20250427_143925.jpg','Screenshot 2026-05-16 204005.png','Screenshot 2026-05-16 204902.png'], caps:["Staff Quarter Foundation","Control Room Building","Formworks","Gantry Foundation","Concreting of Slab","Layout view","Tower Locations"] },
-  sandikharga: { folder:"Burtibang", files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','IMG_20231217_120853.jpg','IMG_20231222_081630.jpg','Screenshot 2026-05-16 205216.png'], caps:["Tower Erection","Stub Setting","DGPS survey","DGPS survey","Way to Tower","Tower Locations"] },
-  tamghas: { folder:"Tamghas", files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'], caps:["Transformer","Survey works","Survey works","Switchyard view"] }
-};
-const SITE_LABELS = {balefi:"Balefi 132kV", lalbandi:"Salempur 132kV", dhalkebar:"Balganga 132kV", sandikharga:"Sandikharga–Burtibang", tamghas:"Tamghas Substation"};
-
-// Freelance data (with real image files and captions)
-const FREELANCE = [
-  { id:"hvac", title:"HVAC System Design & Modeling", date:"2024", desc:"Designed complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing, equipment selection. Client: Griffith University student, Australia.", files:['duct-layout.png'], caps:["HVAC duct layout design"] },
-  { id:"3d-modeling", title:"3D Building Planning & Modeling", date:"2023–2024", desc:"Created detailed architectural visualizations using SketchUp and Revit. Produced floor plans, elevations, and 3D walkthroughs.", files:['1.png','2.png','3.jpg','4.jpeg','5.jpg','6.jpg','7.jpg'], caps:["Staff Quarter 3D model","Control Room 3D model","House 3D model","Cable trench layout","Residential model 1","Residential model 2","Residential model 3"] },
-  { id:"structural-analysis", title:"Structural Analysis for Client Buildings", date:"2024", desc:"Performed detailed structural analysis using STAAD Pro for a client’s building design. Ensured compliance with load and safety standards.", files:['1.png','2.png','3.png','4.png'], caps:["STAAD model","Load distribution","Reaction forces","Deflection diagram"] },
-  { id:"drafting", title:"2D Drafting (AutoCAD)", date:"2023–2025", desc:"Created detailed 2D CAD drawings: floor plans, sections, elevations, and construction details. Produced site layout plans.", files:['1.png','2.png','3.png','4.png','5.png','6.png','7.png','8.png','9.png','10.png','11.png','12.png','13.png','Screenshot 2026-05-17 083920.png','Screenshot 2026-05-17 084542.png'], caps:["Site Layout Plan","Site Layout Plan","Floor Plan","Floor Plan","Floor Plan","Floor Plan","Floor Plan","Land Measurement Plan","Plan with Dimensions","Substation Plan","Building Drawing","ROW works","Tower Locations","Access Road Section","Tower Foundation Drawings"] },
-  { id:"abi", title:"ABI Pier Structural Design Workshop", date:"2023 (Earthquake Day)", desc:"Designed Adjustable Base Isolation Pier system with group effort. Created prototype structure with load and performed seismic load analysis. Presented on Earthquake Day (Magh 2). Group members: Kiran Bhandari, Jenish Poudel, Ashwin Kharel, Abhishek Seti Sirwal.", files:['1.jpeg'], caps:["Presentation on Earthquake Day"] },
-  { id:"sisneri", title:"Slope Stability & Mitigation Design of Sisneri Landslide", date:"2023 (Final Year Project)", desc:"Drone survey + geotechnical analysis; slope slip surface using GeoStudio; GEE hydrology; designed gabion walls, drains, soil reinforcements, and bioengineering. Group: Kiran Bhandari, Priyanka Pradhan, Arpan Pokharel. Supervisors: Subeg Man Bijukchhen, Bhim Kumar Dahal, Naresh Man Shakhya.", files:['Damage due to Landslide.JPG','Group Members.JPG','Landslide view.JPG','Location.JPG','Presentation Day.JPG','Drone deploy location.png','Solu Hydropower Tunnel.JPG','Stability analysis of Slope.jpg','UAV settings.jpg','With Supervisors.JPG'], caps:["Damage due to Landslide","Group Members","Landslide view","Location","Presentation Day","Drone deploy location","Solu Hydropower Tunnel","Stability analysis of Slope","UAV settings","With Supervisors"] }
-];
-
-// Certificate images
-const CERTIFICATES = [
-  { file:'autocad.jpg', cap:'AutoCAD Professional Certification' },
-  { file:'NEC.png', cap:'Nepal Engineering Council Registration' },
-  { file:'SAP.jpg', cap:'SAP2000 Structural Analysis Training' }
-];
-
-// KMZ mapping (placeholder; you need actual .kmz files in assets/kmz/)
-const KMZ_FILES = {
-  balefi:'balefi_route.kmz', lalbandi:'lalbandi_route.kmz', dhalkebar:'dhalkebar_route.kmz',
-  sandikharga:'sandikharga_route.kmz', tamghas:'tamghas_substation.kmz'
-};
-
-// ==================== RENDER FUNCTIONS ====================
-function buildCertifications() {
-  const grid = document.getElementById('certGrid');
-  const certData = [
-    { title: "AutoCAD Professional", subtitle: "Autodesk Certified User", icon: "fas fa-drafting-compass" },
-    { title: "Nepal Engineering Council", subtitle: "Reg. No. 80593 (Civil)", icon: "fas fa-id-card" },
-    { title: "SAP2000 Training", subtitle: "Structural Analysis & Design", icon: "fas fa-calculator" }
-  ];
-  grid.innerHTML = certData.map(c => `
-    <div class="cert-item">
-      <div class="cert-icon" style="background:rgba(0, 114, 219, 0.1); color:var(--c-p1);"><i class="${c.icon}"></i></div>
-      <div class="cert-details">
-        <strong>${c.title}</strong>
-        <span>${c.subtitle}</span>
-      </div>
+    <div class="video-modal" id="videoModal">
+        <div class="video-content">
+            <button class="close-video">&times;</button>
+            <video id="videoPlayer" controls></video>
+        </div>
     </div>
-  `).join('');
 
-  const thumbs = document.getElementById('certThumbs');
-  const basePath = 'assets/Cerififcations/';
-  thumbs.innerHTML = CERTIFICATES.map((c, idx) => `
-    <div class="fl-thumb" onclick="event.stopPropagation(); openCertGallery(${idx})">
-      <img src="${basePath}${encodeURI(c.file)}" alt="${c.cap}">
-    </div>
-  `).join('');
-}
-function openCertGallery(idx) {
-  const basePath = 'assets/Cerififcations/';
-  const list = CERTIFICATES.map(c => ({ src: basePath + encodeURI(c.file), cap: c.cap }));
-  openLightboxList(list, idx);
-}
+    <!-- CDN Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
 
-function buildProjects() {
-  const grid = document.getElementById('projGrid');
-  grid.innerHTML = PROJECTS.map(p => `
-    <div class="proj-card" data-filter="${p.filter}" onclick="openProjectModal(${p.id})">
-      <div class="proj-thumb"><div class="proj-thumb-ph">${p.emoji}</div><div class="proj-hover-mask"><div class="proj-view-btn">Inspect Metrics <i class="fas fa-search-plus"></i></div></div></div>
-      <div class="proj-body"><div class="proj-cat">${p.cat}</div><h3>${p.title}</h3><p>${p.short}</p><div class="tech-row">${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}</div></div>
-    </div>
-  `).join('');
-  // filter buttons
-  const filters = ['all','gis','remote','hydro','civil'];
-  const filterBar = document.getElementById('filterBar');
-  filterBar.innerHTML = filters.map(f => `<button class="filter-btn ${f==='all'?'on':''}" onclick="filterProjects('${f}',this)">${f==='all'?'All Matrix':f.toUpperCase()}</button>`).join('');
-}
-function filterProjects(f,btn) {
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  document.querySelectorAll('.proj-card').forEach(card=>{
-    if(f==='all') card.style.display='block';
-    else card.style.display=card.getAttribute('data-filter')===f?'block':'none';
-  });
-}
-function openProjectModal(id) {
-  const p = PROJECTS.find(x=>x.id===id);
-  if(!p) return;
-  document.getElementById('mCat').innerText = p.cat;
-  document.getElementById('mTitle').innerText = p.title;
-  document.getElementById('mLoc').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${p.loc}`;
-  document.getElementById('mFull').innerText = p.full;
-  let mediaHtml = '';
-  p.media.forEach((m,idx)=>{
-    const basePath = `assets/portfolio-photos/${p.folder}/`;
-    if(m.t==='img') mediaHtml += `<div class="fl-thumb" onclick="event.stopPropagation(); openLightbox('${basePath}', ${JSON.stringify(p.media.filter(mm=>mm.t==='img').map(mm=>mm.src))}, ${idx}, '${m.cap}')"><img src="${basePath}${m.src}" alt="thumbnail"></div>`;
-    else if(m.t==='video') mediaHtml += `<div class="fl-thumb" onclick="event.stopPropagation(); openLightboxVideo('${basePath}${m.src}', '${m.cap}')"><video style="width:100%;height:100%;object-fit:cover;" muted><source src="${basePath}${m.src}" type="video/mp4"></video></div>`;
-  });
-  document.getElementById('mMedia').innerHTML = mediaHtml;
-  let pdfHtml = p.pdf ? `<a href="${p.pdf}" target="_blank" class="btn-pdf" style="display:inline-block; margin-top:1rem;"><i class="fas fa-file-alt"></i> Read Full Report</a>` : '';
-  document.getElementById('mPdf').innerHTML = pdfHtml;
-  document.getElementById('projModal').classList.add('on');
-  document.body.style.overflow = 'hidden';
-}
-function closeModal(id) { document.getElementById(id).classList.remove('on'); document.body.style.overflow = ''; }
-
-function buildSiteChips() {
-  const wrap = document.getElementById('siteChips');
-  wrap.innerHTML = Object.keys(SITES).map(k => `<div class="site-chip" onclick="openSiteGallery('${k}')"><i class="fas fa-images"></i> ${SITE_LABELS[k]}</div>`).join('');
-}
-function openSiteGallery(siteId) {
-  const s = SITES[siteId];
-  if(!s || !s.files.length) { alert('No photos available'); return; }
-  const basePath = `assets/Professional Career/${s.folder}/`;
-  const list = s.files.map((f,i)=>({src:basePath+encodeURI(f), cap:s.caps[i]||'Site photo'}));
-  openLightboxList(list, 0);
-}
-function buildFreelance() {
-  const grid = document.getElementById('flGrid');
-  grid.innerHTML = FREELANCE.map(f => `
-    <div class="fl-card">
-      <div class="fl-top"><h3>${f.title}</h3><span class="fl-date">${f.date}</span></div>
-      <p>${f.desc}</p>
-      <div class="fl-thumbs">
-        ${f.files.map((file,idx)=>`<div class="fl-thumb" onclick="event.stopPropagation(); openFreelanceGallery('${f.id}', ${idx})"><img src="assets/freelance-photos/${f.id}/${encodeURI(file)}" alt="thumb"></div>`).join('')}
-      </div>
-    </div>
-  `).join('');
-}
-function openFreelanceGallery(catId, idx) {
-  const f = FREELANCE.find(x=>x.id===catId);
-  if(!f) return;
-  const basePath = catId === 'sisneri'
-    ? 'assets/portfolio-photos/sisneri-landslide/'
-    : `assets/freelance-photos/${catId}/`;
-  const list = f.files.map((file,i)=>({src:basePath+encodeURI(file), cap:f.caps[i]||'Image'}));
-  openLightboxList(list, idx);
-}
-function openLightbox(basePath, files, startIdx, caption) {
-  const list = files.map(f=>({src:basePath+encodeURI(f), cap:caption}));
-  openLightboxList(list, startIdx);
-}
-function openLightboxVideo(videoSrc, cap) {
-  const stage = document.getElementById('lbStage');
-  stage.innerHTML = `<video controls autoplay style="max-width:100%; max-height:75vh;"><source src="${videoSrc}" type="video/mp4">Your browser does not support video.</video>`;
-  document.getElementById('lbCap').innerText = cap;
-  document.getElementById('lb').classList.add('on');
-  window.currentLBList = null;
-}
-let currentLBList = [], currentLBIdx = 0;
-function openLightboxList(list, startIdx) {
-  currentLBList = list; currentLBIdx = startIdx;
-  renderLightbox();
-  document.getElementById('lb').classList.add('on');
-}
-function renderLightbox() {
-  if(!currentLBList.length) return;
-  const item = currentLBList[currentLBIdx];
-  const stage = document.getElementById('lbStage');
-  if(item.src.match(/\.mp4$/i)) stage.innerHTML = `<video controls autoplay style="max-width:100%; max-height:75vh;"><source src="${item.src}" type="video/mp4"></video>`;
-  else stage.innerHTML = `<img src="${item.src}" alt="full image">`;
-  document.getElementById('lbCap').innerText = item.cap;
-}
-function changeLB(dir) {
-  if(!currentLBList.length) return;
-  currentLBIdx = (currentLBIdx + dir + currentLBList.length) % currentLBList.length;
-  renderLightbox();
-}
-function closeLB() { document.getElementById('lb').classList.remove('on'); currentLBList = []; }
-
-// ==================== ANIMATION, THEME, CANVAS, CURSOR ====================
-const themeSwitcher = document.getElementById('themeSwitcher');
-const themeIcon = themeSwitcher.querySelector('i');
-let savedTheme = localStorage.getItem('portfolio-theme') || 'light';
-document.documentElement.setAttribute('data-theme', savedTheme);
-updateThemeIcon(savedTheme);
-themeSwitcher.addEventListener('click',()=>{
-  const cur = document.documentElement.getAttribute('data-theme');
-  const nxt = cur === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', nxt);
-  localStorage.setItem('portfolio-theme', nxt);
-  updateThemeIcon(nxt);
-});
-function updateThemeIcon(theme) { themeIcon.className = theme==='dark' ? 'fas fa-sun' : 'fas fa-moon'; }
-
-// Canvas network
-(function(){
-  const cn = document.getElementById('bg-canvas'), ctx = cn.getContext('2d');
-  let W,H,pts=[];
-  function resize(){ W=cn.width=window.innerWidth; H=cn.height=window.innerHeight; pts=[]; for(let i=0;i<80;i++) pts.push(new Pt()); }
-  class Pt{ constructor(){ this.reset(); } reset(){ this.x=Math.random()*W; this.y=Math.random()*H; this.vx=(Math.random()-0.5)*0.3; this.vy=(Math.random()-0.5)*0.3; this.r=Math.random()*1.5+1; } update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>W) this.vx*=-1; if(this.y<0||this.y>H) this.vy*=-1; } draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--c-p1')+'22'; ctx.fill(); } }
-  function animate(){ ctx.clearRect(0,0,W,H); for(let i=0;i<pts.length;i++){ pts[i].update(); pts[i].draw(); for(let j=i+1;j<pts.length;j++){ const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.hypot(dx,dy); if(d<130){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--c-p1')+Math.floor(15*(1-d/130)).toString(16).padStart(2,'0'); ctx.lineWidth=0.6; ctx.stroke(); } } } requestAnimationFrame(animate); }
-  window.addEventListener('resize',resize); resize(); for(let i=0;i<80;i++) pts.push(new Pt()); animate();
-})();
-
-// Custom cursor
-const cr=document.createElement('div'), crf=document.createElement('div');
-cr.className='cr'; crf.className='cr-f';
-document.body.appendChild(cr); document.body.appendChild(crf);
-let mx=0,my=0,fx=0,fy=0;
-document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cr.style.cssText=`left:${mx}px;top:${my}px;`; });
-(function loop(){ fx+=(mx-fx)*0.12; fy+=(my-fy)*0.12; crf.style.cssText=`left:${fx}px;top:${fy}px;`; requestAnimationFrame(loop); })();
-document.addEventListener('mouseover', e => {
-  if (e.target.closest('a, button, .proj-card, .fl-thumb, .filter-btn, .btn, .soc-btn, .contact-link, .site-chip')) {
-    document.body.classList.add('cursor-hover');
-  } else {
-    document.body.classList.remove('cursor-hover');
-  }
-});
-
-// Navbar scroll, loader, progress
-const nav=document.getElementById('nav'), prog=document.getElementById('progress-bar'), btnTop=document.getElementById('btnTop');
-window.addEventListener('scroll',()=>{
-  const st=window.scrollY, dh=document.documentElement.scrollHeight-window.innerHeight;
-  if(st>40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
-  if(st>400) btnTop.classList.add('on'); else btnTop.classList.remove('on');
-  if(dh>0) prog.style.width=(st/dh)*100+'%';
-});
-function toggleNav(){ document.getElementById('navLinks').classList.toggle('open'); document.getElementById('hbg').classList.toggle('open'); }
-
-// Typed effect
-const typedEl=document.getElementById('typed'), roles=['Civil Engineer','GIS Specialist','MSc DREM Candidate','InSAR Analyst'];
-let roleIndex=0, charIndex=0, isDeleting=false;
-function typeEffect(){
-  const current=roles[roleIndex];
-  if(isDeleting) typedEl.innerText=current.substring(0,charIndex--);
-  else typedEl.innerText=current.substring(0,charIndex++);
-  if(!isDeleting && charIndex===current.length) setTimeout(()=>isDeleting=true,1500);
-  else if(isDeleting && charIndex===0){ isDeleting=false; roleIndex=(roleIndex+1)%roles.length; }
-  setTimeout(typeEffect, isDeleting?60:100);
-}
-setTimeout(typeEffect,1000);
-
-// ScrollSpy & Nav Active Toggle
-function initScrollSpy() {
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-      }
-    });
-  }, { threshold: 0.25, rootMargin: "-20% 0px -60% 0px" });
-  sections.forEach(s => observer.observe(s));
-  
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      const navLinksEl = document.getElementById('navLinks');
-      if (navLinksEl.classList.contains('open')) {
-        toggleNav();
-      }
-    });
-  });
-}
-
-// Counters
-function initCounters(){
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting){
-      const target=+e.target.getAttribute('data-target'), step=target/80;
-      let cur=0; const int=setInterval(()=>{ cur+=step; if(cur>=target){ e.target.innerText=target+'+'; clearInterval(int); } else e.target.innerText=Math.floor(cur)+'+'; },20);
-      observer.unobserve(e.target);
-    } });
-  },{threshold:0.2});
-  document.querySelectorAll('.stat-num').forEach(n=>observer.observe(n));
-}
-window.addEventListener('DOMContentLoaded',()=>{
-  buildProjects(); buildSiteChips(); buildFreelance(); buildCertifications(); initCounters(); initScrollSpy();
-  setTimeout(()=>document.getElementById('loader').classList.add('out'),800);
-});
-</script>
+    <!-- Custom JS -->
+    <script src="three-scene.js"></script>
+    <script src="cursor.js"></script>
+    <script src="magnetic.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
