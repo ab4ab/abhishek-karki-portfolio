@@ -12,52 +12,21 @@
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --white: #f5f4f0;
-      --black: #0e0e0e;
-      --accent: #8ab4f8;   /* Light blue accent */
-      --gray: #888;
-      --light-gray: #e8e6e0;
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
+      --white: #f5f4f0; --black: #0e0e0e; --accent: #8ab4f8;
+      --light-gray: #e8e6e0; --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
     }
-
     html { scroll-behavior: auto; }
+    body { background: var(--white); color: var(--black); font-family: var(--font-body); font-weight: 300; cursor: none; overflow-x: hidden; }
 
-    body {
-      background: var(--white);
-      color: var(--black);
-      font-family: var(--font-body);
-      font-weight: 300;
-      cursor: none;
-      overflow-x: hidden;
-    }
-
-    /* ── CURSOR ── */
-    #cursor-dot {
-      position: fixed; width: 8px; height: 8px;
-      background: var(--black); border-radius: 50%;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%); transition: transform 0.05s;
-    }
-    #cursor-ring {
-      position: fixed; width: 36px; height: 36px;
-      border: 1.5px solid var(--black); border-radius: 50%;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s, border-color 0.3s;
-    }
+    /* Custom cursor (kept from original) */
+    #cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--black); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.05s; }
+    #cursor-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid var(--black); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, border-color 0.3s; }
     body.cursor-hover #cursor-ring { width: 60px; height: 60px; border-color: var(--accent); }
     body.cursor-hover #cursor-dot { background: var(--accent); }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 28px 60px; mix-blend-mode: multiply;
-      transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s;
-    }
+    /* Nav */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 28px 60px; mix-blend-mode: multiply; transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s; }
     .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; text-decoration: none; color: var(--black); }
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--black); opacity: 0.6; transition: opacity 0.3s; }
@@ -65,92 +34,46 @@
     .nav-cta { background: var(--black); color: var(--white) !important; padding: 6px 20px !important; border-radius: 100px; opacity: 1 !important; font-weight: 600; }
     .nav-cta:hover { background: var(--accent); color: var(--black) !important; }
 
-    /* ── HERO ── */
-    #hero {
-      position: relative; height: 100vh; display: flex; align-items: center;
-      padding: 0 60px; overflow: hidden;
-      background: url('assets/background.jpg') center/cover no-repeat;
-    }
-    #hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: rgba(245,244,240,0.75); /* light overlay */
-      z-index: 1;
-    }
-    #three-canvas {
-      position: absolute; top: 0; right: 0; width: 55%; height: 100%;
-      pointer-events: none; z-index: 0;
-    }
+    /* Hero */
+    #hero { position: relative; height: 100vh; display: flex; align-items: center; padding: 0 60px; overflow: hidden; background: url('assets/background.jpg') center/cover no-repeat; }
+    #hero::before { content: ''; position: absolute; inset: 0; background: rgba(245,244,240,0.75); z-index: 1; }
+    #three-canvas { position: absolute; top: 0; right: 0; width: 55%; height: 100%; pointer-events: none; z-index: 0; }
     .hero-content { position: relative; z-index: 2; max-width: 700px; }
     .hero-tag { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; margin-bottom: 24px; display: block; }
-    .hero-name {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(4rem, 9vw, 8rem); line-height: 1.05; /* increased line-height to prevent clipping */
-      letter-spacing: -0.04em; margin-bottom: 32px;
-      overflow: visible; /* ensure full name visible */
-    }
-    .hero-name .line { display: block; overflow: visible; }
-    .hero-name .word { display: inline-block; transform: translateY(0); } /* initially visible */
-
-    .hero-subtitle { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.6; opacity: 1; max-width: 420px; margin-bottom: 48px; }
+    .hero-name { font-family: var(--font-display); font-weight: 800; font-size: clamp(4rem, 9vw, 8rem); line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 32px; }
+    .hero-name .line { display: block; }
+    .hero-name .word { display: inline-block; }
+    .hero-subtitle { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.6; max-width: 420px; margin-bottom: 48px; }
     .hero-cta { display: inline-flex; gap: 16px; }
 
-    /* ── BUTTONS ── */
-    .btn {
-      display: inline-block; padding: 16px 36px; font-family: var(--font-body);
-      font-size: 0.85rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase;
-      text-decoration: none; border-radius: 100px; position: relative; overflow: hidden;
-      transition: color 0.3s; cursor: none;
-    }
+    .btn { display: inline-block; padding: 16px 36px; font-family: var(--font-body); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; border-radius: 100px; position: relative; overflow: hidden; transition: color 0.3s; cursor: none; }
     .btn-dark { background: var(--black); color: var(--white); border: 1.5px solid var(--black); }
     .btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
-    .btn::after {
-      content: ''; position: absolute; inset: 0; background: var(--accent);
-      transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.76,0,0.24,1);
-      z-index: -1; border-radius: 100px;
-    }
+    .btn::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.76,0,0.24,1); z-index: -1; border-radius: 100px; }
     .btn:hover { color: var(--black); }
     .btn:hover::after { transform: translateY(0); }
 
-    /* ── SCROLL INDICATOR ── */
-    .scroll-hint {
-      position: absolute; bottom: 48px; left: 60px; display: flex; align-items: center;
-      gap: 12px; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4; z-index: 2;
-    }
-    .scroll-line {
-      width: 40px; height: 1px; background: var(--black); transform-origin: left;
-      animation: extendLine 2s ease-in-out infinite;
-    }
+    .scroll-hint { position: absolute; bottom: 48px; left: 60px; display: flex; align-items: center; gap: 12px; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4; z-index: 2; }
+    .scroll-line { width: 40px; height: 1px; background: var(--black); transform-origin: left; animation: extendLine 2s ease-in-out infinite; }
     @keyframes extendLine { 0%,100% { transform: scaleX(0.3); opacity:0.4; } 50% { transform: scaleX(1); opacity:1; } }
 
-    /* ── SECTIONS SHARED ── */
+    /* Sections */
     section { padding: 120px 60px; }
-    .section-label {
-      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.4;
-      margin-bottom: 64px; display: flex; align-items: center; gap: 16px;
-    }
+    .section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.4; margin-bottom: 64px; display: flex; align-items: center; gap: 16px; }
     .section-label::before { content: ''; width: 32px; height: 1px; background: currentColor; }
     .reveal { opacity: 0; transform: translateY(60px); }
 
-    /* ── ABOUT ── */
+    /* About */
     #about { background: var(--white); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .about-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 32px; }
     .about-text { font-size: 1.05rem; line-height: 1.8; opacity: 0.7; margin-bottom: 24px; }
-    .about-image-wrap {
-      position: relative; aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
-      background: var(--light-gray);
-    }
+    .about-image-wrap { position: relative; aspect-ratio: 3/4; border-radius: 4px; overflow: hidden; background: var(--light-gray); }
     .about-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .about-image-placeholder {
-      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.1em; opacity: 0.3; text-transform: uppercase;
-    }
-    .about-accent-box {
-      position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px;
-      background: var(--accent); border-radius: 4px; z-index: -1;
-    }
+    .about-image-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.1em; opacity: 0.3; text-transform: uppercase; }
+    .about-accent-box { position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; background: var(--accent); border-radius: 4px; z-index: -1; }
 
-    /* ── SKILLS ── */
+    /* Skills */
     #skills { background: var(--black); color: var(--white); }
     #skills .section-label { color: var(--white); opacity: 0.3; }
     .skills-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.03em; margin-bottom: 64px; }
@@ -161,31 +84,26 @@
     .skill-bar-bg { height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
     .skill-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(0.76,0,0.24,1); }
 
-    /* ── EXPERIENCE ── */
-    #experience { background: var(--white); }
-    .timeline { position: relative; padding-left: 40px; }
-    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--black); opacity: 0.15; }
-    .tl-item { position: relative; margin-bottom: 48px; }
-    .tl-dot { position: absolute; left: -44px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--white); }
-    .tl-card { padding: 0 0 0 24px; }
-    .tl-date { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
-    .tl-title { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; margin-bottom: 8px; }
-    .tl-company { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
-    .tl-list { list-style: none; }
-    .tl-list li { position: relative; padding-left: 18px; margin-bottom: 6px; font-size: 0.9rem; opacity: 0.75; }
-    .tl-list li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
-    .site-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-    .site-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(0,0,0,0.2); border-radius: 100px; cursor: none; transition: all 0.3s; }
-    .site-chip:hover { border-color: var(--accent); color: var(--accent); }
+    /* Experience new style */
+    .exp-card { background: var(--white); border-radius: 4px; margin-bottom: 48px; padding: 0; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
+    .exp-header { padding: 32px 32px 16px; }
+    .exp-header h3 { font-family: var(--font-display); font-weight: 700; font-size: 2rem; margin-bottom: 4px; }
+    .exp-header .exp-sub { font-size: 0.85rem; opacity: 0.5; }
+    .exp-gallery { position: relative; width: 100%; height: 500px; overflow: hidden; background: #eae7e0; }
+    .exp-gallery img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; position: absolute; top: 0; left: 0; opacity: 0; }
+    .exp-gallery img.active { opacity: 1; }
+    .gallery-controls { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; }
+    .gallery-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(0,0,0,0.3); border: none; cursor: pointer; transition: background 0.3s; }
+    .gallery-dot.active { background: var(--accent); }
+    .gallery-fullscreen { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.5); color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; z-index: 5; transition: background 0.3s; }
+    .gallery-fullscreen:hover { background: var(--accent); }
 
-    /* ── PROJECTS ── */
-    #projects { background: var(--white); }
+    /* Projects, Freelance cards similar to before */
     .projects-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.03em; margin-bottom: 80px; }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2px; }
     .project-card { background: var(--light-gray); border-radius: 4px; overflow: hidden; position: relative; cursor: none; transform-style: preserve-3d; transition: box-shadow 0.4s; }
     .project-card:hover { box-shadow: 0 32px 80px rgba(0,0,0,0.15); }
     .project-img { width: 100%; aspect-ratio: 16/10; background: #d5d3cd; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-    .project-img-placeholder { font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.1em; opacity: 0.3; text-transform: uppercase; }
     .project-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.76,0,0.24,1); }
     .project-card:hover .project-img img { transform: scale(1.05); }
     .project-info { padding: 28px; }
@@ -196,20 +114,6 @@
     .project-link { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--black); display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--black); padding-bottom: 2px; transition: gap 0.3s; cursor: none; }
     .project-link:hover { gap: 14px; }
 
-    /* ── EDUCATION & CERTIFICATIONS ── */
-    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-    .edu-card { background: var(--light-gray); border-radius: 4px; padding: 32px; }
-    .edu-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; }
-    .edu-card p { font-size: 0.9rem; opacity: 0.6; margin-bottom: 4px; }
-    .edu-card .honors { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
-
-    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-    .cert-item { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--light-gray); border-radius: 4px; }
-    .cert-icon { font-size: 1.4rem; opacity: 0.4; }
-    .cert-text strong { display: block; font-size: 0.85rem; }
-    .cert-text span { font-size: 0.75rem; opacity: 0.5; }
-
-    /* ── FREELANCE GRID ── */
     .fl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     .fl-card { background: var(--light-gray); border-radius: 4px; padding: 28px; }
     .fl-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin-bottom: 6px; }
@@ -219,29 +123,13 @@
     .fl-thumb { width: 60px; height: 45px; border-radius: 4px; overflow: hidden; cursor: none; background: #ccc; }
     .fl-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ── CONTACT ── */
-    #contact { background: var(--black); color: var(--white); text-align: center; padding: 160px 60px; }
-    .contact-pre { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.4; margin-bottom: 32px; }
-    .contact-heading { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 8vw, 7rem); letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 56px; }
-    .contact-heading span { color: var(--accent); display: inline-block; }
-    .contact-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 80px; }
-    .contact-link { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 4px; transition: color 0.3s, border-color 0.3s; }
-    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+    /* Modal / Fullscreen */
+    .fullscreen-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 5000; }
+    .fullscreen-modal.active { display: flex; }
+    .fullscreen-modal img { max-width: 80vw; max-height: 80vh; object-fit: contain; border-radius: 8px; }
+    .fullscreen-close { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: white; background: none; border: none; cursor: pointer; }
 
-    /* ── FOOTER ── */
-    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.08); padding: 32px 60px; display: flex; justify-content: space-between; align-items: center; color: rgba(255,255,255,0.3); font-size: 0.78rem; letter-spacing: 0.05em; }
-
-    /* ── SCRAMBLE TEXT ── */
-    .scramble { display: inline-block; }
-
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9997; opacity: 0.4;
-    }
-
-    /* ── MODALS ── */
+    /* Modals for projects */
     .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.4); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
     .modal.on { opacity: 1; pointer-events: all; }
     .modal-box { background: var(--white); border-radius: 8px; width: 90%; max-width: 700px; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
@@ -249,6 +137,7 @@
     .m-gallery { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
     .m-media-wrap { width: 100px; height: 75px; border-radius: 4px; overflow: hidden; cursor: pointer; }
     .m-media-wrap img, .m-media-wrap video { width: 100%; height: 100%; object-fit: cover; }
+
     .carousel-modal, .video-modal { position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; }
     .carousel-modal.active, .video-modal.active { display: flex; }
     .carousel-content { position: relative; max-width: 90%; max-height: 90%; }
@@ -264,16 +153,13 @@
       #hero, section { padding: 100px 24px; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
       #three-canvas { width: 100%; opacity: 0.3; }
-      footer { flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
 </head>
 <body>
-
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
-  <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">AK.</a>
     <ul class="nav-links">
@@ -287,7 +173,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <canvas id="three-canvas"></canvas>
     <div class="hero-content">
@@ -296,117 +181,79 @@
         <span class="line"><span class="word">Abhishek</span></span>
         <span class="line"><span class="word">Karki</span></span>
       </h1>
-      <p class="hero-subtitle">
-        Civil Engineer & GIS Specialist integrating spatial data with structural infrastructure. Advanced focus in hydraulic modeling, risk analysis, and satellite-based temporal assessments.
-      </p>
+      <p class="hero-subtitle">Civil Engineer & GIS Specialist integrating spatial data with structural infrastructure. Advanced focus in hydraulic modeling, risk analysis, and satellite-based temporal assessments.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-dark magnetic">View Work</a>
         <a href="#contact" class="btn btn-outline magnetic">Let's Talk</a>
       </div>
     </div>
-    <div class="scroll-hint">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
+    <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="section-label reveal">About me</div>
     <div class="about-grid">
       <div>
-        <h2 class="about-heading reveal">Bridging Geomatics &amp; Structural Engineering.</h2>
+        <h2 class="about-heading reveal">Bridging Geomatics & Structural Engineering.</h2>
         <p class="about-text reveal">I’m a Civil Engineer with deep GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Management. I merge field data, satellite imagery, and computational models to solve real‑world infrastructure problems.</p>
         <p class="about-text reveal">From InSAR subsidence monitoring to 2D flood mapping, I bring spatial intelligence into every project.</p>
         <a href="cv.html" target="_blank" class="btn btn-dark magnetic reveal" style="margin-top:16px">Download CV</a>
       </div>
       <div class="about-image-wrap reveal">
-        <img src="assets/profile.jpg" alt="Abhishek Karki" onerror="this.style.display='none'; this.parentNode.querySelector('.about-image-placeholder').style.display='flex';">
+        <img src="assets/profile.jpg" alt="Abhishek Karki" onerror="this.style.display='none';this.parentNode.querySelector('.about-image-placeholder').style.display='flex';">
         <div class="about-image-placeholder" style="display:none;">Your Photo Here</div>
         <div class="about-accent-box"></div>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
     <div class="section-label">What I do</div>
     <h2 class="skills-heading reveal">Technical Competencies.</h2>
     <div class="skills-grid" id="skillsContainer"></div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="section-label reveal">Work history</div>
-    <div class="timeline reveal">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-date">Aug 2023 – Jul 2025</div>
-          <h3 class="tl-title">Civil Engineer</h3>
-          <div class="tl-company">Sigma Con Pvt. Ltd – Transmission & Substation Projects</div>
-          <div class="site-chips">
-            <span class="site-chip" onclick="openWorkGallery('balefi')"><i class="fas fa-map-marker-alt"></i> Balefi 132kV TL</span>
-            <span class="site-chip" onclick="openWorkGallery('lalbandi')"><i class="fas fa-map-marker-alt"></i> Lalbandi-Salempur 132kV</span>
-            <span class="site-chip" onclick="openWorkGallery('dhalkebar')"><i class="fas fa-map-marker-alt"></i> Dhalkebar-Balganga</span>
-            <span class="site-chip" onclick="openWorkGallery('sandikharga')"><i class="fas fa-map-marker-alt"></i> Sandikharga–Burtibang</span>
-            <span class="site-chip" onclick="openWorkGallery('tamghas')"><i class="fas fa-map-marker-alt"></i> Tamghas Substation</span>
-          </div>
-          <ul class="tl-list">
-            <li>AutoCAD/Civil 3D substation layouts & 3D models (SketchUp, Revit).</li>
-            <li>ArcGIS for tower relocation and ROW documentation.</li>
-            <li>Estimates, BOQ, BBS, IPC billing & client coordination.</li>
-            <li>DGPS → contours, cross sections, earthwork volumes; Total Station for stub setting.</li>
-            <li>Supervised foundations, control rooms, switchyard; material testing.</li>
-            <li>Primavera scheduling & subcontractor management.</li>
-          </ul>
+    <div class="reveal">
+      <div style="max-width:1200px; margin:0 auto;">
+        <div style="margin-bottom:2rem;">
+          <span style="font-family:var(--font-display);font-weight:700;font-size:1.8rem;">Civil Engineer</span>
+          <span style="margin-left:1rem; opacity:0.6;">Sigma Con Pvt. Ltd · Aug 2023 – Jul 2025</span>
         </div>
+        <p style="opacity:0.7; margin-bottom:1rem;">Transmission & Substation Projects — key responsibilities listed below each site gallery.</p>
       </div>
     </div>
+    <div id="expContainer"></div>
   </section>
 
-  <!-- PROJECTS (Portfolio) -->
   <section id="projects">
     <div class="section-label reveal">Portfolio</div>
     <h2 class="projects-heading reveal">Featured Case Studies.</h2>
     <div class="projects-grid" id="projGrid"></div>
   </section>
 
-  <!-- EDUCATION -->
   <section id="education">
     <div class="section-label reveal">Academics</div>
     <div class="edu-grid">
-      <div class="edu-card reveal">
-        <h3>MSc Disaster Risk Management (DREM)</h3>
-        <p>Tribhuvan University, IOE Pulchowk | 2026–Present</p>
-      </div>
-      <div class="edu-card reveal">
-        <h3>B.E. Civil Engineering</h3>
-        <p>Khwopa Engineering College | 2022 | CGPA 3.43</p>
-        <p class="honors">🏅 Ranked 1st in 7th & 8th semesters</p>
-      </div>
-      <div class="edu-card reveal">
-        <h3>+2 Science (NEB)</h3>
-        <p>Sainik Awasiya Mahavidhyalaya | 2074 BS</p>
-      </div>
+      <div class="edu-card reveal"><h3>MSc Disaster Risk Management (DREM)</h3><p>Tribhuvan University, IOE Pulchowk | 2026–Present</p></div>
+      <div class="edu-card reveal"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College | 2022 | CGPA 3.43</p><p class="honors" style="color:var(--accent);">🏅 Ranked 1st in 7th & 8th semesters</p></div>
+      <div class="edu-card reveal"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya | 2074 BS</p></div>
     </div>
   </section>
 
-  <!-- CERTIFICATIONS -->
   <section id="certifications" style="background:var(--light-gray);">
     <div class="section-label reveal">Credentials</div>
     <div class="cert-grid reveal" id="certGrid"></div>
     <div style="margin-top:20px; display:flex; gap:8px; flex-wrap:wrap;" id="certThumbs"></div>
   </section>
 
-  <!-- FREELANCE -->
   <section id="freelance">
     <div class="section-label reveal">Independent Work</div>
     <h2 class="projects-heading reveal">Freelance & Academic Projects.</h2>
     <div class="fl-grid" id="flGrid"></div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <p class="contact-pre reveal">Get in touch</p>
     <h2 class="contact-heading reveal">Let's build<br><span class="scramble" data-text="something">something</span><br>great.</h2>
@@ -417,18 +264,21 @@
     <a href="mailto:abhishekkarki520@gmail.com" class="btn magnetic" style="background:var(--accent);color:var(--black);border:none;font-size:1rem;padding:20px 56px;border-radius:100px">Say Hello</a>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <span>© 2026 Abhishek Karki. All rights reserved.</span>
-    <span>Built with love & GSAP</span>
+  <footer style="background:var(--black); color:var(--white); text-align:center; padding:32px;">
+    <span>© 2026 Abhishek Karki</span>
   </footer>
 
-  <!-- MODALS -->
+  <!-- Fullscreen modal -->
+  <div class="fullscreen-modal" id="fullscreenModal">
+    <button class="fullscreen-close" onclick="document.getElementById('fullscreenModal').classList.remove('active')">&times;</button>
+    <img id="fullscreenImg" src="" alt="fullscreen" />
+  </div>
+
+  <!-- Project modal (unchanged) -->
   <div class="modal" id="projModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal('projModal')"><i class="fas fa-times"></i></button>
-      <div id="mHead"></div>
-      <div id="mDesc"></div>
+      <div id="mHead"></div><div id="mDesc"></div>
       <div class="m-gallery" id="mGallery"></div>
       <div id="mPdf" style="margin-top:16px;"></div>
     </div>
@@ -443,7 +293,6 @@
       <div id="carouselCaption" class="carousel-caption"></div>
     </div>
   </div>
-
   <div class="video-modal" id="videoModal">
     <div class="video-content">
       <button class="close-video" onclick="closeVideoModal()">&times;</button>
@@ -451,229 +300,305 @@
     </div>
   </div>
 
-  <!-- SCRIPTS -->
   <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // ═══════════════════  YOUR DATA  ═══════════════════
-    const PROJECTS = [
-      { id:1, title:"InSAR Time Series for Highway Subsidence", cat:"InSAR / Geotech", loc:"Sloterdijk to Rijksweg, Netherlands", short:"13 Sentinel‑1 images (Jan–May 2024) processed with SNAP+SNAPHU.", full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering (α=0.5), phase unwrapping, and terrain correction. Extracted A10 highway profiles and produced time series graph showing subsidence over 5 months.", tech:["SNAP","SNAPHU","Sentinel‑1"], pdf:"assets/portfolio-photos/insar/insar.pdf", media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram – phase difference"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map (mm)"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Goldstein filtered interferogram"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 194901.png",caption:"Unwrapped phase and time series"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090637.png",caption:"Subsidence profile – A10"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090658.png",caption:"Cumulative displacement"}] },
-      { id:2, title:"NDVI Timelapse of Kathmandu Valley (2000–2026)", cat:"Remote Sensing", loc:"Kathmandu Valley, Nepal", short:"26‑year vegetation change using Landsat & Sentinel‑2.", full:"Processed 28 images in Google Earth Engine – scaling, cloud masking, NDVI calculation, harmonization, median composites. Built 5‑class timelapse and exported 1080p MP4.", tech:["Google Earth Engine","Landsat 5/8","Sentinel‑2"], pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf", media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},{type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},{type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse animation"}] },
-      { id:3, title:"Hospital Accessibility in Colorado", cat:"GIS", loc:"Colorado, USA", short:"Network drive‑time analysis – 30/60‑min service areas.", full:"Generated service areas from specialist hospitals, overlaid county population, area‑weighted estimation. Revealed spatial disparities in healthcare access.", tech:["ArcGIS Network Analyst","Population data"], media:[{type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute service areas"},{type:"image",src:"assets/portfolio-photos/hospital/60_min Map.png",caption:"60‑minute service areas"},{type:"image",src:"assets/portfolio-photos/hospital/PopulationMap.png",caption:"Population density overlay"}] },
-      { id:4, title:"Urban Sprawl Analysis of Kathmandu Valley", cat:"GIS", loc:"Kathmandu Valley, Nepal", short:"Landsat 8/9 NDBI change, ALOS PALSAR slope filtering.", full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain. Validated urban expansion map.", tech:["Landsat","ALOS PALSAR","ArcGIS"], media:[{type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/2026.png",caption:"NDBI 2026"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/slopemap.png",caption:"Slope filtering"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/Urban Sprawl.png",caption:"Urban expansion map"}] },
-      { id:5, title:"UAV Landslide Susceptibility Mapping", cat:"UAV/GIS", loc:"Sisneri, Solukhumbu, Nepal", short:"UAV orthomosaic/DEM, weighted overlay hazard zonation.", full:"High‑resolution DEM and orthomosaic from drone; derived terrain factors; weighted overlay to classify hazard zones.", tech:["UAV","Agisoft","ArcGIS"], media:[{type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"},{type:"image",src:"assets/portfolio-photos/uav-landslide/BaseMap.png",caption:"UAV orthomosaic"},{type:"image",src:"assets/portfolio-photos/uav-landslide/Weighted Overlay.png",caption:"Hazard zonation"}] },
-      { id:6, title:"Flood Inundation Mapping", cat:"Hydrology", loc:"Narayani River, Nepal", short:"HEC‑RAS 2D unsteady flow, flood depth/velocity mapping.", full:"DEM preparation and terrain correction; 2D unsteady flow simulation; extracted flood depth, velocity, WSE for hazard analysis.", tech:["HEC‑RAS 2D","ArcGIS"], pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf", media:[{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS 2D mesh"},{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 233808.png",caption:"Flood depth map"}] },
-      { id:7, title:"Substation Backfill Volumetric Analysis", cat:"Civil 3D", loc:"Balganga, Janakpur, Nepal", short:"DGPS → surface modeling → corridors → cut/fill volumes.", full:"DGPS survey, surface creation, cross‑sections, corridor modeling, quantity estimation.", tech:["Civil 3D","DGPS"], pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf", media:[{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"DGPS survey points"},{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091526.png",caption:"Corridor model"}] },
-      { id:8, title:"Earthquake Analysis of Nepal", cat:"Seismology / GIS", loc:"Nepal (1978‑2025)", short:"Mainshock declustering & animation using USGS catalog.", full:"Processed USGS catalog (M≥5, 1978‑2025) using Gardner‑Knopoff declustering. 58 mainshocks. Tools: Python, ArcGIS Pro.", tech:["ArcGIS","Python","Animation"], pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf", media:[{type:"video",src:"assets/portfolio-photos/earthquake/Nepal_EarthQuakes_Animation.mp4",caption:"Earthquake animation"},{type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Mainshocks map"}] }
-    ];
+    (function() {
+      // Data
+      const PROJECTS = [
+        { id:1, title:"InSAR Time Series for Highway Subsidence", cat:"InSAR / Geotech", loc:"Sloterdijk to Rijksweg, Netherlands", short:"13 Sentinel‑1 images processed with SNAP+SNAPHU.", full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering, phase unwrapping, terrain correction. Extracted A10 highway profiles.", tech:["SNAP","SNAPHU","Sentinel‑1"], pdf:"assets/portfolio-photos/insar/insar.pdf", media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Filtered"}] },
+        { id:2, title:"NDVI Timelapse of Kathmandu Valley", cat:"Remote Sensing", loc:"Kathmandu Valley", short:"26‑year vegetation change using Landsat & Sentinel‑2.", full:"Processed 28 images in Google Earth Engine – NDVI calculation, harmonization. Built 5‑class timelapse.", tech:["GEE","Landsat","Sentinel‑2"], pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf", media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},{type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},{type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse"}] },
+        { id:3, title:"Hospital Accessibility in Colorado", cat:"GIS", loc:"Colorado, USA", short:"Network drive‑time analysis – 30/60‑min service areas.", full:"Generated service areas from specialist hospitals, overlaid county population. Revealed spatial disparities.", tech:["ArcGIS Network Analyst","Population data"], media:[{type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute"},{type:"image",src:"assets/portfolio-photos/hospital/60_min Map.png",caption:"60‑minute"},{type:"image",src:"assets/portfolio-photos/hospital/PopulationMap.png",caption:"Population overlay"}] },
+        { id:4, title:"Urban Sprawl Analysis of Kathmandu Valley", cat:"GIS", loc:"Kathmandu Valley", short:"Landsat 8/9 NDBI change, ALOS PALSAR slope filtering.", full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain.", tech:["Landsat","ALOS PALSAR","ArcGIS"], media:[{type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/2026.png",caption:"NDBI 2026"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/slopemap.png",caption:"Slope filtering"}] },
+        { id:5, title:"UAV Landslide Susceptibility Mapping", cat:"UAV/GIS", loc:"Sisneri, Solukhumbu", short:"UAV orthomosaic/DEM, weighted overlay hazard zonation.", full:"High‑resolution DEM and orthomosaic from drone; weighted overlay to classify hazard zones.", tech:["UAV","Agisoft","ArcGIS"], media:[{type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"},{type:"image",src:"assets/portfolio-photos/uav-landslide/BaseMap.png",caption:"Orthomosaic"}] },
+        { id:6, title:"Flood Inundation Mapping", cat:"Hydrology", loc:"Narayani River, Nepal", short:"HEC‑RAS 2D unsteady flow, flood depth/velocity mapping.", full:"DEM preparation and terrain correction; 2D unsteady flow simulation.", tech:["HEC‑RAS 2D","ArcGIS"], pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf", media:[{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS mesh"},{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 233808.png",caption:"Flood depth"}] },
+        { id:7, title:"Substation Backfill Volumetric Analysis", cat:"Civil 3D", loc:"Balganga, Janakpur", short:"DGPS → surface modeling → corridors → cut/fill volumes.", full:"DGPS survey, surface creation, cross‑sections, corridor modeling.", tech:["Civil 3D","DGPS"], pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf", media:[{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"Survey points"}] },
+        { id:8, title:"Earthquake Analysis of Nepal", cat:"Seismology / GIS", loc:"Nepal (1978‑2025)", short:"Mainshock declustering & animation using USGS catalog.", full:"Processed USGS catalog using Gardner‑Knopoff declustering. 58 mainshocks.", tech:["ArcGIS","Python"], pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf", media:[{type:"video",src:"assets/portfolio-photos/earthquake/Nepal_EarthQuakes_Animation.mp4",caption:"Animation"},{type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Map"}] }
+      ];
 
-    const WORK_IMAGES = {
-      balefi:{folder:"Balefi",files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],captions:["Tower Erection","Tower Erection","Concreting chimney","Completed Tower"]},
-      lalbandi:{folder:"Salempur",files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG_20231107_104434.jpg','IMG_20240120_112353.jpg','IMG_20240206_140830.jpg','Screenshot 2026-05-16 204535.png'],captions:["Salempur Substation","Plastering","Surveying","Rebar works","Plinth beam","Layout view"]},
-      dhalkebar:{folder:"Balganga",files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','Screenshot 2026-05-16 204005.png'],captions:["Staff Quarter","Control Room","Formworks","Layout"]},
-      sandikharga:{folder:"Burtibang",files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','Screenshot 2026-05-16 205216.png'],captions:["Tower Erection","Stub Setting","DGPS survey","Tower locations"]},
-      tamghas:{folder:"Tamghas",files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'],captions:["Transformer","Survey","Survey","Switchyard"]}
-    };
+      const WORK_IMAGES = {
+        balefi:{folder:"Balefi",files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],captions:["Tower Erection","Tower Erection","Concreting chimney","Completed Tower"], title:"Balefi 132kV TL", desc:"Tower erection, stub setting, concreting."},
+        lalbandi:{folder:"Salempur",files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG_20231107_104434.jpg','IMG_20240120_112353.jpg','IMG_20240206_140830.jpg','Screenshot 2026-05-16 204535.png'],captions:["Salempur Substation","Plastering","Surveying","Rebar works","Plinth beam","Layout view"], title:"Lalbandi-Salempur 132kV + Substation", desc:"Substation civil works, control room, gantry foundation, tower survey."},
+        dhalkebar:{folder:"Balganga",files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','Screenshot 2026-05-16 204005.png'],captions:["Staff Quarter","Control Room","Formworks","Layout"], title:"Dhalkebar-Balganga 132kV", desc:"Staff quarter foundation, control room, gantry foundation."},
+        sandikharga:{folder:"Burtibang",files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','Screenshot 2026-05-16 205216.png'],captions:["Tower Erection","Stub Setting","DGPS survey","Tower locations"], title:"Sandikharga–Burtibang 132kV", desc:"Tower erection, stub setting, DGPS survey."},
+        tamghas:{folder:"Tamghas",files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'],captions:["Transformer","Survey","Survey","Switchyard"], title:"Tamghas Substation", desc:"Substation survey, switchyard works."}
+      };
 
-    const FREELANCE = [
-      { id:"hvac", title:"HVAC System Design & Modeling", date:"2024", desc:"Designed complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing.", folder:"assets/freelance-photos/hvac/", files:['duct-layout.png'], captions:["HVAC duct layout"] },
-      { id:"3d-modeling", title:"3D Building Planning & Modeling", date:"2023–2024", desc:"Detailed architectural visualizations using SketchUp and Revit.", folder:"assets/freelance-photos/3d-modeling/", files:['1.png','2.png','3.jpg'], captions:["Balganga Staff Quarter","Control Room","Residential"] },
-      { id:"structural-analysis", title:"Structural Analysis for Client Buildings", date:"2024", desc:"STAAD Pro analysis ensuring compliance with load standards.", folder:"assets/freelance-photos/structural-analysis/", files:['1.png','2.png'], captions:["STAAD model","Load analysis"] },
-      { id:"drafting", title:"2D Drafting (AutoCAD)", date:"2023–2025", desc:"Detailed 2D CAD drawings: floor plans, sections, site layouts.", folder:"assets/freelance-photos/drafting/", files:['1.png','2.png','3.png'], captions:["Site layout","Residential plan","Tower locations"] },
-      { id:"abi", title:"ABI Pier Structural Design Workshop", date:"2023 (Earthquake Day)", desc:"Designed Adjustable Base Isolation Pier prototype with group.", folder:"assets/freelance-photos/abi/", files:['1.jpeg'], captions:["Prototype presentation"] },
-      { id:"sisneri", title:"Slope Stability & Mitigation – Sisneri Landslide", date:"2023 (Final Year)", desc:"Drone survey, geotechnical investigation, GeoStudio SLOPE/W.", folder:"assets/portfolio-photos/sisneri-landslide/", files:['Damage due to Landslide.JPG','Group Members.JPG'], captions:["Damage","Group"], pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf" }
-    ];
+      const FREELANCE = [
+        { id:"hvac", title:"HVAC System Design & Modeling", date:"2024", desc:"Designed complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing.", folder:"assets/freelance-photos/hvac/", files:['duct-layout.png'], captions:["HVAC duct layout"] },
+        { id:"3d-modeling", title:"3D Building Planning & Modeling", date:"2023–2024", desc:"Detailed architectural visualizations using SketchUp and Revit.", folder:"assets/freelance-photos/3d-modeling/", files:['1.png','2.png','3.jpg'], captions:["Balganga Staff Quarter","Control Room","Residential"] },
+        { id:"structural-analysis", title:"Structural Analysis for Client Buildings", date:"2024", desc:"STAAD Pro analysis ensuring compliance with load standards.", folder:"assets/freelance-photos/structural-analysis/", files:['1.png','2.png'], captions:["STAAD model","Load analysis"] },
+        { id:"drafting", title:"2D Drafting (AutoCAD)", date:"2023–2025", desc:"Detailed 2D CAD drawings: floor plans, sections, site layouts.", folder:"assets/freelance-photos/drafting/", files:['1.png','2.png','3.png'], captions:["Site layout","Residential plan","Tower locations"] },
+        { id:"abi", title:"ABI Pier Structural Design Workshop", date:"2023 (Earthquake Day)", desc:"Designed Adjustable Base Isolation Pier prototype with group.", folder:"assets/freelance-photos/abi/", files:['1.jpeg'], captions:["Prototype presentation"] },
+        { id:"sisneri", title:"Slope Stability & Mitigation – Sisneri Landslide", date:"2023 (Final Year)", desc:"Drone survey, geotechnical investigation, GeoStudio SLOPE/W.", folder:"assets/portfolio-photos/sisneri-landslide/", files:['Damage due to Landslide.JPG','Group Members.JPG'], captions:["Damage","Group"], pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf" }
+      ];
 
-    const SKILLS_DATA = [
-      { name:"ArcGIS Pro & QGIS", pct:92 },
-      { name:"Google Earth Engine", pct:85 },
-      { name:"AutoCAD & Civil 3D", pct:95 },
-      { name:"HEC‑RAS 2D", pct:80 },
-      { name:"STAAD Pro & SAP2000", pct:78 },
-      { name:"Python (GIS scripting)", pct:70 }
-    ];
+      const SKILLS_DATA = [
+        { name:"ArcGIS Pro & QGIS", pct:92 }, { name:"Google Earth Engine", pct:85 }, { name:"AutoCAD & Civil 3D", pct:95 },
+        { name:"HEC‑RAS 2D", pct:80 }, { name:"STAAD Pro & SAP2000", pct:78 }, { name:"Python (GIS scripting)", pct:70 }
+      ];
 
-    const CERTIFICATES = [
-      { icon:"fa-certificate", title:"SAP2000 Training", desc:"Advanced structural analysis" },
-      { icon:"fa-drafting-compass", title:"AutoCAD Professional", desc:"Design & drafting" },
-      { icon:"fa-id-card", title:"Nepal Engineering Council", desc:"Reg. No: 80593" },
-      { icon:"fa-layer-group", title:"ABI Pier Workshop", desc:"Seismic isolation" }
-    ];
-    const CERT_THUMBS = [
-      { file:"autocad.jpg", caption:"AutoCAD Certification" },
-      { file:"NEC.png", caption:"NEC Registration" },
-      { file:"SAP.jpg", caption:"SAP2000 Training" }
-    ];
+      const CERTIFICATES = [
+        { icon:"fa-certificate", title:"SAP2000 Training", desc:"Advanced structural analysis" },
+        { icon:"fa-drafting-compass", title:"AutoCAD Professional", desc:"Design & drafting" },
+        { icon:"fa-id-card", title:"Nepal Engineering Council", desc:"Reg. No: 80593" },
+        { icon:"fa-layer-group", title:"ABI Pier Workshop", desc:"Seismic isolation" }
+      ];
+      const CERT_THUMBS = [
+        { file:"autocad.jpg", caption:"AutoCAD Certification" },
+        { file:"NEC.png", caption:"NEC Registration" },
+        { file:"SAP.jpg", caption:"SAP2000 Training" }
+      ];
 
-    // ═══════════════ INIT ═══════════════
-    gsap.registerPlugin(ScrollTrigger);
+      // Helper to encode path
+      function enc(p){ return encodeURI(p).replace(/#/g,'%23'); }
 
-    class SimpleLenis {
-      constructor() { this.ease=0.08; this.current=window.scrollY; this.target=window.scrollY; this.init(); }
-      init() { window.addEventListener('scroll',()=>{this.target=window.scrollY;}); this.loop(); }
-      loop() { this.current+=(this.target-this.current)*this.ease; ScrollTrigger.update(); requestAnimationFrame(()=>this.loop()); }
-    }
-    new SimpleLenis();
+      // GSAP
+      gsap.registerPlugin(ScrollTrigger);
 
-    const dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring');
-    let mX=0,mY=0,rX=0,rY=0;
-    document.addEventListener('mousemove',e=>{mX=e.clientX;mY=e.clientY;gsap.set(dot,{x:mX,y:mY});});
-    function animRing(){rX+=(mX-rX)*0.12;rY+=(mY-rY)*0.12;gsap.set(ring,{x:rX,y:rY});requestAnimationFrame(animRing);} animRing();
-    document.querySelectorAll('a,button,.btn,.project-card,.site-chip,.fl-thumb,.m-media-wrap').forEach(el=>{
-      el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
-    });
+      // Lenis smooth scroll
+      class SimpleLenis {
+        constructor() { this.ease=0.08; this.current=window.scrollY; this.target=window.scrollY; this.init(); }
+        init() { window.addEventListener('scroll',()=>{this.target=window.scrollY;}); this.loop(); }
+        loop() { this.current+=(this.target-this.current)*this.ease; ScrollTrigger.update(); requestAnimationFrame(()=>this.loop()); }
+      }
+      new SimpleLenis();
 
-    (function(){
-      const canvas=document.getElementById('three-canvas');
-      const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-      const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(60,canvas.offsetWidth/canvas.offsetHeight,0.1,100);
-      camera.position.z=4;
-      const geo=new THREE.TorusKnotGeometry(1.2,0.38,160,20);
-      const mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:0.12,transparent:true});
-      const mesh=new THREE.Mesh(geo,mat); scene.add(mesh);
-      const geoSolid=new THREE.TorusKnotGeometry(1.18,0.36,120,18);
-      const matSolid=new THREE.MeshBasicMaterial({color:0xf5f4f0});
-      const meshSolid=new THREE.Mesh(geoSolid,matSolid); scene.add(meshSolid);
-      const partGeo=new THREE.BufferGeometry(), count=200, positions=new Float32Array(count*3);
-      for(let i=0;i<count*3;i++) positions[i]=(Math.random()-0.5)*8;
-      partGeo.setAttribute('position',new THREE.BufferAttribute(positions,3));
-      const partMat=new THREE.PointsMaterial({color:0x0e0e0e,size:0.025,transparent:true,opacity:0.3});
-      const particles=new THREE.Points(partGeo,partMat); scene.add(particles);
-      let mx=0,my=0,targetRX=0,targetRY=0;
-      document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2; my=-(e.clientY/window.innerHeight-0.5)*2;});
-      function resize(){const w=canvas.offsetWidth,h=canvas.offsetHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
-      resize(); window.addEventListener('resize',resize);
-      let t=0;
-      function animate(){requestAnimationFrame(animate);t+=0.005;targetRX+=(my*0.4-targetRX)*0.05;targetRY+=(mx*0.4-targetRY)*0.05;mesh.rotation.x=targetRX+t*0.3;mesh.rotation.y=targetRY+t*0.5;meshSolid.rotation.x=mesh.rotation.x;meshSolid.rotation.y=mesh.rotation.y;particles.rotation.y=t*0.05;mesh.position.y=Math.sin(t*0.7)*0.12;meshSolid.position.y=mesh.position.y;renderer.render(scene,camera);}
-      animate();
-    })();
-
-    gsap.utils.toArray('.reveal').forEach(el=>{
-      gsap.to(el,{opacity:1,y:0,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}});
-    });
-
-    function renderSkills(){
-      const cont=document.getElementById('skillsContainer');
-      if(!cont) return;
-      cont.innerHTML=SKILLS_DATA.map(s=>`
-        <div class="skill-item reveal">
-          <div class="skill-name"><span>${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="${s.pct}"></div></div>
-        </div>`).join('');
-      document.querySelectorAll('.skill-bar-fill').forEach(bar=>{
-        const w=bar.dataset.width;
-        ScrollTrigger.create({trigger:bar,start:'top 85%',onEnter:()=>bar.style.width=w+'%'});
+      // Cursor
+      const dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring');
+      let mX=0,mY=0,rX=0,rY=0;
+      document.addEventListener('mousemove',e=>{mX=e.clientX;mY=e.clientY;gsap.set(dot,{x:mX,y:mY});});
+      function animRing(){rX+=(mX-rX)*0.12;rY+=(mY-rY)*0.12;gsap.set(ring,{x:rX,y:rY});requestAnimationFrame(animRing);}
+      animRing();
+      document.querySelectorAll('a,button,.btn,.project-card,.fl-thumb,.m-media-wrap,.gallery-fullscreen,.site-chip').forEach(el=>{
+        el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
       });
-    }
 
-    function buildProjects(){
-      const grid=document.getElementById('projGrid');
-      if(!grid) return;
-      grid.innerHTML=PROJECTS.map(p=>{
-        let thumbHTML='<div class="project-img-placeholder">Image</div>';
-        if(p.media&&p.media.length>0){
-          const first=p.media[0];
-          if(first.type==='image') thumbHTML=`<img src="${encodeURI(first.src)}" alt="${p.title}" />`;
-        }
-        return `<div class="project-card reveal" onclick="openProjModal(${p.id})">
-          <div class="project-img">${thumbHTML}</div>
-          <div class="project-info">
-            <div class="project-tags">${p.tech.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
-            <h3 class="project-title">${p.title}</h3>
-            <p class="project-desc">${p.short}</p>
-            <span class="project-link" onclick="event.stopPropagation();openProjModal(${p.id})">View Project →</span>
-          </div>
-        </div>`;
-      }).join('');
-    }
+      // Three.js
+      (function(){
+        const canvas=document.getElementById('three-canvas');
+        const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+        const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(60,canvas.offsetWidth/canvas.offsetHeight,0.1,100);
+        camera.position.z=4;
+        const geo=new THREE.TorusKnotGeometry(1.2,0.38,160,20);
+        const mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:0.12,transparent:true});
+        const mesh=new THREE.Mesh(geo,mat); scene.add(mesh);
+        const geoSolid=new THREE.TorusKnotGeometry(1.18,0.36,120,18);
+        const matSolid=new THREE.MeshBasicMaterial({color:0xf5f4f0});
+        const meshSolid=new THREE.Mesh(geoSolid,matSolid); scene.add(meshSolid);
+        const partGeo=new THREE.BufferGeometry(), count=200, positions=new Float32Array(count*3);
+        for(let i=0;i<count*3;i++) positions[i]=(Math.random()-0.5)*8;
+        partGeo.setAttribute('position',new THREE.BufferAttribute(positions,3));
+        const partMat=new THREE.PointsMaterial({color:0x0e0e0e,size:0.025,transparent:true,opacity:0.3});
+        const particles=new THREE.Points(partGeo,partMat); scene.add(particles);
+        let mx=0,my=0,targetRX=0,targetRY=0;
+        document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2; my=-(e.clientY/window.innerHeight-0.5)*2;});
+        function resize(){const w=canvas.offsetWidth,h=canvas.offsetHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+        resize(); window.addEventListener('resize',resize);
+        let t=0;
+        function animate(){requestAnimationFrame(animate);t+=0.005;targetRX+=(my*0.4-targetRX)*0.05;targetRY+=(mx*0.4-targetRY)*0.05;mesh.rotation.x=targetRX+t*0.3;mesh.rotation.y=targetRY+t*0.5;meshSolid.rotation.x=mesh.rotation.x;meshSolid.rotation.y=mesh.rotation.y;particles.rotation.y=t*0.05;mesh.position.y=Math.sin(t*0.7)*0.12;meshSolid.position.y=mesh.position.y;renderer.render(scene,camera);}
+        animate();
+      })();
 
-    function buildFreelance(){
-      const grid=document.getElementById('flGrid');
-      if(!grid) return;
-      grid.innerHTML=FREELANCE.map(f=>{
-        const thumbs=f.files&&f.files.length?f.files.map((file,i)=>{
-          const src=encodeURI(f.folder+file);
-          return `<div class="fl-thumb" onclick="event.stopPropagation();openCarouselFromList(${JSON.stringify(f.files.map((ff,ii)=>({src:encodeURI(f.folder+ff),caption:f.captions[ii]||ff}))).replace(/"/g,'&quot;')},${i})"><img src="${src}" alt=""></div>`;
-        }).join(''):'';
-        return `<div class="fl-card reveal">
-          <h3>${f.title}</h3><div class="fl-date">${f.date}</div><p>${f.desc}</p>
-          <div class="fl-thumbs">${thumbs}</div>
-          ${f.pdf?`<a href="${f.pdf}" target="_blank" class="btn btn-outline" style="margin-top:8px;padding:8px 16px;font-size:0.75rem;">Report</a>`:''}
-        </div>`;
-      }).join('');
-    }
+      // Scroll reveals
+      gsap.utils.toArray('.reveal').forEach(el=>{
+        gsap.to(el,{opacity:1,y:0,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}});
+      });
 
-    function buildCerts(){
-      const grid=document.getElementById('certGrid');
-      if(grid) grid.innerHTML=CERTIFICATES.map(c=>`
-        <div class="cert-item reveal">
-          <div class="cert-icon"><i class="fas ${c.icon}"></i></div>
-          <div class="cert-text"><strong>${c.title}</strong><span>${c.desc}</span></div>
-        </div>`).join('');
-      const thumbs=document.getElementById('certThumbs');
-      if(thumbs) thumbs.innerHTML=CERT_THUMBS.map((c,i)=>{
-        const src=encodeURI('assets/Cerififcations/'+c.file);
-        return `<img src="${src}" class="fl-thumb" style="width:80px;height:60px;cursor:pointer;" onclick="openCarouselFromList(${JSON.stringify(CERT_THUMBS.map(cc=>({src:encodeURI('assets/Cerififcations/'+cc.file),caption:cc.caption}))).replace(/"/g,'&quot;')},${i})">`;
-      }).join('');
-    }
+      // Build experience with auto galleries
+      function buildExperience() {
+        const container = document.getElementById('expContainer');
+        let html = '';
+        const sites = Object.keys(WORK_IMAGES);
+        sites.forEach(siteId => {
+          const site = WORK_IMAGES[siteId];
+          const base = `assets/Professional Career/${site.folder}/`;
+          const images = site.files.map((f,i) => ({ src: enc(base+f), caption: site.captions[i] || f }));
+          const imgTags = images.map((img,idx) => `<img src="${img.src}" alt="${img.caption}" class="exp-img ${idx===0?'active':''}" data-index="${idx}">`).join('');
+          const dots = images.map((_,i) => `<button class="gallery-dot ${i===0?'active':''}" data-index="${i}"></button>`).join('');
 
-    window.openProjModal=function(id){
-      const p=PROJECTS.find(x=>x.id===id); if(!p)return;
-      document.getElementById('mHead').innerHTML=`<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">${p.title}</h3><p style="opacity:0.6;font-size:0.8rem;margin-bottom:12px">${p.loc}</p>`;
-      document.getElementById('mDesc').innerHTML=`<p>${p.full}</p><p style="margin-top:8px"><strong>Technologies:</strong> ${p.tech.join(', ')}</p>`;
-      const gal=document.getElementById('mGallery');
-      gal.innerHTML=p.media.map((m,i)=>{
-        const safeSrc=encodeURI(m.src);
-        if(m.type==='image') return `<div class="m-media-wrap" onclick="openCarouselFromList(${JSON.stringify(p.media.map(mm=>({src:encodeURI(mm.src),caption:mm.caption}))).replace(/"/g,'&quot;')},${i})"><img src="${safeSrc}" alt=""></div>`;
-        else return `<div class="m-media-wrap" onclick="openVideoModal('${safeSrc}')"><video muted><source src="${safeSrc}" type="video/mp4"></video></div>`;
-      }).join('');
-      document.getElementById('mPdf').innerHTML=p.pdf?`<a href="${p.pdf}" target="_blank" class="btn btn-dark" style="margin-top:8px;padding:8px 20px;font-size:0.75rem;">PDF Report</a>`:'';
-      document.getElementById('projModal').classList.add('on');
-    };
-    window.closeModal=function(id){document.getElementById(id).classList.remove('on');};
+          html += `
+            <div class="exp-card reveal">
+              <div class="exp-header">
+                <h3>${site.title}</h3>
+                <div class="exp-sub">${site.desc}</div>
+              </div>
+              <div class="exp-gallery" data-site="${siteId}">
+                ${imgTags}
+                <div class="gallery-controls">${dots}</div>
+                <button class="gallery-fullscreen"><i class="fas fa-expand"></i> Fullscreen</button>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
 
-    let currMedia=[],currIdx=0;
-    window.openCarouselFromList=function(list,idx){currMedia=list;currIdx=idx;updateCarousel();document.getElementById('carouselModal').classList.add('active');};
-    function updateCarousel(){const item=currMedia[currIdx];document.getElementById('carouselImage').src=typeof item==='string'?item:item.src;document.getElementById('carouselCaption').textContent=typeof item==='string'?'':(item.caption||'');}
-    window.prevImage=()=>{if(currMedia.length){currIdx=(currIdx-1+currMedia.length)%currMedia.length;updateCarousel();}};
-    window.nextImage=()=>{if(currMedia.length){currIdx=(currIdx+1)%currMedia.length;updateCarousel();}};
-    window.closeCarousel=()=>{document.getElementById('carouselModal').classList.remove('active');currMedia=[];};
-    window.openVideoModal=function(src){document.getElementById('videoPlayer').src=src;document.getElementById('videoModal').classList.add('active');};
-    window.closeVideoModal=function(){const v=document.getElementById('videoPlayer');v.pause();v.src='';document.getElementById('videoModal').classList.remove('active');};
+        // Auto-advance galleries
+        const galleries = document.querySelectorAll('.exp-gallery');
+        galleries.forEach(gallery => {
+          const images = gallery.querySelectorAll('.exp-img');
+          const dots = gallery.querySelectorAll('.gallery-dot');
+          let current = 0;
+          let interval = setInterval(nextImage, 4000);
+          let paused = false;
 
-    window.openWorkGallery=function(siteId){
-      const site=WORK_IMAGES[siteId];if(!site||!site.files.length)return;
-      const base=`assets/Professional Career/${site.folder}/`;
-      const media=site.files.map((f,i)=>({src:encodeURI(base+f),caption:site.captions[i]||f}));
-      openCarouselFromList(media,0);
-    };
+          function nextImage() {
+            if (paused) return;
+            images[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (current + 1) % images.length;
+            images[current].classList.add('active');
+            dots[current].classList.add('active');
+          }
 
-    const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
-    function scrambleText(el){const orig=el.dataset.text||el.textContent;let frame=0;const total=30;const interval=setInterval(()=>{el.textContent=orig.split('').map((ch,i)=>{if(ch===' ')return' ';if(frame/total>i/orig.length)return ch;return CHARS[Math.floor(Math.random()*CHARS.length)];}).join('');frame++;if(frame>total){el.textContent=orig;clearInterval(interval);}},40);}
-    document.querySelectorAll('.scramble').forEach(el=>{ScrollTrigger.create({trigger:el,start:'top 80%',onEnter:()=>scrambleText(el)});});
+          function goTo(index) {
+            images[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = index;
+            images[current].classList.add('active');
+            dots[current].classList.add('active');
+          }
 
-    document.querySelectorAll('.magnetic').forEach(btn=>{
-      btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;gsap.to(btn,{x:x*0.38,y:y*0.38,duration:0.4,ease:'power2.out'});});
-      btn.addEventListener('mouseleave',()=>{gsap.to(btn,{x:0,y:0,duration:0.6,ease:'elastic.out(1,0.4)'});});
-    });
-    document.querySelectorAll('.project-card').forEach(card=>{
-      card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;gsap.to(card,{rotateY:x*14,rotateX:-y*14,transformPerspective:800,duration:0.4,ease:'power2.out'});});
-      card.addEventListener('mouseleave',()=>{gsap.to(card,{rotateY:0,rotateX:0,duration:0.6,ease:'elastic.out(1,0.4)'});});
-    });
+          // Dot clicks
+          dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+              goTo(parseInt(dot.dataset.index));
+            });
+          });
 
-    ScrollTrigger.create({start:'top -80',onUpdate:self=>{const nav=document.querySelector('nav');if(self.progress>0){nav.style.background='rgba(245,244,240,0.85)';nav.style.backdropFilter='blur(12px)';nav.style.borderBottom='1px solid rgba(0,0,0,0.06)';}else{nav.style.background='transparent';nav.style.borderBottom='none';}}});
+          // Fullscreen button
+          const fsBtn = gallery.querySelector('.gallery-fullscreen');
+          fsBtn.addEventListener('click', () => {
+            const activeImg = gallery.querySelector('.exp-img.active');
+            if (activeImg) {
+              document.getElementById('fullscreenImg').src = activeImg.src;
+              document.getElementById('fullscreenModal').classList.add('active');
+            }
+          });
 
-    renderSkills();
-    buildProjects();
-    buildFreelance();
-    buildCerts();
-  });
+          // Pause on hover
+          gallery.addEventListener('mouseenter', () => { paused = true; });
+          gallery.addEventListener('mouseleave', () => { paused = false; });
+        });
+      }
+
+      // Skills bars
+      function renderSkills(){
+        const cont = document.getElementById('skillsContainer');
+        cont.innerHTML = SKILLS_DATA.map(s => `
+          <div class="skill-item reveal">
+            <div class="skill-name"><span>${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="${s.pct}"></div></div>
+          </div>`).join('');
+        document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          const w = bar.dataset.width;
+          ScrollTrigger.create({trigger:bar, start:'top 85%', onEnter:()=> bar.style.width = w+'%' });
+        });
+      }
+
+      function buildProjects(){
+        const grid = document.getElementById('projGrid');
+        grid.innerHTML = PROJECTS.map(p => {
+          let thumb = '<div class="project-img-placeholder" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">Image</div>';
+          if(p.media && p.media[0] && p.media[0].type==='image') thumb = `<img src="${enc(p.media[0].src)}" alt="">`;
+          return `<div class="project-card reveal" onclick="openProjModal(${p.id})">
+            <div class="project-img">${thumb}</div>
+            <div class="project-info">
+              <div class="project-tags">${p.tech.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
+              <h3 class="project-title">${p.title}</h3>
+              <p class="project-desc">${p.short}</p>
+              <span class="project-link" onclick="event.stopPropagation();openProjModal(${p.id})">View Project →</span>
+            </div>
+          </div>`;
+        }).join('');
+      }
+
+      function buildFreelance(){
+        document.getElementById('flGrid').innerHTML = FREELANCE.map(f => {
+          let thumbs = f.files ? f.files.map((file,i) => {
+            const src = enc(f.folder+file);
+            return `<div class="fl-thumb" onclick="event.stopPropagation();openCarouselFromList(${JSON.stringify(f.files.map((ff,ii)=>({src:enc(f.folder+ff),caption:f.captions[ii]||ff}))).replace(/"/g,'&quot;')},${i})"><img src="${src}" alt=""></div>`;
+          }).join('') : '';
+          return `<div class="fl-card reveal">
+            <h3>${f.title}</h3><div class="fl-date">${f.date}</div><p>${f.desc}</p>
+            <div class="fl-thumbs">${thumbs}</div>
+            ${f.pdf?`<a href="${f.pdf}" target="_blank" class="btn btn-outline" style="margin-top:8px;padding:8px 16px;font-size:0.75rem;">Report</a>`:''}
+          </div>`;
+        }).join('');
+      }
+
+      function buildCerts(){
+        document.getElementById('certGrid').innerHTML = CERTIFICATES.map(c => `
+          <div class="cert-item reveal">
+            <div class="cert-icon"><i class="fas ${c.icon}"></i></div>
+            <div class="cert-text"><strong>${c.title}</strong><span>${c.desc}</span></div>
+          </div>`).join('');
+        const thumbs = document.getElementById('certThumbs');
+        thumbs.innerHTML = CERT_THUMBS.map((c,i) => {
+          const src = enc('assets/Cerififcations/'+c.file);
+          return `<img src="${src}" class="fl-thumb" style="width:80px;height:60px;cursor:pointer;" onclick="openCarouselFromList(${JSON.stringify(CERT_THUMBS.map(cc=>({src:enc('assets/Cerififcations/'+cc.file),caption:cc.caption}))).replace(/"/g,'&quot;')},${i})">`;
+        }).join('');
+      }
+
+      // Modal logic
+      window.openProjModal = function(id) {
+        const p = PROJECTS.find(x=>x.id===id); if(!p) return;
+        document.getElementById('mHead').innerHTML = `<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">${p.title}</h3><p style="opacity:0.6;font-size:0.8rem;margin-bottom:12px">${p.loc}</p>`;
+        document.getElementById('mDesc').innerHTML = `<p>${p.full}</p><p style="margin-top:8px"><strong>Technologies:</strong> ${p.tech.join(', ')}</p>`;
+        const gal = document.getElementById('mGallery');
+        gal.innerHTML = p.media.map((m,i) => {
+          const safeSrc = enc(m.src);
+          if(m.type==='image') return `<div class="m-media-wrap" onclick="openCarouselFromList(${JSON.stringify(p.media.map(mm=>({src:enc(mm.src),caption:mm.caption}))).replace(/"/g,'&quot;')},${i})"><img src="${safeSrc}" alt=""></div>`;
+          else return `<div class="m-media-wrap" onclick="openVideoModal('${safeSrc}')"><video muted><source src="${safeSrc}" type="video/mp4"></video></div>`;
+        }).join('');
+        document.getElementById('mPdf').innerHTML = p.pdf?`<a href="${p.pdf}" target="_blank" class="btn btn-dark" style="margin-top:8px;padding:8px 20px;font-size:0.75rem;">PDF Report</a>`:'';
+        document.getElementById('projModal').classList.add('on');
+      };
+      window.closeModal = id => document.getElementById(id).classList.remove('on');
+
+      let currMedia=[],currIdx=0;
+      window.openCarouselFromList = (list,idx) => { currMedia=list; currIdx=idx; updateCarousel(); document.getElementById('carouselModal').classList.add('active'); };
+      function updateCarousel(){ const item=currMedia[currIdx]; document.getElementById('carouselImage').src=typeof item==='string'?item:item.src; document.getElementById('carouselCaption').textContent=typeof item==='string'?'':(item.caption||''); }
+      window.prevImage = () => { if(currMedia.length){ currIdx=(currIdx-1+currMedia.length)%currMedia.length; updateCarousel(); }};
+      window.nextImage = () => { if(currMedia.length){ currIdx=(currIdx+1)%currMedia.length; updateCarousel(); }};
+      window.closeCarousel = () => { document.getElementById('carouselModal').classList.remove('active'); currMedia=[]; };
+      window.openVideoModal = src => { document.getElementById('videoPlayer').src=src; document.getElementById('videoModal').classList.add('active'); };
+      window.closeVideoModal = () => { const v=document.getElementById('videoPlayer'); v.pause(); v.src=''; document.getElementById('videoModal').classList.remove('active'); };
+
+      // Magnetic & tilt
+      document.querySelectorAll('.magnetic').forEach(btn=>{
+        btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;gsap.to(btn,{x:x*0.38,y:y*0.38,duration:0.4,ease:'power2.out'});});
+        btn.addEventListener('mouseleave',()=>{gsap.to(btn,{x:0,y:0,duration:0.6,ease:'elastic.out(1,0.4)'});});
+      });
+      document.querySelectorAll('.project-card').forEach(card=>{
+        card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;gsap.to(card,{rotateY:x*14,rotateX:-y*14,transformPerspective:800,duration:0.4,ease:'power2.out'});});
+        card.addEventListener('mouseleave',()=>{gsap.to(card,{rotateY:0,rotateX:0,duration:0.6,ease:'elastic.out(1,0.4)'});});
+      });
+
+      // Nav scroll
+      ScrollTrigger.create({start:'top -80',onUpdate:self=>{
+        const nav=document.querySelector('nav');
+        if(self.progress>0){ nav.style.background='rgba(245,244,240,0.85)'; nav.style.backdropFilter='blur(12px)'; nav.style.borderBottom='1px solid rgba(0,0,0,0.06)'; }
+        else{ nav.style.background='transparent'; nav.style.borderBottom='none'; }
+      }});
+
+      // Scramble
+      const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
+      function scrambleText(el){ const orig=el.dataset.text||el.textContent; let frame=0; const total=30; const interval=setInterval(()=>{ el.textContent=orig.split('').map((ch,i)=>{ if(ch===' ')return' '; if(frame/total>i/orig.length)return ch; return CHARS[Math.floor(Math.random()*CHARS.length)]; }).join(''); frame++; if(frame>total){el.textContent=orig;clearInterval(interval);} },40); }
+      document.querySelectorAll('.scramble').forEach(el=>{ ScrollTrigger.create({trigger:el,start:'top 80%',onEnter:()=>scrambleText(el)}); });
+
+      // Start
+      renderSkills();
+      buildProjects();
+      buildFreelance();
+      buildCerts();
+      buildExperience();
+    })();
   </script>
 </body>
 </html>
