@@ -16,7 +16,7 @@
     :root {
       --white: #f5f4f0;
       --black: #0e0e0e;
-      --accent: #c8ff00;
+      --accent: #8ab4f8;   /* Light blue accent */
       --gray: #888;
       --light-gray: #e8e6e0;
       --font-display: 'Syne', sans-serif;
@@ -766,10 +766,10 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- PROJECTS (Portfolio) -->
   <section id="projects">
-    <div class="section-label reveal">Selected work</div>
-    <h2 class="projects-heading reveal">Things I've built.</h2>
+    <div class="section-label reveal">Portfolio</div>
+    <h2 class="projects-heading reveal">Featured Case Studies.</h2>
     <div class="projects-grid" id="projGrid"></div>
   </section>
 
@@ -859,7 +859,7 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
   <script>
-  // ═══════════════════════  DATA (full) ═══════════════════
+  // ═══════════════════════  DATA  ═══════════════════
   const PROJECTS = [
     { id:1, title:"InSAR Time Series for Highway Subsidence", cat:"InSAR / Geotech", filter:"insar", loc:"Sloterdijk to Rijksweg, Netherlands", short:"13 Sentinel‑1 images (Jan–May 2024) processed with SNAP+SNAPHU.", full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering (α=0.5), phase unwrapping, and terrain correction. Extracted A10 highway profiles and produced time series graph showing subsidence over 5 months.", tech:["SNAP","SNAPHU","Sentinel‑1"], pdf:"assets/portfolio-photos/insar/insar.pdf", media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram – phase difference"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map (mm)"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Goldstein filtered interferogram"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 194901.png",caption:"Unwrapped phase and time series"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090637.png",caption:"Subsidence profile – A10"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090658.png",caption:"Cumulative displacement"}] },
     { id:2, title:"NDVI Timelapse of Kathmandu Valley (2000–2026)", cat:"Remote Sensing", filter:"gis", loc:"Kathmandu Valley, Nepal", short:"26‑year vegetation change using Landsat & Sentinel‑2.", full:"Processed 28 images in Google Earth Engine – scaling, cloud masking, NDVI calculation, harmonization, median composites. Built 5‑class timelapse and exported 1080p MP4.", tech:["Google Earth Engine","Landsat 5/8","Sentinel‑2"], pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf", media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},{type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},{type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse animation"}] },
@@ -983,13 +983,17 @@
     });
   }
 
-  // ── PROJECTS RENDER ──
+  // ── PROJECTS RENDER (with encoded paths) ──
   function buildProjects(){
     const grid=document.getElementById('projGrid');
     grid.innerHTML=PROJECTS.map(p=>{
-      const thumb=p.media&&p.media.length?p.media[0].src:'';
+      let thumbHTML='<div class="project-img-placeholder">Image</div>';
+      if(p.media&&p.media.length>0){
+        const first=p.media[0];
+        if(first.type==='image') thumbHTML=`<img src="${encodeURI(first.src)}" alt="${p.title}" />`;
+      }
       return `<div class="project-card reveal" onclick="openProjModal(${p.id})">
-        <div class="project-img">${thumb?`<img src="${thumb}" alt="">`:'<div class="project-img-placeholder">Image</div>'}</div>
+        <div class="project-img">${thumbHTML}</div>
         <div class="project-info">
           <div class="project-tags">${p.tech.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>
           <h3 class="project-title">${p.title}</h3>
@@ -1000,10 +1004,13 @@
     }).join('');
   }
 
-  // ── FREELANCE RENDER ──
+  // ── FREELANCE RENDER (with encoded paths) ──
   function buildFreelance(){
     document.getElementById('flGrid').innerHTML=FREELANCE.map(f=>{
-      const thumbs=f.files&&f.files.length?f.files.map((file,i)=>`<div class="fl-thumb" onclick="event.stopPropagation();openCarouselFromList(${JSON.stringify(f.files.map((ff,ii)=>({src:f.folder+ff,caption:f.captions[ii]||ff})).map(x=>x.src.replace(/"/g,'\\"'))).replace(/"/g,'&quot;')}, ${i})"><img src="${f.folder+file}" alt=""></div>`).join(''):'';
+      const thumbs=f.files&&f.files.length?f.files.map((file,i)=>{
+        const src=encodeURI(f.folder+file);
+        return `<div class="fl-thumb" onclick="event.stopPropagation();openCarouselFromList(${JSON.stringify(f.files.map((ff,ii)=>({src:encodeURI(f.folder+ff),caption:f.captions[ii]||ff}))).replace(/"/g,'&quot;')},${i})"><img src="${src}" alt=""></div>`;
+      }).join(''):'';
       return `<div class="fl-card reveal">
         <h3>${f.title}</h3><div class="fl-date">${f.date}</div><p>${f.desc}</p>
         <div class="fl-thumbs">${thumbs}</div>
@@ -1012,7 +1019,7 @@
     }).join('');
   }
 
-  // ── CERTS ──
+  // ── CERTS (with encoded paths) ──
   function buildCerts(){
     document.getElementById('certGrid').innerHTML=CERTIFICATES.map(c=>`
       <div class="cert-item reveal">
@@ -1020,7 +1027,10 @@
         <div class="cert-text"><strong>${c.title}</strong><span>${c.desc}</span></div>
       </div>`).join('');
     const thumbs=document.getElementById('certThumbs');
-    thumbs.innerHTML=CERT_THUMBS.map((c,i)=>`<img src="assets/Cerififcations/${c.file}" class="fl-thumb" style="width:80px;height:60px;cursor:pointer;" onclick="openCarouselFromList(${JSON.stringify(CERT_THUMBS.map(cc=>({src:'assets/Cerififcations/'+cc.file,caption:cc.caption})).map(x=>x.src.replace(/"/g,'\\"'))).replace(/"/g,'&quot;')},${i})">`).join('');
+    thumbs.innerHTML=CERT_THUMBS.map((c,i)=>{
+      const src=encodeURI('assets/Cerififcations/'+c.file);
+      return `<img src="${src}" class="fl-thumb" style="width:80px;height:60px;cursor:pointer;" onclick="openCarouselFromList(${JSON.stringify(CERT_THUMBS.map(cc=>({src:encodeURI('assets/Cerififcations/'+cc.file),caption:cc.caption}))).replace(/"/g,'&quot;')},${i})">`;
+    }).join('');
   }
 
   // ── MODAL / CAROUSEL ──
@@ -1030,8 +1040,9 @@
     document.getElementById('mDesc').innerHTML=`<p>${p.full}</p><p style="margin-top:8px"><strong>Technologies:</strong> ${p.tech.join(', ')}</p>`;
     const gal=document.getElementById('mGallery');
     gal.innerHTML=p.media.map((m,i)=>{
-      if(m.type==='image') return `<div class="m-media-wrap" onclick="openCarouselFromList(${JSON.stringify(p.media.map(mm=>({src:mm.src,caption:mm.caption})).map(x=>x.src.replace(/"/g,'\\"'))).replace(/"/g,'&quot;')},${i})"><img src="${m.src}" alt=""></div>`;
-      else return `<div class="m-media-wrap" onclick="openVideoModal('${m.src}')"><video muted><source src="${m.src}" type="video/mp4"></video></div>`;
+      const safeSrc=encodeURI(m.src);
+      if(m.type==='image') return `<div class="m-media-wrap" onclick="openCarouselFromList(${JSON.stringify(p.media.map(mm=>({src:encodeURI(mm.src),caption:mm.caption}))).replace(/"/g,'&quot;')},${i})"><img src="${safeSrc}" alt=""></div>`;
+      else return `<div class="m-media-wrap" onclick="openVideoModal('${safeSrc}')"><video muted><source src="${safeSrc}" type="video/mp4"></video></div>`;
     }).join('');
     document.getElementById('mPdf').innerHTML=p.pdf?`<a href="${p.pdf}" target="_blank" class="btn btn-dark" style="margin-top:8px;padding:8px 20px;font-size:0.75rem;">PDF Report</a>`:'';
     document.getElementById('projModal').classList.add('on');
@@ -1048,7 +1059,7 @@
   window.openWorkGallery=function(siteId){
     const site=WORK_IMAGES[siteId];if(!site||!site.files.length)return;
     const base=`assets/Professional Career/${site.folder}/`;
-    const media=site.files.map((f,i)=>({src:base+f,caption:site.captions[i]||f}));
+    const media=site.files.map((f,i)=>({src:encodeURI(base+f),caption:site.captions[i]||f}));
     openCarouselFromList(media,0);
   };
 
