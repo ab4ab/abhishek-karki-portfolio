@@ -471,6 +471,22 @@ html[data-theme="dark"] .proj-hover-mask { background: rgba(4,8,15,0.82); }
 .fl-thumb:hover{border-color:var(--c-p1);transform:scale(1.07);box-shadow:0 6px 16px rgba(0, 114, 219, .15);}
 .fl-thumb img{width:100%;height:100%;object-fit:cover;}
 
+/* Certifications */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+.cert-item{
+  display:flex;align-items:center;gap:1.2rem;padding:1.4rem;
+  background:var(--c-surface);border:1px solid var(--c-border);
+  border-radius:var(--r-xl);transition:all var(--dur-med) var(--ease-out);
+}
+.cert-item:hover{border-color:var(--c-border-h);transform:translateY(-3px);box-shadow:var(--sh-glow);}
+.cert-icon{
+  width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:1.1rem;flex-shrink:0;
+}
+.cert-details{display:flex;flex-direction:column;gap:0.2rem;}
+.cert-details strong{font-family:'Space Grotesk',sans-serif;font-size:0.95rem;font-weight:700;color:var(--t-primary);}
+.cert-details span{font-size:0.78rem;color:var(--t-secondary);}
+
 /* Contact */
 .contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:3.5rem;}
 .contact-stack{display:grid;gap:.9rem;}
@@ -591,7 +607,7 @@ html[data-theme="dark"] .proj-hover-mask { background: rgba(4,8,15,0.82); }
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="active">Home</a></li><li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li><li><a href="#skills">Skills</a></li>
-      <li><a href="#education">Education</a></li><li><a href="#freelance">Freelance</a></li>
+      <li><a href="#education">Education</a></li><li><a href="#certifications">Certifications</a></li><li><a href="#freelance">Freelance</a></li>
       <li><a href="#contact">Contact</a></li><li><a href="cv.html" target="_blank" class="nav-cta">Resume</a></li>
     </ul>
     <button class="hamburger" id="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
@@ -653,12 +669,18 @@ html[data-theme="dark"] .proj-hover-mask { background: rgba(4,8,15,0.82); }
   </div>
 </div></section>
 
-<section id="freelance" class="sec"><div class="container">
+<section id="certifications" class="sec"><div class="container">
+  <div class="sec-hd"><div class="sec-label">Credentials</div><h2 class="sec-title">Certifications & Memberships</h2></div>
+  <div class="cert-grid" id="certGrid"></div>
+  <div class="fl-thumbs" id="certThumbs" style="margin-top: 2rem; justify-content: center;"></div>
+</div></section>
+
+<section id="freelance" class="sec sec-dark"><div class="container">
   <div class="sec-hd"><div class="sec-label">Independent</div><h2 class="sec-title">Freelance Consulting</h2></div>
   <div class="fl-grid" id="flGrid"></div>
 </div></section>
 
-<section id="contact" class="sec sec-dark"><div class="container">
+<section id="contact" class="sec"><div class="container">
   <div class="sec-hd"><div class="sec-label">Communication</div><h2 class="sec-title">Let's Connect</h2></div>
   <div class="contact-grid"><div class="contact-stack"><a href="mailto:abhishekkarki520@gmail.com" class="contact-link"><div class="cl-icon"><i class="fas fa-envelope"></i></div><div class="cl-text"><strong>Email</strong><span>abhishekkarki520@gmail.com</span></div></a>
     <a href="tel:9860959598" class="contact-link"><div class="cl-icon"><i class="fas fa-phone-alt"></i></div><div class="cl-text"><strong>Phone</strong><span>+977 9860959598</span></div></a>
@@ -812,6 +834,37 @@ const KMZ_FILES = {
 };
 
 // ==================== RENDER FUNCTIONS ====================
+function buildCertifications() {
+  const grid = document.getElementById('certGrid');
+  const certData = [
+    { title: "AutoCAD Professional", subtitle: "Autodesk Certified User", icon: "fas fa-drafting-compass" },
+    { title: "Nepal Engineering Council", subtitle: "Reg. No. 80593 (Civil)", icon: "fas fa-id-card" },
+    { title: "SAP2000 Training", subtitle: "Structural Analysis & Design", icon: "fas fa-calculator" }
+  ];
+  grid.innerHTML = certData.map(c => `
+    <div class="cert-item">
+      <div class="cert-icon" style="background:rgba(0, 114, 219, 0.1); color:var(--c-p1);"><i class="${c.icon}"></i></div>
+      <div class="cert-details">
+        <strong>${c.title}</strong>
+        <span>${c.subtitle}</span>
+      </div>
+    </div>
+  `).join('');
+
+  const thumbs = document.getElementById('certThumbs');
+  const basePath = 'assets/Cerififcations/';
+  thumbs.innerHTML = CERTIFICATES.map((c, idx) => `
+    <div class="fl-thumb" onclick="event.stopPropagation(); openCertGallery(${idx})">
+      <img src="${basePath}${encodeURI(c.file)}" alt="${c.cap}">
+    </div>
+  `).join('');
+}
+function openCertGallery(idx) {
+  const basePath = 'assets/Cerififcations/';
+  const list = CERTIFICATES.map(c => ({ src: basePath + encodeURI(c.file), cap: c.cap }));
+  openLightboxList(list, idx);
+}
+
 function buildProjects() {
   const grid = document.getElementById('projGrid');
   grid.innerHTML = PROJECTS.map(p => `
@@ -880,7 +933,9 @@ function buildFreelance() {
 function openFreelanceGallery(catId, idx) {
   const f = FREELANCE.find(x=>x.id===catId);
   if(!f) return;
-  const basePath = `assets/freelance-photos/${catId}/`;
+  const basePath = catId === 'sisneri'
+    ? 'assets/portfolio-photos/sisneri-landslide/'
+    : `assets/freelance-photos/${catId}/`;
   const list = f.files.map((file,i)=>({src:basePath+encodeURI(file), cap:f.caps[i]||'Image'}));
   openLightboxList(list, idx);
 }
@@ -948,9 +1003,12 @@ document.body.appendChild(cr); document.body.appendChild(crf);
 let mx=0,my=0,fx=0,fy=0;
 document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cr.style.cssText=`left:${mx}px;top:${my}px;`; });
 (function loop(){ fx+=(mx-fx)*0.12; fy+=(my-fy)*0.12; crf.style.cssText=`left:${fx}px;top:${fy}px;`; requestAnimationFrame(loop); })();
-document.querySelectorAll('a,button,.proj-card,.fl-thumb,.filter-btn,.btn,.soc-btn,.contact-link,.site-chip').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+document.addEventListener('mouseover', e => {
+  if (e.target.closest('a, button, .proj-card, .fl-thumb, .filter-btn, .btn, .soc-btn, .contact-link, .site-chip')) {
+    document.body.classList.add('cursor-hover');
+  } else {
+    document.body.classList.remove('cursor-hover');
+  }
 });
 
 // Navbar scroll, loader, progress
@@ -976,6 +1034,36 @@ function typeEffect(){
 }
 setTimeout(typeEffect,1000);
 
+// ScrollSpy & Nav Active Toggle
+function initScrollSpy() {
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.25, rootMargin: "-20% 0px -60% 0px" });
+  sections.forEach(s => observer.observe(s));
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const navLinksEl = document.getElementById('navLinks');
+      if (navLinksEl.classList.contains('open')) {
+        toggleNav();
+      }
+    });
+  });
+}
+
 // Counters
 function initCounters(){
   const observer=new IntersectionObserver(entries=>{
@@ -988,7 +1076,7 @@ function initCounters(){
   document.querySelectorAll('.stat-num').forEach(n=>observer.observe(n));
 }
 window.addEventListener('DOMContentLoaded',()=>{
-  buildProjects(); buildSiteChips(); buildFreelance(); initCounters();
+  buildProjects(); buildSiteChips(); buildFreelance(); buildCertifications(); initCounters(); initScrollSpy();
   setTimeout(()=>document.getElementById('loader').classList.add('out'),800);
 });
 </script>
