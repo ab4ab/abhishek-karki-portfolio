@@ -36,630 +36,223 @@
 
     /* ── CURSOR ── */
     #cursor-dot {
-      position: fixed;
-      width: 8px; height: 8px;
-      background: var(--black);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.05s;
+      position: fixed; width: 8px; height: 8px;
+      background: var(--black); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%); transition: transform 0.05s;
     }
     #cursor-ring {
-      position: fixed;
-      width: 36px; height: 36px;
-      border: 1.5px solid var(--black);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid var(--black); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
       transform: translate(-50%, -50%);
       transition: width 0.3s, height 0.3s, border-color 0.3s;
     }
-    body.cursor-hover #cursor-ring {
-      width: 60px; height: 60px;
-      border-color: var(--accent);
-    }
+    body.cursor-hover #cursor-ring { width: 60px; height: 60px; border-color: var(--accent); }
     body.cursor-hover #cursor-dot { background: var(--accent); }
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 28px 60px;
-      mix-blend-mode: multiply;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 28px 60px; mix-blend-mode: multiply;
       transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s;
     }
-    .nav-logo {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      color: var(--black);
-    }
+    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; text-decoration: none; color: var(--black); }
     .nav-links { display: flex; gap: 40px; list-style: none; }
-    .nav-links a {
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--black);
-      opacity: 0.6;
-      transition: opacity 0.3s;
-    }
+    .nav-links a { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--black); opacity: 0.6; transition: opacity 0.3s; }
     .nav-links a:hover { opacity: 1; }
-    .nav-cta {
-      background: var(--black);
-      color: var(--white) !important;
-      padding: 6px 20px !important;
-      border-radius: 100px;
-      opacity: 1 !important;
-      font-weight: 600;
-    }
+    .nav-cta { background: var(--black); color: var(--white) !important; padding: 6px 20px !important; border-radius: 100px; opacity: 1 !important; font-weight: 600; }
     .nav-cta:hover { background: var(--accent); color: var(--black) !important; }
 
     /* ── HERO ── */
     #hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 0 60px;
-      overflow: hidden;
+      position: relative; height: 100vh; display: flex; align-items: center;
+      padding: 0 60px; overflow: hidden;
+      background: url('assets/background.jpg') center/cover no-repeat;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(245,244,240,0.75); /* light overlay to keep text readable */
+      z-index: 1;
     }
     #three-canvas {
-      position: absolute;
-      top: 0; right: 0;
-      width: 55%;
-      height: 100%;
-      pointer-events: none;
+      position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+      pointer-events: none; z-index: 0;
     }
     .hero-content { position: relative; z-index: 2; max-width: 700px; }
-    .hero-tag {
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.5;
-      margin-bottom: 24px;
-      display: block;
-    }
-    .hero-name {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(4rem, 9vw, 8rem);
-      line-height: 0.92;
-      letter-spacing: -0.04em;
-      margin-bottom: 32px;
-      overflow: hidden;
-    }
+    .hero-tag { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; margin-bottom: 24px; display: block; }
+    .hero-name { font-family: var(--font-display); font-weight: 800; font-size: clamp(4rem, 9vw, 8rem); line-height: 0.92; letter-spacing: -0.04em; margin-bottom: 32px; overflow: hidden; }
     .hero-name .line { display: block; overflow: hidden; }
     .hero-name .word { display: inline-block; transform: translateY(110%); }
 
-    .hero-subtitle {
-      font-size: clamp(1rem, 1.5vw, 1.25rem);
-      line-height: 1.6;
-      opacity: 0;
-      max-width: 420px;
-      margin-bottom: 48px;
-    }
+    .hero-subtitle { font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.6; opacity: 0; max-width: 420px; margin-bottom: 48px; }
     .hero-cta { display: inline-flex; gap: 16px; }
 
     /* ── BUTTONS ── */
     .btn {
-      display: inline-block;
-      padding: 16px 36px;
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 100px;
-      position: relative;
-      overflow: hidden;
-      transition: color 0.3s;
-      cursor: none;
+      display: inline-block; padding: 16px 36px; font-family: var(--font-body);
+      font-size: 0.85rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; border-radius: 100px; position: relative; overflow: hidden;
+      transition: color 0.3s; cursor: none;
     }
-    .btn-dark {
-      background: var(--black);
-      color: var(--white);
-      border: 1.5px solid var(--black);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--black);
-      border: 1.5px solid var(--black);
-    }
+    .btn-dark { background: var(--black); color: var(--white); border: 1.5px solid var(--black); }
+    .btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
     .btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--accent);
-      transform: translateY(100%);
-      transition: transform 0.4s cubic-bezier(0.76,0,0.24,1);
-      z-index: -1;
-      border-radius: 100px;
+      content: ''; position: absolute; inset: 0; background: var(--accent);
+      transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.76,0,0.24,1);
+      z-index: -1; border-radius: 100px;
     }
     .btn:hover { color: var(--black); }
     .btn:hover::after { transform: translateY(0); }
 
     /* ── SCROLL INDICATOR ── */
     .scroll-hint {
-      position: absolute;
-      bottom: 48px;
-      left: 60px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      opacity: 0.4;
+      position: absolute; bottom: 48px; left: 60px; display: flex; align-items: center;
+      gap: 12px; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.4; z-index: 2;
     }
     .scroll-line {
-      width: 40px;
-      height: 1px;
-      background: var(--black);
-      transform-origin: left;
+      width: 40px; height: 1px; background: var(--black); transform-origin: left;
       animation: extendLine 2s ease-in-out infinite;
     }
-    @keyframes extendLine {
-      0%,100% { transform: scaleX(0.3); opacity:0.4; }
-      50% { transform: scaleX(1); opacity:1; }
-    }
+    @keyframes extendLine { 0%,100% { transform: scaleX(0.3); opacity:0.4; } 50% { transform: scaleX(1); opacity:1; } }
 
     /* ── SECTIONS SHARED ── */
     section { padding: 120px 60px; }
     .section-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.4;
-      margin-bottom: 64px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.4;
+      margin-bottom: 64px; display: flex; align-items: center; gap: 16px;
     }
-    .section-label::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: currentColor;
-    }
+    .section-label::before { content: ''; width: 32px; height: 1px; background: currentColor; }
     .reveal { opacity: 0; transform: translateY(60px); }
 
     /* ── ABOUT ── */
     #about { background: var(--white); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .about-heading {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      margin-bottom: 32px;
-    }
-    .about-text {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      opacity: 0.7;
-      margin-bottom: 24px;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 32px; }
+    .about-text { font-size: 1.05rem; line-height: 1.8; opacity: 0.7; margin-bottom: 24px; }
     .about-image-wrap {
-      position: relative;
-      aspect-ratio: 3/4;
-      border-radius: 4px;
-      overflow: hidden;
+      position: relative; aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
       background: var(--light-gray);
     }
-    .about-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .about-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .about-image-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      opacity: 0.3;
-      text-transform: uppercase;
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.1em; opacity: 0.3; text-transform: uppercase;
     }
     .about-accent-box {
-      position: absolute;
-      bottom: -20px;
-      right: -20px;
-      width: 120px;
-      height: 120px;
-      background: var(--accent);
-      border-radius: 4px;
-      z-index: -1;
+      position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px;
+      background: var(--accent); border-radius: 4px; z-index: -1;
     }
 
     /* ── SKILLS ── */
     #skills { background: var(--black); color: var(--white); }
     #skills .section-label { color: var(--white); opacity: 0.3; }
-    .skills-heading {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      letter-spacing: -0.03em;
-      margin-bottom: 64px;
-    }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2px;
-    }
-    .skill-item {
-      padding: 32px 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .skill-name {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-    }
+    .skills-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.03em; margin-bottom: 64px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; }
+    .skill-item { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+    .skill-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; display: flex; justify-content: space-between; }
     .skill-pct { opacity: 0.4; font-weight: 400; }
-    .skill-bar-bg {
-      height: 2px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .skill-bar-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 2px;
-      width: 0;
-      transition: width 1.2s cubic-bezier(0.76,0,0.24,1);
-    }
+    .skill-bar-bg { height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+    .skill-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(0.76,0,0.24,1); }
 
-    /* ── EXPERIENCE TIMELINE ── */
+    /* ── EXPERIENCE ── */
     #experience { background: var(--white); }
     .timeline { position: relative; padding-left: 40px; }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 1px;
-      background: var(--black);
-      opacity: 0.15;
-    }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--black); opacity: 0.15; }
     .tl-item { position: relative; margin-bottom: 48px; }
-    .tl-dot {
-      position: absolute;
-      left: -44px; top: 8px;
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--white);
-    }
+    .tl-dot { position: absolute; left: -44px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--white); }
     .tl-card { padding: 0 0 0 24px; }
-    .tl-date {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.5;
-      margin-bottom: 8px;
-    }
-    .tl-title {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
+    .tl-date { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+    .tl-title { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; margin-bottom: 8px; }
     .tl-company { font-size: 0.9rem; opacity: 0.7; margin-bottom: 16px; }
     .tl-list { list-style: none; }
-    .tl-list li {
-      position: relative;
-      padding-left: 18px;
-      margin-bottom: 6px;
-      font-size: 0.9rem;
-      opacity: 0.75;
-    }
-    .tl-list li::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
+    .tl-list li { position: relative; padding-left: 18px; margin-bottom: 6px; font-size: 0.9rem; opacity: 0.75; }
+    .tl-list li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
     .site-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-    .site-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid rgba(0,0,0,0.2);
-      border-radius: 100px;
-      cursor: none;
-      transition: all 0.3s;
-    }
+    .site-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(0,0,0,0.2); border-radius: 100px; cursor: none; transition: all 0.3s; }
     .site-chip:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ── PROJECTS ── */
     #projects { background: var(--white); }
-    .projects-heading {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      letter-spacing: -0.03em;
-      margin-bottom: 80px;
-    }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2px;
-    }
-    .project-card {
-      background: var(--light-gray);
-      border-radius: 4px;
-      overflow: hidden;
-      position: relative;
-      cursor: none;
-      transform-style: preserve-3d;
-      transition: box-shadow 0.4s;
-    }
+    .projects-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.03em; margin-bottom: 80px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2px; }
+    .project-card { background: var(--light-gray); border-radius: 4px; overflow: hidden; position: relative; cursor: none; transform-style: preserve-3d; transition: box-shadow 0.4s; }
     .project-card:hover { box-shadow: 0 32px 80px rgba(0,0,0,0.15); }
-    .project-img {
-      width: 100%;
-      aspect-ratio: 16/10;
-      background: #d5d3cd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-    .project-img-placeholder {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      opacity: 0.3;
-      text-transform: uppercase;
-    }
-    .project-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.76,0,0.24,1);
-    }
+    .project-img { width: 100%; aspect-ratio: 16/10; background: #d5d3cd; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .project-img-placeholder { font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.1em; opacity: 0.3; text-transform: uppercase; }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.76,0,0.24,1); }
     .project-card:hover .project-img img { transform: scale(1.05); }
     .project-info { padding: 28px; }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .project-tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 100px;
-      border: 1px solid rgba(0,0,0,0.2);
-      opacity: 0.6;
-    }
-    .project-title {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.4rem;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-    .project-desc {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      opacity: 0.6;
-      margin-bottom: 20px;
-    }
-    .project-link {
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--black);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid var(--black);
-      padding-bottom: 2px;
-      transition: gap 0.3s;
-      cursor: none;
-    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .project-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(0,0,0,0.2); opacity: 0.6; }
+    .project-title { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .project-desc { font-size: 0.9rem; line-height: 1.6; opacity: 0.6; margin-bottom: 20px; }
+    .project-link { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--black); display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--black); padding-bottom: 2px; transition: gap 0.3s; cursor: none; }
     .project-link:hover { gap: 14px; }
 
     /* ── EDUCATION & CERTIFICATIONS ── */
     .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-    .edu-card {
-      background: var(--light-gray);
-      border-radius: 4px;
-      padding: 32px;
-    }
-    .edu-card h3 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
+    .edu-card { background: var(--light-gray); border-radius: 4px; padding: 32px; }
+    .edu-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; }
     .edu-card p { font-size: 0.9rem; opacity: 0.6; margin-bottom: 4px; }
     .edu-card .honors { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
 
     .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-    .cert-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px;
-      background: var(--light-gray);
-      border-radius: 4px;
-    }
+    .cert-item { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--light-gray); border-radius: 4px; }
     .cert-icon { font-size: 1.4rem; opacity: 0.4; }
     .cert-text strong { display: block; font-size: 0.85rem; }
     .cert-text span { font-size: 0.75rem; opacity: 0.5; }
 
     /* ── FREELANCE GRID ── */
     .fl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-    .fl-card {
-      background: var(--light-gray);
-      border-radius: 4px;
-      padding: 28px;
-    }
-    .fl-card h3 {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-    }
-    .fl-card .fl-date {
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0.4;
-      margin-bottom: 12px;
-    }
+    .fl-card { background: var(--light-gray); border-radius: 4px; padding: 28px; }
+    .fl-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin-bottom: 6px; }
+    .fl-card .fl-date { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.4; margin-bottom: 12px; }
     .fl-card p { font-size: 0.9rem; opacity: 0.65; line-height: 1.6; margin-bottom: 16px; }
     .fl-thumbs { display: flex; flex-wrap: wrap; gap: 8px; }
-    .fl-thumb {
-      width: 60px; height: 45px;
-      border-radius: 4px;
-      overflow: hidden;
-      cursor: none;
-      background: #ccc;
-    }
+    .fl-thumb { width: 60px; height: 45px; border-radius: 4px; overflow: hidden; cursor: none; background: #ccc; }
     .fl-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
     /* ── CONTACT ── */
-    #contact {
-      background: var(--black);
-      color: var(--white);
-      text-align: center;
-      padding: 160px 60px;
-    }
-    .contact-pre {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.4;
-      margin-bottom: 32px;
-    }
-    .contact-heading {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(3rem, 8vw, 7rem);
-      letter-spacing: -0.04em;
-      line-height: 0.95;
-      margin-bottom: 56px;
-    }
-    .contact-heading span {
-      color: var(--accent);
-      display: inline-block;
-    }
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-bottom: 80px;
-    }
-    .contact-link {
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: rgba(255,255,255,0.5);
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding-bottom: 4px;
-      transition: color 0.3s, border-color 0.3s;
-    }
+    #contact { background: var(--black); color: var(--white); text-align: center; padding: 160px 60px; }
+    .contact-pre { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.4; margin-bottom: 32px; }
+    .contact-heading { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 8vw, 7rem); letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 56px; }
+    .contact-heading span { color: var(--accent); display: inline-block; }
+    .contact-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 80px; }
+    .contact-link { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 4px; transition: color 0.3s, border-color 0.3s; }
     .contact-link:hover { color: var(--accent); border-color: var(--accent); }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--black);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 32px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: rgba(255,255,255,0.3);
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
-    }
+    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.08); padding: 32px 60px; display: flex; justify-content: space-between; align-items: center; color: rgba(255,255,255,0.3); font-size: 0.78rem; letter-spacing: 0.05em; }
 
     /* ── SCRAMBLE TEXT ── */
     .scramble { display: inline-block; }
 
     /* ── NOISE OVERLAY ── */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
+      content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9997;
-      opacity: 0.4;
+      pointer-events: none; z-index: 9997; opacity: 0.4;
     }
 
-    /* ── MODALS (light) ── */
-    .modal {
-      position: fixed; inset: 0; z-index: 2000;
-      background: rgba(0,0,0,0.4); backdrop-filter: blur(12px);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none; transition: opacity 0.4s;
-    }
+    /* ── MODALS ── */
+    .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.4); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
     .modal.on { opacity: 1; pointer-events: all; }
-    .modal-box {
-      background: var(--white); border-radius: 8px;
-      width: 90%; max-width: 700px; max-height: 85vh; overflow-y: auto;
-      padding: 40px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    }
-    .modal-close {
-      position: absolute; top: 20px; right: 24px;
-      background: none; border: none; font-size: 1.8rem; cursor: pointer;
-    }
+    .modal-box { background: var(--white); border-radius: 8px; width: 90%; max-width: 700px; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    .modal-close { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 1.8rem; cursor: pointer; }
     .m-gallery { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-    .m-media-wrap {
-      width: 100px; height: 75px; border-radius: 4px; overflow: hidden; cursor: pointer;
-    }
+    .m-media-wrap { width: 100px; height: 75px; border-radius: 4px; overflow: hidden; cursor: pointer; }
     .m-media-wrap img, .m-media-wrap video { width: 100%; height: 100%; object-fit: cover; }
-    .carousel-modal, .video-modal {
-      position: fixed; inset: 0; z-index: 3000;
-      background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center;
-    }
+    .carousel-modal, .video-modal { position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; }
     .carousel-modal.active, .video-modal.active { display: flex; }
     .carousel-content { position: relative; max-width: 90%; max-height: 90%; }
     .carousel-image { max-height: 70vh; max-width: 100%; border-radius: 8px; }
     .carousel-caption { color: white; text-align: center; margin-top: 10px; }
-    .carousel-prev, .carousel-next {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(0,0,0,0.5); color: white; border: none; font-size: 2rem;
-      padding: 8px 16px; cursor: pointer; border-radius: 50%;
-    }
+    .carousel-prev, .carousel-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; font-size: 2rem; padding: 8px 16px; cursor: pointer; border-radius: 50%; }
     .carousel-prev { left: -50px; } .carousel-next { right: -50px; }
     .close-carousel { position: absolute; top: -30px; right: 0; color: white; background: none; border: none; font-size: 2rem; cursor: pointer; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 24px 24px; }
       .nav-links { display: none; }
@@ -712,7 +305,7 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ABOUT (profile.jpg used here) -->
   <section id="about">
     <div class="section-label reveal">About me</div>
     <div class="about-grid">
@@ -723,13 +316,15 @@
         <a href="cv.html" target="_blank" class="btn btn-dark magnetic reveal" style="margin-top:16px">Download CV</a>
       </div>
       <div class="about-image-wrap reveal">
-        <div class="about-image-placeholder">Your Photo Here</div>
+        <!-- Replace with your actual profile image -->
+        <img src="assets/profile.jpg" alt="Abhishek Karki" onerror="this.style.display='none'; this.parentNode.querySelector('.about-image-placeholder').style.display='flex';">
+        <div class="about-image-placeholder" style="display:none;">Your Photo Here</div>
         <div class="about-accent-box"></div>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- SKILLS (Technical Competencies) -->
   <section id="skills">
     <div class="section-label">What I do</div>
     <h2 class="skills-heading reveal">Technical Competencies.</h2>
@@ -859,16 +454,16 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
   <script>
-  // ═══════════════════════  DATA  ═══════════════════
+  // ═══════════════════  YOUR FULL DATA  ═══════════════════
   const PROJECTS = [
-    { id:1, title:"InSAR Time Series for Highway Subsidence", cat:"InSAR / Geotech", filter:"insar", loc:"Sloterdijk to Rijksweg, Netherlands", short:"13 Sentinel‑1 images (Jan–May 2024) processed with SNAP+SNAPHU.", full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering (α=0.5), phase unwrapping, and terrain correction. Extracted A10 highway profiles and produced time series graph showing subsidence over 5 months.", tech:["SNAP","SNAPHU","Sentinel‑1"], pdf:"assets/portfolio-photos/insar/insar.pdf", media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram – phase difference"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map (mm)"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Goldstein filtered interferogram"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 194901.png",caption:"Unwrapped phase and time series"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090637.png",caption:"Subsidence profile – A10"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090658.png",caption:"Cumulative displacement"}] },
-    { id:2, title:"NDVI Timelapse of Kathmandu Valley (2000–2026)", cat:"Remote Sensing", filter:"gis", loc:"Kathmandu Valley, Nepal", short:"26‑year vegetation change using Landsat & Sentinel‑2.", full:"Processed 28 images in Google Earth Engine – scaling, cloud masking, NDVI calculation, harmonization, median composites. Built 5‑class timelapse and exported 1080p MP4.", tech:["Google Earth Engine","Landsat 5/8","Sentinel‑2"], pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf", media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},{type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},{type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse animation"}] },
-    { id:3, title:"Hospital Accessibility in Colorado", cat:"GIS", filter:"gis", loc:"Colorado, USA", short:"Network drive‑time analysis – 30/60‑min service areas.", full:"Generated service areas from specialist hospitals, overlaid county population, area‑weighted estimation. Revealed spatial disparities in healthcare access.", tech:["ArcGIS Network Analyst","Population data"], media:[{type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute service areas"},{type:"image",src:"assets/portfolio-photos/hospital/60_min Map.png",caption:"60‑minute service areas"},{type:"image",src:"assets/portfolio-photos/hospital/PopulationMap.png",caption:"Population density overlay"}] },
-    { id:4, title:"Urban Sprawl Analysis of Kathmandu Valley", cat:"GIS", filter:"gis", loc:"Kathmandu Valley, Nepal", short:"Landsat 8/9 NDBI change, ALOS PALSAR slope filtering.", full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain. Validated urban expansion map.", tech:["Landsat","ALOS PALSAR","ArcGIS"], media:[{type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/2026.png",caption:"NDBI 2026"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/slopemap.png",caption:"Slope filtering"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/Urban Sprawl.png",caption:"Urban expansion map"}] },
-    { id:5, title:"UAV Landslide Susceptibility Mapping", cat:"UAV/GIS", filter:"gis", loc:"Sisneri, Solukhumbu, Nepal", short:"UAV orthomosaic/DEM, weighted overlay hazard zonation.", full:"High‑resolution DEM and orthomosaic from drone; derived terrain factors; weighted overlay to classify hazard zones.", tech:["UAV","Agisoft","ArcGIS"], media:[{type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"},{type:"image",src:"assets/portfolio-photos/uav-landslide/BaseMap.png",caption:"UAV orthomosaic"},{type:"image",src:"assets/portfolio-photos/uav-landslide/Weighted Overlay.png",caption:"Hazard zonation"}] },
-    { id:6, title:"Flood Inundation Mapping", cat:"Hydrology", filter:"hydro", loc:"Narayani River, Nepal", short:"HEC‑RAS 2D unsteady flow, flood depth/velocity mapping.", full:"DEM preparation and terrain correction; 2D unsteady flow simulation; extracted flood depth, velocity, WSE for hazard analysis.", tech:["HEC‑RAS 2D","ArcGIS"], pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf", media:[{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS 2D mesh"},{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 233808.png",caption:"Flood depth map"}] },
-    { id:7, title:"Substation Backfill Volumetric Analysis", cat:"Civil 3D", filter:"civil", loc:"Balganga, Janakpur, Nepal", short:"DGPS → surface modeling → corridors → cut/fill volumes.", full:"DGPS survey, surface creation, cross‑sections, corridor modeling, quantity estimation.", tech:["Civil 3D","DGPS"], pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf", media:[{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"DGPS survey points"},{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091526.png",caption:"Corridor model"}] },
-    { id:8, title:"Earthquake Analysis of Nepal", cat:"Seismology / GIS", filter:"gis", loc:"Nepal (1978‑2025)", short:"Mainshock declustering & animation using USGS catalog.", full:"Processed USGS catalog (M≥5, 1978‑2025) using Gardner‑Knopoff declustering. 58 mainshocks. Tools: Python, ArcGIS Pro.", tech:["ArcGIS","Python","Animation"], pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf", media:[{type:"video",src:"assets/portfolio-photos/earthquake/Nepal_EarthQuakes_Animation.mp4",caption:"Earthquake animation"},{type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Mainshocks map"}] }
+    { id:1, title:"InSAR Time Series for Highway Subsidence", cat:"InSAR / Geotech", loc:"Sloterdijk to Rijksweg, Netherlands", short:"13 Sentinel‑1 images (Jan–May 2024) processed with SNAP+SNAPHU.", full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering (α=0.5), phase unwrapping, and terrain correction. Extracted A10 highway profiles and produced time series graph showing subsidence over 5 months.", tech:["SNAP","SNAPHU","Sentinel‑1"], pdf:"assets/portfolio-photos/insar/insar.pdf", media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram – phase difference"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map (mm)"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Goldstein filtered interferogram"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 194901.png",caption:"Unwrapped phase and time series"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090637.png",caption:"Subsidence profile – A10"},{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090658.png",caption:"Cumulative displacement"}] },
+    { id:2, title:"NDVI Timelapse of Kathmandu Valley (2000–2026)", cat:"Remote Sensing", loc:"Kathmandu Valley, Nepal", short:"26‑year vegetation change using Landsat & Sentinel‑2.", full:"Processed 28 images in Google Earth Engine – scaling, cloud masking, NDVI calculation, harmonization, median composites. Built 5‑class timelapse and exported 1080p MP4.", tech:["Google Earth Engine","Landsat 5/8","Sentinel‑2"], pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf", media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},{type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},{type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse animation"}] },
+    { id:3, title:"Hospital Accessibility in Colorado", cat:"GIS", loc:"Colorado, USA", short:"Network drive‑time analysis – 30/60‑min service areas.", full:"Generated service areas from specialist hospitals, overlaid county population, area‑weighted estimation. Revealed spatial disparities in healthcare access.", tech:["ArcGIS Network Analyst","Population data"], media:[{type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute service areas"},{type:"image",src:"assets/portfolio-photos/hospital/60_min Map.png",caption:"60‑minute service areas"},{type:"image",src:"assets/portfolio-photos/hospital/PopulationMap.png",caption:"Population density overlay"}] },
+    { id:4, title:"Urban Sprawl Analysis of Kathmandu Valley", cat:"GIS", loc:"Kathmandu Valley, Nepal", short:"Landsat 8/9 NDBI change, ALOS PALSAR slope filtering.", full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain. Validated urban expansion map.", tech:["Landsat","ALOS PALSAR","ArcGIS"], media:[{type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/2026.png",caption:"NDBI 2026"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/slopemap.png",caption:"Slope filtering"},{type:"image",src:"assets/portfolio-photos/urban-sprawl/Urban Sprawl.png",caption:"Urban expansion map"}] },
+    { id:5, title:"UAV Landslide Susceptibility Mapping", cat:"UAV/GIS", loc:"Sisneri, Solukhumbu, Nepal", short:"UAV orthomosaic/DEM, weighted overlay hazard zonation.", full:"High‑resolution DEM and orthomosaic from drone; derived terrain factors; weighted overlay to classify hazard zones.", tech:["UAV","Agisoft","ArcGIS"], media:[{type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"},{type:"image",src:"assets/portfolio-photos/uav-landslide/BaseMap.png",caption:"UAV orthomosaic"},{type:"image",src:"assets/portfolio-photos/uav-landslide/Weighted Overlay.png",caption:"Hazard zonation"}] },
+    { id:6, title:"Flood Inundation Mapping", cat:"Hydrology", loc:"Narayani River, Nepal", short:"HEC‑RAS 2D unsteady flow, flood depth/velocity mapping.", full:"DEM preparation and terrain correction; 2D unsteady flow simulation; extracted flood depth, velocity, WSE for hazard analysis.", tech:["HEC‑RAS 2D","ArcGIS"], pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf", media:[{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS 2D mesh"},{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 233808.png",caption:"Flood depth map"}] },
+    { id:7, title:"Substation Backfill Volumetric Analysis", cat:"Civil 3D", loc:"Balganga, Janakpur, Nepal", short:"DGPS → surface modeling → corridors → cut/fill volumes.", full:"DGPS survey, surface creation, cross‑sections, corridor modeling, quantity estimation.", tech:["Civil 3D","DGPS"], pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf", media:[{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"DGPS survey points"},{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091526.png",caption:"Corridor model"}] },
+    { id:8, title:"Earthquake Analysis of Nepal", cat:"Seismology / GIS", loc:"Nepal (1978‑2025)", short:"Mainshock declustering & animation using USGS catalog.", full:"Processed USGS catalog (M≥5, 1978‑2025) using Gardner‑Knopoff declustering. 58 mainshocks. Tools: Python, ArcGIS Pro.", tech:["ArcGIS","Python","Animation"], pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf", media:[{type:"video",src:"assets/portfolio-photos/earthquake/Nepal_EarthQuakes_Animation.mp4",caption:"Earthquake animation"},{type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Mainshocks map"}] }
   ];
 
   const WORK_IMAGES = {
@@ -909,10 +504,10 @@
     { file:"SAP.jpg", caption:"SAP2000 Training" }
   ];
 
-  // ═══════════════════════  GSAP SETUP  ═══════════════════
+  // ═══════════════ INIT ═══════════════
   gsap.registerPlugin(ScrollTrigger);
 
-  // ── SIMPLE LENIS ──
+  // Lenis smooth scroll
   class SimpleLenis {
     constructor() { this.ease=0.08; this.current=window.scrollY; this.target=window.scrollY; this.init(); }
     init() { window.addEventListener('scroll',()=>{this.target=window.scrollY;}); this.loop(); }
@@ -920,7 +515,7 @@
   }
   new SimpleLenis();
 
-  // ── CURSOR ──
+  // Cursor
   const dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring');
   let mX=0,mY=0,rX=0,rY=0;
   document.addEventListener('mousemove',e=>{mX=e.clientX;mY=e.clientY;gsap.set(dot,{x:mX,y:mY});});
@@ -930,7 +525,7 @@
     el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
   });
 
-  // ── THREE.JS ──
+  // Three.js 3D wireframe
   (function(){
     const canvas=document.getElementById('three-canvas');
     const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
@@ -957,19 +552,19 @@
     animate();
   })();
 
-  // ── HERO TEXT ANIM ──
+  // Hero animation
   const tl=gsap.timeline({delay:0.2});
   tl.to('.hero-name .word',{y:0,duration:1.1,ease:'power4.out',stagger:0.12})
     .to('.hero-subtitle',{opacity:1,y:0,duration:0.8,ease:'power3.out'},'-=0.5')
     .to('.hero-tag',{opacity:0.5,y:0,duration:0.6},'-=0.8')
     .from('.hero-cta .btn',{opacity:0,y:20,stagger:0.1,duration:0.6,ease:'power3.out'},'-=0.4');
 
-  // ── SCROLL REVEALS ──
+  // Scroll reveals
   gsap.utils.toArray('.reveal').forEach(el=>{
     gsap.to(el,{opacity:1,y:0,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}});
   });
 
-  // ── SKILL BARS ──
+  // Render skills bars
   function renderSkills(){
     const cont=document.getElementById('skillsContainer');
     cont.innerHTML=SKILLS_DATA.map(s=>`
@@ -983,7 +578,7 @@
     });
   }
 
-  // ── PROJECTS RENDER (with encoded paths) ──
+  // Render project cards
   function buildProjects(){
     const grid=document.getElementById('projGrid');
     grid.innerHTML=PROJECTS.map(p=>{
@@ -1004,7 +599,7 @@
     }).join('');
   }
 
-  // ── FREELANCE RENDER (with encoded paths) ──
+  // Render freelance cards
   function buildFreelance(){
     document.getElementById('flGrid').innerHTML=FREELANCE.map(f=>{
       const thumbs=f.files&&f.files.length?f.files.map((file,i)=>{
@@ -1019,7 +614,7 @@
     }).join('');
   }
 
-  // ── CERTS (with encoded paths) ──
+  // Render certificates
   function buildCerts(){
     document.getElementById('certGrid').innerHTML=CERTIFICATES.map(c=>`
       <div class="cert-item reveal">
@@ -1033,7 +628,7 @@
     }).join('');
   }
 
-  // ── MODAL / CAROUSEL ──
+  // Modal & carousel logic
   window.openProjModal=function(id){
     const p=PROJECTS.find(x=>x.id===id); if(!p)return;
     document.getElementById('mHead').innerHTML=`<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">${p.title}</h3><p style="opacity:0.6;font-size:0.8rem;margin-bottom:12px">${p.loc}</p>`;
@@ -1048,6 +643,7 @@
     document.getElementById('projModal').classList.add('on');
   };
   window.closeModal=function(id){document.getElementById(id).classList.remove('on');};
+
   let currMedia=[],currIdx=0;
   window.openCarouselFromList=function(list,idx){currMedia=list;currIdx=idx;updateCarousel();document.getElementById('carouselModal').classList.add('active');};
   function updateCarousel(){const item=currMedia[currIdx];document.getElementById('carouselImage').src=typeof item==='string'?item:item.src;document.getElementById('carouselCaption').textContent=typeof item==='string'?'':(item.caption||'');}
@@ -1056,6 +652,7 @@
   window.closeCarousel=()=>{document.getElementById('carouselModal').classList.remove('active');currMedia=[];};
   window.openVideoModal=function(src){document.getElementById('videoPlayer').src=src;document.getElementById('videoModal').classList.add('active');};
   window.closeVideoModal=function(){const v=document.getElementById('videoPlayer');v.pause();v.src='';document.getElementById('videoModal').classList.remove('active');};
+
   window.openWorkGallery=function(siteId){
     const site=WORK_IMAGES[siteId];if(!site||!site.files.length)return;
     const base=`assets/Professional Career/${site.folder}/`;
@@ -1063,27 +660,25 @@
     openCarouselFromList(media,0);
   };
 
-  // ── TEXT SCRAMBLE ──
+  // Text scramble
   const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
   function scrambleText(el){const orig=el.dataset.text||el.textContent;let frame=0;const total=30;const interval=setInterval(()=>{el.textContent=orig.split('').map((ch,i)=>{if(ch===' ')return' ';if(frame/total>i/orig.length)return ch;return CHARS[Math.floor(Math.random()*CHARS.length)];}).join('');frame++;if(frame>total){el.textContent=orig;clearInterval(interval);}},40);}
   document.querySelectorAll('.scramble').forEach(el=>{ScrollTrigger.create({trigger:el,start:'top 80%',onEnter:()=>scrambleText(el)});});
 
-  // ── MAGNETIC ──
+  // Magnetic buttons & card tilt
   document.querySelectorAll('.magnetic').forEach(btn=>{
     btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;gsap.to(btn,{x:x*0.38,y:y*0.38,duration:0.4,ease:'power2.out'});});
     btn.addEventListener('mouseleave',()=>{gsap.to(btn,{x:0,y:0,duration:0.6,ease:'elastic.out(1,0.4)'});});
   });
-
-  // ── PROJECT CARD TILT ──
   document.querySelectorAll('.project-card').forEach(card=>{
     card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;gsap.to(card,{rotateY:x*14,rotateX:-y*14,transformPerspective:800,duration:0.4,ease:'power2.out'});});
     card.addEventListener('mouseleave',()=>{gsap.to(card,{rotateY:0,rotateX:0,duration:0.6,ease:'elastic.out(1,0.4)'});});
   });
 
-  // ── NAV SCROLL ──
+  // Nav background on scroll
   ScrollTrigger.create({start:'top -80',onUpdate:self=>{const nav=document.querySelector('nav');if(self.progress>0){nav.style.background='rgba(245,244,240,0.85)';nav.style.backdropFilter='blur(12px)';nav.style.borderBottom='1px solid rgba(0,0,0,0.06)';}else{nav.style.background='transparent';nav.style.borderBottom='none';}}});
 
-  // ── INIT ──
+  // Start everything
   renderSkills();
   buildProjects();
   buildFreelance();
