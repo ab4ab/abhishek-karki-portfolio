@@ -4,49 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abhishek Karki | Civil Engineer & GIS Expert</title>
-  <meta name="description" content="Civil Engineer & GIS Specialist" />
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
     :root {
       --bg: #0a0a0a;
-      --text: #f5f5f5;
+      --text: #f0f0f0;
       --accent: #8ab4f8;
-      --gray: #1a1a1a;
+      --purple: #c084fc;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
-      line-height: 1.6;
     }
-    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.04em; }
 
-    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      padding: 24px 60px;
+      padding: 30px 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: all 0.4s;
+      mix-blend-mode: difference;
     }
-    .nav-logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.04em; }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      margin-left: 40px;
-      font-weight: 500;
-      opacity: 0.8;
-      transition: opacity 0.3s;
-    }
-    .nav-links a:hover { opacity: 1; }
+    .nav-logo { font-size: 1.8rem; font-weight: 700; }
 
     /* HERO */
     #hero {
@@ -54,159 +43,136 @@
       display: flex;
       align-items: center;
       position: relative;
-      background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
-      overflow: hidden;
+      background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 70%);
     }
     .hero-content {
-      max-width: 700px;
-      padding-left: 80px;
-      z-index: 2;
+      max-width: 720px;
+      padding-left: 100px;
+      z-index: 3;
     }
-    .hero-tag { font-size: 1rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.6; margin-bottom: 16px; }
+    .hero-tag { 
+      font-size: 1.1rem; 
+      letter-spacing: 6px; 
+      text-transform: uppercase; 
+      opacity: 0.6; 
+      margin-bottom: 20px;
+    }
     .hero-name {
-      font-size: clamp(4rem, 8vw, 7rem);
-      line-height: 1.05;
+      font-size: clamp(5rem, 10vw, 8rem);
+      line-height: 0.95;
       font-weight: 700;
-      letter-spacing: -0.05em;
       margin-bottom: 24px;
     }
     .hero-subtitle {
-      font-size: 1.35rem;
-      max-width: 480px;
-      opacity: 0.85;
-      margin-bottom: 48px;
-    }
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
+      font-size: 1.5rem;
+      max-width: 520px;
+      opacity: 0.9;
+      margin-bottom: 50px;
     }
     .btn {
-      padding: 16px 36px;
+      padding: 18px 42px;
       border-radius: 9999px;
       font-weight: 600;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      gap: 12px;
+      transition: all 0.4s;
     }
     .btn-primary {
       background: var(--accent);
-      color: black;
+      color: #000;
     }
-    .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(138, 180, 248, 0.3); }
+    .btn-primary:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 50px -12px rgba(138, 180, 248, 0.5);
+    }
 
-    /* 3D Character Area */
     #three-container {
       position: absolute;
-      right: 0;
-      top: 0;
-      width: 55%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+      right: 5%;
+      top: 10%;
+      width: 50%;
+      height: 80%;
+      z-index: 2;
     }
 
-    section { padding: 140px 80px; }
+    section { padding: 160px 80px; }
     .section-label {
-      font-size: 0.9rem;
-      letter-spacing: 3px;
+      font-size: 0.95rem;
+      letter-spacing: 4px;
       text-transform: uppercase;
       opacity: 0.5;
-      margin-bottom: 60px;
-    }
-
-    /* ABOUT */
-    #about .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 100px;
-      align-items: center;
-    }
-    .about-text {
-      font-size: 1.25rem;
-      line-height: 1.75;
-      opacity: 0.9;
+      margin-bottom: 40px;
     }
 
     /* SERVICES */
-    #services {
-      background: var(--gray);
-    }
+    #services { background: #111; }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 40px;
     }
     .service-card {
-      background: #111;
-      padding: 48px 32px;
-      border-radius: 24px;
-      transition: all 0.4s;
+      background: #1a1a1a;
+      padding: 60px 40px;
+      border-radius: 28px;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .service-card:hover {
-      transform: translateY(-20px);
-      background: #1a1a1a;
+      transform: translateY(-30px);
+      background: #222;
     }
     .service-num {
-      font-size: 4rem;
+      font-size: 6rem;
       font-weight: 700;
-      opacity: 0.15;
-      margin-bottom: -20px;
+      opacity: 0.08;
+      line-height: 1;
+      margin-bottom: -30px;
     }
 
     /* PROJECTS */
     #projects .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-      gap: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 50px;
     }
     .project-card {
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
       background: #111;
-      transition: transform 0.5s;
+      transition: all 0.5s;
     }
-    .project-card:hover { transform: scale(1.03); }
+    .project-card:hover {
+      transform: scale(1.04);
+    }
     .project-card img {
       width: 100%;
-      height: 280px;
+      height: 320px;
       object-fit: cover;
+      transition: transform 0.8s;
     }
+    .project-card:hover img { transform: scale(1.1); }
 
     /* TESTIMONIALS */
-    #testimonials {
-      background: var(--gray);
-    }
-
-    /* CONTACT */
-    #contact {
-      text-align: center;
-    }
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    #testimonials { background: #111; }
 
     footer {
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
       opacity: 0.6;
-      font-size: 0.95rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-logo">AK.</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Contact</a>
+    <div>
+      <a href="#about" style="color:white;margin:0 25px;text-decoration:none;">About</a>
+      <a href="#services" style="color:white;margin:0 25px;text-decoration:none;">Services</a>
+      <a href="#projects" style="color:white;margin:0 25px;text-decoration:none;">Projects</a>
+      <a href="#contact" style="color:white;margin:0 25px;text-decoration:none;">Contact</a>
     </div>
   </nav>
 
@@ -214,13 +180,12 @@
   <section id="hero">
     <div id="three-container"></div>
     <div class="hero-content">
-      <p class="hero-tag">NEC #80593 • Civil Engineer &amp; GIS Expert</p>
+      <p class="hero-tag">NEC Reg. #80593 • Civil Engineer & GIS Expert</p>
       <h1 class="hero-name">Abhishek<br>Karki</h1>
-      <p class="hero-subtitle">Bridging spatial intelligence with structural engineering. Turning complex data into resilient infrastructure.</p>
-      
-      <div class="cta-buttons">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn" style="border: 2px solid #fff; color: white;">Let's Connect</a>
+      <p class="hero-subtitle">Merging spatial intelligence with structural engineering to build resilient infrastructure.</p>
+      <div>
+        <a href="#projects" class="btn btn-primary">Explore My Work</a>
+        <a href="#contact" class="btn" style="border:2px solid #fff; color:#fff; margin-left:20px;">Get In Touch</a>
       </div>
     </div>
   </section>
@@ -228,42 +193,43 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="section-label">About Me</div>
-    <div class="about-grid">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center;">
       <div>
-        <h2 style="font-size: 3.2rem; line-height: 1.1; margin-bottom: 32px;">Bridging Geomatics &amp; Structural Engineering</h2>
-        <p class="about-text">I'm a Civil Engineer with deep expertise in GIS, Remote Sensing, and Disaster Risk Management. I transform satellite data, drone imagery, and field surveys into actionable engineering solutions.</p>
-        <br>
-        <p class="about-text">From InSAR subsidence analysis to 2D flood modeling — I bring spatial intelligence to infrastructure projects.</p>
+        <h2 style="font-size:3.5rem; line-height:1.1;">Bridging Geomatics &amp; Structural Engineering</h2>
+        <p style="font-size:1.3rem; margin-top:32px; opacity:0.9;">
+          Civil Engineer with expertise in GIS, Remote Sensing, InSAR, and Disaster Risk Management. 
+          I transform complex spatial data into practical engineering solutions.
+        </p>
       </div>
-      <div style="text-align: center;">
-        <img src="assets/profile.jpg" alt="Abhishek Karki" style="width: 100%; max-width: 420px; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);">
+      <div>
+        <img src="assets/profile.jpg" alt="Abhishek Karki" style="width:100%; border-radius:24px; box-shadow: 0 40px 80px rgba(0,0,0,0.7);">
       </div>
     </div>
   </section>
 
   <!-- SERVICES -->
   <section id="services">
-    <div class="section-label">What I Offer</div>
+    <div class="section-label">Services</div>
     <div class="services-grid">
       <div class="service-card">
         <div class="service-num">01</div>
-        <h3 style="font-size: 1.8rem; margin-bottom: 16px;">GIS &amp; Remote Sensing</h3>
-        <p>Advanced spatial analysis, InSAR, NDVI, change detection using ArcGIS, GEE, and SNAP.</p>
+        <h3 style="font-size:2rem;">GIS & Remote Sensing</h3>
+        <p style="margin-top:20px; opacity:0.85;">ArcGIS, Google Earth Engine, SNAP, InSAR analysis, NDVI, change detection.</p>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
-        <h3 style="font-size: 1.8rem; margin-bottom: 16px;">Hydraulic &amp; Flood Modeling</h3>
-        <p>2D flood inundation mapping using HEC-RAS and terrain analysis.</p>
+        <h3 style="font-size:2rem;">Hydraulic Modeling</h3>
+        <p style="margin-top:20px; opacity:0.85;">2D Flood Inundation using HEC-RAS, terrain analysis.</p>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
-        <h3 style="font-size: 1.8rem; margin-bottom: 16px;">UAV / Drone Surveying</h3>
-        <p>High-resolution orthomosaics, DEM generation and volumetric analysis.</p>
+        <h3 style="font-size:2rem;">UAV / Drone Survey</h3>
+        <p style="margin-top:20px; opacity:0.85;">Orthomosaics, DEM generation, volumetric calculations.</p>
       </div>
       <div class="service-card">
         <div class="service-num">04</div>
-        <h3 style="font-size: 1.8rem; margin-bottom: 16px;">Infrastructure Design</h3>
-        <p>Civil 3D, AutoCAD, STAAD Pro for transmission lines and substations.</p>
+        <h3 style="font-size:2rem;">Infrastructure Design</h3>
+        <p style="margin-top:20px; opacity:0.85;">Civil 3D, AutoCAD, STAAD Pro for transmission & substation projects.</p>
       </div>
     </div>
   </section>
@@ -271,62 +237,73 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="section-label">Featured Projects</div>
-    <div class="projects-grid" id="projectsGrid">
-      <!-- Populated by JS -->
-    </div>
+    <div class="projects-grid" id="projectsGrid"></div>
   </section>
 
   <!-- TESTIMONIALS -->
   <section id="testimonials">
-    <div class="section-label">What Clients Say</div>
-    <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-      <p style="font-size: 1.8rem; line-height: 1.5; opacity: 0.9;">"Abhishek delivered exceptional GIS analysis for our highway project. His InSAR work was game-changing."</p>
-      <p style="margin-top: 32px; opacity: 0.6;">— Project Manager, Transmission Line Project</p>
+    <div class="section-label">What Clients Are Saying</div>
+    <div style="max-width:900px; margin:0 auto; text-align:center; font-size:1.6rem; line-height:1.6;">
+      "Abhishek's InSAR analysis and GIS work for our highway project was outstanding. Highly professional and technically excellent."
+      <p style="margin-top:40px; opacity:0.6; font-size:1.1rem;">— Senior Project Engineer, Nepal Transmission Line Project</p>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <h2 style="font-size: 4rem; text-align: center; margin-bottom: 60px;">Let's build something<br>great together.</h2>
-    <div class="contact-form">
-      <a href="mailto:abhishekkarki520@gmail.com" class="btn btn-primary" style="font-size: 1.2rem; padding: 22px 60px;">
+    <div style="text-align:center; max-width:700px; margin:0 auto;">
+      <h2 style="font-size:4.5rem; line-height:1.1;">Let's create<br>something great.</h2>
+      <a href="mailto:abhishekkarki520@gmail.com" class="btn btn-primary" style="font-size:1.3rem; padding:24px 64px; margin-top:60px;">
         Say Hello →
       </a>
     </div>
   </section>
 
   <footer>
-    © 2026 Abhishek Karki • Made with passion for spatial engineering
+    © 2026 Abhishek Karki • Civil Engineer & GIS Specialist
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script>
-    // Simple Three.js background like in the video
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Enhanced 3D Hero
     function initHero3D() {
       const container = document.getElementById('three-container');
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 100);
+      const camera = new THREE.PerspectiveCamera(50, container.clientWidth/container.clientHeight, 0.1, 100);
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      
       renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       container.appendChild(renderer.domElement);
+      camera.position.z = 6;
 
-      camera.position.z = 5;
-
-      // Torus knot like in your original but styled for hero
-      const geometry = new THREE.TorusKnotGeometry(1.2, 0.4, 120, 16);
-      const material = new THREE.MeshBasicMaterial({ 
-        color: 0x8ab4f8, 
-        wireframe: true,
+      // Main glowing knot
+      const geometry = new THREE.TorusKnotGeometry(1.6, 0.45, 180, 32, 3, 7);
+      const material = new THREE.MeshPhongMaterial({ 
+        color: 0x8ab4f8,
+        emissive: 0x4a6cf7,
+        shininess: 100,
+        specular: 0xffffff,
         transparent: true,
-        opacity: 0.6
+        opacity: 0.85
       });
       const knot = new THREE.Mesh(geometry, material);
       scene.add(knot);
 
+      // Lights
+      const light = new THREE.PointLight(0xffffff, 2, 100);
+      light.position.set(10, 10, 10);
+      scene.add(light);
+      scene.add(new THREE.AmbientLight(0x404040, 0.8));
+
+      let time = 0;
       function animate() {
         requestAnimationFrame(animate);
-        knot.rotation.x += 0.003;
-        knot.rotation.y += 0.005;
+        time += 0.008;
+        knot.rotation.x = Math.sin(time * 0.4) * 0.3;
+        knot.rotation.y = time * 0.6;
         renderer.render(scene, camera);
       }
       animate();
@@ -338,11 +315,12 @@
       });
     }
 
-    // Populate Projects (you can expand this)
+    // Projects Data
     const projects = [
-      { title: "InSAR Highway Subsidence", img: "assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png" },
-      { title: "Kathmandu Valley NDVI", img: "assets/portfolio-photos/ndvi/GEE1.jpg" },
-      { title: "Flood Inundation Mapping", img: "assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png" },
+      { title: "InSAR Time Series Analysis", img: "assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png" },
+      { title: "Kathmandu Valley NDVI Timelapse", img: "assets/portfolio-photos/ndvi/GEE1.jpg" },
+      { title: "Narayani River Flood Mapping", img: "assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png" },
+      { title: "UAV Landslide Susceptibility", img: "assets/portfolio-photos/uav-landslide/BaseMap.png" },
     ];
 
     function renderProjects() {
@@ -350,17 +328,34 @@
       grid.innerHTML = projects.map(p => `
         <div class="project-card">
           <img src="${p.img}" alt="${p.title}">
-          <div style="padding: 24px;">
-            <h3>${p.title}</h3>
+          <div style="padding:28px;">
+            <h3 style="font-size:1.6rem;">${p.title}</h3>
           </div>
         </div>
       `).join('');
     }
 
-    // Initialize
+    // GSAP Animations
+    function initAnimations() {
+      gsap.from(".hero-name", { y: 100, opacity: 0, duration: 1.2, ease: "power4.out" });
+      gsap.from(".hero-subtitle", { y: 60, opacity: 0, duration: 1, delay: 0.4 });
+
+      document.querySelectorAll('.service-card').forEach((card, i) => {
+        gsap.from(card, {
+          scrollTrigger: card,
+          y: 120,
+          opacity: 0,
+          duration: 1,
+          delay: i * 0.1
+        });
+      });
+    }
+
+    // Initialize everything
     document.addEventListener('DOMContentLoaded', () => {
       initHero3D();
       renderProjects();
+      initAnimations();
     });
   </script>
 </body>
