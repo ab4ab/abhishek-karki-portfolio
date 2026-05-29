@@ -451,15 +451,141 @@
        DATA – fully updated with ALL your actual files
     ═══════════════════════════════════════════════════════════ */
     var PROJECTS = [
-      // ... (all 8 projects unchanged) ...
+      {id:1,title:"InSAR Time Series for Highway Subsidence",cat:"InSAR / Geotech",loc:"Sloterdijk to Rijksweg, Netherlands",
+       short:"13 Sentinel‑1 images processed with SNAP+SNAPHU generating 12 displacement maps.",
+       full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering, phase unwrapping, terrain correction. Extracted A10 highway profiles.",
+       tech:["SNAP","SNAPHU","Sentinel‑1"],pdf:"assets/portfolio-photos/insar/insar.pdf",
+       media:[
+         {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram"},
+         {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map"},
+         {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Goldstein filtered"},
+         {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 194901.png",caption:"Unwrapped phase"},
+         {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090637.png",caption:"Subsidence profile"},
+         {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-17 090658.png",caption:"Cumulative displacement"}
+       ]},
+      {id:2,title:"NDVI Timelapse of Kathmandu Valley",cat:"Remote Sensing",loc:"Kathmandu Valley",
+       short:"26‑year vegetation change using Landsat & Sentinel‑2 with 5‑class timelapse animation.",
+       full:"Processed 28 images in Google Earth Engine – NDVI calculation, harmonization. Built 5‑class timelapse.",
+       tech:["GEE","Landsat","Sentinel‑2"],pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf",
+       media:[
+         {type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},
+         {type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},
+         {type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse animation"}
+       ]},
+      {id:3,title:"Hospital Accessibility in Colorado",cat:"GIS Network Analysis",loc:"Colorado, USA",
+       short:"Network drive‑time analysis generating 30/60‑min service areas from specialist hospitals.",
+       full:"Generated service areas from specialist hospitals, overlaid county population. Revealed spatial disparities.",
+       tech:["ArcGIS Network Analyst","Population data"],
+       media:[
+         {type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute service areas"},
+         {type:"image",src:"assets/portfolio-photos/hospital/60_min Map.png",caption:"60‑minute service areas"},
+         {type:"image",src:"assets/portfolio-photos/hospital/PopulationMap.png",caption:"Population overlay"},
+         {type:"image",src:"assets/portfolio-photos/hospital/Screenshot 2026-04-27 192541.png",caption:"Network settings"},
+         {type:"image",src:"assets/portfolio-photos/hospital/Screenshot 2026-04-28 114005.png",caption:"Unserved areas"},
+         {type:"image",src:"assets/portfolio-photos/hospital/Screenshot 2026-04-28 152454.png",caption:"Coverage statistics"}
+       ]},
+      {id:4,title:"Urban Sprawl Analysis of Kathmandu Valley",cat:"GIS / Remote Sensing",loc:"Kathmandu Valley",
+       short:"Landsat 8/9 NDBI change detection with ALOS PALSAR slope filtering to isolate urban growth.",
+       full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain.",
+       tech:["Landsat","ALOS PALSAR","ArcGIS"],
+       media:[
+         {type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"},
+         {type:"image",src:"assets/portfolio-photos/urban-sprawl/2026.png",caption:"NDBI 2026"},
+         {type:"image",src:"assets/portfolio-photos/urban-sprawl/slopemap.png",caption:"Slope filtering"},
+         {type:"image",src:"assets/portfolio-photos/urban-sprawl/Urban Sprawl.png",caption:"Urban expansion"},
+         {type:"image",src:"assets/portfolio-photos/urban-sprawl/urbanchange.png",caption:"Change detection"}
+       ]},
+      {id:5,title:"UAV Landslide Susceptibility Mapping",cat:"UAV / GIS",loc:"Sisneri, Solukhumbu",
+       short:"High-res UAV orthomosaic & DEM with weighted overlay hazard zonation classification.",
+       full:"High‑resolution DEM and orthomosaic from drone; weighted overlay to classify hazard zones.",
+       tech:["UAV","Agisoft","ArcGIS"],
+       media:[
+         {type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"},
+         {type:"image",src:"assets/portfolio-photos/uav-landslide/BaseMap.png",caption:"UAV orthomosaic"},
+         {type:"image",src:"assets/portfolio-photos/uav-landslide/profile.png",caption:"Slope profile"},
+         {type:"image",src:"assets/portfolio-photos/uav-landslide/Screenshot 2026-04-19 080520.png",caption:"Flight planning"},
+         {type:"image",src:"assets/portfolio-photos/uav-landslide/Screenshot 2026-04-19 084508.png",caption:"Point cloud"},
+         {type:"image",src:"assets/portfolio-photos/uav-landslide/Slope Map.png",caption:"Slope map"},
+         {type:"image",src:"assets/portfolio-photos/uav-landslide/Weighted Overlay.png",caption:"Hazard zonation"}
+       ]},
+      {id:6,title:"Flood Inundation Mapping",cat:"Hydrology",loc:"Narayani River, Nepal",
+       short:"HEC‑RAS 2D unsteady flow simulation for flood depth and velocity mapping.",
+       full:"DEM preparation and terrain correction; 2D unsteady flow simulation.",
+       tech:["HEC‑RAS 2D","ArcGIS"],pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf",
+       media:[
+         {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS mesh"},
+         {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 233808.png",caption:"Flood depth map"},
+         {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-24 121835.png",caption:"Velocity distribution"},
+         {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-05-17 090826.png",caption:"Water surface elevation"},
+         {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-05-17 090841.png",caption:"Flood hazard classification"},
+         {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-05-17 090854.png",caption:"Inundation extent"}
+       ]},
+      {id:7,title:"Substation Backfill Volumetric Analysis",cat:"Civil 3D",loc:"Balganga, Janakpur",
+       short:"DGPS survey to surface modeling, corridors and cut/fill volume computation in Civil 3D.",
+       full:"DGPS survey, surface creation, cross‑sections, corridor modeling.",
+       tech:["Civil 3D","DGPS"],pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf",
+       media:[
+         {type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"DGPS survey points"},
+         {type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091210.png",caption:"Existing ground surface"},
+         {type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091226.png",caption:"Proposed design surface"},
+         {type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091238.png",caption:"Cut/fill analysis"},
+         {type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091511.png",caption:"Cross‑section"},
+         {type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091526.png",caption:"Corridor model"},
+         {type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091539.png",caption:"Quantity takeoff"},
+         {type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091603.png",caption:"3D visualization"}
+       ]},
+      {id:8,title:"Earthquake Analysis of Nepal",cat:"Seismology / GIS",loc:"Nepal (1978‑2025)",
+       short:"Mainshock declustering using Gardner‑Knopoff method from USGS catalog with animated map.",
+       full:"Processed USGS catalog using Gardner‑Knopoff declustering. 58 mainshocks.",
+       tech:["ArcGIS","Python"],pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf",
+       media:[
+         {type:"video",src:"assets/portfolio-photos/earthquake/Nepal EarthQuake ShakeMaps.mp4",caption:"ShakeMap animation"},
+         {type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Mainshocks map"}
+       ]}
     ];
 
     var WORK_SITES = [
-      // ... (all 5 sites unchanged) ...
+      {id:"balefi",num:"01",folder:"Balefi",
+       files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],
+       captions:["Tower Erection","Tower Erection","Concreting Chimney","Completed Tower"],
+       title:"Balefi 132kV Transmission Line",
+       desc:"Tower erection, stub setting, chimney concreting and foundation works.",
+       tags:["Transmission Line","Tower Erection","Foundation"]},
+      {id:"lalbandi",num:"02",folder:"Salempur",
+       files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG-20250130-WA0002.jpg','IMG-20250204-WA0001.jpg','IMG_20231107_104434.jpg','IMG_20231108_172521.jpg','IMG_20240120_112353.jpg','IMG_20240122_113733.jpg','IMG_20240127_131102.jpg','IMG_20240127_223235.jpg','IMG_20240206_140830.jpg','IMG_20240216_123804.jpg','IMG_20240517_144952.jpg','IMG_20240609_174437.jpg','IMG_20240619_134602.jpg','IMG_20240627_191646.jpg','IMG_20241117_144300.jpg','Screenshot 2026-05-16 204535.png','Screenshot 2026-05-16 204630.png'],
+       captions:["Salempur Substation","Plastering","Finishing","Switchyard","Surveying","Excavation","Rebar works","Control Room","DGPS survey","ROW works","Plinth beam","Anchor bolt","Slab rebar","Staff Quarter","Gantry foundation","Road excavation","Tower locations","Layout view"],
+       title:"Lalbandi–Salempur 132kV + Substation",
+       desc:"End-to-end substation works — control room, gantry foundation, tower survey.",
+       tags:["Substation","132kV","Civil Works","Survey"]},
+      {id:"dhalkebar",num:"03",folder:"Balganga",
+       files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','IMG_20250403_113259.jpg','IMG_20250427_143925.jpg','Screenshot 2026-05-16 204005.png','Screenshot 2026-05-16 204902.png'],
+       captions:["Staff Quarter","Control Room","Formworks","Gantry foundation","Slab concreting","Layout view","Tower Locations"],
+       title:"Dhalkebar–Balganga 132kV",
+       desc:"Staff quarter foundation, control room structure, gantry foundation.",
+       tags:["Substation","Foundation","132kV"]},
+      {id:"sandikharga",num:"04",folder:"Burtibang",
+       files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','IMG_20231217_120853.jpg','IMG_20231222_081630.jpg','Screenshot 2026-05-16 205216.png'],
+       captions:["Tower Erection","Stub Setting","DGPS Survey","Tower Locations","Way to Tower","Tower Locations"],
+       title:"Sandikharga–Burtibang 132kV",
+       desc:"Tower erection, stub setting, and DGPS survey in mountainous terrain.",
+       tags:["Transmission Line","DGPS","Tower Erection"]},
+      {id:"tamghas",num:"05",folder:"Tamghas",
+       files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'],
+       captions:["Transformer","Survey","Survey","Switchyard"],
+       title:"Tamghas Substation",
+       desc:"Substation survey, switchyard layout and transformer foundation works.",
+       tags:["Substation","Switchyard","Survey"]}
     ];
 
     var SKILLS_DATA = [
-      // ... (8 skills unchanged) ...
+      {name:"ArcGIS Pro & QGIS",icon:"fa-map"},
+      {name:"Google Earth Engine",icon:"fa-satellite"},
+      {name:"AutoCAD & Civil 3D",icon:"fa-drafting-compass"},
+      {name:"HEC‑RAS 2D Hydraulics",icon:"fa-water"},
+      {name:"STAAD Pro & SAP2000",icon:"fa-building"},
+      {name:"Python (GIS scripting)",icon:"fa-code"},
+      {name:"UAV / Drone Survey",icon:"fa-helicopter"},
+      {name:"SNAP & InSAR Processing",icon:"fa-signal"}
     ];
 
     var FREELANCE = [
@@ -478,13 +604,107 @@
     ];
 
     var CERTIFICATES = [
-      // ... (4 certs unchanged) ...
+      {icon:"fa-certificate",title:"SAP2000 Training",desc:"Advanced structural analysis"},
+      {icon:"fa-drafting-compass",title:"AutoCAD Professional",desc:"Design & drafting"},
+      {icon:"fa-id-card",title:"Nepal Engineering Council",desc:"Reg. No: 80593"},
+      {icon:"fa-layer-group",title:"ABI Pier Workshop",desc:"Seismic isolation design"}
     ];
 
     /* ═══════════════════════════════════════════════════════════
        HELPERS
     ═══════════════════════════════════════════════════════════ */
     function enc(p){return encodeURI(p).replace(/#/g,'%23')}
+
+    /* ═══════════════════════════════════════════════════════════
+       CURSOR
+    ═══════════════════════════════════════════════════════════ */
+    function initCursor(){
+      var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+      var mx=0,my=0,rx=0,ry=0;
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+      document.addEventListener('mousedown',function(){document.body.classList.add('cursor-active')});
+      document.addEventListener('mouseup',function(){document.body.classList.remove('cursor-active')});
+      (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+      document.addEventListener('mouseover',function(e){
+        if(e.target.closest('a,button,.btn,.project-link,.fl-thumb,.m-media-wrap,.hcard-arr,.hcard-fs,.gal-dot,.stack-card-link'))
+          document.body.classList.add('cursor-hover');
+        else document.body.classList.remove('cursor-hover');
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       THREE.JS
+    ═══════════════════════════════════════════════════════════ */
+    function initThree(){
+      var canvas=document.getElementById('three-canvas');
+      var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+      var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.1,100);
+      camera.position.z=4;
+      var geo=new THREE.TorusKnotGeometry(1.2,.38,160,20);
+      var mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:.11,transparent:true});
+      var mesh=new THREE.Mesh(geo,mat);scene.add(mesh);
+      var geoS=new THREE.TorusKnotGeometry(1.18,.36,120,18);
+      var matS=new THREE.MeshBasicMaterial({color:0xf5f4f0});
+      var meshS=new THREE.Mesh(geoS,matS);scene.add(meshS);
+      var pg=new THREE.BufferGeometry(),pos=new Float32Array(600);
+      for(var i=0;i<600;i++)pos[i]=(Math.random()-.5)*8;
+      pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+      scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x0e0e0e,size:.025,transparent:true,opacity:.28})));
+      var mx=0,my=0,trx=0,try_=0;
+      document.addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-.5)*2;my=-(e.clientY/window.innerHeight-.5)*2});
+      function resize(){var w=canvas.offsetWidth,h=canvas.offsetHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+      resize();window.addEventListener('resize',resize);
+      var t=0;
+      (function animate(){requestAnimationFrame(animate);t+=.005;trx+=(my*.4-trx)*.05;try_+=(mx*.4-try_)*.05;
+        mesh.rotation.x=trx+t*.3;mesh.rotation.y=try_+t*.5;meshS.rotation.x=mesh.rotation.x;meshS.rotation.y=mesh.rotation.y;
+        mesh.position.y=Math.sin(t*.7)*.12;meshS.position.y=mesh.position.y;renderer.render(scene,camera)})();
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════════════ */
+    function initNav(){
+      var nav=document.getElementById('mainNav');
+      window.addEventListener('scroll',function(){
+        if(window.scrollY>80){nav.style.background='rgba(245,244,240,.92)';nav.style.backdropFilter='blur(16px)';nav.style.borderBottom='1px solid rgba(0,0,0,.06)'}
+        else{nav.style.background='transparent';nav.style.backdropFilter='';nav.style.borderBottom='none'}
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SCROLL REVEALS
+    ═══════════════════════════════════════════════════════════ */
+    function initReveal(){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+      },{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+      document.querySelectorAll('.reveal,.clip-reveal').forEach(function(el){io.observe(el)});
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SKILLS (SIMPLIFIED)
+    ═══════════════════════════════════════════════════════════ */
+    function buildSkills(){
+      document.getElementById('bentoSkills').innerHTML = SKILLS_DATA.map(function(s){
+        return '<div class="bento-card reveal">'
+          +'<i class="fas '+s.icon+'"></i>'
+          +'<h3>'+s.name+'</h3>'
+          +'</div>';
+      }).join('');
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CERTIFICATIONS
+    ═══════════════════════════════════════════════════════════ */
+    function buildCerts(){
+      document.getElementById('certGrid').innerHTML = CERTIFICATES.map(function(c){
+        return '<div class="cert-item reveal">'
+          +'<div class="cert-icon"><i class="fas '+c.icon+'"></i></div>'
+          +'<div class="cert-text"><strong>'+c.title+'</strong><span>'+c.desc+'</span></div>'
+          +'</div>';
+      }).join('');
+    }
 
     /* ═══════════════════════════════════════════════════════════
        FREELANCE DETAIL MODAL (NEW)
@@ -497,7 +717,8 @@
       document.getElementById('flModalDesc').innerHTML = '<p style="line-height:1.75;margin-bottom:12px">'+f.desc+'</p>';
       var galleryHTML = (f.files||[]).map(function(file, i) {
         var src = enc(f.folder + file);
-        return '<div class="m-media-wrap" onclick="openFullscreen(' + JSON.stringify(f.files.map(function(ff,j){ return {src:enc(f.folder+ff), caption:f.captions?.[j]||''}; })) + ', ' + i + ')"><img src="'+src+'" alt="'+(f.captions?.[i]||'')+'" loading="lazy"></div>';
+        var list = f.files.map(function(ff,j){ return {src:enc(f.folder+ff), caption:f.captions?.[j]||''}; });
+        return '<div class="m-media-wrap" onclick="openFullscreen(' + JSON.stringify(list).replace(/"/g,'&quot;') + ', ' + i + ')"><img src="'+src+'" alt="'+(f.captions?.[i]||'')+'" loading="lazy"></div>';
       }).join('');
       document.getElementById('flModalGallery').innerHTML = galleryHTML;
       document.getElementById('flModal').classList.add('on');
@@ -634,12 +855,248 @@
       }, true);
     }
 
-    // ... rest of the script (project stack, fullscreen, carousel, etc.) unchanged ...
-    // Make sure to include all previously defined functions: buildProjectStack, openProjModal, openFullscreen, etc.
-    // I will not repeat them here for brevity, but they must be present.
-    // The full code from the last message already had all those.
-    // Just ensure the openFlModal function is defined above and the modal HTML is added.
-    // Also adjust the DOMContentLoaded to call the new buildFreelance and buildExperience.
+    /* ═══════════════════════════════════════════════════════════
+       PROJECT STACK – FULL SCREEN CARDS
+    ═══════════════════════════════════════════════════════════ */
+    function buildProjectStack() {
+      var viewport = document.getElementById('stackViewport');
+      var outer = document.getElementById('stackOuter');
+      var N = PROJECTS.length;
+      outer.style.setProperty('--card-count', N);
+      outer.style.height = (N * 100) + 'vh';
+
+      PROJECTS.forEach(function(p, i) {
+        var card = document.createElement('div');
+        card.className = 'stack-card';
+        var imgSrc = (p.media && p.media[0] && p.media[0].type === 'image') ? enc(p.media[0].src) : '';
+        card.innerHTML = (imgSrc
+          ? '<img src="'+imgSrc+'" class="stack-card-img" alt="">'
+          : '<div class="stack-card-img" style="background:#222;"></div>')
+          + '<div class="stack-card-overlay"></div>'
+          + '<div class="stack-card-body">'
+          + '<div class="stack-card-num">0'+(i+1)+'</div>'
+          + '<div class="stack-card-cat">'+p.cat+'</div>'
+          + '<h3 class="stack-card-title">'+p.title+'</h3>'
+          + '<p class="stack-card-desc">'+p.short+'</p>'
+          + '<div class="stack-card-tags">'+p.tech.map(function(t){ return '<span class="stack-card-tag">'+t+'</span>'; }).join('')+'</div>'
+          + '<span class="stack-card-link" onclick="openProjModal('+p.id+')">View Project &rarr;</span>'
+          + '</div>';
+        viewport.appendChild(card);
+      });
+
+      var cards = viewport.querySelectorAll('.stack-card');
+      function updateStack() {
+        var outerRect = outer.getBoundingClientRect();
+        var totalH = outer.offsetHeight - window.innerHeight;
+        var scrolled = -outerRect.top;
+        if (scrolled < 0) scrolled = 0;
+        if (scrolled > totalH) scrolled = totalH;
+        var progress = scrolled / totalH;
+        var activeIdx = Math.min(Math.floor(progress * N), N - 1);
+        var localProg = (progress * N) % 1;
+
+        cards.forEach(function(card, i) {
+          var diff = i - activeIdx;
+          var scale, ty, opacity, zIdx;
+          if (diff < 0) { scale = 0.85; ty = -60; opacity = 0; zIdx = i; }
+          else if (diff === 0) { scale = 1 - localProg * 0.08; ty = -localProg * 40; opacity = 1; zIdx = N + 1; }
+          else if (diff === 1) { scale = 0.9 + localProg * 0.1; ty = 60 * (1 - localProg); opacity = localProg; zIdx = N; }
+          else { scale = 0.85; ty = 100; opacity = 0; zIdx = i; }
+          card.style.cssText = 'transform: translateY('+ty+'px) scale('+scale+'); opacity: '+opacity+'; z-index: '+zIdx+';';
+        });
+      }
+      window.addEventListener('scroll', updateStack, { passive: true });
+      updateStack();
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PROJECT MODAL
+    ═══════════════════════════════════════════════════════════ */
+    window.openProjModal = function(id) {
+      var p = PROJECTS.find(function(x) { return x.id === id; });
+      if (!p) return;
+      document.getElementById('mHead').innerHTML = '<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+p.title+'</h3>'
+        + '<p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+p.loc+'</p>';
+      document.getElementById('mDesc').innerHTML = '<p style="line-height:1.75;margin-bottom:12px">'+p.full+'</p>'
+        + '<p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> '+(p.tech||[]).join(', ')+'</p>';
+      document.getElementById('mGallery').innerHTML = (p.media||[]).map(function(m, i) {
+        var s = enc(m.src);
+        if (m.type === 'image') return '<div class="m-media-wrap" onclick="openProjCarousel('+id+','+i+')" title="'+(m.caption||'')+'"><img src="'+s+'" alt="'+(m.caption||'')+'" loading="lazy"></div>';
+        return '<div class="m-media-wrap" onclick="openVideoModal(\''+s+'\')" title="Play video" style="background:#111;display:flex;align-items:center;justify-content:center"><i class="fas fa-play" style="color:#fff;font-size:1.4rem;position:absolute"></i><video muted style="width:100%;height:100%;object-fit:cover"><source src="'+s+'" type="video/mp4"></video></div>';
+      }).join('');
+      document.getElementById('mPdf').innerHTML = p.pdf ? '<a href="'+p.pdf+'" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>' : '';
+      document.getElementById('projModal').classList.add('on');
+    };
+    window.closeModal = function(id) { document.getElementById(id).classList.remove('on'); };
+    window.openProjCarousel = function(projId, startIdx) {
+      var p = PROJECTS.find(function(x) { return x.id === projId; });
+      if (!p) return;
+      var list = (p.media||[]).filter(function(m) { return m.type === 'image'; }).map(function(m) { return { src: enc(m.src), caption: m.caption||'' }; });
+      openCarousel(list, startIdx);
+    };
+
+    /* ═══════════════════════════════════════════════════════════
+       FULLSCREEN LIGHTBOX
+    ═══════════════════════════════════════════════════════════ */
+    var _fsMedia = [], _fsIdx = 0;
+    function openFullscreen(list, idx) {
+      _fsMedia = list;
+      _fsIdx = idx || 0;
+      updateFS();
+      document.getElementById('fullscreenModal').classList.add('active');
+    }
+    function updateFS() {
+      var item = _fsMedia[_fsIdx];
+      document.getElementById('fullscreenImg').src = item.src;
+      document.getElementById('fsCaption').textContent = (item.caption || '') + ' (' + (_fsIdx + 1) + '/' + _fsMedia.length + ')';
+    }
+    window.fsStep = function(d) {
+      _fsIdx = (_fsIdx + d + _fsMedia.length) % _fsMedia.length;
+      updateFS();
+    };
+    window.closeFull = function() {
+      document.getElementById('fullscreenModal').classList.remove('active');
+    };
+    document.getElementById('fullscreenModal').addEventListener('click', function(e) {
+      if (e.target === this) closeFull();
+    });
+
+    /* ═══════════════════════════════════════════════════════════
+       CAROUSEL
+    ═══════════════════════════════════════════════════════════ */
+    var _carMedia = [], _carIdx = 0;
+    function openCarousel(list, idx) {
+      _carMedia = list;
+      _carIdx = idx || 0;
+      updateCar();
+      document.getElementById('carouselModal').classList.add('active');
+    }
+    function updateCar() {
+      var item = _carMedia[_carIdx];
+      document.getElementById('carouselImage').src = item.src || item;
+      document.getElementById('carouselCaption').textContent = item.caption || ((_carIdx + 1) + ' / ' + _carMedia.length);
+    }
+    window.carStep = function(d) {
+      _carIdx = (_carIdx + d + _carMedia.length) % _carMedia.length;
+      updateCar();
+    };
+    window.closeCarousel = function() { document.getElementById('carouselModal').classList.remove('active'); };
+    window.openCarouselFromList = function(list, idx) { openCarousel(list, idx); };
+
+    /* ═══════════════════════════════════════════════════════════
+       VIDEO MODAL
+    ═══════════════════════════════════════════════════════════ */
+    window.openVideoModal = function(src) {
+      document.getElementById('videoPlayer').src = src;
+      document.getElementById('videoModal').classList.add('active');
+    };
+    window.closeVideoModal = function() {
+      var v = document.getElementById('videoPlayer');
+      v.pause(); v.src = '';
+      document.getElementById('videoModal').classList.remove('active');
+    };
+
+    /* ═══════════════════════════════════════════════════════════
+       MAGNETIC BUTTONS
+    ═══════════════════════════════════════════════════════════ */
+    function initMagnetic() {
+      document.querySelectorAll('.magnetic').forEach(function(btn) {
+        btn.addEventListener('mousemove', function(e) {
+          var r = btn.getBoundingClientRect();
+          var x = e.clientX - r.left - r.width / 2;
+          var y = e.clientY - r.top - r.height / 2;
+          btn.style.transform = 'translate(' + x * 0.3 + 'px,' + y * 0.3 + 'px)';
+          btn.style.transition = 'transform .25s ease';
+        });
+        btn.addEventListener('mouseleave', function() {
+          btn.style.transform = 'translate(0,0)';
+          btn.style.transition = 'transform .6s cubic-bezier(.34,1.56,.64,1)';
+        });
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CARD HOVER EFFECTS
+    ═══════════════════════════════════════════════════════════ */
+    function initCardHover() {
+      document.addEventListener('mousemove', function(e) {
+        document.querySelectorAll('.exp-hcard').forEach(function(card) {
+          var r = card.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5;
+          var y = (e.clientY - r.top) / r.height - 0.5;
+          var dist = Math.sqrt(x * x + y * y);
+          if (dist < 1.5) {
+            card.style.transform = 'translateY(-8px) scale(1.01) perspective(600px) rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 6) + 'deg)';
+            card.style.transition = 'transform .25s ease';
+          }
+        });
+        document.querySelectorAll('.bento-card').forEach(function(card) {
+          var r = card.getBoundingClientRect();
+          if (e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) {
+            var x = (e.clientX - r.left) / r.width - 0.5;
+            var y = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transform = 'translateY(-2px) perspective(500px) rotateY(' + (x * 5) + 'deg) rotateX(' + (-y * 5) + 'deg)';
+            card.style.transition = 'transform .2s ease';
+          } else {
+            card.style.transform = '';
+            card.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1)';
+          }
+        });
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SCRAMBLE
+    ═══════════════════════════════════════════════════════════ */
+    function initScramble() {
+      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
+      document.querySelectorAll('.scramble').forEach(function(el) {
+        var orig = el.dataset.text || el.textContent, done = false;
+        new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting && !done) {
+            done = true;
+            var f = 0, total = 34;
+            var iv = setInterval(function() {
+              el.textContent = orig.split('').map(function(ch, i) {
+                if (ch === ' ') return ' ';
+                if (f / total > i / orig.length) return ch;
+                return CHARS[Math.floor(Math.random() * CHARS.length)];
+              }).join('');
+              f++;
+              if (f > total) { el.textContent = orig; clearInterval(iv); }
+            }, 36);
+          }
+        }, { threshold: .5 }).observe(el);
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       KEYBOARD
+    ═══════════════════════════════════════════════════════════ */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeFull(); closeCarousel(); closeVideoModal();
+        document.querySelectorAll('.modal.on').forEach(function(m) { m.classList.remove('on'); });
+      }
+    });
+
+    /* ═══════════════════════════════════════════════════════════
+       BOOT
+    ═══════════════════════════════════════════════════════════ */
+    document.addEventListener('DOMContentLoaded', function() {
+      buildSkills();
+      buildExperience();
+      buildFreelance();   // now calls the horizontal builder with Preview
+      buildProjectStack();
+      buildCerts();
+      initReveal();
+      initCursor();
+      initNav();
+      initMagnetic();
+      initCardHover();
+      initScramble();
+      if (typeof THREE !== 'undefined') initThree();
+    });
   </script>
 </body>
 </html>
