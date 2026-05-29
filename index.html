@@ -82,7 +82,7 @@
     .about-accent-box { position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; background: var(--accent); border-radius: 4px; z-index: -1; }
 
     /* ── SKILLS SIMPLE BENTO ── */
-    #skills { background: var(--black); color: var(--white); }
+    #skills { background: var(--light-gray); color: var(--white); }
     #skills .section-label { color: var(--white); }
     .skills-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.03em; margin-bottom: 56px; }
     .bento-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
@@ -128,7 +128,7 @@
     .horiz-site-label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .35; font-family: var(--font-display); }
 
     /* Freelance section – light blue */
-    #freelance { background: #e0f2fe; }
+    #freelance { background: var(--light-gray); }
     #freelance .section-label, #freelance .horiz-company, #freelance .horiz-company-sub { color: var(--black); }
     #freelance .horiz-progress-bar { background: rgba(0,0,0,.1); }
     #freelance .horiz-progress-fill { background: var(--accent); }
@@ -136,11 +136,11 @@
     #freelance .horiz-site-dot.active { background: var(--accent); }
 
     /* Experience section – dark */
-    #experience { background: var(--black); color: var(--white); }
+    #experience { background: var(--light-gray); color: var(--white); }
     #experience .section-label, #experience .horiz-company, #experience .horiz-company-sub { color: var(--white); }
 
     /* ── PROJECTS – FULL SCREEN STACK CARDS ── */
-    #projects { background: var(--black); padding: 0; } /* no padding, cards fill screen */
+    #projects { background: var(--light-gray); padding: 0; } /* no padding, cards fill screen */
     #projects .section-label, #projects .projects-heading { padding: 0 60px; color: var(--white); position: relative; z-index: 10; }
     .projects-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -.03em; margin-bottom: 24px; padding: 0 60px; color: var(--white); }
     .stack-outer { position: relative; height: calc(var(--card-count,8) * 100vh); } /* each card occupies full viewport */
@@ -190,7 +190,7 @@
     .stack-card-link:hover { gap: 14px; border-color: #fff; }
 
     /* ── EDUCATION ── */
-    #education { background: var(--black); color: var(--white); }
+    #education { background: var(--light-gray); color: var(--white); }
     #education .section-label { color: var(--white); }
     .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
     .edu-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 16px; padding: 32px; transition: background .3s; }
@@ -218,7 +218,7 @@
 
     /* ── FULLSCREEN MODAL ── */
     .fullscreen-modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.96);
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96);
       display: none; align-items: center; justify-content: center;
       z-index: 6000;
     }
@@ -232,7 +232,7 @@
     .fs-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.8rem; }
 
     /* Other modals unchanged */
-    .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.5); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
+    .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(219, 211, 211, 0.5); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
     .modal.on { opacity: 1; pointer-events: all; }
     .modal-box { background: var(--white); border-radius: 16px; width: 90%; max-width: 680px; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
     .modal-close { position: absolute; top: 18px; right: 22px; background: none; border: none; font-size: 1.5rem; cursor: pointer; opacity: .45; transition: opacity .2s; }
@@ -302,7 +302,7 @@
         <span class="line"><span class="word">Abhishek</span></span>
         <span class="line"><span class="word">Karki</span></span>
       </h1>
-      <p class="hero-subtitle">Civil Engineer &amp; GIS Specialist integrating spatial data with structural infrastructure. Advanced focus in hydraulic modeling, risk analysis, and satellite-based temporal assessments.</p>
+      <p class="hero-subtitle">Civil Engineer &amp; Civil Engineer & GIS Analyst – merging field insight with satellite intelligence.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-dark magnetic">View Work</a>
         <a href="#contact" class="btn btn-outline magnetic">Let's Talk</a>
@@ -315,9 +315,9 @@
     <div class="section-label reveal">About me</div>
     <div class="about-grid">
       <div>
-        <h2 class="about-heading reveal">Bridging Geomatics &amp; Structural Engineering.</h2>
-        <p class="about-text reveal delay-1">I'm a Civil Engineer with deep GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Management. I merge field data, satellite imagery, and computational models to solve real‑world infrastructure problems.</p>
-        <p class="about-text reveal delay-2">From InSAR subsidence monitoring to 2D flood mapping, I bring spatial intelligence into every project.</p>
+        <h2 class="about-heading reveal">GIS Analyst &amp; Remote Sensing.</h2>
+        <p class="about-text reveal delay-1">I'm a Civil Engineer with growing GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Engineering and Management.  I combine field observations, satellite imagery, and computational models to tackle real‑world infrastructure challenges.</p>
+        <p class="about-text reveal delay-2">Using geospatial tools and risk models, I help build safer, more resilient communities.</p>
         <a href="cv.html" target="_blank" class="btn btn-dark magnetic reveal delay-3" style="margin-top:18px">Download CV</a>
       </div>
       <div class="about-image-wrap clip-reveal delay-2">
@@ -338,7 +338,7 @@
     <div class="section-label reveal">Work history</div>
     <div class="horiz-intro reveal">
       <div class="horiz-company">Civil Engineer</div>
-      <div class="horiz-company-sub">Sigma Con Pvt. Ltd &nbsp;·&nbsp; Aug 2023 – Jul 2025 &nbsp;·&nbsp; Transmission &amp; Substation Projects</div>
+      <div class="horiz-company-sub">Sigma Con Pvt. Ltd &nbsp;·&nbsp; Aug 2023 – Jul 2025 &nbsp;·&nbsp; 132kV Transmission lines &amp; Substation Projects</div>
     </div>
     <div class="horiz-sticky-outer" id="expStickyOuter">
       <div class="horiz-sticky-inner">
@@ -386,7 +386,7 @@
   <section id="education">
     <div class="section-label reveal">Academics</div>
     <div class="edu-grid">
-      <div class="edu-card reveal delay-1"><h3>MSc Disaster Risk Management (DREM)</h3><p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p></div>
+      <div class="edu-card reveal delay-1"><h3>MSc Disaster Risk Engineering and Management (DREM)</h3><p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p></div>
       <div class="edu-card reveal delay-2"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College · 2022<br>CGPA 3.43</p><p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p></div>
       <div class="edu-card reveal delay-3"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p></div>
     </div>
