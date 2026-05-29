@@ -11,11 +11,11 @@
 
   <style>
     /* ═══════════════════════════════════════════════════════
-       BASE
+       BASE – exact copy from your preferred version
     ═══════════════════════════════════════════════════════ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --white: #f5f4f0; --black: #0e0e0e; --accent: #8ab4f8;
+      --white: #f5f4f0; --black: #0e0e0e; --accent: #8ab4f8; --accent2: #c4f0a8;
       --light-gray: #e8e6e0;
       --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
     }
@@ -231,7 +231,7 @@
     .fs-prev { left: 20px; } .fs-next { right: 20px; }
     .fs-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.8rem; }
 
-    /* Other modals unchanged (projModal, carousel, video) – same as before */
+    /* Other modals unchanged */
     .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.5); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
     .modal.on { opacity: 1; pointer-events: all; }
     .modal-box { background: var(--white); border-radius: 16px; width: 90%; max-width: 680px; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
@@ -411,7 +411,7 @@
     <span style="opacity:.35;font-size:.82rem">© 2026 Abhishek Karki</span>
   </footer>
 
-  <!-- Fullscreen modal (now properly clickable) -->
+  <!-- Fullscreen modal -->
   <div class="fullscreen-modal" id="fullscreenModal">
     <button class="fullscreen-close" onclick="closeFull()">&times;</button>
     <button class="fs-nav fs-prev" onclick="fsStep(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -446,32 +446,228 @@
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script>
-    // ═══════════════════ DATA ═══════════════════
-    var PROJECTS=[ /* same 8 projects */ ];
-    var WORK_SITES=[ /* same 5 sites */ ];
-    var FREELANCE=[ /* same 6 items */ ];
-    var CERTIFICATES=[ /* same 4 certs */ ];
-    var SKILLS_DATA = [ /* 8 skills */ ];
+    /* ═══════════════════════════════════════════════════════════
+       DATA – fully populated, exactly as before
+    ═══════════════════════════════════════════════════════════ */
+    var PROJECTS=[
+      {id:1,title:"InSAR Time Series for Highway Subsidence",cat:"InSAR / Geotech",loc:"Sloterdijk to Rijksweg, Netherlands",
+       short:"13 Sentinel‑1 images processed with SNAP+SNAPHU generating 12 displacement maps.",
+       full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering, phase unwrapping, terrain correction. Extracted A10 highway profiles.",
+       tech:["SNAP","SNAPHU","Sentinel‑1"],pdf:"assets/portfolio-photos/insar/insar.pdf",
+       media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram"},
+              {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map"},
+              {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Filtered"}]},
+      {id:2,title:"NDVI Timelapse of Kathmandu Valley",cat:"Remote Sensing",loc:"Kathmandu Valley",
+       short:"26‑year vegetation change using Landsat & Sentinel‑2 with 5‑class timelapse animation.",
+       full:"Processed 28 images in Google Earth Engine – NDVI calculation, harmonization. Built 5‑class timelapse.",
+       tech:["GEE","Landsat","Sentinel‑2"],pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf",
+       media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},
+              {type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},
+              {type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse"}]},
+      {id:3,title:"Hospital Accessibility in Colorado",cat:"GIS Network Analysis",loc:"Colorado, USA",
+       short:"Network drive‑time analysis generating 30/60‑min service areas from specialist hospitals.",
+       full:"Generated service areas from specialist hospitals, overlaid county population. Revealed spatial disparities.",
+       tech:["ArcGIS Network Analyst","Population data"],
+       media:[{type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute"},
+              {type:"image",src:"assets/portfolio-photos/hospital/60_min Map.png",caption:"60‑minute"},
+              {type:"image",src:"assets/portfolio-photos/hospital/PopulationMap.png",caption:"Population overlay"}]},
+      {id:4,title:"Urban Sprawl Analysis of Kathmandu Valley",cat:"GIS / Remote Sensing",loc:"Kathmandu Valley",
+       short:"Landsat 8/9 NDBI change detection with ALOS PALSAR slope filtering to isolate urban growth.",
+       full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain.",
+       tech:["Landsat","ALOS PALSAR","ArcGIS"],
+       media:[{type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"},
+              {type:"image",src:"assets/portfolio-photos/urban-sprawl/2026.png",caption:"NDBI 2026"},
+              {type:"image",src:"assets/portfolio-photos/urban-sprawl/slopemap.png",caption:"Slope filtering"}]},
+      {id:5,title:"UAV Landslide Susceptibility Mapping",cat:"UAV / GIS",loc:"Sisneri, Solukhumbu",
+       short:"High-res UAV orthomosaic & DEM with weighted overlay hazard zonation classification.",
+       full:"High‑resolution DEM and orthomosaic from drone; weighted overlay to classify hazard zones.",
+       tech:["UAV","Agisoft","ArcGIS"],
+       media:[{type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"},
+              {type:"image",src:"assets/portfolio-photos/uav-landslide/BaseMap.png",caption:"Orthomosaic"}]},
+      {id:6,title:"Flood Inundation Mapping",cat:"Hydrology",loc:"Narayani River, Nepal",
+       short:"HEC‑RAS 2D unsteady flow simulation for flood depth and velocity mapping.",
+       full:"DEM preparation and terrain correction; 2D unsteady flow simulation.",
+       tech:["HEC‑RAS 2D","ArcGIS"],pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf",
+       media:[{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS mesh"},
+              {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 233808.png",caption:"Flood depth"}]},
+      {id:7,title:"Substation Backfill Volumetric Analysis",cat:"Civil 3D",loc:"Balganga, Janakpur",
+       short:"DGPS survey to surface modeling, corridors and cut/fill volume computation in Civil 3D.",
+       full:"DGPS survey, surface creation, cross‑sections, corridor modeling.",
+       tech:["Civil 3D","DGPS"],pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf",
+       media:[{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"Survey points"}]},
+      {id:8,title:"Earthquake Analysis of Nepal",cat:"Seismology / GIS",loc:"Nepal (1978‑2025)",
+       short:"Mainshock declustering using Gardner‑Knopoff method from USGS catalog with animated map.",
+       full:"Processed USGS catalog using Gardner‑Knopoff declustering. 58 mainshocks.",
+       tech:["ArcGIS","Python"],pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf",
+       media:[{type:"video",src:"assets/portfolio-photos/earthquake/Nepal_EarthQuakes_Animation.mp4",caption:"Animation"},
+              {type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Map"}]}
+    ];
 
-    function enc(p){ return encodeURI(p).replace(/#/g,'%23'); }
+    var WORK_SITES=[
+      {id:"balefi",num:"01",folder:"Balefi",
+       files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],
+       captions:["Tower Erection","Tower Erection","Concreting Chimney","Completed Tower"],
+       title:"Balefi 132kV Transmission Line",
+       desc:"Tower erection, stub setting, chimney concreting and foundation works.",
+       tags:["Transmission Line","Tower Erection","Foundation"]},
+      {id:"lalbandi",num:"02",folder:"Salempur",
+       files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG_20231107_104434.jpg','IMG_20240120_112353.jpg','IMG_20240206_140830.jpg','Screenshot 2026-05-16 204535.png'],
+       captions:["Salempur Substation","Plastering","Surveying","Rebar Works","Plinth Beam","Layout View"],
+       title:"Lalbandi–Salempur 132kV + Substation",
+       desc:"End-to-end substation works — control room, gantry foundation, tower survey.",
+       tags:["Substation","132kV","Civil Works","Survey"]},
+      {id:"dhalkebar",num:"03",folder:"Balganga",
+       files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','Screenshot 2026-05-16 204005.png'],
+       captions:["Staff Quarter","Control Room","Formworks","Layout"],
+       title:"Dhalkebar–Balganga 132kV",
+       desc:"Staff quarter foundation, control room structure, gantry foundation.",
+       tags:["Substation","Foundation","132kV"]},
+      {id:"sandikharga",num:"04",folder:"Burtibang",
+       files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','Screenshot 2026-05-16 205216.png'],
+       captions:["Tower Erection","Stub Setting","DGPS Survey","Tower Locations"],
+       title:"Sandikharga–Burtibang 132kV",
+       desc:"Tower erection, stub setting, and DGPS survey in mountainous terrain.",
+       tags:["Transmission Line","DGPS","Tower Erection"]},
+      {id:"tamghas",num:"05",folder:"Tamghas",
+       files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'],
+       captions:["Transformer","Survey","Survey","Switchyard"],
+       title:"Tamghas Substation",
+       desc:"Substation survey, switchyard layout and transformer foundation works.",
+       tags:["Substation","Switchyard","Survey"]}
+    ];
 
-    // Skills
-    document.getElementById('bentoSkills').innerHTML = SKILLS_DATA.map(s => `
-      <div class="bento-card reveal">
-        <i class="fas ${s.icon}"></i>
-        <h3>${s.name}</h3>
-      </div>
-    `).join('');
+    var SKILLS_DATA=[
+      {name:"ArcGIS Pro & QGIS",icon:"fa-map"},
+      {name:"Google Earth Engine",icon:"fa-satellite"},
+      {name:"AutoCAD & Civil 3D",icon:"fa-drafting-compass"},
+      {name:"HEC‑RAS 2D Hydraulics",icon:"fa-water"},
+      {name:"STAAD Pro & SAP2000",icon:"fa-building"},
+      {name:"Python (GIS scripting)",icon:"fa-code"},
+      {name:"UAV / Drone Survey",icon:"fa-helicopter"},
+      {name:"SNAP & InSAR Processing",icon:"fa-signal"}
+    ];
 
-    // Certificates
-    document.getElementById('certGrid').innerHTML = CERTIFICATES.map(c => `
-      <div class="cert-item reveal">
-        <div class="cert-icon"><i class="fas ${c.icon}"></i></div>
-        <div class="cert-text"><strong>${c.title}</strong><span>${c.desc}</span></div>
-      </div>
-    `).join('');
+    var FREELANCE=[
+      {id:"hvac",title:"HVAC System Design",date:"2024",desc:"Complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing and equipment selection.",
+       folder:"assets/freelance-photos/hvac/",files:['duct-layout.png'],captions:["HVAC duct layout"],tags:["HAP 6.0","HVAC"]},
+      {id:"3d",title:"3D Building Planning & Modeling",date:"2023–2024",desc:"Detailed architectural visualizations using SketchUp and Revit for residential and industrial projects.",
+       folder:"assets/freelance-photos/3d-modeling/",files:['1.png','2.png','3.jpg'],captions:["Staff Quarter","Control Room","Residential"],tags:["SketchUp","Revit"]},
+      {id:"struct",title:"Structural Analysis",date:"2024",desc:"STAAD Pro analysis ensuring compliance with load standards for client buildings.",
+       folder:"assets/freelance-photos/structural-analysis/",files:['1.png','2.png'],captions:["STAAD model","Load analysis"],tags:["STAAD Pro"]},
+      {id:"draft",title:"2D Drafting (AutoCAD)",date:"2023–2025",desc:"Floor plans, sections, site layouts and detail drawings.",
+       folder:"assets/freelance-photos/drafting/",files:['1.png','2.png','3.png'],captions:["Site layout","Plan","Tower"],tags:["AutoCAD"]},
+      {id:"abi",title:"ABI Pier Workshop",date:"2023",desc:"Adjustable Base Isolation Pier prototype design on Earthquake Day.",
+       folder:"assets/freelance-photos/abi/",files:['1.jpeg'],captions:["Prototype"],tags:["Seismic Design"]},
+      {id:"sisneri",title:"Sisneri Landslide Study",date:"2023 Final Year",desc:"Drone survey, geotechnical investigation and GeoStudio SLOPE/W stability analysis.",
+       folder:"assets/portfolio-photos/sisneri-landslide/",files:['Damage due to Landslide.JPG','Group Members.JPG'],captions:["Damage","Group"],tags:["Geotech","Drone"],pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf"}
+    ];
 
-    // Horizontal gallery builder
+    var CERTIFICATES=[
+      {icon:"fa-certificate",title:"SAP2000 Training",desc:"Advanced structural analysis"},
+      {icon:"fa-drafting-compass",title:"AutoCAD Professional",desc:"Design & drafting"},
+      {icon:"fa-id-card",title:"Nepal Engineering Council",desc:"Reg. No: 80593"},
+      {icon:"fa-layer-group",title:"ABI Pier Workshop",desc:"Seismic isolation design"}
+    ];
+
+    /* ═══════════════════════════════════════════════════════════
+       HELPERS
+    ═══════════════════════════════════════════════════════════ */
+    function enc(p){return encodeURI(p).replace(/#/g,'%23')}
+
+    /* ═══════════════════════════════════════════════════════════
+       CURSOR
+    ═══════════════════════════════════════════════════════════ */
+    function initCursor(){
+      var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+      var mx=0,my=0,rx=0,ry=0;
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+      document.addEventListener('mousedown',function(){document.body.classList.add('cursor-active')});
+      document.addEventListener('mouseup',function(){document.body.classList.remove('cursor-active')});
+      (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+      document.addEventListener('mouseover',function(e){
+        if(e.target.closest('a,button,.btn,.project-link,.fl-thumb,.m-media-wrap,.hcard-arr,.hcard-fs,.gal-dot,.stack-card-link'))
+          document.body.classList.add('cursor-hover');
+        else document.body.classList.remove('cursor-hover');
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       THREE.JS
+    ═══════════════════════════════════════════════════════════ */
+    function initThree(){
+      var canvas=document.getElementById('three-canvas');
+      var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+      var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.1,100);
+      camera.position.z=4;
+      var geo=new THREE.TorusKnotGeometry(1.2,.38,160,20);
+      var mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:.11,transparent:true});
+      var mesh=new THREE.Mesh(geo,mat);scene.add(mesh);
+      var geoS=new THREE.TorusKnotGeometry(1.18,.36,120,18);
+      var matS=new THREE.MeshBasicMaterial({color:0xf5f4f0});
+      var meshS=new THREE.Mesh(geoS,matS);scene.add(meshS);
+      var pg=new THREE.BufferGeometry(),pos=new Float32Array(600);
+      for(var i=0;i<600;i++)pos[i]=(Math.random()-.5)*8;
+      pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+      scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x0e0e0e,size:.025,transparent:true,opacity:.28})));
+      var mx=0,my=0,trx=0,try_=0;
+      document.addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-.5)*2;my=-(e.clientY/window.innerHeight-.5)*2});
+      function resize(){var w=canvas.offsetWidth,h=canvas.offsetHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+      resize();window.addEventListener('resize',resize);
+      var t=0;
+      (function animate(){requestAnimationFrame(animate);t+=.005;trx+=(my*.4-trx)*.05;try_+=(mx*.4-try_)*.05;
+        mesh.rotation.x=trx+t*.3;mesh.rotation.y=try_+t*.5;meshS.rotation.x=mesh.rotation.x;meshS.rotation.y=mesh.rotation.y;
+        mesh.position.y=Math.sin(t*.7)*.12;meshS.position.y=mesh.position.y;renderer.render(scene,camera)})();
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════════════ */
+    function initNav(){
+      var nav=document.getElementById('mainNav');
+      window.addEventListener('scroll',function(){
+        if(window.scrollY>80){nav.style.background='rgba(245,244,240,.92)';nav.style.backdropFilter='blur(16px)';nav.style.borderBottom='1px solid rgba(0,0,0,.06)'}
+        else{nav.style.background='transparent';nav.style.backdropFilter='';nav.style.borderBottom='none'}
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SCROLL REVEALS
+    ═══════════════════════════════════════════════════════════ */
+    function initReveal(){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+      },{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+      document.querySelectorAll('.reveal,.clip-reveal').forEach(function(el){io.observe(el)});
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SKILLS (SIMPLIFIED)
+    ═══════════════════════════════════════════════════════════ */
+    function buildSkills(){
+      document.getElementById('bentoSkills').innerHTML = SKILLS_DATA.map(function(s){
+        return '<div class="bento-card reveal">'
+          +'<i class="fas '+s.icon+'"></i>'
+          +'<h3>'+s.name+'</h3>'
+          +'</div>';
+      }).join('');
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CERTIFICATIONS
+    ═══════════════════════════════════════════════════════════ */
+    function buildCerts(){
+      document.getElementById('certGrid').innerHTML = CERTIFICATES.map(function(c){
+        return '<div class="cert-item reveal">'
+          +'<div class="cert-icon"><i class="fas '+c.icon+'"></i></div>'
+          +'<div class="cert-text"><strong>'+c.title+'</strong><span>'+c.desc+'</span></div>'
+          +'</div>';
+      }).join('');
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       HORIZONTAL GALLERY BUILDER
+    ═══════════════════════════════════════════════════════════ */
     function buildHorizontalGallery(prefix, items, folderFn) {
       var outer = document.getElementById(prefix+'StickyOuter');
       var track = document.getElementById(prefix+'Track');
@@ -482,33 +678,37 @@
       outer.style.setProperty('--n-sites', N);
       outer.style.height = (N*100+80)+'vh';
 
-      track.innerHTML = items.map((item,i) => {
+      track.innerHTML = items.map(function(item, i) {
         var base = folderFn ? folderFn(item) : '';
-        var imgs = (item.files||[]).map((f,j) => {
+        var imgs = (item.files||[]).map(function(f, j) {
           var src = folderFn ? enc(base+f) : enc(f.src||f);
-          return `<img src="${src}" class="${j===0?'active':''}" data-idx="${j}" alt="${item.captions?.[j]||''}">`;
+          return '<img src="'+src+'" class="'+(j===0?'active':'')+'" data-idx="'+j+'" alt="'+(item.captions?.[j]||'')+'">';
         }).join('');
-        var dots = (item.files||[]).map((_,j) => `<button class="hcard-dot ${j===0?'active':''}" data-idx="${j}"></button>`).join('');
-        var tags = (item.tags||[]).map(t => `<span class="hcard-tag">${t}</span>`).join('');
-        return `<div class="exp-hcard" id="${prefix}-card-${item.id}">
-          <div class="hcard-gallery">${imgs}</div>
-          <div class="hcard-overlay"></div>
-          <div class="hcard-dots">${dots}</div>
-          <div class="hcard-arrows">
-            <button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>
-            <button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>
-          </div>
-          <div class="hcard-content">
-            <div class="hcard-num">${item.num||('0'+(i+1))}</div>
-            <div class="hcard-title">${item.title}</div>
-            <div class="hcard-desc">${item.desc||item.short||''}</div>
-            <div class="hcard-tags">${tags}</div>
-            ${item.pdf?`<a href="${item.pdf}" target="_blank" style="color:#fff;font-size:.75rem;text-decoration:underline;margin-top:8px;display:inline-block">Report →</a>`:''}
-          </div>
-        </div>`;
+        var dots = (item.files||[]).map(function(_, j) {
+          return '<button class="hcard-dot '+(j===0?'active':'')+'" data-idx="'+j+'"></button>';
+        }).join('');
+        var tags = (item.tags||[]).map(function(t) { return '<span class="hcard-tag">'+t+'</span>'; }).join('');
+        return '<div class="exp-hcard" id="'+prefix+'-card-'+item.id+'">'
+          +'<div class="hcard-gallery">'+imgs+'</div>'
+          +'<div class="hcard-overlay"></div>'
+          +'<div class="hcard-dots">'+dots+'</div>'
+          +'<div class="hcard-arrows">'
+          +'<button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>'
+          +'<button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>'
+          +'</div>'
+          +'<div class="hcard-content">'
+          +'<div class="hcard-num">'+(item.num||('0'+(i+1)))+'</div>'
+          +'<div class="hcard-title">'+item.title+'</div>'
+          +'<div class="hcard-desc">'+(item.desc||item.short||'')+'</div>'
+          +'<div class="hcard-tags">'+tags+'</div>'
+          + (item.pdf ? '<a href="'+item.pdf+'" target="_blank" style="color:#fff;font-size:.75rem;text-decoration:underline;margin-top:8px;display:inline-block">Report →</a>' : '')
+          +'</div>'
+          +'</div>';
       }).join('');
 
-      dotsCont.innerHTML = items.map((_,i) => `<button class="horiz-site-dot${i===0?' active':''}" data-idx="${i}"></button>`).join('');
+      dotsCont.innerHTML = items.map(function(_, i) {
+        return '<button class="horiz-site-dot'+(i===0?' active':'')+'" data-idx="'+i+'"></button>';
+      }).join('');
       labelEl.textContent = '01 / '+String(N).padStart(2,'0');
 
       var siteDots = dotsCont.querySelectorAll('.horiz-site-dot');
@@ -524,44 +724,49 @@
         var viewW = track.parentElement.offsetWidth;
         var maxTranslate = trackW - viewW + 120;
         if (maxTranslate<0) maxTranslate=0;
-        track.style.transform = `translateX(${-progress*maxTranslate}px)`;
+        track.style.transform = 'translateX('+(-progress*maxTranslate)+'px)';
         var cardIdx = Math.min(Math.floor(progress*N), N-1);
-        siteDots.forEach((d,i) => d.classList.toggle('active', i===cardIdx));
+        siteDots.forEach(function(d,i){ d.classList.toggle('active',i===cardIdx); });
         labelEl.textContent = (items[cardIdx]?.num||('0'+(cardIdx+1)))+' / '+String(N).padStart(2,'0');
         fillEl.style.width = (progress*100)+'%';
       }
+
       window.addEventListener('scroll', updateScroll, {passive:true});
       updateScroll();
 
-      siteDots.forEach((d,i) => d.addEventListener('click', () => {
-        var totalH = outer.offsetHeight - window.innerHeight;
-        window.scrollTo({top: outer.offsetTop + (i/(N-1))*totalH, behavior:'smooth'});
-      }));
+      siteDots.forEach(function(d,i) {
+        d.addEventListener('click', function() {
+          var totalH = outer.offsetHeight - window.innerHeight;
+          var target = outer.offsetTop + (i/(N-1))*totalH;
+          window.scrollTo({top:target, behavior:'smooth'});
+        });
+      });
 
-      setTimeout(() => {
-        document.querySelectorAll(`#${prefix}Track .exp-hcard`).forEach((card, idx) => {
+      // Auto-gallery per card + click → fullscreen
+      setTimeout(function() {
+        document.querySelectorAll('#'+prefix+'Track .exp-hcard').forEach(function(card, idx) {
           var imgs = card.querySelectorAll('.hcard-gallery img');
           var dots = card.querySelectorAll('.hcard-dot');
           var cur = 0, timer;
-          function goTo(n) {
+          function goTo(n, manual) {
             imgs[cur].classList.remove('active'); dots[cur].classList.remove('active');
             cur = (n+imgs.length)%imgs.length;
             imgs[cur].classList.add('active'); dots[cur].classList.add('active');
+            if (manual) { clearInterval(timer); startAuto(); }
           }
-          function auto() { timer = setInterval(() => goTo(cur+1), 3800); }
-          auto();
-          dots.forEach(d => d.addEventListener('click', e => { goTo(parseInt(e.target.dataset.idx)); clearInterval(timer); auto(); }));
-          card.querySelector('.hcard-prev').addEventListener('click', () => { goTo(cur-1); clearInterval(timer); auto(); });
-          card.querySelector('.hcard-next').addEventListener('click', () => { goTo(cur+1); clearInterval(timer); auto(); });
-          card.addEventListener('mouseenter', () => clearInterval(timer));
-          card.addEventListener('mouseleave', () => auto());
-          // CLICK ON IMAGE → FULLSCREEN
-          imgs.forEach((img, i) => {
-            img.addEventListener('click', () => {
-              var list = (items[idx].files||items[idx].media||[]).map((f, j) => ({
-                src: folderFn ? enc(folderFn(items[idx])+f) : enc(f.src||f),
-                caption: items[idx].captions?.[j] || ''
-              }));
+          function startAuto() { timer = setInterval(function() { goTo(cur+1, false); }, 3800); }
+          startAuto();
+          dots.forEach(function(d) { d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx), true); }); });
+          card.querySelector('.hcard-prev').addEventListener('click', function() { goTo(cur-1, true); });
+          card.querySelector('.hcard-next').addEventListener('click', function() { goTo(cur+1, true); });
+          card.addEventListener('mouseenter', function() { clearInterval(timer); });
+          card.addEventListener('mouseleave', function() { startAuto(); });
+          imgs.forEach(function(img, i) {
+            img.addEventListener('click', function() {
+              var list = (items[idx].files||items[idx].media||[]).map(function(f, j) {
+                var src = folderFn ? enc((folderFn(items[idx]))+f) : enc(f.src||f);
+                return { src: src, caption: items[idx].captions?.[j] || '' };
+              });
               openFullscreen(list, i);
             });
             img.style.cursor = 'pointer';
@@ -570,33 +775,50 @@
       }, 120);
     }
 
-    buildHorizontalGallery('exp', WORK_SITES, item => 'assets/Professional Career/'+item.folder+'/');
-    buildHorizontalGallery('fl', FREELANCE, item => item.folder);
+    /* ═══════════════════════════════════════════════════════════
+       EXPERIENCE
+    ═══════════════════════════════════════════════════════════ */
+    function buildExperience() {
+      buildHorizontalGallery('exp', WORK_SITES, function(item) {
+        return 'assets/Professional Career/'+item.folder+'/';
+      });
+    }
 
-    // PROJECT STACK – FULL SCREEN CARDS
+    /* ═══════════════════════════════════════════════════════════
+       FREELANCE
+    ═══════════════════════════════════════════════════════════ */
+    function buildFreelance() {
+      buildHorizontalGallery('fl', FREELANCE, function(item) {
+        return item.folder;
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PROJECT STACK – FULL SCREEN CARDS
+    ═══════════════════════════════════════════════════════════ */
     function buildProjectStack() {
       var viewport = document.getElementById('stackViewport');
       var outer = document.getElementById('stackOuter');
       var N = PROJECTS.length;
       outer.style.setProperty('--card-count', N);
-      outer.style.height = (N * 100) + 'vh'; // each card is 100vh scroll
+      outer.style.height = (N * 100) + 'vh';
 
-      PROJECTS.forEach((p,i) => {
+      PROJECTS.forEach(function(p, i) {
         var card = document.createElement('div');
         card.className = 'stack-card';
-        var imgSrc = (p.media && p.media[0] && p.media[0].type==='image') ? enc(p.media[0].src) : '';
-        card.innerHTML = `
-          ${imgSrc ? `<img src="${imgSrc}" class="stack-card-img" alt="">` : `<div class="stack-card-img" style="background:#222;"></div>`}
-          <div class="stack-card-overlay"></div>
-          <div class="stack-card-body">
-            <div class="stack-card-num">0${i+1}</div>
-            <div class="stack-card-cat">${p.cat}</div>
-            <h3 class="stack-card-title">${p.title}</h3>
-            <p class="stack-card-desc">${p.short}</p>
-            <div class="stack-card-tags">${p.tech.map(t=>`<span class="stack-card-tag">${t}</span>`).join('')}</div>
-            <span class="stack-card-link" onclick="openProjModal(${p.id})">View Project →</span>
-          </div>
-        `;
+        var imgSrc = (p.media && p.media[0] && p.media[0].type === 'image') ? enc(p.media[0].src) : '';
+        card.innerHTML = (imgSrc
+          ? '<img src="'+imgSrc+'" class="stack-card-img" alt="">'
+          : '<div class="stack-card-img" style="background:#222;"></div>')
+          + '<div class="stack-card-overlay"></div>'
+          + '<div class="stack-card-body">'
+          + '<div class="stack-card-num">0'+(i+1)+'</div>'
+          + '<div class="stack-card-cat">'+p.cat+'</div>'
+          + '<h3 class="stack-card-title">'+p.title+'</h3>'
+          + '<p class="stack-card-desc">'+p.short+'</p>'
+          + '<div class="stack-card-tags">'+p.tech.map(function(t){ return '<span class="stack-card-tag">'+t+'</span>'; }).join('')+'</div>'
+          + '<span class="stack-card-link" onclick="openProjModal('+p.id+')">View Project &rarr;</span>'
+          + '</div>';
         viewport.appendChild(card);
       });
 
@@ -608,54 +830,211 @@
         if (scrolled < 0) scrolled = 0;
         if (scrolled > totalH) scrolled = totalH;
         var progress = scrolled / totalH;
-        var activeIdx = Math.min(Math.floor(progress * N), N-1);
+        var activeIdx = Math.min(Math.floor(progress * N), N - 1);
         var localProg = (progress * N) % 1;
 
-        cards.forEach((card, i) => {
+        cards.forEach(function(card, i) {
           var diff = i - activeIdx;
           var scale, ty, opacity, zIdx;
           if (diff < 0) { scale = 0.85; ty = -60; opacity = 0; zIdx = i; }
-          else if (diff === 0) { scale = 1 - localProg * 0.08; ty = -localProg * 40; opacity = 1; zIdx = N+1; }
+          else if (diff === 0) { scale = 1 - localProg * 0.08; ty = -localProg * 40; opacity = 1; zIdx = N + 1; }
           else if (diff === 1) { scale = 0.9 + localProg * 0.1; ty = 60 * (1 - localProg); opacity = localProg; zIdx = N; }
           else { scale = 0.85; ty = 100; opacity = 0; zIdx = i; }
-          card.style.cssText = `transform: translateY(${ty}px) scale(${scale}); opacity: ${opacity}; z-index: ${zIdx};`;
+          card.style.cssText = 'transform: translateY('+ty+'px) scale('+scale+'); opacity: '+opacity+'; z-index: '+zIdx+';';
         });
       }
       window.addEventListener('scroll', updateStack, { passive: true });
       updateStack();
     }
-    buildProjectStack();
 
-    // Fullscreen logic
-    var _fsMedia=[], _fsIdx=0;
+    /* ═══════════════════════════════════════════════════════════
+       PROJECT MODAL
+    ═══════════════════════════════════════════════════════════ */
+    window.openProjModal = function(id) {
+      var p = PROJECTS.find(function(x) { return x.id === id; });
+      if (!p) return;
+      document.getElementById('mHead').innerHTML = '<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+p.title+'</h3>'
+        + '<p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+p.loc+'</p>';
+      document.getElementById('mDesc').innerHTML = '<p style="line-height:1.75;margin-bottom:12px">'+p.full+'</p>'
+        + '<p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> '+(p.tech||[]).join(', ')+'</p>';
+      document.getElementById('mGallery').innerHTML = (p.media||[]).map(function(m, i) {
+        var s = enc(m.src);
+        if (m.type === 'image') return '<div class="m-media-wrap" onclick="openProjCarousel('+id+','+i+')" title="'+(m.caption||'')+'"><img src="'+s+'" alt="'+(m.caption||'')+'" loading="lazy"></div>';
+        return '<div class="m-media-wrap" onclick="openVideoModal(\''+s+'\')" title="Play video" style="background:#111;display:flex;align-items:center;justify-content:center"><i class="fas fa-play" style="color:#fff;font-size:1.4rem;position:absolute"></i><video muted style="width:100%;height:100%;object-fit:cover"><source src="'+s+'" type="video/mp4"></video></div>';
+      }).join('');
+      document.getElementById('mPdf').innerHTML = p.pdf ? '<a href="'+p.pdf+'" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>' : '';
+      document.getElementById('projModal').classList.add('on');
+    };
+    window.closeModal = function(id) { document.getElementById(id).classList.remove('on'); };
+    window.openProjCarousel = function(projId, startIdx) {
+      var p = PROJECTS.find(function(x) { return x.id === projId; });
+      if (!p) return;
+      var list = (p.media||[]).filter(function(m) { return m.type === 'image'; }).map(function(m) { return { src: enc(m.src), caption: m.caption||'' }; });
+      openCarousel(list, startIdx);
+    };
+
+    /* ═══════════════════════════════════════════════════════════
+       FULLSCREEN LIGHTBOX
+    ═══════════════════════════════════════════════════════════ */
+    var _fsMedia = [], _fsIdx = 0;
     function openFullscreen(list, idx) {
-      _fsMedia = list; _fsIdx = idx || 0;
-      document.getElementById('fullscreenImg').src = _fsMedia[_fsIdx].src;
-      document.getElementById('fsCaption').textContent = (_fsMedia[_fsIdx].caption||'') + ` (${_fsIdx+1}/${_fsMedia.length})`;
+      _fsMedia = list;
+      _fsIdx = idx || 0;
+      updateFS();
       document.getElementById('fullscreenModal').classList.add('active');
+    }
+    function updateFS() {
+      var item = _fsMedia[_fsIdx];
+      document.getElementById('fullscreenImg').src = item.src;
+      document.getElementById('fsCaption').textContent = (item.caption || '') + ' (' + (_fsIdx + 1) + '/' + _fsMedia.length + ')';
     }
     window.fsStep = function(d) {
       _fsIdx = (_fsIdx + d + _fsMedia.length) % _fsMedia.length;
-      document.getElementById('fullscreenImg').src = _fsMedia[_fsIdx].src;
-      document.getElementById('fsCaption').textContent = (_fsMedia[_fsIdx].caption||'') + ` (${_fsIdx+1}/${_fsMedia.length})`;
+      updateFS();
     };
-    window.closeFull = function() { document.getElementById('fullscreenModal').classList.remove('active'); };
+    window.closeFull = function() {
+      document.getElementById('fullscreenModal').classList.remove('active');
+    };
     document.getElementById('fullscreenModal').addEventListener('click', function(e) {
       if (e.target === this) closeFull();
     });
 
-    // Project modal (same as before)
-    window.openProjModal = function(id) { /* ... same ... */ };
-    window.closeModal = function(id) { document.getElementById(id).classList.remove('on'); };
-
-    // Carousel, video, etc. unchanged.
-
-    // Init functions: cursor, three, nav, reveal, magnetic, scramble
-    function initAll() {
-      initCursor(); initNav(); initReveal(); initMagnetic(); initCardHover(); initScramble();
-      if (typeof THREE !== 'undefined') initThree();
+    /* ═══════════════════════════════════════════════════════════
+       CAROUSEL
+    ═══════════════════════════════════════════════════════════ */
+    var _carMedia = [], _carIdx = 0;
+    function openCarousel(list, idx) {
+      _carMedia = list;
+      _carIdx = idx || 0;
+      updateCar();
+      document.getElementById('carouselModal').classList.add('active');
     }
-    document.addEventListener('DOMContentLoaded', initAll);
+    function updateCar() {
+      var item = _carMedia[_carIdx];
+      document.getElementById('carouselImage').src = item.src || item;
+      document.getElementById('carouselCaption').textContent = item.caption || ((_carIdx + 1) + ' / ' + _carMedia.length);
+    }
+    window.carStep = function(d) {
+      _carIdx = (_carIdx + d + _carMedia.length) % _carMedia.length;
+      updateCar();
+    };
+    window.closeCarousel = function() { document.getElementById('carouselModal').classList.remove('active'); };
+    window.openCarouselFromList = function(list, idx) { openCarousel(list, idx); };
+
+    /* ═══════════════════════════════════════════════════════════
+       VIDEO MODAL
+    ═══════════════════════════════════════════════════════════ */
+    window.openVideoModal = function(src) {
+      document.getElementById('videoPlayer').src = src;
+      document.getElementById('videoModal').classList.add('active');
+    };
+    window.closeVideoModal = function() {
+      var v = document.getElementById('videoPlayer');
+      v.pause(); v.src = '';
+      document.getElementById('videoModal').classList.remove('active');
+    };
+
+    /* ═══════════════════════════════════════════════════════════
+       MAGNETIC BUTTONS
+    ═══════════════════════════════════════════════════════════ */
+    function initMagnetic() {
+      document.querySelectorAll('.magnetic').forEach(function(btn) {
+        btn.addEventListener('mousemove', function(e) {
+          var r = btn.getBoundingClientRect();
+          var x = e.clientX - r.left - r.width / 2;
+          var y = e.clientY - r.top - r.height / 2;
+          btn.style.transform = 'translate(' + x * 0.3 + 'px,' + y * 0.3 + 'px)';
+          btn.style.transition = 'transform .25s ease';
+        });
+        btn.addEventListener('mouseleave', function() {
+          btn.style.transform = 'translate(0,0)';
+          btn.style.transition = 'transform .6s cubic-bezier(.34,1.56,.64,1)';
+        });
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CARD HOVER EFFECTS
+    ═══════════════════════════════════════════════════════════ */
+    function initCardHover() {
+      document.addEventListener('mousemove', function(e) {
+        document.querySelectorAll('.exp-hcard').forEach(function(card) {
+          var r = card.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5;
+          var y = (e.clientY - r.top) / r.height - 0.5;
+          var dist = Math.sqrt(x * x + y * y);
+          if (dist < 1.5) {
+            card.style.transform = 'translateY(-8px) scale(1.01) perspective(600px) rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 6) + 'deg)';
+            card.style.transition = 'transform .25s ease';
+          }
+        });
+        document.querySelectorAll('.bento-card').forEach(function(card) {
+          var r = card.getBoundingClientRect();
+          if (e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) {
+            var x = (e.clientX - r.left) / r.width - 0.5;
+            var y = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transform = 'translateY(-2px) perspective(500px) rotateY(' + (x * 5) + 'deg) rotateX(' + (-y * 5) + 'deg)';
+            card.style.transition = 'transform .2s ease';
+          } else {
+            card.style.transform = '';
+            card.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1)';
+          }
+        });
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SCRAMBLE
+    ═══════════════════════════════════════════════════════════ */
+    function initScramble() {
+      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
+      document.querySelectorAll('.scramble').forEach(function(el) {
+        var orig = el.dataset.text || el.textContent, done = false;
+        new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting && !done) {
+            done = true;
+            var f = 0, total = 34;
+            var iv = setInterval(function() {
+              el.textContent = orig.split('').map(function(ch, i) {
+                if (ch === ' ') return ' ';
+                if (f / total > i / orig.length) return ch;
+                return CHARS[Math.floor(Math.random() * CHARS.length)];
+              }).join('');
+              f++;
+              if (f > total) { el.textContent = orig; clearInterval(iv); }
+            }, 36);
+          }
+        }, { threshold: .5 }).observe(el);
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       KEYBOARD
+    ═══════════════════════════════════════════════════════════ */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeFull(); closeCarousel(); closeVideoModal();
+        document.querySelectorAll('.modal.on').forEach(function(m) { m.classList.remove('on'); });
+      }
+    });
+
+    /* ═══════════════════════════════════════════════════════════
+       BOOT
+    ═══════════════════════════════════════════════════════════ */
+    document.addEventListener('DOMContentLoaded', function() {
+      buildSkills();
+      buildExperience();
+      buildFreelance();
+      buildProjectStack();
+      buildCerts();
+      initReveal();
+      initCursor();
+      initNav();
+      initMagnetic();
+      initCardHover();
+      initScramble();
+      if (typeof THREE !== 'undefined') initThree();
+    });
   </script>
 </body>
 </html>
