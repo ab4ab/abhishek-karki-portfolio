@@ -10,1090 +10,1000 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
-    /* ═══════════════════════════════════════════════════════
-       BASE (identical to previous – unchanged)
-    ═══════════════════════════════════════════════════════ */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --white: #f5f4f0; --black: #0e0e0e; --accent: #8ab4f8; --accent2: #c4f0a8;
-      --light-gray: #e8e6e0; --mid-gray: #c8c5bc;
-      --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+    /* ═══════════════════ BASE ═══════════════════ */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --white:#f5f4f0;--black:#0e0e0e;--accent:#8ab4f8;--accent2:#c4f0a8;
+      --light-gray:#e8e6e0;--mid-gray:#c8c5bc;
+      --font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
     }
-    html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--black); font-family: var(--font-body); font-weight: 300; cursor: none; overflow-x: hidden; }
+    html{scroll-behavior:smooth}
+    body{background:var(--white);color:var(--black);font-family:var(--font-body);font-weight:300;cursor:none;overflow-x:hidden}
 
-    /* CURSOR */
-    #cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--black); border-radius: 50%; pointer-events: none; z-index: 9999; left: 0; top: 0; transform: translate(-50%, -50%); will-change: left, top; }
-    #cursor-ring { position: fixed; width: 38px; height: 38px; border: 1.5px solid var(--black); border-radius: 50%; pointer-events: none; z-index: 9998; left: 0; top: 0; transform: translate(-50%, -50%); transition: width .3s, height .3s, border-color .3s; will-change: left, top; }
-    body.cursor-hover #cursor-ring { width: 64px; height: 64px; border-color: var(--accent); }
-    body.cursor-hover #cursor-dot { background: var(--accent); }
-    body.cursor-active #cursor-dot { transform: translate(-50%, -50%) scale(0.5); }
+    /* Cursor */
+    #cursor-dot{position:fixed;width:8px;height:8px;background:var(--black);border-radius:50%;pointer-events:none;z-index:9999;left:0;top:0;transform:translate(-50%,-50%);will-change:left,top}
+    #cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid var(--black);border-radius:50%;pointer-events:none;z-index:9998;left:0;top:0;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;will-change:left,top}
+    body.cursor-hover #cursor-ring{width:64px;height:64px;border-color:var(--accent)}
+    body.cursor-hover #cursor-dot{background:var(--accent)}
+    body.cursor-active #cursor-dot{transform:translate(-50%,-50%) scale(0.5)}
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 28px 60px; transition: background .4s, backdrop-filter .4s, border-bottom .4s; }
-    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: -.02em; text-decoration: none; color: var(--black); }
-    .nav-links { display: flex; gap: 40px; list-style: none; }
-    .nav-links a { font-size: .78rem; letter-spacing: .09em; text-transform: uppercase; text-decoration: none; color: var(--black); opacity: .55; transition: opacity .25s; }
-    .nav-links a:hover { opacity: 1; }
-    .nav-cta { background: var(--black)!important; color: var(--white)!important; padding: 7px 22px!important; border-radius: 100px; opacity: 1!important; font-weight: 600; }
-    .nav-cta:hover { background: var(--accent)!important; color: var(--black)!important; }
+    /* Nav */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:28px 60px;transition:background .4s,backdrop-filter .4s,border-bottom .4s}
+    .nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.1rem;letter-spacing:-.02em;text-decoration:none;color:var(--black)}
+    .nav-links{display:flex;gap:40px;list-style:none}
+    .nav-links a{font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;color:var(--black);opacity:.55;transition:opacity .25s}
+    .nav-links a:hover{opacity:1}
+    .nav-cta{background:var(--black)!important;color:var(--white)!important;padding:7px 22px!important;border-radius:100px;opacity:1!important;font-weight:600}
+    .nav-cta:hover{background:var(--accent)!important;color:var(--black)!important}
 
-    /* BUTTONS */
-    .btn { display: inline-block; padding: 15px 36px; font-family: var(--font-body); font-size: .83rem; font-weight: 400; letter-spacing: .07em; text-transform: uppercase; text-decoration: none; border-radius: 100px; position: relative; overflow: hidden; transition: color .3s; cursor: none; }
-    .btn-dark { background: var(--black); color: var(--white); border: 1.5px solid var(--black); }
-    .btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
-    .btn::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateY(102%); transition: transform .42s cubic-bezier(.76,0,.24,1); z-index: -1; border-radius: 100px; }
-    .btn:hover { color: var(--black); } .btn:hover::after { transform: translateY(0); }
+    /* Buttons */
+    .btn{display:inline-block;padding:15px 36px;font-family:var(--font-body);font-size:.83rem;font-weight:400;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border-radius:100px;position:relative;overflow:hidden;transition:color .3s;cursor:none}
+    .btn-dark{background:var(--black);color:var(--white);border:1.5px solid var(--black)}
+    .btn-outline{background:transparent;color:var(--black);border:1.5px solid var(--black)}
+    .btn::after{content:'';position:absolute;inset:0;background:var(--accent);transform:translateY(102%);transition:transform .42s cubic-bezier(.76,0,.24,1);z-index:-1;border-radius:100px}
+    .btn:hover{color:var(--black)}.btn:hover::after{transform:translateY(0)}
 
-    /* SECTIONS */
-    section { padding: 120px 60px; }
-    .section-label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; opacity: .38; margin-bottom: 64px; display: flex; align-items: center; gap: 14px; }
-    .section-label::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+    /* Sections */
+    section{padding:120px 60px}
+    .section-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.38;margin-bottom:64px;display:flex;align-items:center;gap:14px}
+    .section-label::before{content:'';width:28px;height:1px;background:currentColor}
 
-    /* CLIP-PATH REVEAL */
-    .reveal { opacity: 0; transform: translateY(48px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .clip-reveal { clip-path: inset(0 0 100% 0); transition: clip-path .85s cubic-bezier(.22,1,.36,1); }
-    .clip-reveal.visible { clip-path: inset(0 0 0% 0); }
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(48px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .clip-reveal{clip-path:inset(0 0 100% 0);transition:clip-path .85s cubic-bezier(.22,1,.36,1)}
+    .clip-reveal.visible{clip-path:inset(0 0 0% 0)}
 
-    /* HERO */
-    #hero { position: relative; height: 100vh; display: flex; align-items: center; padding: 0 60px; overflow: hidden; background: url('assets/background.jpg') center/cover no-repeat; }
-    #hero::before { content: ''; position: absolute; inset: 0; background: rgba(245,244,240,.78); z-index: 1; }
-    #three-canvas { position: absolute; top: 0; right: 0; width: 55%; height: 100%; pointer-events: none; z-index: 0; }
-    .hero-content { position: relative; z-index: 2; max-width: 700px; }
-    .hero-tag { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; opacity: .45; margin-bottom: 22px; display: block; }
-    .hero-name { font-family: var(--font-display); font-weight: 800; font-size: clamp(4rem, 9vw, 8rem); line-height: 1.04; letter-spacing: -.04em; margin-bottom: 30px; }
-    .hero-name .line { display: block; overflow: hidden; }
-    .hero-name .word { display: inline-block; transform: translateY(110%); animation: wordUp .9s cubic-bezier(.22,1,.36,1) forwards; }
-    .hero-name .line:nth-child(2) .word { animation-delay: .12s; }
-    @keyframes wordUp { to { transform: translateY(0); } }
-    .hero-subtitle { font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.65; max-width: 400px; margin-bottom: 48px; opacity: .75; }
-    .hero-cta { display: inline-flex; gap: 16px; }
-    .scroll-hint { position: absolute; bottom: 44px; left: 60px; display: flex; align-items: center; gap: 12px; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; opacity: .35; z-index: 2; }
-    .scroll-line { width: 40px; height: 1px; background: var(--black); transform-origin: left; animation: extL 2s ease-in-out infinite; }
-    @keyframes extL { 0%,100% { transform: scaleX(.3); opacity: .4; } 50% { transform: scaleX(1); opacity: 1; } }
+    /* Hero */
+    #hero{position:relative;height:100vh;display:flex;align-items:center;padding:0 60px;overflow:hidden;background:url('assets/background.jpg') center/cover no-repeat}
+    #hero::before{content:'';position:absolute;inset:0;background:rgba(245,244,240,.78);z-index:1}
+    #three-canvas{position:absolute;top:0;right:0;width:55%;height:100%;pointer-events:none;z-index:0}
+    .hero-content{position:relative;z-index:2;max-width:700px}
+    .hero-tag{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;opacity:.45;margin-bottom:22px;display:block}
+    .hero-name{font-family:var(--font-display);font-weight:800;font-size:clamp(4rem,9vw,8rem);line-height:1.04;letter-spacing:-.04em;margin-bottom:30px}
+    .hero-name .line{display:block;overflow:hidden}
+    .hero-name .word{display:inline-block;transform:translateY(110%);animation:wordUp .9s cubic-bezier(.22,1,.36,1) forwards}
+    .hero-name .line:nth-child(2) .word{animation-delay:.12s}
+    @keyframes wordUp{to{transform:translateY(0)}}
+    .hero-subtitle{font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.65;max-width:400px;margin-bottom:48px;opacity:.75}
+    .hero-cta{display:inline-flex;gap:16px}
+    .scroll-hint{position:absolute;bottom:44px;left:60px;display:flex;align-items:center;gap:12px;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;opacity:.35;z-index:2}
+    .scroll-line{width:40px;height:1px;background:var(--black);transform-origin:left;animation:extL 2s ease-in-out infinite}
+    @keyframes extL{0%,100%{transform:scaleX(.3);opacity:.4}50%{transform:scaleX(1);opacity:1}}
 
-    /* ABOUT */
-    #about { background: var(--white); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .about-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -.03em; margin-bottom: 30px; }
-    .about-text { font-size: 1.05rem; line-height: 1.82; opacity: .68; margin-bottom: 22px; }
-    .about-image-wrap { position: relative; aspect-ratio: 3/4; border-radius: 4px; overflow: hidden; background: var(--light-gray); }
-    .about-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .about-image-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: .8rem; letter-spacing: .1em; opacity: .28; text-transform: uppercase; }
-    .about-accent-box { position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; background: var(--accent); border-radius: 4px; z-index: -1; }
+    /* About */
+    #about{background:var(--white)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .about-heading{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,5vw,4.2rem);line-height:1;letter-spacing:-.03em;margin-bottom:30px}
+    .about-text{font-size:1.05rem;line-height:1.82;opacity:.68;margin-bottom:22px}
+    .about-image-wrap{position:relative;aspect-ratio:3/4;border-radius:4px;overflow:hidden;background:var(--light-gray)}
+    .about-image-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .about-image-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:.8rem;letter-spacing:.1em;opacity:.28;text-transform:uppercase}
+    .about-accent-box{position:absolute;bottom:-20px;right:-20px;width:120px;height:120px;background:var(--accent);border-radius:4px;z-index:-1}
 
-    /* SKILLS BENTO GRID (unchanged) */
-    #skills { background: var(--black); color: var(--white); }
-    #skills .section-label { color: var(--white); }
-    .skills-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.03em; margin-bottom: 56px; }
-    .bento-grid { display: grid; grid-template-columns: repeat(12,1fr); grid-auto-rows: 80px; gap: 14px; }
-    .bento-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; overflow: hidden; position: relative; transition: background .3s, border-color .3s, transform .3s; }
-    .bento-card:hover { background: rgba(255,255,255,.09); border-color: rgba(138,180,248,.25); transform: translateY(-2px); }
-    .bento-skill-lg { grid-column: span 4; grid-row: span 3; }
-    .bento-skill-md { grid-column: span 4; grid-row: span 2; }
-    .bento-skill-sm { grid-column: span 3; grid-row: span 2; }
-    .bento-skill-xl { grid-column: span 5; grid-row: span 3; }
-    .bento-skill-wide { grid-column: span 8; grid-row: span 2; }
-    .bento-skill-tall { grid-column: span 3; grid-row: span 4; }
-    .bento-skill-sq { grid-column: span 3; grid-row: span 3; }
-    .bento-stat { grid-column: span 3; grid-row: span 2; }
-    .bento-accent { grid-column: span 4; grid-row: span 2; background: var(--accent); border-color: transparent; color: var(--black); }
-    .bento-accent2 { grid-column: span 3; grid-row: span 2; background: var(--accent2); border-color: transparent; color: var(--black); }
-    .bento-quote { grid-column: span 9; grid-row: span 2; }
-    .bento-inner { padding: 24px 26px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
-    .bento-label { font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; opacity: .45; margin-bottom: 6px; }
-    .bento-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; margin-bottom: 10px; }
-    .bento-stat-num { font-family: var(--font-display); font-weight: 800; font-size: 2.4rem; letter-spacing: -.04em; line-height: 1; }
-    .bento-stat-sub { font-size: .7rem; opacity: .45; margin-top: 4px; }
-    .bento-bar-bg { height: 3px; background: rgba(255,255,255,.12); border-radius: 3px; overflow: hidden; margin-top: auto; }
-    .bento-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; width: 0; transition: width 1.5s cubic-bezier(.76,0,.24,1); }
-    .bento-card:hover .bento-bar-fill { filter: brightness(1.15); }
-    .bento-accent .bento-title, .bento-accent .bento-label, .bento-accent .bento-stat-num, .bento-accent .bento-stat-sub { color: var(--black); }
-    .bento-accent .bento-bar-bg { background: rgba(0,0,0,.15); }
-    .bento-accent .bento-bar-fill { background: var(--black); }
-    .bento-accent2 .bento-title, .bento-accent2 .bento-label { color: var(--black); }
-    .bento-quote-text { font-family: var(--font-display); font-size: clamp(1rem, 1.8vw, 1.4rem); line-height: 1.5; font-style: italic; opacity: .7; }
+    /* Skills Bento */
+    #skills{background:var(--black);color:var(--white)}
+    #skills .section-label{color:var(--white)}
+    .skills-heading{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.03em;margin-bottom:56px}
+    .bento-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:80px;gap:14px}
+    .bento-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;position:relative;transition:background .3s,border-color .3s,transform .3s}
+    .bento-card:hover{background:rgba(255,255,255,.09);border-color:rgba(138,180,248,.25);transform:translateY(-2px)}
+    .bento-skill-lg{grid-column:span 4;grid-row:span 3}
+    .bento-skill-md{grid-column:span 4;grid-row:span 2}
+    .bento-skill-xl{grid-column:span 5;grid-row:span 3}
+    .bento-skill-sq{grid-column:span 3;grid-row:span 3}
+    .bento-stat{grid-column:span 3;grid-row:span 2}
+    .bento-accent{grid-column:span 4;grid-row:span 2;background:var(--accent);border-color:transparent;color:var(--black)}
+    .bento-accent2{grid-column:span 3;grid-row:span 2;background:var(--accent2);border-color:transparent;color:var(--black)}
+    .bento-quote{grid-column:span 9;grid-row:span 2}
+    .bento-inner{padding:24px 26px;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+    .bento-label{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;opacity:.45;margin-bottom:6px}
+    .bento-title{font-family:var(--font-display);font-weight:700;font-size:1.05rem;line-height:1.3;margin-bottom:10px}
+    .bento-stat-num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;letter-spacing:-.04em;line-height:1}
+    .bento-stat-sub{font-size:.7rem;opacity:.45;margin-top:4px}
+    .bento-bar-bg{height:3px;background:rgba(255,255,255,.12);border-radius:3px;overflow:hidden;margin-top:auto}
+    .bento-bar-fill{height:100%;background:var(--accent);border-radius:3px;width:0;transition:width 1.5s cubic-bezier(.76,0,.24,1)}
+    .bento-accent .bento-title,.bento-accent .bento-label,.bento-accent .bento-stat-num,.bento-accent .bento-stat-sub{color:var(--black)}
+    .bento-accent .bento-bar-bg{background:rgba(0,0,0,.15)}
+    .bento-accent .bento-bar-fill{background:var(--black)}
+    .bento-accent2 .bento-title,.bento-accent2 .bento-label{color:var(--black)}
+    .bento-quote-text{font-family:var(--font-display);font-size:clamp(1rem,1.8vw,1.4rem);line-height:1.5;font-style:italic;opacity:.7}
 
-    /* ═══════════════════════════════════════════════════════
-       UNIVERSAL HORIZONTAL GALLERY SECTIONS
-       (used by Experience, Projects, Freelance, Certs)
-    ═══════════════════════════════════════════════════════ */
-    .horiz-section { background: var(--black); color: var(--white); padding: 120px 0; }
-    .horiz-section .section-label { color: var(--white); padding: 0 60px; }
-    .horiz-intro { padding: 0 60px; margin-bottom: 64px; }
-    .horiz-company { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -.03em; }
-    .horiz-company-sub { margin-top: 8px; opacity: .45; font-size: 1rem; }
-    .horiz-sticky-outer { height: calc(var(--n-items) * 100vh); position: relative; }
-    .horiz-sticky-inner { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 48px; }
-    .horiz-track-wrap { overflow: hidden; position: relative; }
-    .horiz-track { display: flex; gap: 24px; padding: 0 60px; will-change: transform; }
-    .horiz-card { flex: 0 0 480px; height: 520px; border-radius: 16px; overflow: hidden; position: relative; background: #1a1a1a; border: 1px solid rgba(255,255,255,.07); transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s; }
-    .horiz-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,.6); }
-    .hcard-gallery { position: absolute; inset: 0; overflow: hidden; }
-    .hcard-gallery img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .65s ease; }
-    .hcard-gallery img.active { opacity: 1; }
-    .hcard-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.15) 50%, transparent 100%); z-index: 2; }
-    .hcard-content { position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; padding: 28px; }
-    .hcard-num { font-family: var(--font-display); font-size: 3.5rem; font-weight: 800; line-height: 1; opacity: .12; letter-spacing: -.04em; margin-bottom: -12px; }
-    .hcard-title { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; margin-bottom: 6px; color: #fff; }
-    .hcard-desc { font-size: .82rem; opacity: .55; line-height: 1.6; margin-bottom: 14px; color: #fff; }
-    .hcard-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .hcard-tag { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.6); }
-    .hcard-dots { position: absolute; top: 16px; right: 16px; z-index: 4; display: flex; gap: 5px; }
-    .hcard-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.3); border: none; cursor: pointer; transition: background .25s, transform .25s; }
-    .hcard-dot.active { background: #fff; transform: scale(1.25); }
-    .hcard-arrows { position: absolute; bottom: 88px; right: 16px; z-index: 4; display: flex; gap: 6px; }
-    .hcard-arr { background: rgba(255,255,255,.12); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: .8rem; display: flex; align-items: center; justify-content: center; transition: background .25s; }
-    .hcard-arr:hover { background: var(--accent); color: var(--black); }
-    .hcard-fs { position: absolute; top: 16px; left: 16px; z-index: 4; background: rgba(0,0,0,.4); color: #fff; border: none; padding: 5px 10px; border-radius: 6px; font-size: .72rem; cursor: pointer; opacity: 0; transition: opacity .25s; }
-    .horiz-card:hover .hcard-fs { opacity: 1; }
-    .horiz-progress-bar { height: 2px; background: rgba(255,255,255,.1); position: relative; margin: 0 60px; margin-top: 24px; }
-    .horiz-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); transition: width .15s linear; border-radius: 2px; }
-    .horiz-site-nav { display: flex; gap: 16px; padding: 16px 60px 0; align-items: center; }
-    .horiz-site-indicator { display: flex; gap: 8px; }
-    .horiz-site-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.2); transition: background .3s, width .3s; border: none; cursor: pointer; }
-    .horiz-site-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
-    .horiz-site-label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .35; font-family: var(--font-display); }
+    /* Horizontal gallery sections */
+    .horiz-section{background:var(--black);color:var(--white);padding:120px 0}
+    .horiz-section .section-label{color:var(--white);padding:0 60px}
+    .horiz-intro{padding:0 60px;margin-bottom:64px}
+    .horiz-company{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,4vw,3.4rem);letter-spacing:-.03em}
+    .horiz-company-sub{margin-top:8px;opacity:.45;font-size:1rem}
+    .horiz-sticky-outer{height:calc(var(--n-items) * 100vh);position:relative}
+    .horiz-sticky-inner{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:48px}
+    .horiz-track-wrap{overflow:hidden;position:relative}
+    .horiz-track{display:flex;gap:24px;padding:0 60px;will-change:transform}
+    .horiz-card{flex:0 0 480px;height:520px;border-radius:16px;overflow:hidden;position:relative;background:#1a1a1a;border:1px solid rgba(255,255,255,.07);transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s}
+    .horiz-card:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 40px 80px rgba(0,0,0,.6)}
+    .hcard-gallery{position:absolute;inset:0;overflow:hidden}
+    .hcard-gallery img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .65s ease}
+    .hcard-gallery img.active{opacity:1}
+    .hcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.15) 50%,transparent 100%);z-index:2}
+    .hcard-content{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:28px}
+    .hcard-num{font-family:var(--font-display);font-size:3.5rem;font-weight:800;line-height:1;opacity:.12;letter-spacing:-.04em;margin-bottom:-12px}
+    .hcard-title{font-family:var(--font-display);font-weight:700;font-size:1.2rem;margin-bottom:6px;color:#fff}
+    .hcard-desc{font-size:.82rem;opacity:.55;line-height:1.6;margin-bottom:14px;color:#fff}
+    .hcard-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .hcard-tag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.6)}
+    .hcard-dots{position:absolute;top:16px;right:16px;z-index:4;display:flex;gap:5px}
+    .hcard-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);border:none;cursor:pointer;transition:background .25s,transform .25s}
+    .hcard-dot.active{background:#fff;transform:scale(1.25)}
+    .hcard-arrows{position:absolute;bottom:88px;right:16px;z-index:4;display:flex;gap:6px}
+    .hcard-arr{background:rgba(255,255,255,.12);color:#fff;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:background .25s}
+    .hcard-arr:hover{background:var(--accent);color:var(--black)}
+    .hcard-fs{position:absolute;top:16px;left:16px;z-index:4;background:rgba(0,0,0,.4);color:#fff;border:none;padding:5px 10px;border-radius:6px;font-size:.72rem;cursor:pointer;opacity:0;transition:opacity .25s}
+    .horiz-card:hover .hcard-fs{opacity:1}
+    .horiz-progress-bar{height:2px;background:rgba(255,255,255,.1);position:relative;margin:0 60px;margin-top:24px}
+    .horiz-progress-fill{position:absolute;left:0;top:0;height:100%;background:var(--accent);transition:width .15s linear;border-radius:2px}
+    .horiz-site-nav{display:flex;gap:16px;padding:16px 60px 0;align-items:center}
+    .horiz-site-indicator{display:flex;gap:8px}
+    .horiz-site-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s,width .3s;border:none;cursor:pointer}
+    .horiz-site-dot.active{background:var(--accent);width:24px;border-radius:4px}
+    .horiz-site-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;opacity:.35;font-family:var(--font-display)}
 
-    /* Projects card link */
-    .hcard-link { font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; text-decoration: none; color: #fff; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 2px; margin-top: 12px; transition: gap .3s; }
-    .hcard-link:hover { gap: 14px; color: var(--accent); }
+    /* Education */
+    #education{background:var(--black);color:var(--white)}
+    #education .section-label{color:var(--white)}
+    .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .edu-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:32px;transition:background .3s}
+    .edu-card:hover{background:rgba(255,255,255,.08)}
+    .edu-card h3{font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:10px}
+    .edu-card p{font-size:.88rem;opacity:.5;line-height:1.7}
+    .honors{margin-top:8px;opacity:1!important;color:var(--accent)!important}
 
-    /* Freelance specific (if needed) */
-    .fl-card .hcard-link { color: var(--white); }
+    /* Contact */
+    #contact{background:var(--black);color:var(--white);text-align:center}
+    .contact-pre{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.35;margin-bottom:24px}
+    .contact-heading{font-family:var(--font-display);font-weight:800;font-size:clamp(3rem,7vw,7rem);letter-spacing:-.04em;line-height:1.1;margin-bottom:52px}
+    .contact-links{display:flex;gap:28px;justify-content:center;margin-bottom:44px}
+    .contact-link{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--white);opacity:.45;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:3px;transition:opacity .3s}
+    .contact-link:hover{opacity:1}
 
-    /* EDUCATION */
-    #education { background: var(--black); color: var(--white); }
-    #education .section-label { color: var(--white); }
-    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .edu-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 16px; padding: 32px; transition: background .3s; }
-    .edu-card:hover { background: rgba(255,255,255,.08); }
-    .edu-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; margin-bottom: 10px; }
-    .edu-card p { font-size: .88rem; opacity: .5; line-height: 1.7; }
-    .honors { margin-top: 8px; opacity: 1!important; color: var(--accent)!important; }
+    /* Modals */
+    .fullscreen-modal{position:fixed;inset:0;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;z-index:5000}
+    .fullscreen-modal.active{display:flex}
+    .fullscreen-modal img{max-width:86vw;max-height:84vh;object-fit:contain;border-radius:8px}
+    .fullscreen-close{position:absolute;top:20px;right:28px;font-size:1.8rem;color:white;background:none;border:none;cursor:pointer;opacity:.6;transition:opacity .2s}
+    .fullscreen-close:hover{opacity:1}
+    .fs-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);color:#fff;border:none;font-size:1.4rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;transition:background .25s}
+    .fs-nav:hover{background:var(--accent);color:var(--black)}
+    .fs-prev{left:20px}.fs-next{right:20px}
+    .fs-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.78rem;letter-spacing:.07em;white-space:nowrap}
 
-    /* CONTACT */
-    #contact { background: var(--black); color: var(--white); text-align: center; }
-    .contact-pre { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; opacity: .35; margin-bottom: 24px; }
-    .contact-heading { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -.04em; line-height: 1.1; margin-bottom: 52px; }
-    .contact-links { display: flex; gap: 28px; justify-content: center; margin-bottom: 44px; }
-    .contact-link { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--white); opacity: .45; border-bottom: 1px solid rgba(255,255,255,.2); padding-bottom: 3px; transition: opacity .3s; }
-    .contact-link:hover { opacity: 1; }
+    .modal{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.5);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
+    .modal.on{opacity:1;pointer-events:all}
+    .modal-box{background:var(--white);border-radius:16px;width:90%;max-width:680px;max-height:85vh;overflow-y:auto;padding:40px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+    .modal-close{position:absolute;top:18px;right:22px;background:none;border:none;font-size:1.5rem;cursor:pointer;opacity:.45;transition:opacity .2s}
+    .modal-close:hover{opacity:1}
+    .m-gallery{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .m-media-wrap{width:96px;height:72px;border-radius:8px;overflow:hidden;cursor:pointer;position:relative;transition:transform .25s}
+    .m-media-wrap:hover{transform:scale(1.05)}
+    .m-media-wrap img,.m-media-wrap video{width:100%;height:100%;object-fit:cover}
 
-    /* MODALS (unchanged) */
-    .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.5); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
-    .modal.on { opacity: 1; pointer-events: all; }
-    .modal-box { background: var(--white); border-radius: 16px; width: 90%; max-width: 680px; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
-    .modal-close { position: absolute; top: 18px; right: 22px; background: none; border: none; font-size: 1.5rem; cursor: pointer; opacity: .45; transition: opacity .2s; }
-    .modal-close:hover { opacity: 1; }
-    .m-gallery { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-    .m-media-wrap { width: 96px; height: 72px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; transition: transform .25s; }
-    .m-media-wrap:hover { transform: scale(1.05); }
-    .m-media-wrap img, .m-media-wrap video { width: 100%; height: 100%; object-fit: cover; }
-    .fullscreen-modal { position: fixed; inset: 0; background: rgba(0,0,0,.96); display: none; align-items: center; justify-content: center; z-index: 5000; }
-    .fullscreen-modal.active { display: flex; }
-    .fullscreen-modal img { max-width: 86vw; max-height: 84vh; object-fit: contain; border-radius: 8px; }
-    .fullscreen-close { position: absolute; top: 20px; right: 28px; font-size: 1.8rem; color: white; background: none; border: none; cursor: pointer; opacity: .6; transition: opacity .2s; }
-    .fullscreen-close:hover { opacity: 1; }
-    .fs-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.1); color: #fff; border: none; font-size: 1.4rem; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; transition: background .25s; }
-    .fs-nav:hover { background: var(--accent); color: var(--black); }
-    .fs-prev { left: 20px; } .fs-next { right: 20px; }
-    .fs-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.5); font-size: .78rem; letter-spacing: .07em; white-space: nowrap; }
-    .carousel-modal { position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,.93); display: none; align-items: center; justify-content: center; }
-    .carousel-modal.active { display: flex; }
-    .carousel-content { position: relative; max-width: 90%; max-height: 90%; }
-    .carousel-image { max-height: 72vh; max-width: 86vw; border-radius: 8px; display: block; }
-    .carousel-caption { color: rgba(255,255,255,.55); text-align: center; margin-top: 10px; font-size: .8rem; }
-    .carousel-prev, .carousel-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.1); color: white; border: none; font-size: 1.2rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; transition: background .25s; }
-    .carousel-prev:hover, .carousel-next:hover { background: var(--accent); color: var(--black); }
-    .carousel-prev { left: -56px; } .carousel-next { right: -56px; }
-    .close-carousel { position: absolute; top: -34px; right: 0; color: white; background: none; border: none; font-size: 1.7rem; cursor: pointer; opacity: .6; }
-    .close-carousel:hover { opacity: 1; }
-    .video-modal { position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,.93); display: none; align-items: center; justify-content: center; }
-    .video-modal.active { display: flex; }
-    .close-video { position: absolute; top: 18px; right: 26px; color: white; background: none; border: none; font-size: 1.7rem; cursor: pointer; opacity: .6; }
-    .close-video:hover { opacity: 1; }
+    .carousel-modal,.video-modal{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.93);display:none;align-items:center;justify-content:center}
+    .carousel-modal.active,.video-modal.active{display:flex}
+    .carousel-content{position:relative;max-width:90%;max-height:90%}
+    .carousel-image{max-height:72vh;max-width:86vw;border-radius:8px;display:block}
+    .carousel-caption{color:rgba(255,255,255,.55);text-align:center;margin-top:10px;font-size:.8rem}
+    .carousel-prev,.carousel-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);color:white;border:none;font-size:1.2rem;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;transition:background .25s}
+    .carousel-prev:hover,.carousel-next:hover{background:var(--accent);color:var(--black)}
+    .carousel-prev{left:-56px}.carousel-next{right:-56px}
+    .close-carousel{position:absolute;top:-34px;right:0;color:white;background:none;border:none;font-size:1.7rem;cursor:pointer;opacity:.6}
+    .close-carousel:hover{opacity:1}
+    .close-video{position:absolute;top:18px;right:26px;color:white;background:none;border:none;font-size:1.7rem;cursor:pointer;opacity:.6}
+    .close-video:hover{opacity:1}
 
-    /* VISITOR COUNTER BADGE */
-    .visitor-counter { position: fixed; bottom: 16px; right: 24px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); color: var(--white); padding: 6px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; z-index: 999; display: flex; align-items: center; gap: 6px; opacity: 0.85; }
-    .visitor-counter i { font-size: 0.8rem; color: var(--accent); }
+    .visitor-counter{position:fixed;bottom:16px;right:24px;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);color:var(--white);padding:6px 14px;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.05em;z-index:999;display:flex;align-items:center;gap:6px;opacity:.85}
+    .visitor-counter i{font-size:.8rem;color:var(--accent)}
 
     @media(max-width:1000px){
-      .bento-skill-lg, .bento-skill-md, .bento-skill-sm, .bento-skill-xl, .bento-skill-wide,
-      .bento-skill-tall, .bento-skill-sq, .bento-stat, .bento-accent, .bento-accent2, .bento-quote { grid-column: span 6; grid-row: span 2; }
-      .horiz-card { flex: 0 0 340px; height: 400px; }
+      .bento-skill-lg,.bento-skill-md,.bento-skill-xl,.bento-skill-sq,.bento-stat,.bento-accent,.bento-accent2,.bento-quote{grid-column:span 6;grid-row:span 2}
+      .horiz-card{flex:0 0 340px;height:400px}
     }
     @media(max-width:768px){
-      nav { padding: 20px 24px; }
-      .nav-links { display: none; }
-      #hero, section { padding: 100px 24px; }
-      #experience { padding: 100px 0; }
-      #projects { padding: 100px 0; }
-      #freelance { padding: 100px 0; }
-      #certifications { padding: 100px 0; }
-      #three-canvas { width: 100%; opacity: .25; }
-      .about-grid { grid-template-columns: 1fr; gap: 44px; }
-      .horiz-card { flex: 0 0 85vw; height: 440px; }
-      .horiz-track { padding: 0 24px; }
-      .horiz-site-nav, .horiz-progress-bar, .horiz-intro, .horiz-track-wrap { padding-left: 24px; padding-right: 24px; }
-      .horiz-progress-bar { margin: 0 24px; }
-      .bento-grid { grid-template-columns: repeat(6,1fr); }
+      nav{padding:20px 24px}.nav-links{display:none}
+      #hero,section{padding:100px 24px}
+      #three-canvas{width:100%;opacity:.25}
+      .about-grid{grid-template-columns:1fr;gap:44px}
+      .horiz-card{flex:0 0 85vw;height:440px}
+      .horiz-track{padding:0 24px}
+      .horiz-site-nav,.horiz-progress-bar,.horiz-intro,.horiz-track-wrap{padding-left:24px;padding-right:24px}
+      .horiz-progress-bar{margin:0 24px}
+      .bento-grid{grid-template-columns:repeat(6,1fr)}
     }
   </style>
 </head>
 <body>
-  <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 
-  <nav id="mainNav">
-    <a href="#" class="nav-logo">AK.</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Work</a></li>
-      <li><a href="#freelance">Freelance</a></li>
-      <li><a href="#certifications">Credentials</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="cv.html" target="_blank" class="nav-cta">Resume</a></li>
-    </ul>
-  </nav>
+<nav id="mainNav">
+  <a href="#" class="nav-logo">AK.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#freelance">Freelance</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="cv.html" target="_blank" class="nav-cta">Resume</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <canvas id="three-canvas"></canvas>
-    <div class="hero-content">
-      <span class="hero-tag">NEC Reg. #80593 · Civil Engineer</span>
-      <h1 class="hero-name">
-        <span class="line"><span class="word">Abhishek</span></span>
-        <span class="line"><span class="word">Karki</span></span>
-      </h1>
-      <p class="hero-subtitle">Civil Engineer &amp; GIS Specialist integrating spatial data with structural infrastructure. Advanced focus in hydraulic modeling, risk analysis, and satellite-based temporal assessments.</p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-dark magnetic">View Work</a>
-        <a href="#contact" class="btn btn-outline magnetic">Let's Talk</a>
-      </div>
-    </div>
-    <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-label reveal">About me</div>
-    <div class="about-grid">
-      <div>
-        <h2 class="about-heading reveal">Bridging Geomatics &amp; Structural Engineering.</h2>
-        <p class="about-text reveal delay-1">I'm a Civil Engineer with deep GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Management. I merge field data, satellite imagery, and computational models to solve real‑world infrastructure problems.</p>
-        <p class="about-text reveal delay-2">From InSAR subsidence monitoring to 2D flood mapping, I bring spatial intelligence into every project.</p>
-        <a href="cv.html" target="_blank" class="btn btn-dark magnetic reveal delay-3" style="margin-top:18px">Download CV</a>
-      </div>
-      <div class="about-image-wrap clip-reveal delay-2">
-        <img src="assets/profile.jpg" alt="Abhishek Karki" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="about-image-placeholder" style="display:none">Your Photo Here</div>
-        <div class="about-accent-box"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS (BENTO) -->
-  <section id="skills">
-    <div class="section-label">What I do</div>
-    <h2 class="skills-heading reveal">Technical Competencies.</h2>
-    <div class="bento-grid" id="bentoSkills"></div>
-  </section>
-
-  <!-- EXPERIENCE (HORIZONTAL GALLERY) -->
-  <section id="experience" class="horiz-section">
-    <div class="section-label reveal">Work history</div>
-    <div class="horiz-intro reveal">
-      <div class="horiz-company">Civil Engineer</div>
-      <div class="horiz-company-sub">Sigma Con Pvt. Ltd &nbsp;·&nbsp; Aug 2023 – Jul 2025 &nbsp;·&nbsp; Transmission &amp; Substation Projects</div>
-    </div>
-    <div class="horiz-sticky-outer" id="expStickyOuter">
-      <div class="horiz-sticky-inner">
-        <div class="horiz-track-wrap">
-          <div class="horiz-track" id="expTrack"></div>
-        </div>
-        <div class="horiz-site-nav">
-          <div class="horiz-site-indicator" id="expSiteDots"></div>
-          <span class="horiz-site-label" id="expSiteLabel">01 / 05</span>
-        </div>
-        <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="expProgressFill"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS (HORIZONTAL GALLERY) -->
-  <section id="projects" class="horiz-section">
-    <div class="section-label reveal">Portfolio</div>
-    <div class="horiz-intro reveal">
-      <div class="horiz-company">Featured Case Studies.</div>
-      <div class="horiz-company-sub">8 geospatial &amp; engineering projects</div>
-    </div>
-    <div class="horiz-sticky-outer" id="projStickyOuter">
-      <div class="horiz-sticky-inner">
-        <div class="horiz-track-wrap">
-          <div class="horiz-track" id="projTrack"></div>
-        </div>
-        <div class="horiz-site-nav">
-          <div class="horiz-site-indicator" id="projSiteDots"></div>
-          <span class="horiz-site-label" id="projSiteLabel">01 / 08</span>
-        </div>
-        <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="projProgressFill"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="section-label reveal">Academics</div>
-    <div class="edu-grid">
-      <div class="edu-card reveal delay-1"><h3>MSc Disaster Risk Management (DREM)</h3><p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p></div>
-      <div class="edu-card reveal delay-2"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College · 2022<br>CGPA 3.43</p><p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p></div>
-      <div class="edu-card reveal delay-3"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p></div>
-    </div>
-  </section>
-
-  <!-- CERTIFICATIONS (HORIZONTAL GALLERY) -->
-  <section id="certifications" class="horiz-section">
-    <div class="section-label reveal">Credentials</div>
-    <div class="horiz-intro reveal">
-      <div class="horiz-company">Certifications &amp; Memberships</div>
-      <div class="horiz-company-sub">Verified qualifications</div>
-    </div>
-    <div class="horiz-sticky-outer" id="certStickyOuter">
-      <div class="horiz-sticky-inner">
-        <div class="horiz-track-wrap">
-          <div class="horiz-track" id="certTrack"></div>
-        </div>
-        <div class="horiz-site-nav">
-          <div class="horiz-site-indicator" id="certSiteDots"></div>
-          <span class="horiz-site-label" id="certSiteLabel">01 / 04</span>
-        </div>
-        <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="certProgressFill"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FREELANCE (HORIZONTAL GALLERY) -->
-  <section id="freelance" class="horiz-section">
-    <div class="section-label reveal">Independent Work</div>
-    <div class="horiz-intro reveal">
-      <div class="horiz-company">Freelance &amp; Academic Projects</div>
-      <div class="horiz-company-sub">6 selected works</div>
-    </div>
-    <div class="horiz-sticky-outer" id="flStickyOuter">
-      <div class="horiz-sticky-inner">
-        <div class="horiz-track-wrap">
-          <div class="horiz-track" id="flTrack"></div>
-        </div>
-        <div class="horiz-site-nav">
-          <div class="horiz-site-indicator" id="flSiteDots"></div>
-          <span class="horiz-site-label" id="flSiteLabel">01 / 06</span>
-        </div>
-        <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="flProgressFill"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="contact-pre reveal">Get in touch</p>
-    <h2 class="contact-heading reveal">Let's build<br><span class="scramble" data-text="something">something</span><br>great.</h2>
-    <div class="contact-links reveal">
-      <a href="mailto:abhishekkarki520@gmail.com" class="contact-link">Email</a>
-      <a href="https://linkedin.com/in/abhishek-karki-9b034524a/" target="_blank" class="contact-link">LinkedIn</a>
-    </div>
-    <a href="mailto:abhishekkarki520@gmail.com" class="btn reveal" style="background:var(--accent);color:var(--black);border:none;font-size:1rem;padding:20px 56px;border-radius:100px">Say Hello</a>
-  </section>
-
-  <footer style="background:var(--black);color:var(--white);text-align:center;padding:32px">
-    <span style="opacity:.35;font-size:.82rem">© 2026 Abhishek Karki</span>
-  </footer>
-
-  <div class="visitor-counter" id="visitorCounter">
-    <i class="fas fa-eye"></i> <span id="visitorCount">...</span>
-  </div>
-
-  <!-- MODALS (unchanged) -->
-  <div class="fullscreen-modal" id="fullscreenModal">
-    <button class="fullscreen-close" onclick="closeFull()">&times;</button>
-    <button class="fs-nav fs-prev" onclick="fsStep(-1)"><i class="fas fa-chevron-left"></i></button>
-    <img id="fullscreenImg" src="" alt="">
-    <button class="fs-nav fs-next" onclick="fsStep(1)"><i class="fas fa-chevron-right"></i></button>
-    <div id="fsCaption" class="fs-caption"></div>
-  </div>
-
-  <div class="modal" id="projModal">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('projModal')">&times;</button>
-      <div id="mHead"></div><div id="mDesc"></div>
-      <div class="m-gallery" id="mGallery"></div>
-      <div id="mPdf" style="margin-top:16px"></div>
+<section id="hero">
+  <canvas id="three-canvas"></canvas>
+  <div class="hero-content">
+    <span class="hero-tag">NEC Reg. #80593 · Civil Engineer</span>
+    <h1 class="hero-name">
+      <span class="line"><span class="word">Abhishek</span></span>
+      <span class="line"><span class="word">Karki</span></span>
+    </h1>
+    <p class="hero-subtitle">Civil Engineer &amp; GIS Specialist integrating spatial data with structural infrastructure. Advanced focus in hydraulic modeling, risk analysis, and satellite‑based temporal assessments.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-dark magnetic">View Work</a>
+      <a href="#contact" class="btn btn-outline magnetic">Let's Talk</a>
     </div>
   </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
 
-  <div class="carousel-modal" id="carouselModal">
-    <div class="carousel-content">
-      <button class="close-carousel" onclick="closeCarousel()">&times;</button>
-      <button class="carousel-prev" onclick="carStep(-1)"><i class="fas fa-chevron-left"></i></button>
-      <img id="carouselImage" class="carousel-image" src="" alt="">
-      <button class="carousel-next" onclick="carStep(1)"><i class="fas fa-chevron-right"></i></button>
-      <div id="carouselCaption" class="carousel-caption"></div>
+<section id="about">
+  <div class="section-label reveal">About me</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-heading reveal">Bridging Geomatics &amp; Structural Engineering.</h2>
+      <p class="about-text reveal delay-1">I'm a Civil Engineer with deep GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Management. I merge field data, satellite imagery, and computational models to solve real‑world infrastructure problems.</p>
+      <p class="about-text reveal delay-2">From InSAR subsidence monitoring to 2D flood mapping, I bring spatial intelligence into every project.</p>
+      <a href="cv.html" target="_blank" class="btn btn-dark magnetic reveal delay-3" style="margin-top:18px">Download CV</a>
+    </div>
+    <div class="about-image-wrap clip-reveal delay-2">
+      <img src="assets/profile.jpg" alt="Abhishek Karki" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="about-image-placeholder" style="display:none">Your Photo Here</div>
+      <div class="about-accent-box"></div>
     </div>
   </div>
+</section>
 
-  <div class="video-modal" id="videoModal">
-    <button class="close-video" onclick="closeVideoModal()">&times;</button>
-    <video id="videoPlayer" controls style="max-width:90vw;max-height:80vh"></video>
+<section id="skills">
+  <div class="section-label">What I do</div>
+  <h2 class="skills-heading reveal">Technical Competencies.</h2>
+  <div class="bento-grid" id="bentoSkills"></div>
+</section>
+
+<section id="experience" class="horiz-section">
+  <div class="section-label reveal">Work history</div>
+  <div class="horiz-intro reveal">
+    <div class="horiz-company">Civil Engineer</div>
+    <div class="horiz-company-sub">Sigma Con Pvt. Ltd · Aug 2023 – Jul 2025 · Transmission &amp; Substation Projects</div>
   </div>
+  <div class="horiz-sticky-outer" id="expStickyOuter">
+    <div class="horiz-sticky-inner">
+      <div class="horiz-track-wrap"><div class="horiz-track" id="expTrack"></div></div>
+      <div class="horiz-site-nav">
+        <div class="horiz-site-indicator" id="expSiteDots"></div>
+        <span class="horiz-site-label" id="expSiteLabel">01 / 05</span>
+      </div>
+      <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="expProgressFill"></div></div>
+    </div>
+  </div>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-  <script>
-    /* ═══════════════════════════════════════════════════════════
-       DATA
-    ═══════════════════════════════════════════════════════════ */
-    const PROJECTS = [
-      {id:1,title:"InSAR Time Series for Highway Subsidence",cat:"InSAR / Geotech",loc:"Sloterdijk to Rijksweg, Netherlands",
-       short:"13 Sentinel‑1 images processed with SNAP+SNAPHU generating 12 displacement maps.",
-       full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering, phase unwrapping, terrain correction. Extracted A10 highway profiles.",
-       tech:["SNAP","SNAPHU","Sentinel‑1"],pdf:"assets/portfolio-photos/insar/insar.pdf",
-       media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram"},
-              {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map"},
-              {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Filtered"}]},
-      {id:2,title:"NDVI Timelapse of Kathmandu Valley",cat:"Remote Sensing",loc:"Kathmandu Valley",
-       short:"26‑year vegetation change using Landsat & Sentinel‑2 with 5‑class timelapse animation.",
-       full:"Processed 28 images in Google Earth Engine – NDVI calculation, harmonization. Built 5‑class timelapse.",
-       tech:["GEE","Landsat","Sentinel‑2"],pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf",
-       media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},
-              {type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},
-              {type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse"}]},
-      {id:3,title:"Hospital Accessibility in Colorado",cat:"GIS Network Analysis",loc:"Colorado, USA",
-       short:"Network drive‑time analysis generating 30/60‑min service areas from specialist hospitals.",
-       full:"Generated service areas from specialist hospitals, overlaid county population. Revealed spatial disparities.",
-       tech:["ArcGIS Network Analyst","Population data"],
-       media:[{type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute"},
-              {type:"image",src:"assets/portfolio-photos/hospital/60_min Map.png",caption:"60‑minute"},
-              {type:"image",src:"assets/portfolio-photos/hospital/PopulationMap.png",caption:"Population overlay"}]},
-      {id:4,title:"Urban Sprawl Analysis of Kathmandu Valley",cat:"GIS / Remote Sensing",loc:"Kathmandu Valley",
-       short:"Landsat 8/9 NDBI change detection with ALOS PALSAR slope filtering to isolate urban growth.",
-       full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain.",
-       tech:["Landsat","ALOS PALSAR","ArcGIS"],
-       media:[{type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"},
-              {type:"image",src:"assets/portfolio-photos/urban-sprawl/2026.png",caption:"NDBI 2026"},
-              {type:"image",src:"assets/portfolio-photos/urban-sprawl/slopemap.png",caption:"Slope filtering"}]},
-      {id:5,title:"UAV Landslide Susceptibility Mapping",cat:"UAV / GIS",loc:"Sisneri, Solukhumbu",
-       short:"High-res UAV orthomosaic & DEM with weighted overlay hazard zonation classification.",
-       full:"High‑resolution DEM and orthomosaic from drone; weighted overlay to classify hazard zones.",
-       tech:["UAV","Agisoft","ArcGIS"],
-       media:[{type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"},
-              {type:"image",src:"assets/portfolio-photos/uav-landslide/BaseMap.png",caption:"Orthomosaic"}]},
-      {id:6,title:"Flood Inundation Mapping",cat:"Hydrology",loc:"Narayani River, Nepal",
-       short:"HEC‑RAS 2D unsteady flow simulation for flood depth and velocity mapping.",
-       full:"DEM preparation and terrain correction; 2D unsteady flow simulation.",
-       tech:["HEC‑RAS 2D","ArcGIS"],pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf",
-       media:[{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS mesh"},
-              {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 233808.png",caption:"Flood depth"}]},
-      {id:7,title:"Substation Backfill Volumetric Analysis",cat:"Civil 3D",loc:"Balganga, Janakpur",
-       short:"DGPS survey to surface modeling, corridors and cut/fill volume computation in Civil 3D.",
-       full:"DGPS survey, surface creation, cross‑sections, corridor modeling.",
-       tech:["Civil 3D","DGPS"],pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf",
-       media:[{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"Survey points"}]},
-      {id:8,title:"Earthquake Analysis of Nepal",cat:"Seismology / GIS",loc:"Nepal (1978‑2025)",
-       short:"Mainshock declustering using Gardner‑Knopoff method from USGS catalog with animated map.",
-       full:"Processed USGS catalog using Gardner‑Knopoff declustering. 58 mainshocks.",
-       tech:["ArcGIS","Python"],pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf",
-       media:[{type:"video",src:"assets/portfolio-photos/earthquake/Nepal_EarthQuakes_Animation.mp4",caption:"Animation"},
-              {type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Map"}]}
-    ];
+<section id="projects" class="horiz-section">
+  <div class="section-label reveal">Portfolio</div>
+  <div class="horiz-intro reveal">
+    <div class="horiz-company">Featured Case Studies.</div>
+    <div class="horiz-company-sub">8 geospatial &amp; engineering projects</div>
+  </div>
+  <div class="horiz-sticky-outer" id="projStickyOuter">
+    <div class="horiz-sticky-inner">
+      <div class="horiz-track-wrap"><div class="horiz-track" id="projTrack"></div></div>
+      <div class="horiz-site-nav">
+        <div class="horiz-site-indicator" id="projSiteDots"></div>
+        <span class="horiz-site-label" id="projSiteLabel">01 / 08</span>
+      </div>
+      <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="projProgressFill"></div></div>
+    </div>
+  </div>
+</section>
 
-    const WORK_SITES = [
-      {id:"balefi",num:"01",folder:"Balefi",
-       files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],
-       captions:["Tower Erection","Tower Erection","Concreting Chimney","Completed Tower"],
-       title:"Balefi 132kV Transmission Line",
-       desc:"Tower erection, stub setting, chimney concreting and foundation works.",
-       tags:["Transmission Line","Tower Erection","Foundation"]},
-      {id:"lalbandi",num:"02",folder:"Salempur",
-       files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG_20231107_104434.jpg','IMG_20240120_112353.jpg','IMG_20240206_140830.jpg','Screenshot 2026-05-16 204535.png'],
-       captions:["Salempur Substation","Plastering","Surveying","Rebar Works","Plinth Beam","Layout View"],
-       title:"Lalbandi–Salempur 132kV + Substation",
-       desc:"End-to-end substation works — control room, gantry foundation, tower survey.",
-       tags:["Substation","132kV","Civil Works","Survey"]},
-      {id:"dhalkebar",num:"03",folder:"Balganga",
-       files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','Screenshot 2026-05-16 204005.png'],
-       captions:["Staff Quarter","Control Room","Formworks","Layout"],
-       title:"Dhalkebar–Balganga 132kV",
-       desc:"Staff quarter foundation, control room structure, gantry foundation.",
-       tags:["Substation","Foundation","132kV"]},
-      {id:"sandikharga",num:"04",folder:"Burtibang",
-       files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','Screenshot 2026-05-16 205216.png'],
-       captions:["Tower Erection","Stub Setting","DGPS Survey","Tower Locations"],
-       title:"Sandikharga–Burtibang 132kV",
-       desc:"Tower erection, stub setting, and DGPS survey in mountainous terrain.",
-       tags:["Transmission Line","DGPS","Tower Erection"]},
-      {id:"tamghas",num:"05",folder:"Tamghas",
-       files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'],
-       captions:["Transformer","Survey","Survey","Switchyard"],
-       title:"Tamghas Substation",
-       desc:"Substation survey, switchyard layout and transformer foundation works.",
-       tags:["Substation","Switchyard","Survey"]}
-    ];
+<section id="education">
+  <div class="section-label reveal">Academics</div>
+  <div class="edu-grid">
+    <div class="edu-card reveal delay-1"><h3>MSc Disaster Risk Management (DREM)</h3><p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p></div>
+    <div class="edu-card reveal delay-2"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College · 2022<br>CGPA 3.43</p><p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p></div>
+    <div class="edu-card reveal delay-3"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p></div>
+  </div>
+</section>
 
-    const SKILLS_DATA = [
-      {name:"ArcGIS Pro & QGIS",pct:92,icon:"fa-map"},
-      {name:"Google Earth Engine",pct:85,icon:"fa-satellite"},
-      {name:"AutoCAD & Civil 3D",pct:95,icon:"fa-drafting-compass"},
-      {name:"HEC‑RAS 2D Hydraulics",pct:80,icon:"fa-water"},
-      {name:"STAAD Pro & SAP2000",pct:78,icon:"fa-building"},
-      {name:"Python (GIS scripting)",pct:70,icon:"fa-code"},
-      {name:"UAV / Drone Survey",pct:82,icon:"fa-helicopter"},
-      {name:"SNAP & InSAR Processing",pct:75,icon:"fa-signal"}
-    ];
+<section id="certifications" class="horiz-section">
+  <div class="section-label reveal">Credentials</div>
+  <div class="horiz-intro reveal">
+    <div class="horiz-company">Certifications &amp; Memberships</div>
+    <div class="horiz-company-sub">Verified qualifications</div>
+  </div>
+  <div class="horiz-sticky-outer" id="certStickyOuter">
+    <div class="horiz-sticky-inner">
+      <div class="horiz-track-wrap"><div class="horiz-track" id="certTrack"></div></div>
+      <div class="horiz-site-nav">
+        <div class="horiz-site-indicator" id="certSiteDots"></div>
+        <span class="horiz-site-label" id="certSiteLabel">01 / 04</span>
+      </div>
+      <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="certProgressFill"></div></div>
+    </div>
+  </div>
+</section>
 
-    const FREELANCE = [
-      {id:"hvac",title:"HVAC System Design",date:"2024",desc:"Complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing and equipment selection.",
-       folder:"assets/freelance-photos/hvac/",files:['duct-layout.png'],captions:["HVAC duct layout"],tags:["HAP 6.0","HVAC"]},
-      {id:"3d",title:"3D Building Planning & Modeling",date:"2023–2024",desc:"Detailed architectural visualizations using SketchUp and Revit for residential and industrial projects.",
-       folder:"assets/freelance-photos/3d-modeling/",files:['1.png','2.png','3.jpg'],captions:["Staff Quarter","Control Room","Residential"],tags:["SketchUp","Revit"]},
-      {id:"struct",title:"Structural Analysis",date:"2024",desc:"STAAD Pro analysis ensuring compliance with load standards for client buildings.",
-       folder:"assets/freelance-photos/structural-analysis/",files:['1.png','2.png'],captions:["STAAD model","Load analysis"],tags:["STAAD Pro"]},
-      {id:"draft",title:"2D Drafting (AutoCAD)",date:"2023–2025",desc:"Floor plans, sections, site layouts and detail drawings.",
-       folder:"assets/freelance-photos/drafting/",files:['1.png','2.png','3.png'],captions:["Site layout","Plan","Tower"],tags:["AutoCAD"]},
-      {id:"abi",title:"ABI Pier Workshop",date:"2023",desc:"Adjustable Base Isolation Pier prototype design on Earthquake Day.",
-       folder:"assets/freelance-photos/abi/",files:['1.jpeg'],captions:["Prototype"],tags:["Seismic Design"]},
-      {id:"sisneri",title:"Sisneri Landslide Study",date:"2023 Final Year",desc:"Drone survey, geotechnical investigation and GeoStudio SLOPE/W stability analysis.",
-       folder:"assets/portfolio-photos/sisneri-landslide/",files:['Damage due to Landslide.JPG','Group Members.JPG'],captions:["Damage","Group"],tags:["Geotech","Drone"],pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf"}
-    ];
+<section id="freelance" class="horiz-section">
+  <div class="section-label reveal">Independent Work</div>
+  <div class="horiz-intro reveal">
+    <div class="horiz-company">Freelance &amp; Academic Projects</div>
+    <div class="horiz-company-sub">6 selected works</div>
+  </div>
+  <div class="horiz-sticky-outer" id="flStickyOuter">
+    <div class="horiz-sticky-inner">
+      <div class="horiz-track-wrap"><div class="horiz-track" id="flTrack"></div></div>
+      <div class="horiz-site-nav">
+        <div class="horiz-site-indicator" id="flSiteDots"></div>
+        <span class="horiz-site-label" id="flSiteLabel">01 / 06</span>
+      </div>
+      <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="flProgressFill"></div></div>
+    </div>
+  </div>
+</section>
 
-    const CERTIFICATES = [
-      {icon:"fa-certificate",title:"SAP2000 Training",desc:"Advanced structural analysis",files:["autocad.jpg"],captions:["AutoCAD Certification"]},
-      {icon:"fa-drafting-compass",title:"AutoCAD Professional",desc:"Design & drafting",files:["NEC.png"],captions:["NEC Registration"]},
-      {icon:"fa-id-card",title:"Nepal Engineering Council",desc:"Reg. No: 80593",files:["SAP.jpg"],captions:["SAP2000 Training"]},
-      {icon:"fa-layer-group",title:"ABI Pier Workshop",desc:"Seismic isolation design",files:[],captions:[]}
-    ];
+<section id="contact">
+  <p class="contact-pre reveal">Get in touch</p>
+  <h2 class="contact-heading reveal">Let's build<br><span class="scramble" data-text="something">something</span><br>great.</h2>
+  <div class="contact-links reveal">
+    <a href="mailto:abhishekkarki520@gmail.com" class="contact-link">Email</a>
+    <a href="https://linkedin.com/in/abhishek-karki-9b034524a/" target="_blank" class="contact-link">LinkedIn</a>
+  </div>
+  <a href="mailto:abhishekkarki520@gmail.com" class="btn reveal" style="background:var(--accent);color:var(--black);border:none;font-size:1rem;padding:20px 56px;border-radius:100px">Say Hello</a>
+</section>
 
-    /* ═══════════════════════════════════════════════════════════
-       HELPERS
-    ═══════════════════════════════════════════════════════════ */
-    function enc(p){return encodeURI(p).replace(/#/g,'%23')}
+<footer style="background:var(--black);color:var(--white);text-align:center;padding:32px">
+  <span style="opacity:.35;font-size:.82rem">© 2026 Abhishek Karki</span>
+</footer>
 
-    /* ═══════════════════════════════════════════════════════════
-       CURSOR
-    ═══════════════════════════════════════════════════════════ */
-    function initCursor(){
-      const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
-      let mx=0,my=0,rx=0,ry=0;
-      document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
-      document.addEventListener('mousedown',()=>document.body.classList.add('cursor-active'));
-      document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-active'));
-      (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
-      document.addEventListener('mouseover',e=>{
-        if(e.target.closest('a,button,.btn,.project-link,.fl-thumb,.m-media-wrap,.hcard-arr,.hcard-fs,.gal-dot,.stack-card-link'))
-          document.body.classList.add('cursor-hover');
-        else document.body.classList.remove('cursor-hover');
-      });
+<div class="visitor-counter" id="visitorCounter"><i class="fas fa-eye"></i> <span id="visitorCount">...</span></div>
+
+<!-- FULLSCREEN MODAL -->
+<div class="fullscreen-modal" id="fullscreenModal">
+  <button class="fullscreen-close" onclick="closeFull()">&times;</button>
+  <button class="fs-nav fs-prev" onclick="fsStep(-1)"><i class="fas fa-chevron-left"></i></button>
+  <img id="fullscreenImg" src="" alt="">
+  <button class="fs-nav fs-next" onclick="fsStep(1)"><i class="fas fa-chevron-right"></i></button>
+  <div id="fsCaption" class="fs-caption"></div>
+</div>
+
+<!-- PROJECT DETAIL MODAL -->
+<div class="modal" id="projModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('projModal')">&times;</button>
+    <div id="mHead"></div><div id="mDesc"></div>
+    <div class="m-gallery" id="mGallery"></div>
+    <div id="mPdf" style="margin-top:16px"></div>
+  </div>
+</div>
+
+<div class="carousel-modal" id="carouselModal">
+  <div class="carousel-content">
+    <button class="close-carousel" onclick="closeCarousel()">&times;</button>
+    <button class="carousel-prev" onclick="carStep(-1)"><i class="fas fa-chevron-left"></i></button>
+    <img id="carouselImage" class="carousel-image" src="" alt="">
+    <button class="carousel-next" onclick="carStep(1)"><i class="fas fa-chevron-right"></i></button>
+    <div id="carouselCaption" class="carousel-caption"></div>
+  </div>
+</div>
+<div class="video-modal" id="videoModal">
+  <button class="close-video" onclick="closeVideoModal()">&times;</button>
+  <video id="videoPlayer" controls style="max-width:90vw;max-height:80vh"></video>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+// ═══════════════ DATA ═══════════════
+const PROJECTS = [
+  {id:1,title:"InSAR Time Series for Highway Subsidence",cat:"InSAR / Geotech",loc:"Sloterdijk to Rijksweg, Netherlands",
+   short:"13 Sentinel‑1 images processed with SNAP+SNAPHU generating 12 displacement maps.",
+   full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering, phase unwrapping, terrain correction. Extracted A10 highway profiles.",
+   tech:["SNAP","SNAPHU","Sentinel‑1"],pdf:"assets/portfolio-photos/insar/insar.pdf",
+   media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram"},
+          {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map"},
+          {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-10 125056.png",caption:"Filtered"}]},
+  {id:2,title:"NDVI Timelapse of Kathmandu Valley",cat:"Remote Sensing",loc:"Kathmandu Valley",
+   short:"26‑year vegetation change using Landsat & Sentinel‑2 with 5‑class timelapse animation.",
+   full:"Processed 28 images in Google Earth Engine – NDVI calculation, harmonization. Built 5‑class timelapse.",
+   tech:["GEE","Landsat","Sentinel‑2"],pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf",
+   media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"},
+          {type:"image",src:"assets/portfolio-photos/ndvi/GEE2.jpg",caption:"Change detection"},
+          {type:"video",src:"assets/portfolio-photos/ndvi/Map.mp4",caption:"Timelapse"}]},
+  {id:3,title:"Hospital Accessibility in Colorado",cat:"GIS Network Analysis",loc:"Colorado, USA",
+   short:"Network drive‑time analysis generating 30/60‑min service areas from specialist hospitals.",
+   full:"Generated service areas from specialist hospitals, overlaid county population. Revealed spatial disparities.",
+   tech:["ArcGIS Network Analyst","Population data"],
+   media:[{type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute"},
+          {type:"image",src:"assets/portfolio-photos/hospital/60_min Map.png",caption:"60‑minute"},
+          {type:"image",src:"assets/portfolio-photos/hospital/PopulationMap.png",caption:"Population overlay"}]},
+  {id:4,title:"Urban Sprawl Analysis of Kathmandu Valley",cat:"GIS / Remote Sensing",loc:"Kathmandu Valley",
+   short:"Landsat 8/9 NDBI change detection with ALOS PALSAR slope filtering to isolate urban growth.",
+   full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain.",
+   tech:["Landsat","ALOS PALSAR","ArcGIS"],
+   media:[{type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"},
+          {type:"image",src:"assets/portfolio-photos/urban-sprawl/2026.png",caption:"NDBI 2026"},
+          {type:"image",src:"assets/portfolio-photos/urban-sprawl/slopemap.png",caption:"Slope filtering"}]},
+  {id:5,title:"UAV Landslide Susceptibility Mapping",cat:"UAV / GIS",loc:"Sisneri, Solukhumbu",
+   short:"High-res UAV orthomosaic & DEM with weighted overlay hazard zonation classification.",
+   full:"High‑resolution DEM and orthomosaic from drone; weighted overlay to classify hazard zones.",
+   tech:["UAV","Agisoft","ArcGIS"],
+   media:[{type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"},
+          {type:"image",src:"assets/portfolio-photos/uav-landslide/BaseMap.png",caption:"Orthomosaic"}]},
+  {id:6,title:"Flood Inundation Mapping",cat:"Hydrology",loc:"Narayani River, Nepal",
+   short:"HEC‑RAS 2D unsteady flow simulation for flood depth and velocity mapping.",
+   full:"DEM preparation and terrain correction; 2D unsteady flow simulation.",
+   tech:["HEC‑RAS 2D","ArcGIS"],pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf",
+   media:[{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS mesh"},
+          {type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 233808.png",caption:"Flood depth"}]},
+  {id:7,title:"Substation Backfill Volumetric Analysis",cat:"Civil 3D",loc:"Balganga, Janakpur",
+   short:"DGPS survey to surface modeling, corridors and cut/fill volume computation in Civil 3D.",
+   full:"DGPS survey, surface creation, cross‑sections, corridor modeling.",
+   tech:["Civil 3D","DGPS"],pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf",
+   media:[{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"Survey points"}]},
+  {id:8,title:"Earthquake Analysis of Nepal",cat:"Seismology / GIS",loc:"Nepal (1978‑2025)",
+   short:"Mainshock declustering using Gardner‑Knopoff method from USGS catalog with animated map.",
+   full:"Processed USGS catalog using Gardner‑Knopoff declustering. 58 mainshocks.",
+   tech:["ArcGIS","Python"],pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf",
+   media:[{type:"video",src:"assets/portfolio-photos/earthquake/Nepal_EarthQuakes_Animation.mp4",caption:"Animation"},
+          {type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Map"}]}
+];
+
+const WORK_SITES = [
+  {id:"balefi",num:"01",folder:"Balefi",
+   files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],
+   captions:["Tower Erection","Tower Erection","Concreting Chimney","Completed Tower"],
+   title:"Balefi 132kV Transmission Line",
+   desc:"Tower erection, stub setting, chimney concreting and foundation works.",
+   tags:["Transmission Line","Tower Erection","Foundation"]},
+  {id:"lalbandi",num:"02",folder:"Salempur",
+   files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG_20231107_104434.jpg','IMG_20240120_112353.jpg','IMG_20240206_140830.jpg','Screenshot 2026-05-16 204535.png'],
+   captions:["Salempur Substation","Plastering","Surveying","Rebar Works","Plinth Beam","Layout View"],
+   title:"Lalbandi–Salempur 132kV + Substation",
+   desc:"End-to-end substation works — control room, gantry foundation, tower survey.",
+   tags:["Substation","132kV","Civil Works","Survey"]},
+  {id:"dhalkebar",num:"03",folder:"Balganga",
+   files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','Screenshot 2026-05-16 204005.png'],
+   captions:["Staff Quarter","Control Room","Formworks","Layout"],
+   title:"Dhalkebar–Balganga 132kV",
+   desc:"Staff quarter foundation, control room structure, gantry foundation.",
+   tags:["Substation","Foundation","132kV"]},
+  {id:"sandikharga",num:"04",folder:"Burtibang",
+   files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','Screenshot 2026-05-16 205216.png'],
+   captions:["Tower Erection","Stub Setting","DGPS Survey","Tower Locations"],
+   title:"Sandikharga–Burtibang 132kV",
+   desc:"Tower erection, stub setting, and DGPS survey in mountainous terrain.",
+   tags:["Transmission Line","DGPS","Tower Erection"]},
+  {id:"tamghas",num:"05",folder:"Tamghas",
+   files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'],
+   captions:["Transformer","Survey","Survey","Switchyard"],
+   title:"Tamghas Substation",
+   desc:"Substation survey, switchyard layout and transformer foundation works.",
+   tags:["Substation","Switchyard","Survey"]}
+];
+
+const SKILLS_DATA = [
+  {name:"ArcGIS Pro & QGIS",pct:92,icon:"fa-map"},
+  {name:"Google Earth Engine",pct:85,icon:"fa-satellite"},
+  {name:"AutoCAD & Civil 3D",pct:95,icon:"fa-drafting-compass"},
+  {name:"HEC‑RAS 2D Hydraulics",pct:80,icon:"fa-water"},
+  {name:"STAAD Pro & SAP2000",pct:78,icon:"fa-building"},
+  {name:"Python (GIS scripting)",pct:70,icon:"fa-code"},
+  {name:"UAV / Drone Survey",pct:82,icon:"fa-helicopter"},
+  {name:"SNAP & InSAR Processing",pct:75,icon:"fa-signal"}
+];
+
+const FREELANCE = [
+  {id:"hvac",title:"HVAC System Design",date:"2024",desc:"Complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing and equipment selection.",
+   folder:"assets/freelance-photos/hvac/",files:['duct-layout.png'],captions:["HVAC duct layout"],tags:["HAP 6.0","HVAC"]},
+  {id:"3d",title:"3D Building Planning & Modeling",date:"2023–2024",desc:"Detailed architectural visualizations using SketchUp and Revit for residential and industrial projects.",
+   folder:"assets/freelance-photos/3d-modeling/",files:['1.png','2.png','3.jpg'],captions:["Staff Quarter","Control Room","Residential"],tags:["SketchUp","Revit"]},
+  {id:"struct",title:"Structural Analysis",date:"2024",desc:"STAAD Pro analysis ensuring compliance with load standards for client buildings.",
+   folder:"assets/freelance-photos/structural-analysis/",files:['1.png','2.png'],captions:["STAAD model","Load analysis"],tags:["STAAD Pro"]},
+  {id:"draft",title:"2D Drafting (AutoCAD)",date:"2023–2025",desc:"Floor plans, sections, site layouts and detail drawings.",
+   folder:"assets/freelance-photos/drafting/",files:['1.png','2.png','3.png'],captions:["Site layout","Plan","Tower"],tags:["AutoCAD"]},
+  {id:"abi",title:"ABI Pier Workshop",date:"2023",desc:"Adjustable Base Isolation Pier prototype design on Earthquake Day.",
+   folder:"assets/freelance-photos/abi/",files:['1.jpeg'],captions:["Prototype"],tags:["Seismic Design"]},
+  {id:"sisneri",title:"Sisneri Landslide Study",date:"2023 Final Year",desc:"Drone survey, geotechnical investigation and GeoStudio SLOPE/W stability analysis.",
+   folder:"assets/portfolio-photos/sisneri-landslide/",files:['Damage due to Landslide.JPG','Group Members.JPG'],captions:["Damage","Group"],tags:["Geotech","Drone"],pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf"}
+];
+
+const CERTIFICATES = [
+  {icon:"fa-certificate",title:"SAP2000 Training",desc:"Advanced structural analysis",files:["autocad.jpg"],captions:["AutoCAD Certification"]},
+  {icon:"fa-drafting-compass",title:"AutoCAD Professional",desc:"Design & drafting",files:["NEC.png"],captions:["NEC Registration"]},
+  {icon:"fa-id-card",title:"Nepal Engineering Council",desc:"Reg. No: 80593",files:["SAP.jpg"],captions:["SAP2000 Training"]},
+  {icon:"fa-layer-group",title:"ABI Pier Workshop",desc:"Seismic isolation design",files:[],captions:[]}
+];
+
+// HELPERS
+function enc(p){return encodeURI(p).replace(/#/g,'%23')}
+
+// ═══════════ CURSOR, THREE.JS, NAV, REVEAL ═══════════
+function initCursor(){
+  const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  document.addEventListener('mousedown',()=>document.body.classList.add('cursor-active'));
+  document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-active'));
+  (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+  document.addEventListener('mouseover',e=>{
+    if(e.target.closest('a,button,.btn,.project-link,.fl-thumb,.m-media-wrap,.hcard-arr,.hcard-fs,.gal-dot,.stack-card-link'))
+      document.body.classList.add('cursor-hover');
+    else document.body.classList.remove('cursor-hover');
+  });
+}
+
+function initThree(){
+  const canvas=document.getElementById('three-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.1,100);
+  camera.position.z=4;
+  const geo=new THREE.TorusKnotGeometry(1.2,.38,160,20);
+  const mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:.11,transparent:true});
+  const mesh=new THREE.Mesh(geo,mat);scene.add(mesh);
+  const geoS=new THREE.TorusKnotGeometry(1.18,.36,120,18);
+  const matS=new THREE.MeshBasicMaterial({color:0xf5f4f0});
+  const meshS=new THREE.Mesh(geoS,matS);scene.add(meshS);
+  const pg=new THREE.BufferGeometry(),pos=new Float32Array(600);
+  for(let i=0;i<600;i++)pos[i]=(Math.random()-.5)*8;
+  pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x0e0e0e,size:.025,transparent:true,opacity:.28})));
+  let mx=0,my=0,trx=0,try_=0;
+  document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*2;my=-(e.clientY/window.innerHeight-.5)*2});
+  function resize(){const w=canvas.offsetWidth,h=canvas.offsetHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+  resize();window.addEventListener('resize',resize);
+  let t=0;
+  (function animate(){requestAnimationFrame(animate);t+=.005;trx+=(my*.4-trx)*.05;try_+=(mx*.4-try_)*.05;
+    mesh.rotation.x=trx+t*.3;mesh.rotation.y=try_+t*.5;meshS.rotation.x=mesh.rotation.x;meshS.rotation.y=mesh.rotation.y;
+    mesh.position.y=Math.sin(t*.7)*.12;meshS.position.y=mesh.position.y;renderer.render(scene,camera)})();
+}
+
+function initNav(){
+  const nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>80){nav.style.background='rgba(245,244,240,.92)';nav.style.backdropFilter='blur(16px)';nav.style.borderBottom='1px solid rgba(0,0,0,.06)'}
+    else{nav.style.background='transparent';nav.style.backdropFilter='';nav.style.borderBottom='none'}
+  });
+}
+
+function initReveal(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+  },{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('.reveal,.clip-reveal').forEach(el=>io.observe(el));
+}
+
+// ═══════════ BENTO SKILLS ═══════════
+function buildBentoSkills(){
+  const layouts=[
+    {cls:'bento-skill-lg reveal delay-1',type:'skill',idx:0},
+    {cls:'bento-skill-xl reveal delay-2',type:'skill',idx:1},
+    {cls:'bento-stat reveal delay-3',type:'stat',val:'2+',sub:'Years field experience'},
+    {cls:'bento-accent reveal delay-4',type:'skill',idx:2},
+    {cls:'bento-skill-md reveal delay-1',type:'skill',idx:3},
+    {cls:'bento-skill-md reveal delay-2',type:'skill',idx:4},
+    {cls:'bento-accent2 reveal delay-3',type:'stat',val:'8',sub:'GIS projects delivered'},
+    {cls:'bento-skill-sq reveal delay-1',type:'skill',idx:5},
+    {cls:'bento-skill-sq reveal delay-2',type:'skill',idx:6},
+    {cls:'bento-skill-sq reveal delay-3',type:'skill',idx:7},
+    {cls:'bento-quote reveal delay-4',type:'quote'}
+  ];
+  let html='';
+  layouts.forEach(item=>{
+    if(item.type==='skill'){
+      const s=SKILLS_DATA[item.idx];
+      html+=`<div class="bento-card ${item.cls}"><div class="bento-inner"><div><div class="bento-label"><i class="fas ${s.icon}" style="margin-right:6px"></i>Skill</div><div class="bento-title">${s.name}</div></div><div><div style="display:flex;justify-content:space-between;font-size:.72rem;opacity:.4;margin-bottom:6px"><span>Proficiency</span><span>${s.pct}%</span></div><div class="bento-bar-bg"><div class="bento-bar-fill" data-w="${s.pct}"></div></div></div></div></div>`;
+    }else if(item.type==='stat'){
+      html+=`<div class="bento-card ${item.cls}"><div class="bento-inner"><div class="bento-stat-num">${item.val}</div><div class="bento-stat-sub">${item.sub}</div></div></div>`;
+    }else if(item.type==='quote'){
+      html+=`<div class="bento-card ${item.cls}"><div class="bento-inner" style="justify-content:center"><div class="bento-quote-text">"Spatial intelligence transforms raw infrastructure data into decisions that protect communities and build resilient futures."</div></div></div>`;
     }
+  });
+  document.getElementById('bentoSkills').innerHTML=html;
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.dataset.w+'%';io.unobserve(e.target)}});
+  },{threshold:.1});
+  document.querySelectorAll('.bento-bar-fill').forEach(b=>io.observe(b));
+}
 
-    /* ═══════════════════════════════════════════════════════════
-       THREE.JS
-    ═══════════════════════════════════════════════════════════ */
-    function initThree(){
-      const canvas=document.getElementById('three-canvas');
-      const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-      const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.1,100);
-      camera.position.z=4;
-      const geo=new THREE.TorusKnotGeometry(1.2,.38,160,20);
-      const mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:.11,transparent:true});
-      const mesh=new THREE.Mesh(geo,mat);scene.add(mesh);
-      const geoS=new THREE.TorusKnotGeometry(1.18,.36,120,18);
-      const matS=new THREE.MeshBasicMaterial({color:0xf5f4f0});
-      const meshS=new THREE.Mesh(geoS,matS);scene.add(meshS);
-      const pg=new THREE.BufferGeometry(),pos=new Float32Array(600);
-      for(let i=0;i<600;i++)pos[i]=(Math.random()-.5)*8;
-      pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
-      scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x0e0e0e,size:.025,transparent:true,opacity:.28})));
-      let mx=0,my=0,trx=0,try_=0;
-      document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*2;my=-(e.clientY/window.innerHeight-.5)*2});
-      function resize(){const w=canvas.offsetWidth,h=canvas.offsetHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
-      resize();window.addEventListener('resize',resize);
-      let t=0;
-      (function animate(){requestAnimationFrame(animate);t+=.005;trx+=(my*.4-trx)*.05;try_+=(mx*.4-try_)*.05;
-        mesh.rotation.x=trx+t*.3;mesh.rotation.y=try_+t*.5;meshS.rotation.x=mesh.rotation.x;meshS.rotation.y=mesh.rotation.y;
-        mesh.position.y=Math.sin(t*.7)*.12;meshS.position.y=mesh.position.y;renderer.render(scene,camera)})();
-    }
+// ═══════════ HORIZONTAL GALLERY BUILDER ═══════════
+function buildHorizontalGallery(sectionId, items, prefix, itemToHTML, cardExtraClass){
+  const outer=document.getElementById(prefix+'StickyOuter');
+  const track=document.getElementById(prefix+'Track');
+  const dotsContainer=document.getElementById(prefix+'SiteDots');
+  const labelEl=document.getElementById(prefix+'SiteLabel');
+  const fillEl=document.getElementById(prefix+'ProgressFill');
+  const N=items.length;
 
-    /* ═══════════════════════════════════════════════════════════
-       NAV
-    ═══════════════════════════════════════════════════════════ */
-    function initNav(){
-      const nav=document.getElementById('mainNav');
-      window.addEventListener('scroll',()=>{
-        if(window.scrollY>80){nav.style.background='rgba(245,244,240,.92)';nav.style.backdropFilter='blur(16px)';nav.style.borderBottom='1px solid rgba(0,0,0,.06)'}
-        else{nav.style.background='transparent';nav.style.backdropFilter='';nav.style.borderBottom='none'}
-      });
-    }
+  outer.style.setProperty('--n-items',N);
+  outer.style.height=(N*100+80)+'vh';
 
-    /* ═══════════════════════════════════════════════════════════
-       SCROLL REVEALS
-    ═══════════════════════════════════════════════════════════ */
-    function initReveal(){
-      const io=new IntersectionObserver(entries=>{
-        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
-      },{threshold:.08,rootMargin:'0px 0px -50px 0px'});
-      document.querySelectorAll('.reveal,.clip-reveal').forEach(el=>io.observe(el));
-    }
+  track.innerHTML=items.map((item,i)=>{
+    const cardHTML=itemToHTML(item,i);
+    return `<div class="horiz-card ${cardExtraClass||''}" id="${prefix}-card-${item.id||i}">${cardHTML}</div>`;
+  }).join('');
 
-    /* ═══════════════════════════════════════════════════════════
-       BENTO SKILLS
-    ═══════════════════════════════════════════════════════════ */
-    function buildBentoSkills(){
-      const layouts=[
-        {cls:'bento-skill-lg reveal delay-1',type:'skill',idx:0},
-        {cls:'bento-skill-xl reveal delay-2',type:'skill',idx:1},
-        {cls:'bento-stat reveal delay-3',type:'stat',val:'2+',sub:'Years field experience'},
-        {cls:'bento-accent reveal delay-4',type:'skill',idx:2},
-        {cls:'bento-skill-md reveal delay-1',type:'skill',idx:3},
-        {cls:'bento-skill-md reveal delay-2',type:'skill',idx:4},
-        {cls:'bento-accent2 reveal delay-3',type:'stat',val:'8',sub:'GIS projects delivered'},
-        {cls:'bento-skill-sq reveal delay-1',type:'skill',idx:5},
-        {cls:'bento-skill-sq reveal delay-2',type:'skill',idx:6},
-        {cls:'bento-skill-sq reveal delay-3',type:'skill',idx:7},
-        {cls:'bento-quote reveal delay-4',type:'quote'}
-      ];
-      let html='';
-      layouts.forEach(item=>{
-        if(item.type==='skill'){
-          const s=SKILLS_DATA[item.idx];
-          html+=`<div class="bento-card ${item.cls}"><div class="bento-inner"><div><div class="bento-label"><i class="fas ${s.icon}" style="margin-right:6px"></i>Skill</div><div class="bento-title">${s.name}</div></div><div><div style="display:flex;justify-content:space-between;font-size:.72rem;opacity:.4;margin-bottom:6px"><span>Proficiency</span><span>${s.pct}%</span></div><div class="bento-bar-bg"><div class="bento-bar-fill" data-w="${s.pct}"></div></div></div></div></div>`;
-        }else if(item.type==='stat'){
-          html+=`<div class="bento-card ${item.cls}"><div class="bento-inner"><div class="bento-stat-num">${item.val}</div><div class="bento-stat-sub">${item.sub}</div></div></div>`;
-        }else if(item.type==='quote'){
-          html+=`<div class="bento-card ${item.cls}"><div class="bento-inner" style="justify-content:center"><div class="bento-quote-text">"Spatial intelligence transforms raw infrastructure data into decisions that protect communities and build resilient futures."</div></div></div>`;
-        }
-      });
-      document.getElementById('bentoSkills').innerHTML=html;
-      const io=new IntersectionObserver(entries=>{
-        entries.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.dataset.w+'%';io.unobserve(e.target)}});
-      },{threshold:.1});
-      document.querySelectorAll('.bento-bar-fill').forEach(b=>io.observe(b));
-    }
+  dotsContainer.innerHTML=items.map((_,i)=>`<button class="horiz-site-dot${i===0?' active':''}" data-idx="${i}"></button>`).join('');
+  labelEl.textContent=(items[0]?.num||'01')+' / '+String(N).padStart(2,'0');
 
-    /* ═══════════════════════════════════════════════════════════
-       GENERIC HORIZONTAL GALLERY BUILDER
-       Used for Experience, Projects, Freelance, Certs
-    ═══════════════════════════════════════════════════════════ */
-    function buildHorizontalGallery(sectionId, items, prefix, itemToHTML, cardExtraClass) {
-      const outer = document.getElementById(prefix + 'StickyOuter');
-      const track = document.getElementById(prefix + 'Track');
-      const dotsContainer = document.getElementById(prefix + 'SiteDots');
-      const labelEl = document.getElementById(prefix + 'SiteLabel');
-      const fillEl = document.getElementById(prefix + 'ProgressFill');
-      const N = items.length;
+  const siteDots=dotsContainer.querySelectorAll('.horiz-site-dot');
 
-      outer.style.setProperty('--n-items', N);
-      outer.style.height = (N * 100 + 80) + 'vh';
+  function updateScroll(){
+    const outerRect=outer.getBoundingClientRect();
+    const totalH=outer.offsetHeight-window.innerHeight;
+    let scrolled=-outerRect.top;
+    if(scrolled<0)scrolled=0;
+    if(scrolled>totalH)scrolled=totalH;
+    const progress=scrolled/totalH;
+    const trackW=track.scrollWidth;
+    const viewW=track.parentElement.offsetWidth;
+    const maxTranslate=trackW-viewW+120;
+    if(maxTranslate<0)maxTranslate=0;
+    track.style.transform=`translateX(${-progress*maxTranslate}px)`;
+    const cardIdx=Math.min(Math.max(Math.round(progress*(N-1)),0),N-1);
+    siteDots.forEach((d,i)=>d.classList.toggle('active',i===cardIdx));
+    labelEl.textContent=(items[cardIdx]?.num||('0'+(cardIdx+1)))+' / '+String(N).padStart(2,'0');
+    fillEl.style.width=(progress*100)+'%';
+  }
 
-      track.innerHTML = items.map((item, i) => {
-        const cardHTML = itemToHTML(item, i);
-        return `<div class="horiz-card ${cardExtraClass || ''}" id="${prefix}-card-${item.id || i}">${cardHTML}</div>`;
-      }).join('');
+  window.addEventListener('scroll',updateScroll,{passive:true});
+  updateScroll();
 
-      dotsContainer.innerHTML = items.map((_, i) => `<button class="horiz-site-dot${i===0?' active':''}" data-idx="${i}"></button>`).join('');
-      labelEl.textContent = (items[0]?.num || '01') + ' / ' + String(N).padStart(2, '0');
-
-      const siteDots = dotsContainer.querySelectorAll('.horiz-site-dot');
-
-      function updateScroll() {
-        const outerRect = outer.getBoundingClientRect();
-        const totalH = outer.offsetHeight - window.innerHeight;
-        let scrolled = -outerRect.top;
-        if (scrolled < 0) scrolled = 0;
-        if (scrolled > totalH) scrolled = totalH;
-        const progress = scrolled / totalH;
-        const trackW = track.scrollWidth;
-        const viewW = track.parentElement.offsetWidth;
-        const maxTranslate = trackW - viewW + 120;
-        if (maxTranslate < 0) maxTranslate = 0;
-        track.style.transform = `translateX(${-progress * maxTranslate}px)`;
-        const cardIdx = Math.min(Math.max(Math.round(progress * (N - 1)), 0), N - 1);
-        siteDots.forEach((d, i) => d.classList.toggle('active', i === cardIdx));
-        labelEl.textContent = (items[cardIdx]?.num || ('0' + (cardIdx + 1))) + ' / ' + String(N).padStart(2, '0');
-        fillEl.style.width = (progress * 100) + '%';
-      }
-
-      window.addEventListener('scroll', updateScroll, {passive: true});
-      updateScroll();
-
-      siteDots.forEach((d, i) => {
-        d.addEventListener('click', () => {
-          const totalH = outer.offsetHeight - window.innerHeight;
-          const target = outer.offsetTop + (i / (N - 1)) * totalH;
-          window.scrollTo({top: target, behavior: 'smooth'});
-        });
-      });
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       BUILD EXPERIENCE
-    ═══════════════════════════════════════════════════════════ */
-    function buildExperience() {
-      buildHorizontalGallery('experience', WORK_SITES, 'exp', (site, i) => {
-        const base = 'assets/Professional Career/' + site.folder + '/';
-        const imgs = site.files.map((f, j) => `<img src="${enc(base+f)}" class="${j===0?'active':''}" data-idx="${j}" alt="${site.captions[j]||f}">`).join('');
-        const dots = site.files.map((_, j) => `<button class="hcard-dot ${j===0?'active':''}" data-idx="${j}"></button>`).join('');
-        const tags = site.tags.map(t => `<span class="hcard-tag">${t}</span>`).join('');
-        return `<div class="hcard-gallery">${imgs}</div>
-                <div class="hcard-overlay"></div>
-                <div class="hcard-dots">${dots}</div>
-                <div class="hcard-arrows">
-                  <button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>
-                  <button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <button class="hcard-fs" onclick="openExpFullscreen('${site.id}')"><i class="fas fa-expand"></i> View</button>
-                <div class="hcard-content">
-                  <div class="hcard-num">${site.num}</div>
-                  <div class="hcard-title">${site.title}</div>
-                  <div class="hcard-desc">${site.desc}</div>
-                  <div class="hcard-tags">${tags}</div>
-                </div>`;
-      });
-
-      // Add auto-gallery per card after DOM ready
-      setTimeout(() => {
-        document.querySelectorAll('#experience .horiz-card').forEach(card => {
-          const imgs = card.querySelectorAll('.hcard-gallery img');
-          const dots = card.querySelectorAll('.hcard-dot');
-          let cur = 0, timer;
-          function goTo(n, manual) {
-            imgs[cur].classList.remove('active'); dots[cur].classList.remove('active');
-            cur = (n + imgs.length) % imgs.length;
-            imgs[cur].classList.add('active'); dots[cur].classList.add('active');
-            if (manual) { clearInterval(timer); startAuto(); }
-          }
-          function startAuto() { timer = setInterval(() => goTo(cur + 1, false), 3800); }
-          startAuto();
-          dots.forEach(d => d.addEventListener('click', e => goTo(parseInt(d.dataset.idx), true)));
-          card.querySelector('.hcard-prev').addEventListener('click', () => goTo(cur - 1, true));
-          card.querySelector('.hcard-next').addEventListener('click', () => goTo(cur + 1, true));
-          card.addEventListener('mouseenter', () => clearInterval(timer));
-          card.addEventListener('mouseleave', () => startAuto());
-          imgs.forEach((img, i) => {
-            img.addEventListener('click', () => {
-              const site = WORK_SITES.find(s => s.id === card.id.replace('exp-card-',''));
-              if (!site) return;
-              const list = site.files.map((f, j) => ({ src: enc('assets/Professional Career/' + site.folder + '/' + f), caption: site.captions[j] || '' }));
-              openFullscreen(list, i);
-            });
-            img.style.cursor = 'pointer';
-          });
-        });
-      }, 100);
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       BUILD PROJECTS (HORIZONTAL)
-    ═══════════════════════════════════════════════════════════ */
-    function buildProjects() {
-      buildHorizontalGallery('projects', PROJECTS, 'proj', (p, i) => {
-        const imgs = p.media.map((m, j) => {
-          if (m.type === 'image') return `<img src="${enc(m.src)}" class="${j===0?'active':''}" data-idx="${j}" alt="${m.caption||''}">`;
-          else return ''; // videos not shown in auto gallery
-        }).filter(Boolean).join('');
-        const dots = p.media.filter(m => m.type==='image').map((_, j) => `<button class="hcard-dot ${j===0?'active':''}" data-idx="${j}"></button>`).join('');
-        return `<div class="hcard-gallery">${imgs}</div>
-                <div class="hcard-overlay"></div>
-                <div class="hcard-dots">${dots}</div>
-                <div class="hcard-arrows">
-                  <button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>
-                  <button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <button class="hcard-fs" onclick="openProjFullscreen(${p.id})"><i class="fas fa-expand"></i> View</button>
-                <div class="hcard-content">
-                  <div class="hcard-num">${String(i+1).padStart(2,'0')}</div>
-                  <div class="hcard-title">${p.title}</div>
-                  <div class="hcard-desc">${p.short}</div>
-                  <div class="hcard-tags">${p.tech.map(t=>`<span class="hcard-tag">${t}</span>`).join('')}</div>
-                  <span class="hcard-link" onclick="event.stopPropagation(); openProjModal(${p.id})">View Project →</span>
-                </div>`;
-      });
-      setTimeout(() => {
-        document.querySelectorAll('#projects .horiz-card').forEach((card, idx) => {
-          const p = PROJECTS[idx];
-          const imgs = card.querySelectorAll('.hcard-gallery img');
-          const dots = card.querySelectorAll('.hcard-dot');
-          let cur = 0, timer;
-          function goTo(n, manual) {
-            imgs[cur].classList.remove('active'); dots[cur].classList.remove('active');
-            cur = (n + imgs.length) % imgs.length;
-            imgs[cur].classList.add('active'); dots[cur].classList.add('active');
-            if (manual) { clearInterval(timer); startAuto(); }
-          }
-          function startAuto() { timer = setInterval(() => goTo(cur + 1, false), 4000); }
-          startAuto();
-          dots.forEach(d => d.addEventListener('click', e => goTo(parseInt(d.dataset.idx), true)));
-          card.querySelector('.hcard-prev').addEventListener('click', () => goTo(cur - 1, true));
-          card.querySelector('.hcard-next').addEventListener('click', () => goTo(cur + 1, true));
-          card.addEventListener('mouseenter', () => clearInterval(timer));
-          card.addEventListener('mouseleave', () => startAuto());
-          imgs.forEach((img, i) => {
-            img.addEventListener('click', () => {
-              const list = p.media.filter(m => m.type==='image').map(m => ({ src: enc(m.src), caption: m.caption || '' }));
-              openFullscreen(list, i);
-            });
-            img.style.cursor = 'pointer';
-          });
-        });
-      }, 100);
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       BUILD FREELANCE (HORIZONTAL)
-    ═══════════════════════════════════════════════════════════ */
-    function buildFreelance() {
-      buildHorizontalGallery('freelance', FREELANCE, 'fl', (f, i) => {
-        const base = f.folder;
-        const imgs = f.files.map((file, j) => `<img src="${enc(base+file)}" class="${j===0?'active':''}" data-idx="${j}" alt="${f.captions[j]||''}">`).join('');
-        const dots = f.files.map((_, j) => `<button class="hcard-dot ${j===0?'active':''}" data-idx="${j}"></button>`).join('');
-        return `<div class="hcard-gallery">${imgs}</div>
-                <div class="hcard-overlay"></div>
-                <div class="hcard-dots">${dots}</div>
-                <div class="hcard-arrows">
-                  <button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>
-                  <button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <button class="hcard-fs" onclick="openFLFullscreen('${f.id}')"><i class="fas fa-expand"></i> View</button>
-                <div class="hcard-content">
-                  <div class="hcard-num">${String(i+1).padStart(2,'0')}</div>
-                  <div class="hcard-title">${f.title}</div>
-                  <div class="hcard-desc">${f.desc}</div>
-                  <div class="hcard-tags">${f.tags.map(t=>`<span class="hcard-tag">${t}</span>`).join('')}</div>
-                  ${f.pdf ? `<a href="${f.pdf}" target="_blank" class="hcard-link" style="color:#fff">Report →</a>` : ''}
-                </div>`;
-      });
-      setTimeout(() => {
-        document.querySelectorAll('#freelance .horiz-card').forEach((card, idx) => {
-          const f = FREELANCE[idx];
-          const imgs = card.querySelectorAll('.hcard-gallery img');
-          const dots = card.querySelectorAll('.hcard-dot');
-          let cur = 0, timer;
-          function goTo(n, manual) {
-            imgs[cur].classList.remove('active'); dots[cur].classList.remove('active');
-            cur = (n + imgs.length) % imgs.length;
-            imgs[cur].classList.add('active'); dots[cur].classList.add('active');
-            if (manual) { clearInterval(timer); startAuto(); }
-          }
-          function startAuto() { timer = setInterval(() => goTo(cur + 1, false), 3800); }
-          startAuto();
-          dots.forEach(d => d.addEventListener('click', e => goTo(parseInt(d.dataset.idx), true)));
-          card.querySelector('.hcard-prev').addEventListener('click', () => goTo(cur - 1, true));
-          card.querySelector('.hcard-next').addEventListener('click', () => goTo(cur + 1, true));
-          card.addEventListener('mouseenter', () => clearInterval(timer));
-          card.addEventListener('mouseleave', () => startAuto());
-          imgs.forEach((img, i) => {
-            img.addEventListener('click', () => {
-              const list = f.files.map((file, j) => ({ src: enc(f.folder + file), caption: f.captions[j] || '' }));
-              openFullscreen(list, i);
-            });
-            img.style.cursor = 'pointer';
-          });
-        });
-      }, 100);
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       BUILD CERTIFICATIONS (HORIZONTAL)
-    ═══════════════════════════════════════════════════════════ */
-    function buildCerts() {
-      // Flatten certificates with their image files
-      const certItems = [];
-      CERTIFICATES.forEach((c, i) => {
-        if (c.files && c.files.length) {
-          c.files.forEach((f, j) => {
-            certItems.push({
-              id: `${i}-${j}`,
-              num: String(certItems.length + 1).padStart(2, '0'),
-              title: c.title,
-              desc: c.desc,
-              icon: c.icon,
-              src: enc('assets/Cerififcations/' + f),
-              caption: c.captions[j] || c.title
-            });
-          });
-        } else {
-          certItems.push({
-            id: `${i}-0`,
-            num: String(certItems.length + 1).padStart(2, '0'),
-            title: c.title,
-            desc: c.desc,
-            icon: c.icon,
-            src: null,
-            caption: null
-          });
-        }
-      });
-
-      buildHorizontalGallery('certifications', certItems, 'cert', (item, i) => {
-        if (item.src) {
-          return `<div class="hcard-gallery"><img src="${item.src}" class="active" alt="${item.caption||''}"></div>
-                  <div class="hcard-overlay"></div>
-                  <button class="hcard-fs" onclick="openFullscreen([{src:'${item.src}',caption:'${item.caption||''}'}],0)" style="opacity:1"><i class="fas fa-expand"></i> View</button>
-                  <div class="hcard-content">
-                    <div class="hcard-num">${item.num}</div>
-                    <div class="hcard-title">${item.title}</div>
-                    <div class="hcard-desc">${item.desc}</div>
-                  </div>`;
-        } else {
-          return `<div class="hcard-gallery" style="background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;"><i class="fas ${item.icon}" style="font-size:4rem;opacity:0.15"></i></div>
-                  <div class="hcard-overlay" style="background:rgba(0,0,0,0.5)"></div>
-                  <div class="hcard-content">
-                    <div class="hcard-num">${item.num}</div>
-                    <div class="hcard-title">${item.title}</div>
-                    <div class="hcard-desc">${item.desc}</div>
-                  </div>`;
-        }
-      });
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       FULLSCREEN & MODALS
-    ═══════════════════════════════════════════════════════════ */
-    window.openExpFullscreen = function(siteId) {
-      const site = WORK_SITES.find(s => s.id === siteId);
-      if (!site) return;
-      const activeImg = document.querySelector(`#exp-card-${siteId} .hcard-gallery img.active`);
-      const startIdx = activeImg ? parseInt(activeImg.dataset.idx) || 0 : 0;
-      const list = site.files.map((f, i) => ({ src: enc('assets/Professional Career/' + site.folder + '/' + f), caption: site.captions[i] || '' }));
-      openFullscreen(list, startIdx);
-    };
-    window.openProjFullscreen = function(projId) {
-      const p = PROJECTS.find(x => x.id === projId);
-      if (!p) return;
-      const card = document.getElementById(`proj-card-${projId}`);
-      const activeImg = card ? card.querySelector('.hcard-gallery img.active') : null;
-      const startIdx = activeImg ? parseInt(activeImg.dataset.idx) || 0 : 0;
-      const list = p.media.filter(m => m.type === 'image').map(m => ({ src: enc(m.src), caption: m.caption || '' }));
-      openFullscreen(list, startIdx);
-    };
-    window.openFLFullscreen = function(flId) {
-      const f = FREELANCE.find(x => x.id === flId);
-      if (!f) return;
-      const activeImg = document.querySelector(`#fl-card-${flId} .hcard-gallery img.active`);
-      const startIdx = activeImg ? parseInt(activeImg.dataset.idx) || 0 : 0;
-      const list = f.files.map((file, i) => ({ src: enc(f.folder + file), caption: f.captions[i] || '' }));
-      openFullscreen(list, startIdx);
-    };
-
-    let _fsMedia = [], _fsIdx = 0;
-    window.openFullscreen = function(list, idx) { _fsMedia = list; _fsIdx = idx || 0; updateFS(); document.getElementById('fullscreenModal').classList.add('active'); }
-    function updateFS() { const item = _fsMedia[_fsIdx]; document.getElementById('fullscreenImg').src = item.src; document.getElementById('fsCaption').textContent = (item.caption || '') + ` (${_fsIdx+1}/${_fsMedia.length})`; }
-    window.fsStep = function(d) { _fsIdx = (_fsIdx + d + _fsMedia.length) % _fsMedia.length; updateFS(); }
-    window.closeFull = function() { document.getElementById('fullscreenModal').classList.remove('active'); }
-
-    // Project modal (unchanged)
-    window.openProjModal = function(id) {
-      const p = PROJECTS.find(x => x.id === id); if (!p) return;
-      document.getElementById('mHead').innerHTML = `<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">${p.title}</h3><p style="opacity:.5;font-size:.8rem;margin-bottom:14px">${p.loc}</p>`;
-      document.getElementById('mDesc').innerHTML = `<p style="line-height:1.75;margin-bottom:12px">${p.full}</p><p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> ${p.tech.join(', ')}</p>`;
-      document.getElementById('mGallery').innerHTML = p.media.map((m, i) => {
-        const s = enc(m.src);
-        if (m.type === 'image') return `<div class="m-media-wrap" onclick="openProjCarousel(${id},${i})" title="${m.caption||''}"><img src="${s}" alt="${m.caption||''}" loading="lazy"></div>`;
-        return `<div class="m-media-wrap" onclick="openVideoModal('${s}')" title="Play video"><i class="fas fa-play" style="color:#fff;position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);font-size:1.4rem"></i><video muted><source src="${s}" type="video/mp4"></video></div>`;
-      }).join('');
-      document.getElementById('mPdf').innerHTML = p.pdf ? `<a href="${p.pdf}" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>` : '';
-      document.getElementById('projModal').classList.add('on');
-    };
-    window.closeModal = function(id) { document.getElementById(id).classList.remove('on'); }
-    window.openProjCarousel = function(projId, startIdx) {
-      const p = PROJECTS.find(x => x.id === projId); if (!p) return;
-      const list = p.media.filter(m => m.type === 'image').map(m => ({ src: enc(m.src), caption: m.caption || '' }));
-      openCarousel(list, startIdx);
-    };
-
-    let _carMedia = [], _carIdx = 0;
-    function openCarousel(list, idx) { _carMedia = list; _carIdx = idx || 0; updateCar(); document.getElementById('carouselModal').classList.add('active'); }
-    function updateCar() { const item = _carMedia[_carIdx]; document.getElementById('carouselImage').src = item.src; document.getElementById('carouselCaption').textContent = item.caption || `${_carIdx+1}/${_carMedia.length}`; }
-    window.carStep = function(d) { _carIdx = (_carIdx + d + _carMedia.length) % _carMedia.length; updateCar(); }
-    window.closeCarousel = function() { document.getElementById('carouselModal').classList.remove('active'); }
-
-    window.openVideoModal = function(src) { document.getElementById('videoPlayer').src = src; document.getElementById('videoModal').classList.add('active'); }
-    window.closeVideoModal = function() { const v = document.getElementById('videoPlayer'); v.pause(); v.src = ''; document.getElementById('videoModal').classList.remove('active'); }
-
-    /* ═══════════════════════════════════════════════════════════
-       VISITOR COUNT & DISCORD
-    ═══════════════════════════════════════════════════════════ */
-    (function() {
-      const countEl = document.getElementById('visitorCount');
-      fetch('https://api.countapi.xyz/hit/abhishek-portfolio/visits')
-        .then(r => r.json())
-        .then(data => countEl.textContent = data.value + ' visits')
-        .catch(() => countEl.textContent = '...');
-
-      const discordURL = 'YOUR_DISCORD_WEBHOOK_URL';
-      if (discordURL !== 'YOUR_DISCORD_WEBHOOK_URL') {
-        fetch(discordURL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            username: 'Portfolio Bot',
-            content: `🚀 **New Visitor!** Someone just opened your portfolio.\n🕒 ${new Date().toLocaleString()}`
-          })
-        }).catch(() => {});
-      }
-    })();
-
-    /* ═══════════════════════════════════════════════════════════
-       INIT
-    ═══════════════════════════════════════════════════════════ */
-    document.addEventListener('DOMContentLoaded', () => {
-      buildBentoSkills();
-      buildExperience();
-      buildProjects();
-      buildFreelance();
-      buildCerts();
-      initReveal();
-      initCursor();
-      initNav();
-      initMagnetic();
-      initScramble();
-      if (typeof THREE !== 'undefined') initThree();
+  siteDots.forEach((d,i)=>{
+    d.addEventListener('click',()=>{
+      const totalH=outer.offsetHeight-window.innerHeight;
+      const target=outer.offsetTop+(i/(N-1))*totalH;
+      window.scrollTo({top:target,behavior:'smooth'});
     });
+  });
+}
 
-    function initMagnetic() {
-      document.querySelectorAll('.magnetic').forEach(btn => {
-        btn.addEventListener('mousemove', e => {
-          const r = btn.getBoundingClientRect();
-          btn.style.transform = `translate(${(e.clientX - r.left - r.width/2)*0.3}px, ${(e.clientY - r.top - r.height/2)*0.3}px)`;
-          btn.style.transition = 'transform .25s ease';
+// ═══════════ EXPERIENCE ═══════════
+function buildExperience(){
+  buildHorizontalGallery('experience',WORK_SITES,'exp',(site,i)=>{
+    const base='assets/Professional Career/'+site.folder+'/';
+    const imgs=site.files.map((f,j)=>`<img src="${enc(base+f)}" class="${j===0?'active':''}" data-idx="${j}" alt="${site.captions[j]||f}">`).join('');
+    const dots=site.files.map((_,j)=>`<button class="hcard-dot ${j===0?'active':''}" data-idx="${j}"></button>`).join('');
+    const tags=site.tags.map(t=>`<span class="hcard-tag">${t}</span>`).join('');
+    return `<div class="hcard-gallery">${imgs}</div>
+            <div class="hcard-overlay"></div>
+            <div class="hcard-dots">${dots}</div>
+            <div class="hcard-arrows">
+              <button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>
+              <button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <button class="hcard-fs" onclick="openExpFullscreen('${site.id}')"><i class="fas fa-expand"></i> View</button>
+            <div class="hcard-content">
+              <div class="hcard-num">${site.num}</div>
+              <div class="hcard-title">${site.title}</div>
+              <div class="hcard-desc">${site.desc}</div>
+              <div class="hcard-tags">${tags}</div>
+            </div>`;
+  });
+  // Auto-gallery per card
+  setTimeout(()=>{
+    document.querySelectorAll('#experience .horiz-card').forEach((card,idx)=>{
+      const site=WORK_SITES[idx];
+      const imgs=card.querySelectorAll('.hcard-gallery img');
+      const dots=card.querySelectorAll('.hcard-dot');
+      let cur=0,timer;
+      function goTo(n,manual){
+        imgs[cur].classList.remove('active');dots[cur].classList.remove('active');
+        cur=(n+imgs.length)%imgs.length;
+        imgs[cur].classList.add('active');dots[cur].classList.add('active');
+        if(manual){clearInterval(timer);startAuto()}
+      }
+      function startAuto(){timer=setInterval(()=>goTo(cur+1,false),3800)}
+      startAuto();
+      dots.forEach(d=>d.addEventListener('click',e=>goTo(parseInt(d.dataset.idx),true)));
+      card.querySelector('.hcard-prev').addEventListener('click',()=>goTo(cur-1,true));
+      card.querySelector('.hcard-next').addEventListener('click',()=>goTo(cur+1,true));
+      card.addEventListener('mouseenter',()=>clearInterval(timer));
+      card.addEventListener('mouseleave',()=>startAuto());
+      imgs.forEach((img,i)=>{
+        img.addEventListener('click',()=>{
+          const list=site.files.map((f,j)=>({src:enc('assets/Professional Career/'+site.folder+'/'+f),caption:site.captions[j]||''}));
+          openFullscreen(list,i);
         });
-        btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; btn.style.transition = 'transform .6s cubic-bezier(.34,1.56,.64,1)'; });
+        img.style.cursor='pointer';
+      });
+    });
+  },100);
+}
+
+// ═══════════ PROJECTS ═══════════
+function buildProjects(){
+  buildHorizontalGallery('projects',PROJECTS,'proj',(p,i)=>{
+    const imgs=p.media.filter(m=>m.type==='image').map((m,j)=>`<img src="${enc(m.src)}" class="${j===0?'active':''}" data-idx="${j}" alt="${m.caption||''}">`).join('');
+    const dots=p.media.filter(m=>m.type==='image').map((_,j)=>`<button class="hcard-dot ${j===0?'active':''}" data-idx="${j}"></button>`).join('');
+    return `<div class="hcard-gallery">${imgs}</div>
+            <div class="hcard-overlay"></div>
+            <div class="hcard-dots">${dots}</div>
+            <div class="hcard-arrows">
+              <button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>
+              <button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <button class="hcard-fs" onclick="openProjFullscreen(${p.id})"><i class="fas fa-expand"></i> View</button>
+            <div class="hcard-content">
+              <div class="hcard-num">${String(i+1).padStart(2,'0')}</div>
+              <div class="hcard-title">${p.title}</div>
+              <div class="hcard-desc">${p.short}</div>
+              <div class="hcard-tags">${p.tech.map(t=>`<span class="hcard-tag">${t}</span>`).join('')}</div>
+              <span class="hcard-link" onclick="event.stopPropagation();openProjModal(${p.id})" style="color:#fff;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.35);margin-top:12px;font-size:.75rem;text-transform:uppercase;letter-spacing:.09em">View Project →</span>
+            </div>`;
+  });
+  setTimeout(()=>{
+    document.querySelectorAll('#projects .horiz-card').forEach((card,idx)=>{
+      const p=PROJECTS[idx];
+      const imgs=card.querySelectorAll('.hcard-gallery img');
+      const dots=card.querySelectorAll('.hcard-dot');
+      let cur=0,timer;
+      function goTo(n,manual){
+        imgs[cur].classList.remove('active');dots[cur].classList.remove('active');
+        cur=(n+imgs.length)%imgs.length;
+        imgs[cur].classList.add('active');dots[cur].classList.add('active');
+        if(manual){clearInterval(timer);startAuto()}
+      }
+      function startAuto(){timer=setInterval(()=>goTo(cur+1,false),4000)}
+      startAuto();
+      dots.forEach(d=>d.addEventListener('click',e=>goTo(parseInt(d.dataset.idx),true)));
+      card.querySelector('.hcard-prev').addEventListener('click',()=>goTo(cur-1,true));
+      card.querySelector('.hcard-next').addEventListener('click',()=>goTo(cur+1,true));
+      card.addEventListener('mouseenter',()=>clearInterval(timer));
+      card.addEventListener('mouseleave',()=>startAuto());
+      imgs.forEach((img,i)=>{
+        img.addEventListener('click',()=>{
+          const list=p.media.filter(m=>m.type==='image').map(m=>({src:enc(m.src),caption:m.caption||''}));
+          openFullscreen(list,i);
+        });
+        img.style.cursor='pointer';
+      });
+    });
+  },100);
+}
+
+// ═══════════ FREELANCE ═══════════
+function buildFreelance(){
+  buildHorizontalGallery('freelance',FREELANCE,'fl',(f,i)=>{
+    const base=f.folder;
+    const imgs=f.files.map((file,j)=>`<img src="${enc(base+file)}" class="${j===0?'active':''}" data-idx="${j}" alt="${f.captions[j]||''}">`).join('');
+    const dots=f.files.map((_,j)=>`<button class="hcard-dot ${j===0?'active':''}" data-idx="${j}"></button>`).join('');
+    return `<div class="hcard-gallery">${imgs}</div>
+            <div class="hcard-overlay"></div>
+            <div class="hcard-dots">${dots}</div>
+            <div class="hcard-arrows">
+              <button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>
+              <button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <button class="hcard-fs" onclick="openFLFullscreen('${f.id}')"><i class="fas fa-expand"></i> View</button>
+            <div class="hcard-content">
+              <div class="hcard-num">${String(i+1).padStart(2,'0')}</div>
+              <div class="hcard-title">${f.title}</div>
+              <div class="hcard-desc">${f.desc}</div>
+              <div class="hcard-tags">${f.tags.map(t=>`<span class="hcard-tag">${t}</span>`).join('')}</div>
+              ${f.pdf?`<a href="${f.pdf}" target="_blank" style="color:#fff;font-size:.75rem;border-bottom:1px solid rgba(255,255,255,.35);display:inline-flex;align-items:center;gap:6px;margin-top:12px;text-decoration:none">Report →</a>`:''}
+            </div>`;
+  });
+  setTimeout(()=>{
+    document.querySelectorAll('#freelance .horiz-card').forEach((card,idx)=>{
+      const f=FREELANCE[idx];
+      const imgs=card.querySelectorAll('.hcard-gallery img');
+      const dots=card.querySelectorAll('.hcard-dot');
+      let cur=0,timer;
+      function goTo(n,manual){
+        imgs[cur].classList.remove('active');dots[cur].classList.remove('active');
+        cur=(n+imgs.length)%imgs.length;
+        imgs[cur].classList.add('active');dots[cur].classList.add('active');
+        if(manual){clearInterval(timer);startAuto()}
+      }
+      function startAuto(){timer=setInterval(()=>goTo(cur+1,false),3800)}
+      startAuto();
+      dots.forEach(d=>d.addEventListener('click',e=>goTo(parseInt(d.dataset.idx),true)));
+      card.querySelector('.hcard-prev').addEventListener('click',()=>goTo(cur-1,true));
+      card.querySelector('.hcard-next').addEventListener('click',()=>goTo(cur+1,true));
+      card.addEventListener('mouseenter',()=>clearInterval(timer));
+      card.addEventListener('mouseleave',()=>startAuto());
+      imgs.forEach((img,i)=>{
+        img.addEventListener('click',()=>{
+          const list=f.files.map((file,j)=>({src:enc(f.folder+file),caption:f.captions[j]||''}));
+          openFullscreen(list,i);
+        });
+        img.style.cursor='pointer';
+      });
+    });
+  },100);
+}
+
+// ═══════════ CERTIFICATIONS ═══════════
+function buildCerts(){
+  const certItems=[];
+  CERTIFICATES.forEach((c,i)=>{
+    if(c.files&&c.files.length){
+      c.files.forEach((f,j)=>{
+        certItems.push({
+          id:`${i}-${j}`,
+          num:String(certItems.length+1).padStart(2,'0'),
+          title:c.title,
+          desc:c.desc,
+          icon:c.icon,
+          src:enc('assets/Cerififcations/'+f),
+          caption:c.captions[j]||c.title
+        });
+      });
+    }else{
+      certItems.push({
+        id:`${i}-0`,
+        num:String(certItems.length+1).padStart(2,'0'),
+        title:c.title,
+        desc:c.desc,
+        icon:c.icon,
+        src:null,
+        caption:null
       });
     }
-    function initScramble() {
-      const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
-      document.querySelectorAll('.scramble').forEach(el => {
-        const orig = el.dataset.text || el.textContent;
-        let done = false;
-        new IntersectionObserver(entries => {
-          if (entries[0].isIntersecting && !done) {
-            done = true;
-            let frame = 0;
-            const total = 34;
-            const iv = setInterval(() => {
-              el.textContent = orig.split('').map((ch, i) => {
-                if (ch === ' ') return ' ';
-                if (frame / total > i / orig.length) return ch;
-                return CHARS[Math.floor(Math.random() * CHARS.length)];
-              }).join('');
-              frame++;
-              if (frame > total) { el.textContent = orig; clearInterval(iv); }
-            }, 36);
-          }
-        }, { threshold: .5 }).observe(el);
-      });
+  });
+  buildHorizontalGallery('certifications',certItems,'cert',(item,i)=>{
+    if(item.src){
+      return `<div class="hcard-gallery"><img src="${item.src}" class="active" alt="${item.caption||''}"></div>
+              <div class="hcard-overlay"></div>
+              <button class="hcard-fs" onclick="openFullscreen([{src:'${item.src}',caption:'${item.caption||''}'}],0)" style="opacity:1"><i class="fas fa-expand"></i> View</button>
+              <div class="hcard-content">
+                <div class="hcard-num">${item.num}</div>
+                <div class="hcard-title">${item.title}</div>
+                <div class="hcard-desc">${item.desc}</div>
+              </div>`;
+    }else{
+      return `<div class="hcard-gallery" style="background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;"><i class="fas ${item.icon}" style="font-size:4rem;opacity:0.15"></i></div>
+              <div class="hcard-overlay" style="background:rgba(0,0,0,0.5)"></div>
+              <div class="hcard-content">
+                <div class="hcard-num">${item.num}</div>
+                <div class="hcard-title">${item.title}</div>
+                <div class="hcard-desc">${item.desc}</div>
+              </div>`;
     }
-  </script>
+  });
+}
+
+// ═══════════ FULLSCREEN & MODALS ═══════════
+window.openExpFullscreen=function(siteId){
+  const site=WORK_SITES.find(s=>s.id===siteId);
+  if(!site)return;
+  const activeImg=document.querySelector(`#exp-card-${siteId} .hcard-gallery img.active`);
+  const startIdx=activeImg?parseInt(activeImg.dataset.idx)||0:0;
+  const list=site.files.map((f,i)=>({src:enc('assets/Professional Career/'+site.folder+'/'+f),caption:site.captions[i]||''}));
+  openFullscreen(list,startIdx);
+};
+window.openProjFullscreen=function(projId){
+  const p=PROJECTS.find(x=>x.id===projId);
+  if(!p)return;
+  const card=document.getElementById(`proj-card-${projId}`);
+  const activeImg=card?card.querySelector('.hcard-gallery img.active'):null;
+  const startIdx=activeImg?parseInt(activeImg.dataset.idx)||0:0;
+  const list=p.media.filter(m=>m.type==='image').map(m=>({src:enc(m.src),caption:m.caption||''}));
+  openFullscreen(list,startIdx);
+};
+window.openFLFullscreen=function(flId){
+  const f=FREELANCE.find(x=>x.id===flId);
+  if(!f)return;
+  const activeImg=document.querySelector(`#fl-card-${flId} .hcard-gallery img.active`);
+  const startIdx=activeImg?parseInt(activeImg.dataset.idx)||0:0;
+  const list=f.files.map((file,i)=>({src:enc(f.folder+file),caption:f.captions[i]||''}));
+  openFullscreen(list,startIdx);
+};
+
+let _fsMedia=[],_fsIdx=0;
+window.openFullscreen=function(list,idx){_fsMedia=list;_fsIdx=idx||0;updateFS();document.getElementById('fullscreenModal').classList.add('active')}
+function updateFS(){const item=_fsMedia[_fsIdx];document.getElementById('fullscreenImg').src=item.src;document.getElementById('fsCaption').textContent=(item.caption||'')+` (${_fsIdx+1}/${_fsMedia.length})`}
+window.fsStep=function(d){_fsIdx=(_fsIdx+d+_fsMedia.length)%_fsMedia.length;updateFS()}
+window.closeFull=function(){document.getElementById('fullscreenModal').classList.remove('active')}
+
+window.openProjModal=function(id){
+  const p=PROJECTS.find(x=>x.id===id);if(!p)return;
+  document.getElementById('mHead').innerHTML=`<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">${p.title}</h3><p style="opacity:.5;font-size:.8rem;margin-bottom:14px">${p.loc}</p>`;
+  document.getElementById('mDesc').innerHTML=`<p style="line-height:1.75;margin-bottom:12px">${p.full}</p><p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> ${p.tech.join(', ')}</p>`;
+  document.getElementById('mGallery').innerHTML=p.media.map((m,i)=>{
+    const s=enc(m.src);
+    if(m.type==='image')return `<div class="m-media-wrap" onclick="openProjCarousel(${id},${i})" title="${m.caption||''}"><img src="${s}" alt="${m.caption||''}" loading="lazy"></div>`;
+    return `<div class="m-media-wrap" onclick="openVideoModal('${s}')" title="Play video"><i class="fas fa-play" style="color:#fff;position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);font-size:1.4rem"></i><video muted><source src="${s}" type="video/mp4"></video></div>`;
+  }).join('');
+  document.getElementById('mPdf').innerHTML=p.pdf?`<a href="${p.pdf}" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>`:'';
+  document.getElementById('projModal').classList.add('on');
+};
+window.closeModal=function(id){document.getElementById(id).classList.remove('on')}
+window.openProjCarousel=function(projId,startIdx){
+  const p=PROJECTS.find(x=>x.id===projId);if(!p)return;
+  const list=p.media.filter(m=>m.type==='image').map(m=>({src:enc(m.src),caption:m.caption||''}));
+  openCarousel(list,startIdx);
+};
+
+let _carMedia=[],_carIdx=0;
+function openCarousel(list,idx){_carMedia=list;_carIdx=idx||0;updateCar();document.getElementById('carouselModal').classList.add('active')}
+function updateCar(){const item=_carMedia[_carIdx];document.getElementById('carouselImage').src=item.src;document.getElementById('carouselCaption').textContent=item.caption||`${_carIdx+1}/${_carMedia.length}`}
+window.carStep=function(d){_carIdx=(_carIdx+d+_carMedia.length)%_carMedia.length;updateCar()}
+window.closeCarousel=function(){document.getElementById('carouselModal').classList.remove('active')}
+
+window.openVideoModal=function(src){document.getElementById('videoPlayer').src=src;document.getElementById('videoModal').classList.add('active')}
+window.closeVideoModal=function(){const v=document.getElementById('videoPlayer');v.pause();v.src='';document.getElementById('videoModal').classList.remove('active')}
+
+// ═══════════ VISITOR COUNT & DISCORD ═══════════
+(function(){
+  const countEl=document.getElementById('visitorCount');
+  fetch('https://api.countapi.xyz/hit/abhishek-portfolio/visits')
+    .then(r=>r.json())
+    .then(data=>countEl.textContent=data.value+' visits')
+    .catch(()=>countEl.textContent='...');
+
+  const discordURL='YOUR_DISCORD_WEBHOOK_URL';
+  if(discordURL!=='YOUR_DISCORD_WEBHOOK_URL'){
+    fetch(discordURL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({username:'Portfolio Bot',content:`🚀 **New Visitor!** Someone just opened your portfolio.\n🕒 ${new Date().toLocaleString()}`})
+    }).catch(()=>{});
+  }
+})();
+
+// ═══════════ MAGNETIC & SCRAMBLE ═══════════
+function initMagnetic(){
+  document.querySelectorAll('.magnetic').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.3}px, ${(e.clientY-r.top-r.height/2)*0.3}px)`;
+      btn.style.transition='transform .25s ease';
+    });
+    btn.addEventListener('mouseleave',()=>{btn.style.transform='translate(0,0)';btn.style.transition='transform .6s cubic-bezier(.34,1.56,.64,1)'});
+  });
+}
+function initScramble(){
+  const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
+  document.querySelectorAll('.scramble').forEach(el=>{
+    const orig=el.dataset.text||el.textContent;
+    let done=false;
+    new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting&&!done){
+        done=true;
+        let frame=0;
+        const total=34;
+        const iv=setInterval(()=>{
+          el.textContent=orig.split('').map((ch,i)=>{
+            if(ch===' ')return' ';
+            if(frame/total>i/orig.length)return ch;
+            return CHARS[Math.floor(Math.random()*CHARS.length)];
+          }).join('');
+          frame++;
+          if(frame>total){el.textContent=orig;clearInterval(iv)}
+        },36);
+      }
+    },{threshold:.5}).observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  buildBentoSkills();
+  buildExperience();
+  buildProjects();
+  buildFreelance();
+  buildCerts();
+  initReveal();
+  initCursor();
+  initNav();
+  initMagnetic();
+  initScramble();
+  if(typeof THREE!=='undefined')initThree();
+});
+</script>
 </body>
 </html>
