@@ -11,7 +11,7 @@
 
   <style>
     /* ═══════════════════════════════════════════════════════
-       BASE – unchanged from your preferred version
+       BASE – unchanged
     ═══════════════════════════════════════════════════════ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -856,7 +856,7 @@
     }
 
     /* ═══════════════════════════════════════════════════════════
-       PROJECT STACK – FULL SCREEN CARDS
+       PROJECT STACK – FULL SCREEN CARDS (NOW USING FIRST IMAGE)
     ═══════════════════════════════════════════════════════════ */
     function buildProjectStack() {
       var viewport = document.getElementById('stackViewport');
@@ -868,7 +868,9 @@
       PROJECTS.forEach(function(p, i) {
         var card = document.createElement('div');
         card.className = 'stack-card';
-        var imgSrc = (p.media && p.media[0] && p.media[0].type === 'image') ? enc(p.media[0].src) : '';
+        // Find the first image media (skip videos)
+        var firstImage = (p.media||[]).find(function(m) { return m.type === 'image'; });
+        var imgSrc = firstImage ? enc(firstImage.src) : '';
         card.innerHTML = (imgSrc
           ? '<img src="'+imgSrc+'" class="stack-card-img" alt="">'
           : '<div class="stack-card-img" style="background:#222;"></div>')
