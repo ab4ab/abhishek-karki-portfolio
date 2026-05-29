@@ -4,59 +4,81 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abhishek Karki | Civil Engineer & GIS Expert</title>
-  <meta name="description" content="Portfolio of Abhishek Karki — Civil Engineer, GIS & Remote Sensing Specialist, MSc. DREM." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <meta name="description" content="Portfolio of Abhishek Karki — Civil Engineer, GIS & Remote Sensing Specialist, MSc. DRM." />
+  
+  <preconnect href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     /* ═══════════════════════════════════════════════════════
-       BASE – exact copy from your preferred version
+       BASE STYLES & VARIABLES
     ═══════════════════════════════════════════════════════ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
     :root {
-      --white: #f5f4f0; --black: #0e0e0e; --accent: #8ab4f8; --accent2: #c4f0a8;
+      --white: #f5f4f0; 
+      --black: #0e0e0e; 
+      --accent: #8ab4f8; 
+      --accent2: #c4f0a8;
       --light-gray: #e8e6e0;
-      --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+      --font-display: 'Syne', sans-serif; 
+      --font-body: 'DM Sans', sans-serif;
     }
+    
     html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--black); font-family: var(--font-body); font-weight: 300; cursor: none; overflow-x: hidden; }
+    
+    body { 
+      background: var(--white); 
+      color: var(--black); 
+      font-family: var(--font-body); 
+      font-weight: 300; 
+      cursor: none; 
+      overflow-x: hidden; 
+    }
 
-    /* ── CURSOR ── */
+    /* ── CURSOR INTERACTION ── */
     #cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--black); border-radius: 50%; pointer-events: none; z-index: 9999; left: 0; top: 0; transform: translate(-50%, -50%); will-change: left, top; }
     #cursor-ring { position: fixed; width: 38px; height: 38px; border: 1.5px solid var(--black); border-radius: 50%; pointer-events: none; z-index: 9998; left: 0; top: 0; transform: translate(-50%, -50%); transition: width .3s, height .3s, border-color .3s; will-change: left, top; }
     body.cursor-hover #cursor-ring { width: 64px; height: 64px; border-color: var(--accent); }
     body.cursor-hover #cursor-dot { background: var(--accent); }
     body.cursor-active #cursor-dot { transform: translate(-50%, -50%) scale(0.5); }
 
-    /* ── NAV ── */
+    @media (pointer: coarse) {
+      #cursor-dot, #cursor-ring { display: none !important; }
+      body { cursor: auto !important; }
+      .btn, a, button { cursor: pointer !important; }
+    }
+
+    /* ── NAVIGATION ── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 28px 60px; transition: background .4s, backdrop-filter .4s, border-bottom .4s; }
     .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: -.02em; text-decoration: none; color: var(--black); }
-    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
     .nav-links a { font-size: .78rem; letter-spacing: .09em; text-transform: uppercase; text-decoration: none; color: var(--black); opacity: .55; transition: opacity .25s; }
     .nav-links a:hover { opacity: 1; }
     .nav-cta { background: var(--black)!important; color: var(--white)!important; padding: 7px 22px!important; border-radius: 100px; opacity: 1!important; font-weight: 600; }
     .nav-cta:hover { background: var(--accent)!important; color: var(--black)!important; }
 
-    /* ── BUTTONS ── */
+    /* ── GLOBAL BUTTONS ── */
     .btn { display: inline-block; padding: 15px 36px; font-family: var(--font-body); font-size: .83rem; font-weight: 400; letter-spacing: .07em; text-transform: uppercase; text-decoration: none; border-radius: 100px; position: relative; overflow: hidden; transition: color .3s; cursor: none; }
     .btn-dark { background: var(--black); color: var(--white); border: 1.5px solid var(--black); }
     .btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
     .btn::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateY(102%); transition: transform .42s cubic-bezier(.76,0,.24,1); z-index: -1; border-radius: 100px; }
-    .btn:hover { color: var(--black); } .btn:hover::after { transform: translateY(0); }
+    .btn:hover { color: var(--black); } 
+    .btn:hover::after { transform: translateY(0); }
 
-    /* ── SECTIONS ── */
+    /* ── SECTIONS ARCHITECTURE ── */
     section { padding: 120px 60px; }
     .section-label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; opacity: .38; margin-bottom: 64px; display: flex; align-items: center; gap: 14px; }
     .section-label::before { content: ''; width: 28px; height: 1px; background: currentColor; }
 
-    /* ── CLIP-PATH REVEAL ── */
+    /* ── REVEAL SYSTEM ── */
     .reveal { opacity: 0; transform: translateY(48px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .clip-reveal { clip-path: inset(0 0 100% 0); transition: clip-path .85s cubic-bezier(.22,1,.36,1); }
     .clip-reveal.visible { clip-path: inset(0 0 0% 0); }
 
-    /* ── HERO ── */
+    /* ── HERO GRAPHICS ── */
     #hero { position: relative; height: 100vh; display: flex; align-items: center; padding: 0 60px; overflow: hidden; background: url('assets/background.jpg') center/cover no-repeat; }
     #hero::before { content: ''; position: absolute; inset: 0; background: rgba(245,244,240,.78); z-index: 1; }
     #three-canvas { position: absolute; top: 0; right: 0; width: 55%; height: 100%; pointer-events: none; z-index: 0; }
@@ -65,13 +87,14 @@
     .hero-name { font-family: var(--font-display); font-weight: 800; font-size: clamp(4rem, 9vw, 8rem); line-height: 1.04; letter-spacing: -.04em; margin-bottom: 30px; }
     .hero-name .line { display: block; overflow: visible; }
     .hero-name .word { display: inline-block; }
-    .hero-subtitle { font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.65; max-width: 400px; margin-bottom: 48px; opacity: .75; }
+    .hero-subtitle { font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.65; max-width: 450px; margin-bottom: 48px; opacity: .75; }
     .hero-cta { display: inline-flex; gap: 16px; }
+    
     .scroll-hint { position: absolute; bottom: 44px; left: 60px; display: flex; align-items: center; gap: 12px; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; opacity: .35; z-index: 2; }
     .scroll-line { width: 40px; height: 1px; background: var(--black); transform-origin: left; animation: extL 2s ease-in-out infinite; }
     @keyframes extL { 0%,100% { transform: scaleX(.3); opacity: .4; } 50% { transform: scaleX(1); opacity: 1; } }
 
-    /* ── ABOUT ── */
+    /* ── ABOUT MATRIX ── */
     #about { background: var(--white); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .about-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -.03em; margin-bottom: 30px; }
@@ -81,17 +104,17 @@
     .about-image-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: .8rem; letter-spacing: .1em; opacity: .28; text-transform: uppercase; }
     .about-accent-box { position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; background: var(--accent); border-radius: 4px; z-index: -1; }
 
-    /* ── SKILLS SIMPLE BENTO ── */
+    /* ── SKILLS BENTO BOX ── */
     #skills { background: var(--black); color: var(--white); }
     #skills .section-label { color: var(--white); }
     .skills-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.03em; margin-bottom: 56px; }
     .bento-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
-    .bento-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 24px; text-align: center; transition: background .3s, border-color .3s, transform .3s; }
-    .bento-card:hover { background: rgba(255,255,255,.09); border-color: rgba(138,180,248,.25); transform: translateY(-2px); }
+    .bento-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 24px; text-align: center; transition: background .3s, border-color .3s, transform .5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
+    .bento-card:hover { background: rgba(255,255,255,.09); border-color: rgba(138,180,248,.25); }
     .bento-card i { font-size: 2rem; color: var(--accent); margin-bottom: 10px; display: block; }
     .bento-card h3 { font-family: var(--font-display); font-weight: 600; font-size: .95rem; color: var(--white); }
 
-    /* ── HORIZONTAL GALLERY (Experience, Freelance) ── */
+    /* ── HORIZONTAL TRACK SCROLLING ── */
     .horiz-section { padding: 120px 0; }
     .horiz-section .section-label { padding: 0 60px; }
     .horiz-intro { padding: 0 60px; margin-bottom: 64px; }
@@ -101,8 +124,9 @@
     .horiz-sticky-inner { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 48px; }
     .horiz-track-wrap { overflow: hidden; position: relative; }
     .horiz-track { display: flex; gap: 24px; padding: 0 60px; will-change: transform; }
-    .exp-hcard { flex: 0 0 480px; height: 520px; border-radius: 16px; overflow: hidden; position: relative; background: #1a1a1a; border: 1px solid rgba(255,255,255,.07); transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s; }
-    .exp-hcard:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,.6); }
+    
+    .exp-hcard { flex: 0 0 480px; height: 520px; border-radius: 16px; overflow: hidden; position: relative; background: #1a1a1a; border: 1px solid rgba(255,255,255,.07); transition: transform .5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow .4s; will-change: transform; }
+    .exp-hcard:hover { box-shadow: 0 40px 80px rgba(0,0,0,.6); }
     .hcard-gallery { position: absolute; inset: 0; overflow: hidden; }
     .hcard-gallery img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .65s ease; }
     .hcard-gallery img.active { opacity: 1; }
@@ -113,12 +137,14 @@
     .hcard-desc { font-size: .82rem; opacity: .55; line-height: 1.6; margin-bottom: 14px; color: #fff; }
     .hcard-tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .hcard-tag { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.6); }
+    
     .hcard-dots { position: absolute; top: 16px; right: 16px; z-index: 4; display: flex; gap: 5px; }
     .hcard-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.3); border: none; cursor: pointer; transition: background .25s, transform .25s; }
     .hcard-dot.active { background: #fff; transform: scale(1.25); }
     .hcard-arrows { position: absolute; bottom: 88px; right: 16px; z-index: 4; display: flex; gap: 6px; }
     .hcard-arr { background: rgba(255,255,255,.12); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: .8rem; display: flex; align-items: center; justify-content: center; transition: background .25s; }
     .hcard-arr:hover { background: var(--accent); color: var(--black); }
+    
     .horiz-progress-bar { height: 2px; background: rgba(255,255,255,.1); position: relative; margin: 0 60px; margin-top: 24px; }
     .horiz-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); transition: width .15s linear; border-radius: 2px; }
     .horiz-site-nav { display: flex; gap: 16px; padding: 16px 60px 0; align-items: center; }
@@ -127,69 +153,40 @@
     .horiz-site-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
     .horiz-site-label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .35; font-family: var(--font-display); }
 
-    /* Freelance section – light blue */
-    #freelance { background: #e0f2fe; }
+    #freelance { background: #edf2f7; }
     #freelance .section-label, #freelance .horiz-company, #freelance .horiz-company-sub { color: var(--black); }
     #freelance .horiz-progress-bar { background: rgba(0,0,0,.1); }
-    #freelance .horiz-progress-fill { background: var(--accent); }
+    #freelance .horiz-progress-fill { background: var(--black); }
     #freelance .horiz-site-dot { background: rgba(0,0,0,.2); }
-    #freelance .horiz-site-dot.active { background: var(--accent); }
+    #freelance .horiz-site-dot.active { background: var(--black); }
 
-    /* Experience section – dark */
     #experience { background: var(--black); color: var(--white); }
     #experience .section-label, #experience .horiz-company, #experience .horiz-company-sub { color: var(--white); }
 
-    /* ── PROJECTS – FULL SCREEN STACK CARDS ── */
-    #projects { background: var(--black); padding: 0; } /* no padding, cards fill screen */
-    #projects .section-label, #projects .projects-heading { padding: 0 60px; color: var(--white); position: relative; z-index: 10; }
-    .projects-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -.03em; margin-bottom: 24px; padding: 0 60px; color: var(--white); }
-    .stack-outer { position: relative; height: calc(var(--card-count,8) * 100vh); } /* each card occupies full viewport */
-    .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-    .stack-hint { text-align: center; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .3; margin-top: 16px; padding: 0 0 48px; color: var(--white); position: absolute; bottom: 0; width: 100%; }
-    .stack-card {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0; top: 0;
-      display: flex;
-      flex-direction: column;
-      will-change: transform, opacity;
-      transform-origin: center center;
-      overflow: hidden;
-    }
-    .stack-card-img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .stack-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
-      z-index: 1;
-    }
-    .stack-card-body {
-      position: relative;
-      z-index: 2;
-      padding: 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      height: 100%;
-      color: #fff;
-    }
-    .stack-card-num { font-family: var(--font-display); font-size: 5rem; font-weight: 800; line-height: 1; opacity: .2; letter-spacing: -.04em; margin-bottom: -16px; }
-    .stack-card-cat { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; opacity: .6; margin-bottom: 10px; }
-    .stack-card-title { font-family: var(--font-display); font-weight: 700; font-size: 2.5rem; letter-spacing: -.02em; margin-bottom: 10px; line-height: 1.2; max-width: 700px; }
-    .stack-card-desc { font-size: 1rem; line-height: 1.68; opacity: .8; margin-bottom: 22px; max-width: 600px; }
+    /* ── CARD STACK FEATURE PIECES ── */
+    #projects { background: var(--black); padding: 120px 0 0; }
+    #projects .section-label, #projects .projects-heading { padding: 0 60px; color: var(--white); }
+    .projects-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -.03em; margin-bottom: 24px; color: var(--white); }
+    .stack-outer { position: relative; height: calc(var(--card-count,8) * 120px + 100vh); }
+    .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .stack-hint { text-align: center; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .3; margin-top: 16px; padding: 0 0 48px; color: var(--white); }
+    
+    .stack-card { position: absolute; width: min(900px, 88vw); border-radius: 20px; overflow: hidden; background: #1a1a1a; border: 1px solid rgba(255,255,255,.08); box-shadow: 0 2px 4px rgba(0,0,0,.4); display: grid; grid-template-columns: 1fr 1fr; will-change: transform, opacity; transform-origin: top center; }
+    .stack-card-img { aspect-ratio: unset; background: var(--light-gray); overflow: hidden; position: relative; min-height: 340px; }
+    .stack-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+    .stack-card:hover .stack-card-img img { transform: scale(1.04); }
+    .stack-card-img-ph { width: 100%; height: 100%; min-height: 340px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); opacity: .22; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: #fff; }
+    .stack-card-body { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; color: #fff; }
+    .stack-card-num { font-family: var(--font-display); font-size: 5rem; font-weight: 800; line-height: 1; opacity: .05; letter-spacing: -.04em; margin-bottom: -16px; color: #fff; }
+    .stack-card-cat { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; opacity: .4; margin-bottom: 10px; color: #fff; }
+    .stack-card-title { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: -.02em; margin-bottom: 10px; line-height: 1.2; color: #fff; }
+    .stack-card-desc { font-size: .9rem; line-height: 1.68; opacity: .7; margin-bottom: 22px; color: #fff; }
     .stack-card-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
-    .stack-card-tag { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(255,255,255,.3); opacity: .9; }
-    .stack-card-link { font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; text-decoration: none; color: #fff; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,.4); padding-bottom: 2px; transition: gap .3s, border-color .3s; width: fit-content; }
+    .stack-card-tag { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(255,255,255,.3); opacity: .8; color: #fff; }
+    .stack-card-link { font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; text-decoration: none; color: #fff; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 2px; transition: gap .3s, border-color .3s; width: fit-content; width: -moz-fit-content; cursor: pointer; }
     .stack-card-link:hover { gap: 14px; border-color: #fff; }
 
-    /* ── EDUCATION ── */
+    /* ── ACADEMICS GRAPH ── */
     #education { background: var(--black); color: var(--white); }
     #education .section-label { color: var(--white); }
     .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
@@ -199,7 +196,7 @@
     .edu-card p { font-size: .88rem; opacity: .5; line-height: 1.7; }
     .honors { margin-top: 8px; opacity: 1!important; color: var(--accent)!important; }
 
-    /* ── CERTIFICATIONS ── */
+    /* ── CREDENTIALS LIST ── */
     #certifications { background: var(--light-gray); }
     .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
     .cert-item { background: var(--white); border-radius: 14px; padding: 24px; display: flex; align-items: flex-start; gap: 14px; transition: transform .25s; }
@@ -208,7 +205,7 @@
     .cert-text strong { display: block; font-family: var(--font-display); font-size: .92rem; margin-bottom: 3px; }
     .cert-text span { font-size: .8rem; opacity: .5; }
 
-    /* ── CONTACT ── */
+    /* ── TERMINAL FOOTER ── */
     #contact { background: var(--black); color: var(--white); text-align: center; }
     .contact-pre { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; opacity: .35; margin-bottom: 24px; }
     .contact-heading { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -.04em; line-height: 1.1; margin-bottom: 52px; }
@@ -216,23 +213,8 @@
     .contact-link { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--white); opacity: .45; border-bottom: 1px solid rgba(255,255,255,.2); padding-bottom: 3px; transition: opacity .3s; }
     .contact-link:hover { opacity: 1; }
 
-    /* ── FULLSCREEN MODAL ── */
-    .fullscreen-modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.96);
-      display: none; align-items: center; justify-content: center;
-      z-index: 6000;
-    }
-    .fullscreen-modal.active { display: flex; }
-    .fullscreen-modal img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 12px; }
-    .fullscreen-close { position: absolute; top: 20px; right: 28px; font-size: 1.8rem; color: white; background: none; border: none; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; }
-    .fullscreen-close:hover { opacity: 1; }
-    .fs-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); color: #fff; border: none; font-size: 1.4rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; transition: background 0.25s; }
-    .fs-nav:hover { background: var(--accent); color: var(--black); }
-    .fs-prev { left: 20px; } .fs-next { right: 20px; }
-    .fs-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.8rem; }
-
-    /* Other modals unchanged */
-    .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.5); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
+    /* ── CONTAINER MODALS ── */
+    .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.5); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
     .modal.on { opacity: 1; pointer-events: all; }
     .modal-box { background: var(--white); border-radius: 16px; width: 90%; max-width: 680px; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
     .modal-close { position: absolute; top: 18px; right: 22px; background: none; border: none; font-size: 1.5rem; cursor: pointer; opacity: .45; transition: opacity .2s; }
@@ -241,6 +223,17 @@
     .m-media-wrap { width: 96px; height: 72px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; transition: transform .25s; }
     .m-media-wrap:hover { transform: scale(1.05); }
     .m-media-wrap img, .m-media-wrap video { width: 100%; height: 100%; object-fit: cover; }
+
+    /* LIGHTBOX VIEWPORTS */
+    .fullscreen-modal { position: fixed; inset: 0; background: rgba(0,0,0,.96); display: none; align-items: center; justify-content: center; z-index: 5000; }
+    .fullscreen-modal.active { display: flex; }
+    .fullscreen-modal img { max-width: 86vw; max-height: 84vh; object-fit: contain; border-radius: 8px; }
+    .fullscreen-close { position: absolute; top: 20px; right: 28px; font-size: 1.8rem; color: white; background: none; border: none; cursor: pointer; opacity: .6; transition: opacity .2s; }
+    .fullscreen-close:hover { opacity: 1; }
+    .fs-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.1); color: #fff; border: none; font-size: 1.4rem; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; transition: background .25s; }
+    .fs-nav:hover { background: var(--accent); color: var(--black); }
+    .fs-prev { left: 20px; } .fs-next { right: 20px; }
+    .fs-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.5); font-size: .78rem; letter-spacing: .07em; white-space: nowrap; }
 
     .carousel-modal, .video-modal { position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,.93); display: none; align-items: center; justify-content: center; }
     .carousel-modal.active, .video-modal.active { display: flex; }
@@ -255,24 +248,25 @@
     .close-video { position: absolute; top: 18px; right: 26px; color: white; background: none; border: none; font-size: 1.7rem; cursor: pointer; opacity: .6; }
     .close-video:hover { opacity: 1; }
 
-    /* ── RESPONSIVE ── */
+    /* ── RESPONSIVE QUERY SYSTEM ── */
     @media(max-width:1000px) {
+      .stack-card { grid-template-columns: 1fr; }
+      .stack-card-img { min-height: 200px; }
       .exp-hcard { flex: 0 0 340px; height: 400px; }
-      .stack-card-body { padding: 30px; }
     }
     @media(max-width:768px) {
       nav { padding: 20px 24px; }
       .nav-links { display: none; }
       #hero, section { padding: 100px 24px; }
       .horiz-section { padding: 100px 0; }
-      #projects { padding: 0; }
+      #projects { padding: 100px 0 0; }
       #three-canvas { width: 100%; opacity: .25; }
       .about-grid { grid-template-columns: 1fr; gap: 44px; }
       .exp-hcard { flex: 0 0 85vw; height: 440px; }
       .horiz-track { padding: 0 24px; }
       .horiz-site-nav, .horiz-progress-bar, .horiz-intro, .horiz-track-wrap { padding-left: 24px; padding-right: 24px; }
       .horiz-progress-bar { margin: 0 24px; }
-      .projects-heading, .stack-hint { padding: 0 24px; }
+      .projects-heading, .stack-hint, #projects .section-label { padding: 0 24px; }
       .bento-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
     }
   </style>
@@ -290,7 +284,7 @@
       <li><a href="#projects">Work</a></li>
       <li><a href="#freelance">Freelance</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="cv.html" target="_blank" class="nav-cta">Resume</a></li>
+      <li><a href="cv.html" target="_blank" rel="noopener noreferrer" class="nav-cta">Resume</a></li>
     </ul>
   </nav>
 
@@ -316,11 +310,11 @@
     <div class="about-grid">
       <div>
         <h2 class="about-heading reveal">Bridging Geomatics &amp; Structural Engineering.</h2>
-        <p class="about-text reveal delay-1">I'm a Civil Engineer with deep GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Management. I merge field data, satellite imagery, and computational models to solve real‑world infrastructure problems.</p>
-        <p class="about-text reveal delay-2">From InSAR subsidence monitoring to 2D flood mapping, I bring spatial intelligence into every project.</p>
-        <a href="cv.html" target="_blank" class="btn btn-dark magnetic reveal delay-3" style="margin-top:18px">Download CV</a>
+        <p class="about-text reveal">I'm a Civil Engineer with deep GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Management. I merge field data, satellite imagery, and computational models to solve real‑world infrastructure problems.</p>
+        <p class="about-text reveal">From InSAR subsidence monitoring to 2D flood mapping, I bring spatial intelligence into every project.</p>
+        <a href="cv.html" target="_blank" rel="noopener noreferrer" class="btn btn-dark magnetic reveal" style="margin-top:18px">Download CV</a>
       </div>
-      <div class="about-image-wrap clip-reveal delay-2">
+      <div class="about-image-wrap clip-reveal">
         <img src="assets/profile.jpg" alt="Abhishek Karki" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="about-image-placeholder" style="display:none">Your Photo Here</div>
         <div class="about-accent-box"></div>
@@ -386,13 +380,13 @@
   <section id="education">
     <div class="section-label reveal">Academics</div>
     <div class="edu-grid">
-      <div class="edu-card reveal delay-1"><h3>MSc Disaster Risk Management (DREM)</h3><p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p></div>
-      <div class="edu-card reveal delay-2"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College · 2022<br>CGPA 3.43</p><p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p></div>
-      <div class="edu-card reveal delay-3"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p></div>
+      <div class="edu-card reveal"><h3>MSc Disaster Risk Management (DRM)</h3><p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p></div>
+      <div class="edu-card reveal"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College · 2022<br>CGPA 3.43</p><p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p></div>
+      <div class="edu-card reveal"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p></div>
     </div>
   </section>
 
-  <section id="certifications" style="background:var(--light-gray)">
+  <section id="certifications">
     <div class="section-label reveal">Credentials</div>
     <div class="cert-grid reveal" id="certGrid"></div>
   </section>
@@ -402,7 +396,7 @@
     <h2 class="contact-heading reveal">Let's build<br><span class="scramble" data-text="something">something</span><br>great.</h2>
     <div class="contact-links reveal">
       <a href="mailto:abhishekkarki520@gmail.com" class="contact-link">Email</a>
-      <a href="https://linkedin.com/in/abhishek-karki-9b034524a/" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="https://linkedin.com/in/abhishek-karki-9b034524a/" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
     </div>
     <a href="mailto:abhishekkarki520@gmail.com" class="btn reveal" style="background:var(--accent);color:var(--black);border:none;font-size:1rem;padding:20px 56px;border-radius:100px">Say Hello</a>
   </section>
@@ -411,7 +405,6 @@
     <span style="opacity:.35;font-size:.82rem">© 2026 Abhishek Karki</span>
   </footer>
 
-  <!-- Fullscreen modal -->
   <div class="fullscreen-modal" id="fullscreenModal">
     <button class="fullscreen-close" onclick="closeFull()">&times;</button>
     <button class="fs-nav fs-prev" onclick="fsStep(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -447,9 +440,9 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script>
     /* ═══════════════════════════════════════════════════════════
-       DATA – fully populated, exactly as before
+       DATA REPOSITORY
     ═══════════════════════════════════════════════════════════ */
-    var PROJECTS=[
+    const PROJECTS=[
       {id:1,title:"InSAR Time Series for Highway Subsidence",cat:"InSAR / Geotech",loc:"Sloterdijk to Rijksweg, Netherlands",
        short:"13 Sentinel‑1 images processed with SNAP+SNAPHU generating 12 displacement maps.",
        full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering, phase unwrapping, terrain correction. Extracted A10 highway profiles.",
@@ -503,7 +496,7 @@
               {type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Map"}]}
     ];
 
-    var WORK_SITES=[
+    const WORK_SITES=[
       {id:"balefi",num:"01",folder:"Balefi",
        files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],
        captions:["Tower Erection","Tower Erection","Concreting Chimney","Completed Tower"],
@@ -536,7 +529,7 @@
        tags:["Substation","Switchyard","Survey"]}
     ];
 
-    var SKILLS_DATA=[
+    const SKILLS_DATA=[
       {name:"ArcGIS Pro & QGIS",icon:"fa-map"},
       {name:"Google Earth Engine",icon:"fa-satellite"},
       {name:"AutoCAD & Civil 3D",icon:"fa-drafting-compass"},
@@ -547,7 +540,7 @@
       {name:"SNAP & InSAR Processing",icon:"fa-signal"}
     ];
 
-    var FREELANCE=[
+    const FREELANCE=[
       {id:"hvac",title:"HVAC System Design",date:"2024",desc:"Complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing and equipment selection.",
        folder:"assets/freelance-photos/hvac/",files:['duct-layout.png'],captions:["HVAC duct layout"],tags:["HAP 6.0","HVAC"]},
       {id:"3d",title:"3D Building Planning & Modeling",date:"2023–2024",desc:"Detailed architectural visualizations using SketchUp and Revit for residential and industrial projects.",
@@ -562,7 +555,7 @@
        folder:"assets/portfolio-photos/sisneri-landslide/",files:['Damage due to Landslide.JPG','Group Members.JPG'],captions:["Damage","Group"],tags:["Geotech","Drone"],pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf"}
     ];
 
-    var CERTIFICATES=[
+    const CERTIFICATES=[
       {icon:"fa-certificate",title:"SAP2000 Training",desc:"Advanced structural analysis"},
       {icon:"fa-drafting-compass",title:"AutoCAD Professional",desc:"Design & drafting"},
       {icon:"fa-id-card",title:"Nepal Engineering Council",desc:"Reg. No: 80593"},
@@ -570,16 +563,17 @@
     ];
 
     /* ═══════════════════════════════════════════════════════════
-       HELPERS
+       UTILITIES & ENCODING
     ═══════════════════════════════════════════════════════════ */
     function enc(p){return encodeURI(p).replace(/#/g,'%23')}
 
     /* ═══════════════════════════════════════════════════════════
-       CURSOR
+       INTERACTIVE ENGINES
     ═══════════════════════════════════════════════════════════ */
     function initCursor(){
-      var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
-      var mx=0,my=0,rx=0,ry=0;
+      const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+      if (!dot || !ring) return;
+      let mx=0,my=0,rx=0,ry=0;
       document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
       document.addEventListener('mousedown',function(){document.body.classList.add('cursor-active')});
       document.addEventListener('mouseup',function(){document.body.classList.remove('cursor-active')});
@@ -591,61 +585,65 @@
       });
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       THREE.JS
-    ═══════════════════════════════════════════════════════════ */
     function initThree(){
-      var canvas=document.getElementById('three-canvas');
-      var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+      const canvas=document.getElementById('three-canvas');
+      if (!canvas) return;
+      const renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
       renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-      var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.1,100);
+      const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.1,100);
       camera.position.z=4;
-      var geo=new THREE.TorusKnotGeometry(1.2,.38,160,20);
-      var mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:.11,transparent:true});
-      var mesh=new THREE.Mesh(geo,mat);scene.add(mesh);
-      var geoS=new THREE.TorusKnotGeometry(1.18,.36,120,18);
-      var matS=new THREE.MeshBasicMaterial({color:0xf5f4f0});
-      var meshS=new THREE.Mesh(geoS,matS);scene.add(meshS);
-      var pg=new THREE.BufferGeometry(),pos=new Float32Array(600);
-      for(var i=0;i<600;i++)pos[i]=(Math.random()-.5)*8;
+      
+      const geo=new THREE.TorusKnotGeometry(1.2,.38,160,20);
+      const mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:.11,transparent:true});
+      const mesh=new THREE.Mesh(geo,mat);scene.add(mesh);
+      
+      const geoS=new THREE.TorusKnotGeometry(1.18,.36,120,18);
+      const matS=new THREE.MeshBasicMaterial({color:0xf5f4f0});
+      const meshS=new THREE.Mesh(geoS,matS);scene.add(meshS);
+      
+      const pg=new THREE.BufferGeometry(),pos=new Float32Array(600);
+      for(let i=0;i<600;i++)pos[i]=(Math.random()-.5)*8;
       pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
       scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x0e0e0e,size:.025,transparent:true,opacity:.28})));
-      var mx=0,my=0,trx=0,try_=0;
+      
+      let mx=0,my=0,trx=0,try_=0;
       document.addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-.5)*2;my=-(e.clientY/window.innerHeight-.5)*2});
-      function resize(){var w=canvas.offsetWidth,h=canvas.offsetHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+      
+      function resize(){
+        const w=canvas.offsetWidth,h=canvas.offsetHeight;
+        renderer.setSize(w,h,false);
+        camera.aspect=w/h;
+        camera.updateProjectionMatrix();
+      }
       resize();window.addEventListener('resize',resize);
-      var t=0;
-      (function animate(){requestAnimationFrame(animate);t+=.005;trx+=(my*.4-trx)*.05;try_+=(mx*.4-try_)*.05;
+      let t=0;
+      (function animate(){
+        requestAnimationFrame(animate);t+=.005;trx+=(my*.4-trx)*.05;try_+=(mx*.4-try_)*.05;
         mesh.rotation.x=trx+t*.3;mesh.rotation.y=try_+t*.5;meshS.rotation.x=mesh.rotation.x;meshS.rotation.y=mesh.rotation.y;
-        mesh.position.y=Math.sin(t*.7)*.12;meshS.position.y=mesh.position.y;renderer.render(scene,camera)})();
+        mesh.position.y=Math.sin(t*.7)*.12;meshS.position.y=mesh.position.y;renderer.render(scene,camera)
+      })();
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       NAV
-    ═══════════════════════════════════════════════════════════ */
     function initNav(){
-      var nav=document.getElementById('mainNav');
+      const nav=document.getElementById('mainNav');
+      if (!nav) return;
       window.addEventListener('scroll',function(){
         if(window.scrollY>80){nav.style.background='rgba(245,244,240,.92)';nav.style.backdropFilter='blur(16px)';nav.style.borderBottom='1px solid rgba(0,0,0,.06)'}
         else{nav.style.background='transparent';nav.style.backdropFilter='';nav.style.borderBottom='none'}
-      });
+      }, {passive: true});
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       SCROLL REVEALS
-    ═══════════════════════════════════════════════════════════ */
     function initReveal(){
-      var io=new IntersectionObserver(function(entries){
+      const io=new IntersectionObserver(function(entries){
         entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
       },{threshold:.08,rootMargin:'0px 0px -50px 0px'});
       document.querySelectorAll('.reveal,.clip-reveal').forEach(function(el){io.observe(el)});
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       SKILLS (SIMPLIFIED)
-    ═══════════════════════════════════════════════════════════ */
     function buildSkills(){
-      document.getElementById('bentoSkills').innerHTML = SKILLS_DATA.map(function(s){
+      const target = document.getElementById('bentoSkills');
+      if (!target) return;
+      target.innerHTML = SKILLS_DATA.map(function(s){
         return '<div class="bento-card reveal">'
           +'<i class="fas '+s.icon+'"></i>'
           +'<h3>'+s.name+'</h3>'
@@ -653,11 +651,10 @@
       }).join('');
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       CERTIFICATIONS
-    ═══════════════════════════════════════════════════════════ */
     function buildCerts(){
-      document.getElementById('certGrid').innerHTML = CERTIFICATES.map(function(c){
+      const target = document.getElementById('certGrid');
+      if (!target) return;
+      target.innerHTML = CERTIFICATES.map(function(c){
         return '<div class="cert-item reveal">'
           +'<div class="cert-icon"><i class="fas '+c.icon+'"></i></div>'
           +'<div class="cert-text"><strong>'+c.title+'</strong><span>'+c.desc+'</span></div>'
@@ -666,28 +663,30 @@
     }
 
     /* ═══════════════════════════════════════════════════════════
-       HORIZONTAL GALLERY BUILDER
+       DYNAMIC HORIZONTAL SCROLLER MAPPING
     ═══════════════════════════════════════════════════════════ */
     function buildHorizontalGallery(prefix, items, folderFn) {
-      var outer = document.getElementById(prefix+'StickyOuter');
-      var track = document.getElementById(prefix+'Track');
-      var dotsCont = document.getElementById(prefix+'SiteDots');
-      var labelEl = document.getElementById(prefix+'SiteLabel');
-      var fillEl = document.getElementById(prefix+'ProgressFill');
-      var N = items.length;
+      const outer = document.getElementById(prefix+'StickyOuter');
+      const track = document.getElementById(prefix+'Track');
+      const dotsCont = document.getElementById(prefix+'SiteDots');
+      const labelEl = document.getElementById(prefix+'SiteLabel');
+      const fillEl = document.getElementById(prefix+'ProgressFill');
+      if (!outer || !track) return;
+      
+      const N = items.length;
       outer.style.setProperty('--n-sites', N);
       outer.style.height = (N*100+80)+'vh';
 
       track.innerHTML = items.map(function(item, i) {
-        var base = folderFn ? folderFn(item) : '';
-        var imgs = (item.files||[]).map(function(f, j) {
-          var src = folderFn ? enc(base+f) : enc(f.src||f);
+        const base = folderFn ? folderFn(item) : '';
+        const imgs = (item.files||[]).map(function(f, j) {
+          const src = folderFn ? enc(base+f) : enc(f.src||f);
           return '<img src="'+src+'" class="'+(j===0?'active':'')+'" data-idx="'+j+'" alt="'+(item.captions?.[j]||'')+'">';
         }).join('');
-        var dots = (item.files||[]).map(function(_, j) {
+        const dots = (item.files||[]).map(function(_, j) {
           return '<button class="hcard-dot '+(j===0?'active':'')+'" data-idx="'+j+'"></button>';
         }).join('');
-        var tags = (item.tags||[]).map(function(t) { return '<span class="hcard-tag">'+t+'</span>'; }).join('');
+        const tags = (item.tags||[]).map(function(t) { return '<span class="hcard-tag">'+t+'</span>'; }).join('');
         return '<div class="exp-hcard" id="'+prefix+'-card-'+item.id+'">'
           +'<div class="hcard-gallery">'+imgs+'</div>'
           +'<div class="hcard-overlay"></div>'
@@ -701,34 +700,36 @@
           +'<div class="hcard-title">'+item.title+'</div>'
           +'<div class="hcard-desc">'+(item.desc||item.short||'')+'</div>'
           +'<div class="hcard-tags">'+tags+'</div>'
-          + (item.pdf ? '<a href="'+item.pdf+'" target="_blank" style="color:#fff;font-size:.75rem;text-decoration:underline;margin-top:8px;display:inline-block">Report →</a>' : '')
+          + (item.pdf ? '<a href="'+item.pdf+'" target="_blank" rel="noopener noreferrer" style="color:#fff;font-size:.75rem;text-decoration:underline;margin-top:8px;display:inline-block">Report →</a>' : '')
           +'</div>'
           +'</div>';
       }).join('');
 
-      dotsCont.innerHTML = items.map(function(_, i) {
-        return '<button class="horiz-site-dot'+(i===0?' active':'')+'" data-idx="'+i+'"></button>';
-      }).join('');
-      labelEl.textContent = '01 / '+String(N).padStart(2,'0');
+      if(dotsCont) {
+        dotsCont.innerHTML = items.map(function(_, i) {
+          return '<button class="horiz-site-dot'+(i===0?' active':'')+'" data-idx="'+i+'"></button>';
+        }).join('');
+      }
+      if(labelEl) labelEl.textContent = '01 / '+String(N).padStart(2,'0');
 
-      var siteDots = dotsCont.querySelectorAll('.horiz-site-dot');
+      const siteDots = dotsCont ? dotsCont.querySelectorAll('.horiz-site-dot') : [];
 
       function updateScroll() {
-        var outerRect = outer.getBoundingClientRect();
-        var totalH = outer.offsetHeight - window.innerHeight;
-        var scrolled = -outerRect.top;
+        const outerRect = outer.getBoundingClientRect();
+        const totalH = outer.offsetHeight - window.innerHeight;
+        let scrolled = -outerRect.top;
         if (scrolled<0) scrolled=0;
         if (scrolled>totalH) scrolled=totalH;
-        var progress = scrolled/totalH;
-        var trackW = track.scrollWidth;
-        var viewW = track.parentElement.offsetWidth;
-        var maxTranslate = trackW - viewW + 120;
+        const progress = scrolled/totalH;
+        const trackW = track.scrollWidth;
+        const viewW = track.parentElement.offsetWidth;
+        let maxTranslate = trackW - viewW + 120;
         if (maxTranslate<0) maxTranslate=0;
         track.style.transform = 'translateX('+(-progress*maxTranslate)+'px)';
-        var cardIdx = Math.min(Math.floor(progress*N), N-1);
+        const cardIdx = Math.min(Math.floor(progress*N), N-1);
         siteDots.forEach(function(d,i){ d.classList.toggle('active',i===cardIdx); });
-        labelEl.textContent = (items[cardIdx]?.num||('0'+(cardIdx+1)))+' / '+String(N).padStart(2,'0');
-        fillEl.style.width = (progress*100)+'%';
+        if(labelEl) labelEl.textContent = (items[cardIdx]?.num||('0'+(cardIdx+1)))+' / '+String(N).padStart(2,'0');
+        if(fillEl) fillEl.style.width = (progress*100)+'%';
       }
 
       window.addEventListener('scroll', updateScroll, {passive:true});
@@ -736,19 +737,19 @@
 
       siteDots.forEach(function(d,i) {
         d.addEventListener('click', function() {
-          var totalH = outer.offsetHeight - window.innerHeight;
-          var target = outer.offsetTop + (i/(N-1))*totalH;
+          const totalH = outer.offsetHeight - window.innerHeight;
+          const target = outer.offsetTop + (i/(N-1))*totalH;
           window.scrollTo({top:target, behavior:'smooth'});
         });
       });
 
-      // Auto-gallery per card + click → fullscreen
       setTimeout(function() {
         document.querySelectorAll('#'+prefix+'Track .exp-hcard').forEach(function(card, idx) {
-          var imgs = card.querySelectorAll('.hcard-gallery img');
-          var dots = card.querySelectorAll('.hcard-dot');
-          var cur = 0, timer;
+          const imgs = card.querySelectorAll('.hcard-gallery img');
+          const dots = card.querySelectorAll('.hcard-dot');
+          let cur = 0, timer;
           function goTo(n, manual) {
+            if(!imgs.length) return;
             imgs[cur].classList.remove('active'); dots[cur].classList.remove('active');
             cur = (n+imgs.length)%imgs.length;
             imgs[cur].classList.add('active'); dots[cur].classList.add('active');
@@ -763,8 +764,8 @@
           card.addEventListener('mouseleave', function() { startAuto(); });
           imgs.forEach(function(img, i) {
             img.addEventListener('click', function() {
-              var list = (items[idx].files||items[idx].media||[]).map(function(f, j) {
-                var src = folderFn ? enc((folderFn(items[idx]))+f) : enc(f.src||f);
+              const list = (items[idx].files||items[idx].media||[]).map(function(f, j) {
+                const src = folderFn ? enc((folderFn(items[idx]))+f) : enc(f.src||f);
                 return { src: src, caption: items[idx].captions?.[j] || '' };
               });
               openFullscreen(list, i);
@@ -775,18 +776,12 @@
       }, 120);
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       EXPERIENCE
-    ═══════════════════════════════════════════════════════════ */
     function buildExperience() {
       buildHorizontalGallery('exp', WORK_SITES, function(item) {
         return 'assets/Professional Career/'+item.folder+'/';
       });
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       FREELANCE
-    ═══════════════════════════════════════════════════════════ */
     function buildFreelance() {
       buildHorizontalGallery('fl', FREELANCE, function(item) {
         return item.folder;
@@ -794,234 +789,195 @@
     }
 
     /* ═══════════════════════════════════════════════════════════
-       PROJECT STACK – FULL SCREEN CARDS
+       PROJECT STACK ENGINE
     ═══════════════════════════════════════════════════════════ */
-    function buildProjectStack() {
-      var viewport = document.getElementById('stackViewport');
-      var outer = document.getElementById('stackOuter');
-      var N = PROJECTS.length;
-      outer.style.setProperty('--card-count', N);
-      outer.style.height = (N * 100) + 'vh';
+    function buildProjectStack(){
+      const viewport=document.getElementById('stackViewport');
+      const outer=document.getElementById('stackOuter');
+      if(!viewport || !outer) return;
+      const N=PROJECTS.length;
+      outer.style.setProperty('--card-count',N);
+      outer.style.height=(N*140+100)+'vh';
 
-      PROJECTS.forEach(function(p, i) {
-        var card = document.createElement('div');
-        card.className = 'stack-card';
-        var imgSrc = (p.media && p.media[0] && p.media[0].type === 'image') ? enc(p.media[0].src) : '';
-        card.innerHTML = (imgSrc
-          ? '<img src="'+imgSrc+'" class="stack-card-img" alt="">'
-          : '<div class="stack-card-img" style="background:#222;"></div>')
-          + '<div class="stack-card-overlay"></div>'
-          + '<div class="stack-card-body">'
-          + '<div class="stack-card-num">0'+(i+1)+'</div>'
-          + '<div class="stack-card-cat">'+p.cat+'</div>'
-          + '<h3 class="stack-card-title">'+p.title+'</h3>'
-          + '<p class="stack-card-desc">'+p.short+'</p>'
-          + '<div class="stack-card-tags">'+p.tech.map(function(t){ return '<span class="stack-card-tag">'+t+'</span>'; }).join('')+'</div>'
-          + '<span class="stack-card-link" onclick="openProjModal('+p.id+')">View Project &rarr;</span>'
-          + '</div>';
+      PROJECTS.forEach(function(p,i){
+        const card=document.createElement('div');
+        card.className='stack-card';
+        card.id='scard-'+p.id;
+        const firstImg=p.media&&p.media[0]&&p.media[0].type==='image'
+          ?'<img src="'+enc(p.media[0].src)+'" alt="'+p.title+'" loading="lazy">'
+          :'<div class="stack-card-img-ph">'+p.cat+'</div>';
+        const tags=(p.tech||[]).map(function(t){return'<span class="stack-card-tag">'+t+'</span>'}).join('');
+        card.innerHTML='<div class="stack-card-img">'+firstImg+'</div>'
+          +'<div class="stack-card-body">'
+          +'<div class="stack-card-num">0'+(i+1)+'</div>'
+          +'<div class="stack-card-cat">'+p.cat+'</div>'
+          +'<h3 class="stack-card-title">'+p.title+'</h3>'
+          +'<p class="stack-card-desc">'+p.short+'</p>'
+          +'<div class="stack-card-tags">'+tags+'</div>'
+          +'<span class="stack-card-link" onclick="openProjModal('+p.id+')">View Project &rarr;</span>'
+          +'</div>';
         viewport.appendChild(card);
       });
 
-      var cards = viewport.querySelectorAll('.stack-card');
-      function updateStack() {
-        var outerRect = outer.getBoundingClientRect();
-        var totalH = outer.offsetHeight - window.innerHeight;
-        var scrolled = -outerRect.top;
-        if (scrolled < 0) scrolled = 0;
-        if (scrolled > totalH) scrolled = totalH;
-        var progress = scrolled / totalH;
-        var activeIdx = Math.min(Math.floor(progress * N), N - 1);
-        var localProg = (progress * N) % 1;
+      const cards=viewport.querySelectorAll('.stack-card');
+      function updateStack(){
+        const outerRect=outer.getBoundingClientRect();
+        const totalH=outer.offsetHeight-window.innerHeight;
+        let scrolled=-outerRect.top;
+        if(scrolled<0)scrolled=0;
+        if(scrolled>totalH)scrolled=totalH;
+        const progress=scrolled/totalH;
 
-        cards.forEach(function(card, i) {
-          var diff = i - activeIdx;
-          var scale, ty, opacity, zIdx;
-          if (diff < 0) { scale = 0.85; ty = -60; opacity = 0; zIdx = i; }
-          else if (diff === 0) { scale = 1 - localProg * 0.08; ty = -localProg * 40; opacity = 1; zIdx = N + 1; }
-          else if (diff === 1) { scale = 0.9 + localProg * 0.1; ty = 60 * (1 - localProg); opacity = localProg; zIdx = N; }
-          else { scale = 0.85; ty = 100; opacity = 0; zIdx = i; }
-          card.style.cssText = 'transform: translateY('+ty+'px) scale('+scale+'); opacity: '+opacity+'; z-index: '+zIdx+';';
+        const activeIdx=Math.min(Math.floor(progress*N),N-1);
+        const localProg=(progress*N)%1;
+
+        cards.forEach(function(card,i){
+          const diff=i-activeIdx;
+          let scale,ty,opacity,zIdx;
+          if(diff<0){scale=0.88;ty=-60;opacity=0;zIdx=i;}
+          else if(diff===0){scale=1-localProg*.04;ty=-localProg*20;opacity=1;zIdx=N+1;}
+          else if(diff===1){scale=.94+localProg*.06;ty=40*(1-localProg);opacity=localProg;zIdx=N;}
+          else{scale=.88;ty=80;opacity=0;zIdx=i;}
+          card.style.cssText='transform:translateY('+ty+'px) scale('+scale+');opacity:'+opacity+';z-index:'+zIdx+';transition:none';
         });
       }
-      window.addEventListener('scroll', updateStack, { passive: true });
+      window.addEventListener('scroll',updateStack,{passive:true});
       updateStack();
     }
 
     /* ═══════════════════════════════════════════════════════════
-       PROJECT MODAL
+       VIEWPORTS & MODALS LOGIC
     ═══════════════════════════════════════════════════════════ */
-    window.openProjModal = function(id) {
-      var p = PROJECTS.find(function(x) { return x.id === id; });
-      if (!p) return;
-      document.getElementById('mHead').innerHTML = '<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+p.title+'</h3>'
-        + '<p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+p.loc+'</p>';
-      document.getElementById('mDesc').innerHTML = '<p style="line-height:1.75;margin-bottom:12px">'+p.full+'</p>'
-        + '<p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> '+(p.tech||[]).join(', ')+'</p>';
-      document.getElementById('mGallery').innerHTML = (p.media||[]).map(function(m, i) {
-        var s = enc(m.src);
-        if (m.type === 'image') return '<div class="m-media-wrap" onclick="openProjCarousel('+id+','+i+')" title="'+(m.caption||'')+'"><img src="'+s+'" alt="'+(m.caption||'')+'" loading="lazy"></div>';
-        return '<div class="m-media-wrap" onclick="openVideoModal(\''+s+'\')" title="Play video" style="background:#111;display:flex;align-items:center;justify-content:center"><i class="fas fa-play" style="color:#fff;font-size:1.4rem;position:absolute"></i><video muted style="width:100%;height:100%;object-fit:cover"><source src="'+s+'" type="video/mp4"></video></div>';
+    window.openProjModal=function(id){
+      const p=PROJECTS.find(function(x){return x.id===id});if(!p)return;
+      document.getElementById('mHead').innerHTML='<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+p.title+'</h3>'
+        +'<p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+p.loc+'</p>';
+      document.getElementById('mDesc').innerHTML='<p style="line-height:1.75;margin-bottom:12px">'+p.full+'</p>'
+        +'<p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> '+(p.tech||[]).join(', ')+'</p>';
+      document.getElementById('mGallery').innerHTML=(p.media||[]).map(function(m,i){
+        const s=enc(m.src);
+        if(m.type==='image')return'<div class="m-media-wrap" onclick="openProjCarousel('+id+','+i+')" title="'+(m.caption||'')+'">'
+          +'<img src="'+s+'" alt="'+(m.caption||'')+'" loading="lazy"></div>';
+        return'<div class="m-media-wrap" onclick="openVideoModal(\''+s+'\')" title="Play video" style="background:#111;display:flex;align-items:center;justify-content:center">'
+          +'<i class="fas fa-play" style="color:#fff;font-size:1.4rem;position:absolute"></i>'
+          +'<video muted style="width:100%;height:100%;object-fit:cover"><source src="'+s+'" type="video/mp4"></video></div>';
       }).join('');
-      document.getElementById('mPdf').innerHTML = p.pdf ? '<a href="'+p.pdf+'" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>' : '';
+      document.getElementById('mPdf').innerHTML=p.pdf?'<a href="'+p.pdf+'" target="_blank" rel="noopener noreferrer" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>':'';
       document.getElementById('projModal').classList.add('on');
     };
-    window.closeModal = function(id) { document.getElementById(id).classList.remove('on'); };
-    window.openProjCarousel = function(projId, startIdx) {
-      var p = PROJECTS.find(function(x) { return x.id === projId; });
-      if (!p) return;
-      var list = (p.media||[]).filter(function(m) { return m.type === 'image'; }).map(function(m) { return { src: enc(m.src), caption: m.caption||'' }; });
-      openCarousel(list, startIdx);
+    
+    window.closeModal=function(id){document.getElementById(id).classList.remove('on')};
+    
+    window.openProjCarousel=function(projId,startIdx){
+      const p=PROJECTS.find(function(x){return x.id===projId});if(!p)return;
+      const list=(p.media||[]).filter(function(m){return m.type==='image'}).map(function(m){return{src:enc(m.src),caption:m.caption||''}});
+      openCarousel(list,startIdx);
     };
 
-    /* ═══════════════════════════════════════════════════════════
-       FULLSCREEN LIGHTBOX
-    ═══════════════════════════════════════════════════════════ */
-    var _fsMedia = [], _fsIdx = 0;
-    function openFullscreen(list, idx) {
-      _fsMedia = list;
-      _fsIdx = idx || 0;
-      updateFS();
-      document.getElementById('fullscreenModal').classList.add('active');
+    let _fsMedia=[],_fsIdx=0;
+    function openFullscreen(list,idx){_fsMedia=list;_fsIdx=idx||0;updateFS();document.getElementById('fullscreenModal').classList.add('active')}
+    function updateFS(){
+      if(!_fsMedia.length) return;
+      const i=_fsMedia[_fsIdx];
+      document.getElementById('fullscreenImg').src=i.src;
+      document.getElementById('fsCaption').textContent=(i.caption||'')+' ('+((_fsIdx+1)+' / '+_fsMedia.length)+')'
     }
-    function updateFS() {
-      var item = _fsMedia[_fsIdx];
-      document.getElementById('fullscreenImg').src = item.src;
-      document.getElementById('fsCaption').textContent = (item.caption || '') + ' (' + (_fsIdx + 1) + '/' + _fsMedia.length + ')';
+    window.fsStep=function(d){if(!_fsMedia.length) return;_fsIdx=(_fsIdx+d+_fsMedia.length)%_fsMedia.length;updateFS()};
+    window.closeFull=function(){document.getElementById('fullscreenModal').classList.remove('active')};
+    document.getElementById('fullscreenModal').addEventListener('click',function(e){if(e.target===this)closeFull()});
+
+    let _carMedia=[],_carIdx=0;
+    function openCarousel(list,idx){_carMedia=list;_carIdx=idx||0;updateCar();document.getElementById('carouselModal').classList.add('active')}
+    function updateCar(){
+      if(!_carMedia.length) return;
+      const i=_carMedia[_carIdx];
+      document.getElementById('carouselImage').src=i.src||i;
+      document.getElementById('carouselCaption').textContent=i.caption||((_carIdx+1)+' / '+_carMedia.length)
     }
-    window.fsStep = function(d) {
-      _fsIdx = (_fsIdx + d + _fsMedia.length) % _fsMedia.length;
-      updateFS();
-    };
-    window.closeFull = function() {
-      document.getElementById('fullscreenModal').classList.remove('active');
-    };
-    document.getElementById('fullscreenModal').addEventListener('click', function(e) {
-      if (e.target === this) closeFull();
-    });
+    window.carStep=function(d){if(!_carMedia.length) return;_carIdx=(_carIdx+d+_carMedia.length)%_carMedia.length;updateCar()};
+    window.closeCarousel=function(){document.getElementById('carouselModal').classList.remove('active')};
+
+    window.openVideoModal=function(src){document.getElementById('videoPlayer').src=src;document.getElementById('videoModal').classList.add('active')};
+    window.closeVideoModal=function(){const v=document.getElementById('videoPlayer');v.pause();v.src='';document.getElementById('videoModal').classList.remove('active')};
 
     /* ═══════════════════════════════════════════════════════════
-       CAROUSEL
+       INTERACTIVE MICRO-INTERACTIONS
     ═══════════════════════════════════════════════════════════ */
-    var _carMedia = [], _carIdx = 0;
-    function openCarousel(list, idx) {
-      _carMedia = list;
-      _carIdx = idx || 0;
-      updateCar();
-      document.getElementById('carouselModal').classList.add('active');
-    }
-    function updateCar() {
-      var item = _carMedia[_carIdx];
-      document.getElementById('carouselImage').src = item.src || item;
-      document.getElementById('carouselCaption').textContent = item.caption || ((_carIdx + 1) + ' / ' + _carMedia.length);
-    }
-    window.carStep = function(d) {
-      _carIdx = (_carIdx + d + _carMedia.length) % _carMedia.length;
-      updateCar();
-    };
-    window.closeCarousel = function() { document.getElementById('carouselModal').classList.remove('active'); };
-    window.openCarouselFromList = function(list, idx) { openCarousel(list, idx); };
-
-    /* ═══════════════════════════════════════════════════════════
-       VIDEO MODAL
-    ═══════════════════════════════════════════════════════════ */
-    window.openVideoModal = function(src) {
-      document.getElementById('videoPlayer').src = src;
-      document.getElementById('videoModal').classList.add('active');
-    };
-    window.closeVideoModal = function() {
-      var v = document.getElementById('videoPlayer');
-      v.pause(); v.src = '';
-      document.getElementById('videoModal').classList.remove('active');
-    };
-
-    /* ═══════════════════════════════════════════════════════════
-       MAGNETIC BUTTONS
-    ═══════════════════════════════════════════════════════════ */
-    function initMagnetic() {
-      document.querySelectorAll('.magnetic').forEach(function(btn) {
-        btn.addEventListener('mousemove', function(e) {
-          var r = btn.getBoundingClientRect();
-          var x = e.clientX - r.left - r.width / 2;
-          var y = e.clientY - r.top - r.height / 2;
-          btn.style.transform = 'translate(' + x * 0.3 + 'px,' + y * 0.3 + 'px)';
-          btn.style.transition = 'transform .25s ease';
+    function initMagnetic(){
+      document.querySelectorAll('.magnetic').forEach(function(btn){
+        btn.addEventListener('mousemove',function(e){
+          const r=btn.getBoundingClientRect();
+          const x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
+          btn.style.transform='translate('+x*.3+'px,'+y*.3+'px)';
+          btn.style.transition='transform .25s ease';
         });
-        btn.addEventListener('mouseleave', function() {
-          btn.style.transform = 'translate(0,0)';
-          btn.style.transition = 'transform .6s cubic-bezier(.34,1.56,.64,1)';
-        });
+        btn.addEventListener('mouseleave',function(){btn.style.transform='translate(0,0)';btn.style.transition='transform .6s cubic-bezier(.34,1.56,.64,1)'});
       });
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       CARD HOVER EFFECTS
-    ═══════════════════════════════════════════════════════════ */
-    function initCardHover() {
-      document.addEventListener('mousemove', function(e) {
-        document.querySelectorAll('.exp-hcard').forEach(function(card) {
-          var r = card.getBoundingClientRect();
-          var x = (e.clientX - r.left) / r.width - 0.5;
-          var y = (e.clientY - r.top) / r.height - 0.5;
-          var dist = Math.sqrt(x * x + y * y);
-          if (dist < 1.5) {
-            card.style.transform = 'translateY(-8px) scale(1.01) perspective(600px) rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 6) + 'deg)';
-            card.style.transition = 'transform .25s ease';
+    function initCardHover(){
+      if (window.matchMedia("(pointer: coarse)").matches) return;
+
+      document.addEventListener('mousemove',function(e){
+        document.querySelectorAll('.exp-hcard').forEach(function(card){
+          const r=card.getBoundingClientRect();
+          const x=(e.clientX-r.left)/r.width-.5;
+          const y=(e.clientY-r.top)/r.height-.5;
+          const dist=Math.sqrt(x*x+y*y);
+          if(dist<1.5){
+            card.style.transform='translateY(-8px) scale(1.01) perspective(600px) rotateY('+(x*6)+'deg) rotateX('+(-y*6)+'deg)';
+            card.style.transition='transform .1s ease';
           }
         });
-        document.querySelectorAll('.bento-card').forEach(function(card) {
-          var r = card.getBoundingClientRect();
-          if (e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom) {
-            var x = (e.clientX - r.left) / r.width - 0.5;
-            var y = (e.clientY - r.top) / r.height - 0.5;
-            card.style.transform = 'translateY(-2px) perspective(500px) rotateY(' + (x * 5) + 'deg) rotateX(' + (-y * 5) + 'deg)';
-            card.style.transition = 'transform .2s ease';
+        document.querySelectorAll('.bento-card').forEach(function(card){
+          const r=card.getBoundingClientRect();
+          if(e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom){
+            const x=(e.clientX-r.left)/r.width-.5;
+            const y=(e.clientY-r.top)/r.height-.5;
+            card.style.transform='translateY(-2px) perspective(500px) rotateY('+(x*5)+'deg) rotateX('+(-y*5)+'deg)';
+            card.style.transition='transform .1s ease';
           } else {
-            card.style.transform = '';
-            card.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1)';
+            card.style.transform='';
+            card.style.transition='transform .5s cubic-bezier(0.25, 1, 0.5, 1)';
           }
+        });
+      });
+
+      document.querySelectorAll('.exp-hcard').forEach(function(card){
+        card.addEventListener('mouseleave', function(){
+          card.style.transform='';
+          card.style.transition='transform .5s cubic-bezier(0.25, 1, 0.5, 1)';
         });
       });
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       SCRAMBLE
-    ═══════════════════════════════════════════════════════════ */
-    function initScramble() {
-      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
-      document.querySelectorAll('.scramble').forEach(function(el) {
-        var orig = el.dataset.text || el.textContent, done = false;
-        new IntersectionObserver(function(entries) {
-          if (entries[0].isIntersecting && !done) {
-            done = true;
-            var f = 0, total = 34;
-            var iv = setInterval(function() {
-              el.textContent = orig.split('').map(function(ch, i) {
-                if (ch === ' ') return ' ';
-                if (f / total > i / orig.length) return ch;
-                return CHARS[Math.floor(Math.random() * CHARS.length)];
-              }).join('');
-              f++;
-              if (f > total) { el.textContent = orig; clearInterval(iv); }
-            }, 36);
+    function initScramble(){
+      const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
+      document.querySelectorAll('.scramble').forEach(function(el){
+        const orig=el.dataset.text||el.textContent;
+        let done=false;
+        new IntersectionObserver(function(entries){
+          if(entries[0].isIntersecting&&!done){done=true;
+            let f=0,total=34;
+            const iv=setInterval(function(){
+              el.textContent=orig.split('').map(function(ch,i){if(ch===' ')return' ';if(f/total>i/orig.length)return ch;return CHARS[Math.floor(Math.random()*CHARS.length)]}).join('');
+              f++;if(f>total){el.textContent=orig;clearInterval(iv)}},36);
           }
-        }, { threshold: .5 }).observe(el);
+        },{threshold:.5}).observe(el);
       });
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       KEYBOARD
-    ═══════════════════════════════════════════════════════════ */
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeFull(); closeCarousel(); closeVideoModal();
-        document.querySelectorAll('.modal.on').forEach(function(m) { m.classList.remove('on'); });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){
+        closeFull();closeCarousel();closeVideoModal();
+        document.querySelectorAll('.modal.on').forEach(function(m){m.classList.remove('on')});
       }
     });
 
     /* ═══════════════════════════════════════════════════════════
-       BOOT
+       INITIALIZATION CALLS
     ═══════════════════════════════════════════════════════════ */
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded',function(){
       buildSkills();
       buildExperience();
       buildFreelance();
@@ -1033,7 +989,7 @@
       initMagnetic();
       initCardHover();
       initScramble();
-      if (typeof THREE !== 'undefined') initThree();
+      if(typeof THREE!=='undefined') initThree();
     });
   </script>
 </body>
