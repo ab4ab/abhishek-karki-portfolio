@@ -4,544 +4,333 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abhishek Karki | Civil Engineer & GIS Expert</title>
-  <meta name="description" content="Portfolio of Abhishek Karki — Civil Engineer, GIS & Remote Sensing Specialist, MSc. DREM." />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --white: #f4f8fc; --black: #0b121f; --accent: #1d4ed8; --accent2: #38bdf8;
-      --card-bg: #ffffff; --card-border: #e2eefc; --text-muted: #475569;
-      --font-heading: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+      --bg: #0a0a0a;
+      --text: #f5f5f5;
+      --accent: #8ab4f8;
+      --purple: #c084fc;
     }
-    html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--black); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; }
-    /* cursor hidden on touch devices */
-    @media (hover: none) and (pointer: coarse) {
-      #cursor-dot, #cursor-ring { display: none; }
-      body { cursor: auto; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
     }
-    h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; line-height: 1.1; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.04em; }
 
-    /* Custom Cursor */
-    #cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; left: 0; top: 0; transform: translate(-50%, -50%); }
-    #cursor-ring { position: fixed; width: 38px; height: 38px; border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; left: 0; top: 0; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, border-color 0.3s; }
-    body.cursor-hover #cursor-ring { width: 64px; height: 64px; border-color: var(--accent2); }
-    body.cursor-hover #cursor-dot { background: var(--accent2); }
-
-    /* Navigation */
     nav {
-      position: fixed; top: 0; left: 0; width: 100%; padding: 24px 5vw;
-      display: flex; justify-content: space-between; align-items: center;
-      z-index: 100; background: rgba(244, 248, 252, 0.8); backdrop-filter: blur(12px);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 28px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10,10,10,0.8);
+      backdrop-filter: blur(12px);
     }
-    .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.5rem; color: var(--black); text-decoration: none; }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { font-size: 0.82rem; text-transform: uppercase; text-decoration: none; color: var(--black); opacity: 0.7; font-weight: 500; transition: opacity 0.3s; }
-    .nav-links a:hover { opacity: 1; }
+    .nav-logo { font-size: 1.6rem; font-weight: 700; }
 
-    /* Hero */
+    /* HERO - Matching video style */
     #hero {
-      position: relative; width: 100%; min-height: 100vh;
-      display: flex; align-items: center; padding: 0 5vw; overflow: hidden;
-      background: url('assets/background.jpg') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: linear-gradient(135deg, #0a0a0a 40%, #1a1a2e);
+      overflow: hidden;
     }
-    #hero::before { content: ''; position: absolute; inset: 0; background: rgba(244, 248, 252, 0.78); z-index: 1; }
-    #three-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.5; pointer-events: none; }
-    .hero-content { position: relative; z-index: 2; max-width: 800px; }
-    .hero-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin-bottom: 20px; }
+    .hero-content {
+      max-width: 680px;
+      padding-left: 100px;
+      z-index: 3;
+    }
+    .hero-tag { font-size: 1rem; letter-spacing: 5px; text-transform: uppercase; opacity: 0.6; }
     .hero-name {
-      font-family: var(--font-heading); font-weight: 800; font-size: clamp(3.5rem, 8vw, 8rem);
-      line-height: 0.95; letter-spacing: -3px; margin-bottom: 24px; white-space: normal;
+      font-size: clamp(5rem, 9vw, 7.5rem);
+      line-height: 1;
+      font-weight: 700;
+      margin: 20px 0 24px;
     }
-    .hero-sub { font-size: clamp(1rem, 2vw, 1.4rem); color: var(--text-muted); max-width: 600px; line-height: 1.5; }
+    .hero-subtitle {
+      font-size: 1.4rem;
+      max-width: 500px;
+      opacity: 0.9;
+    }
+    .cta-buttons {
+      margin-top: 50px;
+      display: flex;
+      gap: 20px;
+    }
+    .btn {
+      padding: 18px 40px;
+      border-radius: 9999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.4s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+    .btn-primary:hover { transform: translateY(-6px); }
 
-    /* Sections */
-    section { padding: 120px 5vw; }
-    .section-title { font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -1.5px; margin-bottom: 60px; }
-    .section-title span { color: var(--accent); }
-
-    /* About */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .about-text p { font-size: 1.1rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 20px; }
-    .about-img {
-      aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; background: #e0f2fe;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    /* Skills Bento (simplified) */
-    .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .bento-card {
-      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px;
-      padding: 30px; transition: transform 0.3s;
-    }
-    .bento-card:hover { transform: translateY(-3px); border-color: var(--accent2); }
-    .bento-card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
-    .bento-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-    .bento-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 15px; }
-    .bento-tags span {
-      background: var(--white); border: 1px solid var(--card-border);
-      padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; color: var(--text-muted);
-    }
-
-    /* Horizontal gallery sections (Experience, Freelance) */
-    .horiz-section { background: var(--black); color: #fff; padding: 120px 0; }
-    .horiz-section .section-title { color: #fff; padding: 0 5vw; }
-    .horiz-outer { height: 500vh; position: relative; } /* enough scroll height */
-    .horiz-inner {
-      position: sticky; top: 0; height: 100vh; overflow: hidden;
-      display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 30px;
-    }
-    .horiz-track { display: flex; gap: 20px; padding: 0 5vw; will-change: transform; }
-    .h-card {
-      flex: 0 0 420px; height: 520px; border-radius: 20px; overflow: hidden; position: relative;
-      background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s;
-    }
-    .h-card:hover { transform: translateY(-6px); }
-    .h-card-gallery { position: absolute; inset: 0; overflow: hidden; }
-    .h-card-gallery img {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-      opacity: 0; transition: opacity 0.6s;
-    }
-    .h-card-gallery img.active { opacity: 1; }
-    .h-card-overlay {
-      position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    #three-container {
+      position: absolute;
+      right: 8%;
+      top: 15%;
+      width: 48%;
+      height: 70%;
       z-index: 2;
     }
-    .h-card-content { position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; padding: 24px; }
-    .h-card-title { font-family: var(--font-heading); font-weight: 700; font-size: 1.3rem; margin-bottom: 6px; }
-    .h-card-desc { font-size: 0.85rem; opacity: 0.7; margin-bottom: 10px; }
-    .h-card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-    .h-card-tags span {
-      font-size: 0.65rem; padding: 3px 8px; border: 1px solid rgba(255,255,255,0.3); border-radius: 100px;
-    }
-    .h-card-dots { position: absolute; top: 15px; right: 15px; z-index: 4; display: flex; gap: 5px; }
-    .h-card-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.4); border: none; cursor: pointer; }
-    .h-card-dot.active { background: var(--accent2); transform: scale(1.2); }
-    .h-card-arrows { position: absolute; bottom: 80px; right: 15px; z-index: 4; display: flex; gap: 5px; }
-    .h-card-arrow {
-      background: rgba(255,255,255,0.2); color: #fff; border: none; width: 30px; height: 30px;
-      border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    }
-    .h-card-arrow:hover { background: var(--accent); }
-    .horiz-progress { height: 2px; background: rgba(255,255,255,0.1); margin: 0 5vw; margin-top: 20px; position: relative; }
-    .horiz-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent2); width: 0%; }
 
-    /* Projects (sticky cards) */
-    .proj-stack { display: flex; flex-direction: column; gap: 4vh; }
-    .proj-card {
-      position: sticky; top: 12vh; background: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: 24px; padding: 40px; display: grid; grid-template-columns: 1.2fr 0.8fr;
-      gap: 30px; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-    }
-    .proj-card img { width: 100%; border-radius: 12px; object-fit: cover; }
-    .proj-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
-    .proj-card p { color: var(--text-muted); line-height: 1.6; }
-
-    /* Education & Certifications */
-    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-    .edu-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; }
-    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-    .cert-card {
-      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
-      padding: 16px; display: flex; align-items: center; gap: 12px;
+    section { padding: 140px 80px; }
+    .section-label {
+      font-size: 0.95rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 50px;
     }
 
-    /* Contact */
-    #contact { background: var(--black); color: #fff; text-align: center; }
-    .contact-btn {
-      display: inline-block; padding: 18px 40px; background: var(--accent); color: #fff;
-      font-family: var(--font-heading); font-weight: 600; border-radius: 100px; text-decoration: none; transition: 0.3s;
+    /* ABOUT */
+    #about {
+      background: #111;
     }
-    .contact-btn:hover { background: #fff; color: var(--black); }
-
-    /* Fullscreen modal */
-    .fullscreen-modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 5000;
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
     }
-    .fullscreen-modal.active { display: flex; }
-    .fullscreen-modal img { max-width: 85vw; max-height: 85vh; object-fit: contain; border-radius: 10px; }
-    .fullscreen-close { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
-      .h-card { flex: 0 0 85vw; height: 440px; }
-      .proj-card { grid-template-columns: 1fr; height: auto; position: relative; top: 0; }
+    /* SERVICES - Video style */
+    #services {
+      background: var(--bg);
+    }
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+    .service-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .service-num {
+      font-size: 5rem;
+      font-weight: 700;
+      opacity: 0.15;
+      line-height: 1;
+    }
+    .service-content h3 {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+    }
+
+    /* PROJECTS */
+    #projects .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 40px;
+    }
+    .project-card {
+      background: #111;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.5s;
+    }
+    .project-card:hover { transform: scale(1.03); }
+    .project-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    /* TESTIMONIALS */
+    #testimonials {
+      background: #111;
+    }
+
+    footer {
+      text-align: center;
+      padding: 80px;
+      opacity: 0.6;
     }
   </style>
 </head>
 <body>
-  <div id="cursor-dot"></div>
-  <div id="cursor-ring"></div>
 
-  <!-- Nav -->
   <nav>
-    <a href="#" class="logo">AK.</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#freelance">Freelance</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-logo">AK.</div>
+    <div>
+      <a href="#about" style="color:white; margin:0 20px; text-decoration:none;">About</a>
+      <a href="#services" style="color:white; margin:0 20px; text-decoration:none;">Services</a>
+      <a href="#projects" style="color:white; margin:0 20px; text-decoration:none;">Projects</a>
+      <a href="#contact" style="color:white; margin:0 20px; text-decoration:none;">Contact</a>
+    </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section id="hero">
-    <canvas id="three-canvas"></canvas>
+    <div id="three-container"></div>
     <div class="hero-content">
-      <p class="hero-tag">NEC Reg. #80593 · Civil Engineer</p>
-      <h1 class="hero-name">Abhishek Karki</h1>
-      <p class="hero-sub">Civil Engineer & GIS Specialist integrating spatial data with structural infrastructure. Advanced focus in hydraulic modeling, risk analysis, and satellite‑based temporal assessments.</p>
+      <p class="hero-tag">NEC #80593 • Civil Engineer & GIS Expert</p>
+      <h1 class="hero-name">Abhishek<br>Karki</h1>
+      <p class="hero-subtitle">Civil Engineer & GIS Specialist integrating spatial data with structural infrastructure.</p>
+      <div class="cta-buttons">
+        <a href="#projects" class="btn btn-primary">View Work</a>
+        <a href="#contact" class="btn" style="border:2px solid white; color:white;">Let's Talk</a>
+      </div>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- ABOUT -->
   <section id="about">
-    <h2 class="section-title">01 // <span>Background</span></h2>
+    <div class="section-label">About Me</div>
     <div class="about-grid">
-      <div class="about-text">
-        <p>I’m a Civil Engineer with deep GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Management. I merge field data, satellite imagery, and computational models to solve real‑world infrastructure problems.</p>
-        <p>From InSAR subsidence monitoring to 2D flood mapping, I bring spatial intelligence into every project.</p>
+      <div>
+        <h2 style="font-size: 3.4rem; line-height: 1.1;">Bridging Geomatics & Structural Engineering.</h2>
+        <p style="font-size: 1.25rem; margin-top: 32px; opacity: 0.9;">I'm a Civil Engineer with deep GIS and remote sensing expertise, currently pursuing MSc in Disaster Risk Management.</p>
+        <p style="font-size: 1.25rem; margin-top: 24px; opacity: 0.9;">From InSAR subsidence monitoring to 2D flood mapping, I bring spatial intelligence into every project.</p>
       </div>
-      <div class="about-img">
-        <img src="assets/profile.jpg" alt="Abhishek Karki" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fa-solid fa-user fa-5x\' style=\'color:var(--accent)\'></i>';">
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills (bento) -->
-  <section id="skills">
-    <h2 class="section-title">02 // <span>Technical Competencies</span></h2>
-    <div class="bento-grid" id="skillsBento"></div>
-  </section>
-
-  <!-- Experience (horizontal gallery) -->
-  <section id="experience" class="horiz-section">
-    <h2 class="section-title">03 // <span>Field Experience</span></h2>
-    <div class="horiz-outer" id="expOuter">
-      <div class="horiz-inner">
-        <div class="horiz-track" id="expTrack"></div>
-        <div class="horiz-progress"><div class="horiz-progress-fill" id="expProgress"></div></div>
+      <div>
+        <img src="assets/profile.jpg" alt="Abhishek Karki" style="width:100%; border-radius: 24px;">
       </div>
     </div>
   </section>
 
-  <!-- Freelance (horizontal gallery) -->
-  <section id="freelance" class="horiz-section">
-    <h2 class="section-title">04 // <span>Freelance & Academic</span></h2>
-    <div class="horiz-outer" id="flOuter">
-      <div class="horiz-inner">
-        <div class="horiz-track" id="flTrack"></div>
-        <div class="horiz-progress"><div class="horiz-progress-fill" id="flProgress"></div></div>
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-label">Services</div>
+    <div class="services-list">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <div class="service-content">
+          <h3>GIS & Remote Sensing</h3>
+          <p>ArcGIS Pro, QGIS, Google Earth Engine, SNAP, InSAR Processing</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <div class="service-content">
+          <h3>Hydraulic & Flood Modeling</h3>
+          <p>HEC-RAS 2D, terrain analysis, inundation mapping</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <div class="service-content">
+          <h3>UAV / Drone Surveying</h3>
+          <p>Orthomosaic, DEM generation, volumetric analysis</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">04</div>
+        <div class="service-content">
+          <h3>Infrastructure Design</h3>
+          <p>Civil 3D, AutoCAD, STAAD Pro for transmission & substation projects</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects (sticky stack) -->
+  <!-- PROJECTS (using your data) -->
   <section id="projects">
-    <h2 class="section-title">05 // <span>Featured Case Studies</span></h2>
-    <div class="proj-stack" id="projStack"></div>
+    <div class="section-label">Featured Projects</div>
+    <div class="projects-grid" id="projectsGrid"></div>
   </section>
 
-  <!-- Education -->
-  <section id="education">
-    <h2 class="section-title">06 // <span>Academics</span></h2>
-    <div class="edu-grid">
-      <div class="edu-card"><h3>MSc Disaster Risk Management</h3><p>Tribhuvan University, IOE Pulchowk<br>2026–Present</p></div>
-      <div class="edu-card"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College · 2022<br>CGPA 3.43<br><span style="color:var(--accent);">🏅 1st in 7th & 8th semesters</span></p></div>
-      <div class="edu-card"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p></div>
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-label">What Clients Are Saying</div>
+    <!-- Add your testimonials here -->
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+      <h2 style="font-size: 4rem; line-height: 1.1;">Let's build<br>something great.</h2>
+      <a href="mailto:abhishekkarki520@gmail.com" class="btn btn-primary" style="margin-top: 60px; font-size: 1.3rem; padding: 24px 70px;">
+        Get In Touch
+      </a>
     </div>
   </section>
 
-  <!-- Certifications -->
-  <section id="certifications">
-    <h2 class="section-title">07 // <span>Credentials</span></h2>
-    <div class="cert-grid" id="certGrid"></div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <p style="font-size:0.8rem; text-transform:uppercase; letter-spacing:3px; opacity:0.6;">Get in touch</p>
-    <h2 style="font-family:var(--font-heading); font-size:4rem; margin:20px 0 40px;">Let's build<br>resilient infrastructure.</h2>
-    <a href="mailto:abhishekkarki520@gmail.com" class="contact-btn">Initiate Connection</a>
-  </section>
-
-  <footer style="background:#070c14; color:var(--text-muted); text-align:center; padding:24px;">
-    &copy; 2026 Abhishek Karki
+  <footer>
+    © 2026 Abhishek Karki
   </footer>
-
-  <!-- Fullscreen modal -->
-  <div class="fullscreen-modal" id="fullscreenModal">
-    <button class="fullscreen-close" onclick="closeFull()">&times;</button>
-    <img id="fullscreenImg" src="" alt="">
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script>
-    // ══════════════════════════ DATA ══════════════════════════
-    const PROJECTS = [
-      { id:1, title:"InSAR Time Series for Highway Subsidence", cat:"InSAR / Geotech", loc:"Sloterdijk to Rijksweg, Netherlands",
-        short:"13 Sentinel‑1 images processed with SNAP+SNAPHU generating 12 displacement maps.",
-        full:"Processed 13 Sentinel‑1 SLC images using SNAP + SNAPHU to generate 12 displacement maps. Applied Goldstein filtering, phase unwrapping, terrain correction. Extracted A10 highway profiles.",
-        tech:["SNAP","SNAPHU","Sentinel‑1"], pdf:"assets/portfolio-photos/insar/insar.pdf",
-        media:[{type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png",caption:"Interferogram"},
-               {type:"image",src:"assets/portfolio-photos/insar/Screenshot 2026-05-08 203715.png",caption:"Displacement map"}] },
-      { id:2, title:"NDVI Timelapse of Kathmandu Valley", cat:"Remote Sensing", loc:"Kathmandu Valley",
-        short:"26‑year vegetation change using Landsat & Sentinel‑2 with 5‑class timelapse animation.",
-        full:"Processed 28 images in Google Earth Engine – NDVI calculation, harmonization. Built 5‑class timelapse.",
-        tech:["GEE","Landsat","Sentinel‑2"], pdf:"assets/portfolio-photos/ndvi/NDVI_Report_Kathmandu_Valley.pdf",
-        media:[{type:"image",src:"assets/portfolio-photos/ndvi/GEE1.jpg",caption:"NDVI classification"}] },
-      { id:3, title:"Hospital Accessibility in Colorado", cat:"GIS Network Analysis", loc:"Colorado, USA",
-        short:"Network drive‑time analysis generating 30/60‑min service areas.",
-        full:"Generated service areas from specialist hospitals, overlaid county population. Revealed spatial disparities.",
-        tech:["ArcGIS Network Analyst","Population data"],
-        media:[{type:"image",src:"assets/portfolio-photos/hospital/30min_Map.png",caption:"30‑minute"}] },
-      { id:4, title:"Urban Sprawl Analysis of Kathmandu Valley", cat:"GIS", loc:"Kathmandu Valley",
-        short:"Landsat 8/9 NDBI change detection with ALOS PALSAR slope filtering.",
-        full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain.",
-        tech:["Landsat","ALOS PALSAR","ArcGIS"],
-        media:[{type:"image",src:"assets/portfolio-photos/urban-sprawl/2016.png",caption:"NDBI 2016"}] },
-      { id:5, title:"UAV Landslide Susceptibility Mapping", cat:"UAV/GIS", loc:"Sisneri, Solukhumbu",
-        short:"High-res UAV orthomosaic & DEM with weighted overlay hazard zonation.",
-        full:"High‑resolution DEM and orthomosaic from drone; weighted overlay to classify hazard zones.",
-        tech:["UAV","Agisoft","ArcGIS"],
-        media:[{type:"image",src:"assets/portfolio-photos/uav-landslide/Aspect Map.png",caption:"Aspect map"}] },
-      { id:6, title:"Flood Inundation Mapping", cat:"Hydrology", loc:"Narayani River, Nepal",
-        short:"HEC‑RAS 2D unsteady flow simulation for flood depth and velocity mapping.",
-        full:"DEM preparation and terrain correction; 2D unsteady flow simulation.",
-        tech:["HEC‑RAS 2D","ArcGIS"], pdf:"assets/portfolio-photos/flood/FloodInundationMap.pdf",
-        media:[{type:"image",src:"assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png",caption:"HEC‑RAS mesh"}] },
-      { id:7, title:"Substation Backfill Volumetric Analysis", cat:"Civil 3D", loc:"Balganga, Janakpur",
-        short:"DGPS survey to surface modeling, corridors and cut/fill volume computation.",
-        full:"DGPS survey, surface creation, cross‑sections, corridor modeling.",
-        tech:["Civil 3D","DGPS"], pdf:"assets/portfolio-photos/civil3d/BACKFILLING.pdf",
-        media:[{type:"image",src:"assets/portfolio-photos/civil3d/Screenshot 2026-05-17 091158.png",caption:"Survey points"}] },
-      { id:8, title:"Earthquake Analysis of Nepal", cat:"Seismology / GIS", loc:"Nepal (1978‑2025)",
-        short:"Mainshock declustering using Gardner‑Knopoff method from USGS catalog with animated map.",
-        full:"Processed USGS catalog using Gardner‑Knopoff declustering. 58 mainshocks.",
-        tech:["ArcGIS","Python"], pdf:"assets/portfolio-photos/earthquake/NEpal earthquake mainshocks.pdf",
-        media:[{type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Mainshocks map"}] }
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Better 3D Hero
+    function initHero3D() {
+      const container = document.getElementById('three-container');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(600, 600);
+      container.appendChild(renderer.domElement);
+      camera.position.z = 5;
+
+      const geometry = new THREE.TorusKnotGeometry(1.4, 0.4, 140, 24);
+      const material = new THREE.MeshPhongMaterial({
+        color: 0x8ab4f8,
+        emissive: 0x4a6cf7,
+        shininess: 80
+      });
+      const knot = new THREE.Mesh(geometry, material);
+      scene.add(knot);
+
+      const light = new THREE.PointLight(0xffffff, 2);
+      light.position.set(5, 5, 5);
+      scene.add(light);
+      scene.add(new THREE.AmbientLight(0xaaaaaa));
+
+      function animate() {
+        requestAnimationFrame(animate);
+        knot.rotation.x += 0.004;
+        knot.rotation.y += 0.006;
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+    // Populate Projects from your original data
+    const projects = [
+      {title: "InSAR Time Series for Highway Subsidence", img: "assets/portfolio-photos/insar/Screenshot 2026-05-08 194722.png"},
+      {title: "NDVI Timelapse of Kathmandu Valley", img: "assets/portfolio-photos/ndvi/GEE1.jpg"},
+      {title: "Hospital Accessibility Analysis", img: "assets/portfolio-photos/hospital/30min_Map.png"},
+      {title: "Flood Inundation Mapping", img: "assets/portfolio-photos/flood/Screenshot 2026-04-23 230415.png"}
     ];
 
-    const WORK_SITES = [
-      { id:"balefi", folder:"Balefi", title:"Balefi 132kV Transmission Line", desc:"Tower erection, stub setting, chimney concreting and foundation works.",
-        files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],
-        captions:["Tower Erection","Tower Erection","Concreting Chimney","Completed Tower"],
-        tags:["Transmission Line","Tower Erection","Foundation"] },
-      { id:"lalbandi", folder:"Salempur", title:"Lalbandi–Salempur 132kV + Substation", desc:"End-to-end substation works — control room, gantry foundation, tower survey.",
-        files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG_20231107_104434.jpg','IMG_20240120_112353.jpg','IMG_20240206_140830.jpg','Screenshot 2026-05-16 204535.png'],
-        captions:["Salempur Substation","Plastering","Surveying","Rebar Works","Plinth Beam","Layout View"],
-        tags:["Substation","132kV","Civil Works","Survey"] },
-      { id:"dhalkebar", folder:"Balganga", title:"Dhalkebar–Balganga 132kV", desc:"Staff quarter foundation, control room structure, gantry foundation.",
-        files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','Screenshot 2026-05-16 204005.png'],
-        captions:["Staff Quarter","Control Room","Formworks","Layout"],
-        tags:["Substation","Foundation","132kV"] },
-      { id:"sandikharga", folder:"Burtibang", title:"Sandikharga–Burtibang 132kV", desc:"Tower erection, stub setting, and DGPS survey in mountainous terrain.",
-        files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','Screenshot 2026-05-16 205216.png'],
-        captions:["Tower Erection","Stub Setting","DGPS Survey","Tower Locations"],
-        tags:["Transmission Line","DGPS","Tower Erection"] },
-      { id:"tamghas", folder:"Tamghas", title:"Tamghas Substation", desc:"Substation survey, switchyard layout and transformer foundation works.",
-        files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'],
-        captions:["Transformer","Survey","Survey","Switchyard"],
-        tags:["Substation","Switchyard","Survey"] }
-    ];
-
-    const FREELANCE = [
-      { id:"hvac", title:"HVAC System Design", date:"2024", desc:"Complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing and equipment selection.",
-        folder:"assets/freelance-photos/hvac/", files:['duct-layout.png'], captions:["HVAC duct layout"], tags:["HAP 6.0","HVAC"] },
-      { id:"3d", title:"3D Building Planning & Modeling", date:"2023–2024", desc:"Detailed architectural visualizations using SketchUp and Revit.",
-        folder:"assets/freelance-photos/3d-modeling/", files:['1.png','2.png','3.jpg'], captions:["Staff Quarter","Control Room","Residential"], tags:["SketchUp","Revit"] },
-      { id:"struct", title:"Structural Analysis", date:"2024", desc:"STAAD Pro analysis ensuring compliance with load standards for client buildings.",
-        folder:"assets/freelance-photos/structural-analysis/", files:['1.png','2.png'], captions:["STAAD model","Load analysis"], tags:["STAAD Pro"] },
-      { id:"draft", title:"2D Drafting (AutoCAD)", date:"2023–2025", desc:"Floor plans, sections, site layouts and detail drawings.",
-        folder:"assets/freelance-photos/drafting/", files:['1.png','2.png','3.png'], captions:["Site layout","Plan","Tower"], tags:["AutoCAD"] },
-      { id:"abi", title:"ABI Pier Workshop", date:"2023", desc:"Adjustable Base Isolation Pier prototype design on Earthquake Day.",
-        folder:"assets/freelance-photos/abi/", files:['1.jpeg'], captions:["Prototype"], tags:["Seismic Design"] },
-      { id:"sisneri", title:"Sisneri Landslide Study", date:"2023 Final Year", desc:"Drone survey, geotechnical investigation and GeoStudio SLOPE/W stability analysis.",
-        folder:"assets/portfolio-photos/sisneri-landslide/", files:['Damage due to Landslide.JPG','Group Members.JPG'], captions:["Damage","Group"], tags:["Geotech","Drone"], pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf" }
-    ];
-
-    const SKILLS = [
-      { icon:"fa-earth-americas", title:"Geospatial & Satellite Processing", tags:["ArcGIS Pro","QGIS","SNAP","InSAR","Remote Sensing"] },
-      { icon:"fa-water", title:"Hydrotechnics", tags:["HEC‑RAS 2D","Flood Mapping","Hydraulic Modeling"] },
-      { icon:"fa-drafting-compass", title:"Drafting & Design", tags:["AutoCAD","Civil 3D","Revit","SketchUp"] },
-      { icon:"fa-code", title:"Scripting & Compute", tags:["Python","MATLAB","Google Earth Engine"] },
-      { icon:"fa-drone", title:"Environmental & Survey", tags:["UAV Drone","Agisoft","AERMOD"] }
-    ];
-
-    const CERTIFICATES = [
-      { icon:"fa-certificate", title:"SAP2000 Training", desc:"Advanced structural analysis" },
-      { icon:"fa-drafting-compass", title:"AutoCAD Professional", desc:"Design & drafting" },
-      { icon:"fa-id-card", title:"Nepal Engineering Council", desc:"Reg. No: 80593" },
-      { icon:"fa-layer-group", title:"ABI Pier Workshop", desc:"Seismic isolation design" }
-    ];
-
-    // Helper
-    function enc(p) { return encodeURI(p).replace(/#/g,'%23'); }
-
-    // Build Skills
-    document.getElementById('skillsBento').innerHTML = SKILLS.map(s => `
-      <div class="bento-card">
-        <i class="fa-solid ${s.icon}"></i>
-        <h3>${s.title}</h3>
-        <div class="bento-tags">${s.tags.map(t=>`<span>${t}</span>`).join('')}</div>
-      </div>
-    `).join('');
-
-    // Build Projects Stack
-    const featured = PROJECTS.slice(0, 3);
-    document.getElementById('projStack').innerHTML = featured.map((p,i) => {
-      const firstImg = p.media && p.media[0] && p.media[0].type==='image' ? `<img src="${enc(p.media[0].src)}" alt="">` : '';
-      return `<div class="proj-card">
-        <div>
-          <span style="color:var(--accent); font-weight:700;">CASE STUDY ${i+1}</span>
-          <h3>${p.title}</h3>
-          <p>${p.short}</p>
-          <div class="bento-tags" style="margin-top:15px;">${p.tech.map(t=>`<span>${t}</span>`).join('')}</div>
+    function renderProjects() {
+      const grid = document.getElementById('projectsGrid');
+      grid.innerHTML = projects.map(p => `
+        <div class="project-card">
+          <img src="${p.img}" alt="${p.title}">
+          <div style="padding: 24px;">
+            <h3>${p.title}</h3>
+          </div>
         </div>
-        <div style="border-radius:12px; overflow:hidden;">${firstImg}</div>
-      </div>`;
-    }).join('');
-
-    // Build Certifications
-    document.getElementById('certGrid').innerHTML = CERTIFICATES.map(c => `
-      <div class="cert-card">
-        <div style="width:36px; height:36px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center;"><i class="fas ${c.icon}"></i></div>
-        <div><strong>${c.title}</strong><br><span style="font-size:0.8rem; color:var(--text-muted);">${c.desc}</span></div>
-      </div>
-    `).join('');
-
-    // ══════════════════════════ HORIZONTAL GALLERY BUILDER ══════════════════════════
-    function buildHorizontalGallery(prefix, items, folderFn) {
-      const outer = document.getElementById(prefix+'Outer');
-      const track = document.getElementById(prefix+'Track');
-      const progress = document.getElementById(prefix+'Progress');
-      const N = items.length;
-      outer.style.height = (N * 100 + 80) + 'vh';
-
-      track.innerHTML = items.map((item, i) => {
-        const base = folderFn ? folderFn(item) : '';
-        const imgs = (item.files || []).map((f, j) => `<img src="${enc(base+f)}" class="${j===0?'active':''}" data-idx="${j}" alt="${item.captions?.[j]||''}">`).join('');
-        const dots = (item.files || []).map((_, j) => `<button class="h-card-dot ${j===0?'active':''}" data-idx="${j}"></button>`).join('');
-        const tags = (item.tags || []).map(t => `<span>${t}</span>`).join('');
-        return `<div class="h-card" id="${prefix}-card-${item.id}">
-          <div class="h-card-gallery">${imgs}</div>
-          <div class="h-card-overlay"></div>
-          <div class="h-card-dots">${dots}</div>
-          <div class="h-card-arrows">
-            <button class="h-card-arrow h-prev"><i class="fas fa-chevron-left"></i></button>
-            <button class="h-card-arrow h-next"><i class="fas fa-chevron-right"></i></button>
-          </div>
-          <div class="h-card-content">
-            <div class="h-card-title">${item.title}</div>
-            <div class="h-card-desc">${item.desc || item.short || ''}</div>
-            <div class="h-card-tags">${tags}</div>
-          </div>
-        </div>`;
-      }).join('');
-
-      // Per-card auto-gallery
-      const cards = track.querySelectorAll('.h-card');
-      cards.forEach((card, idx) => {
-        const imgs = card.querySelectorAll('.h-card-gallery img');
-        const dots = card.querySelectorAll('.h-card-dot');
-        let cur = 0, timer;
-        function goTo(n) {
-          imgs[cur].classList.remove('active'); dots[cur].classList.remove('active');
-          cur = (n + imgs.length) % imgs.length;
-          imgs[cur].classList.add('active'); dots[cur].classList.add('active');
-        }
-        function auto() { timer = setInterval(() => goTo(cur+1), 3800); }
-        auto();
-        card.addEventListener('mouseenter', () => clearInterval(timer));
-        card.addEventListener('mouseleave', () => auto());
-        dots.forEach(d => d.addEventListener('click', e => { goTo(parseInt(e.target.dataset.idx)); clearInterval(timer); auto(); }));
-        card.querySelector('.h-prev').addEventListener('click', () => { goTo(cur-1); clearInterval(timer); auto(); });
-        card.querySelector('.h-next').addEventListener('click', () => { goTo(cur+1); clearInterval(timer); auto(); });
-        // Click image → fullscreen
-        imgs.forEach((img, i) => {
-          img.addEventListener('click', () => {
-            const list = (items[idx].files || []).map((f, j) => ({
-              src: enc(base + f),
-              caption: items[idx].captions?.[j] || ''
-            }));
-            openFullscreen(list, i);
-          });
-          img.style.cursor = 'pointer';
-        });
-      });
-
-      // Scroll-driven translation
-      function update() {
-        const rect = outer.getBoundingClientRect();
-        const totalH = outer.offsetHeight - window.innerHeight;
-        let scrolled = -rect.top;
-        if (scrolled < 0) scrolled = 0;
-        if (scrolled > totalH) scrolled = totalH;
-        const p = scrolled / totalH;
-        const maxMove = track.scrollWidth - track.parentElement.offsetWidth + 120;
-        track.style.transform = `translateX(${-p * maxMove}px)`;
-        progress.style.width = (p * 100) + '%';
-      }
-      window.addEventListener('scroll', update, { passive: true });
-      update();
+      `).join('');
     }
 
-    // Build both horizontal sections
-    buildHorizontalGallery('exp', WORK_SITES, item => 'assets/Professional Career/' + item.folder + '/');
-    buildHorizontalGallery('fl', FREELANCE, item => item.folder);
-
-    // Fullscreen logic
-    let fsList = [], fsIdx = 0;
-    window.openFullscreen = (list, idx) => {
-      fsList = list; fsIdx = idx;
-      document.getElementById('fullscreenImg').src = fsList[fsIdx].src;
-      document.getElementById('fullscreenModal').classList.add('active');
-    };
-    window.closeFull = () => document.getElementById('fullscreenModal').classList.remove('active');
-    document.getElementById('fullscreenModal').addEventListener('click', e => {
-      if (e.target === e.currentTarget) closeFull();
+    document.addEventListener('DOMContentLoaded', () => {
+      initHero3D();
+      renderProjects();
     });
-
-    // Custom cursor (desktop only)
-    if (!('ontouchstart' in window)) {
-      const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
-      let mx = 0, my = 0, rx = 0, ry = 0;
-      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
-      function loop() {
-        rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
-        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-        requestAnimationFrame(loop);
-      }
-      loop();
-      document.querySelectorAll('a, button, .h-card, .bento-card, .proj-card').forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-      });
-    }
-
-    // Three.js background (optional)
-    if (typeof THREE !== 'undefined') {
-      const canvas = document.getElementById('three-canvas');
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
-      camera.position.z = 4;
-      const geo = new THREE.TorusKnotGeometry(1.2, 0.38, 160, 20);
-      const mat = new THREE.MeshBasicMaterial({ color: 0x0e0e0e, wireframe: true, opacity: 0.1, transparent: true });
-      const mesh = new THREE.Mesh(geo, mat); scene.add(mesh);
-      function resize() { renderer.setSize(canvas.offsetWidth, canvas.offsetHeight, false); camera.aspect = canvas.offsetWidth / canvas.offsetHeight; camera.updateProjectionMatrix(); }
-      resize(); window.addEventListener('resize', resize);
-      (function animate() { requestAnimationFrame(animate); mesh.rotation.x += 0.002; mesh.rotation.y += 0.003; renderer.render(scene, camera); })();
-    }
   </script>
 </body>
 </html>
