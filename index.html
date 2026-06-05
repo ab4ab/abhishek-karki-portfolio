@@ -10,21 +10,43 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
+    /* ═══════════════════════════════════════════════════════
+       BASE
+    ═══════════════════════════════════════════════════════ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --white: #f5f4f0; --black: #0e0e0e; --accent: #8ab4f8; --accent2: #c4f0a8;
+      --white: #f5f4f0;
+      --black: #0e0e0e;
+      --accent: #8ab4f8;
+      --accent2: #c4f0a8;
+      --accent3: #f8c58a;
       --light-gray: #e8e6e0;
-      --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+      --mid-gray: #d0cec8;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
     }
     html { scroll-behavior: smooth; }
     body { background: var(--white); color: var(--black); font-family: var(--font-body); font-weight: 300; cursor: none; overflow-x: hidden; }
 
+    /* Subtle grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9990;
+      opacity: .4;
+    }
+
+    /* ── CURSOR ── */
     #cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--black); border-radius: 50%; pointer-events: none; z-index: 9999; left: 0; top: 0; transform: translate(-50%, -50%); will-change: left, top; }
     #cursor-ring { position: fixed; width: 38px; height: 38px; border: 1.5px solid var(--black); border-radius: 50%; pointer-events: none; z-index: 9998; left: 0; top: 0; transform: translate(-50%, -50%); transition: width .3s, height .3s, border-color .3s; will-change: left, top; }
     body.cursor-hover #cursor-ring { width: 64px; height: 64px; border-color: var(--accent); }
     body.cursor-hover #cursor-dot { background: var(--accent); }
     body.cursor-active #cursor-dot { transform: translate(-50%, -50%) scale(0.5); }
 
+    /* ── NAV ── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 28px 60px; transition: background .4s, backdrop-filter .4s, border-bottom .4s; }
     .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: -.02em; text-decoration: none; color: var(--black); }
     .nav-links { display: flex; gap: 40px; list-style: none; }
@@ -33,23 +55,41 @@
     .nav-cta { background: var(--black)!important; color: var(--white)!important; padding: 7px 22px!important; border-radius: 100px; opacity: 1!important; font-weight: 600; }
     .nav-cta:hover { background: var(--accent)!important; color: var(--black)!important; }
 
+    /* ── BUTTONS ── */
     .btn { display: inline-block; padding: 15px 36px; font-family: var(--font-body); font-size: .83rem; font-weight: 400; letter-spacing: .07em; text-transform: uppercase; text-decoration: none; border-radius: 100px; position: relative; overflow: hidden; transition: color .3s; cursor: none; }
     .btn-dark { background: var(--black); color: var(--white); border: 1.5px solid var(--black); }
     .btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
     .btn::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateY(102%); transition: transform .42s cubic-bezier(.76,0,.24,1); z-index: -1; border-radius: 100px; }
     .btn:hover { color: var(--black); } .btn:hover::after { transform: translateY(0); }
 
+    /* ── SECTIONS ── */
     section { padding: 120px 60px; }
     .section-label { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; opacity: .38; margin-bottom: 64px; display: flex; align-items: center; gap: 14px; }
     .section-label::before { content: ''; width: 28px; height: 1px; background: currentColor; }
 
+    /* ── CLIP-PATH REVEAL ── */
     .reveal { opacity: 0; transform: translateY(48px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     .clip-reveal { clip-path: inset(0 0 100% 0); transition: clip-path .85s cubic-bezier(.22,1,.36,1); }
     .clip-reveal.visible { clip-path: inset(0 0 0% 0); }
+    .delay-1 { transition-delay: .1s; }
+    .delay-2 { transition-delay: .2s; }
+    .delay-3 { transition-delay: .3s; }
 
+    /* ── HERO ── */
     #hero { position: relative; height: 100vh; display: flex; align-items: center; padding: 0 60px; overflow: hidden; background: url('assets/background.jpg') center/cover no-repeat; }
     #hero::before { content: ''; position: absolute; inset: 0; background: rgba(245,244,240,.78); z-index: 1; }
+    /* Decorative geometric shapes in hero */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(138,180,248,0.18) 0%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
     #three-canvas { position: absolute; top: 0; right: 0; width: 55%; height: 100%; pointer-events: none; z-index: 0; }
     .hero-content { position: relative; z-index: 2; max-width: 700px; }
     .hero-tag { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; opacity: .45; margin-bottom: 22px; display: block; }
@@ -58,10 +98,19 @@
     .hero-name .word { display: inline-block; }
     .hero-subtitle { font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.65; max-width: 400px; margin-bottom: 48px; opacity: .75; }
     .hero-cta { display: inline-flex; gap: 16px; }
+    /* Hero stats strip */
+    .hero-stats {
+      position: absolute; bottom: 44px; right: 60px;
+      display: flex; gap: 40px; z-index: 2;
+    }
+    .hero-stat { text-align: right; }
+    .hero-stat-num { font-family: var(--font-display); font-weight: 800; font-size: 2rem; letter-spacing: -.04em; line-height: 1; }
+    .hero-stat-label { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; opacity: .4; margin-top: 4px; }
     .scroll-hint { position: absolute; bottom: 44px; left: 60px; display: flex; align-items: center; gap: 12px; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; opacity: .35; z-index: 2; }
     .scroll-line { width: 40px; height: 1px; background: var(--black); transform-origin: left; animation: extL 2s ease-in-out infinite; }
     @keyframes extL { 0%,100% { transform: scaleX(.3); opacity: .4; } 50% { transform: scaleX(1); opacity: 1; } }
 
+    /* ── ABOUT ── */
     #about { background: var(--white); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
     .about-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -.03em; margin-bottom: 30px; }
@@ -70,27 +119,32 @@
     .about-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .about-image-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: .8rem; letter-spacing: .1em; opacity: .28; text-transform: uppercase; }
     .about-accent-box { position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; background: var(--accent); border-radius: 4px; z-index: -1; }
+    /* Floating accent dot */
+    .about-dot { position: absolute; top: 28px; left: -18px; width: 36px; height: 36px; border-radius: 50%; background: var(--accent2); z-index: 3; }
 
+    /* ── SKILLS BENTO ── */
     #skills { background: var(--light-gray); color: var(--black); }
     #skills .section-label { color: var(--black); }
     .skills-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -.03em; margin-bottom: 56px; }
     .bento-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
-    .bento-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 24px; text-align: center; transition: background .3s, border-color .3s, transform .3s; }
-    .bento-card:hover { background: rgba(255,255,255,.09); border-color: rgba(138,180,248,.25); transform: translateY(-2px); }
-    .bento-card i { font-size: 2rem; color: var(--accent); margin-bottom: 10px; display: block; }
-    .bento-card h3 { font-family: var(--font-display); font-weight: 600; font-size: .95rem; color: var(--black); }
+    .bento-card { background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 16px; padding: 28px 24px; text-align: center; transition: background .3s, border-color .3s, transform .3s, box-shadow .3s; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+    .bento-card:hover { background: var(--black); border-color: transparent; transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,.16); }
+    .bento-card:hover i, .bento-card:hover h3 { color: var(--accent); }
+    .bento-card i { font-size: 2rem; color: var(--black); margin-bottom: 12px; display: block; transition: color .3s; }
+    .bento-card h3 { font-family: var(--font-display); font-weight: 600; font-size: .92rem; color: var(--black); transition: color .3s; }
 
+    /* ── HORIZONTAL GALLERY ── */
     .horiz-section { padding: 120px 0; }
     .horiz-section .section-label { padding: 0 60px; }
     .horiz-intro { padding: 0 60px; margin-bottom: 64px; }
     .horiz-company { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -.03em; }
     .horiz-company-sub { margin-top: 8px; opacity: .45; font-size: 1rem; }
-    .horiz-sticky-outer { height: calc(var(--n-sites,5) * 100vh); position: relative; }
+    .horiz-sticky-outer { position: relative; }
     .horiz-sticky-inner { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 48px; }
     .horiz-track-wrap { overflow: hidden; position: relative; }
     .horiz-track { display: flex; gap: 24px; padding: 0 60px; will-change: transform; }
-    .exp-hcard { flex: 0 0 480px; height: 520px; border-radius: 16px; overflow: hidden; position: relative; background: #1a1a1a; border: 1px solid rgba(255,255,255,.07); transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s; }
-    .exp-hcard:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,.6); }
+    .exp-hcard { flex: 0 0 480px; height: 520px; border-radius: 20px; overflow: hidden; position: relative; background: #1a1a1a; border: 1px solid rgba(255,255,255,.07); transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s; }
+    .exp-hcard:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,.35); }
     .hcard-gallery { position: absolute; inset: 0; overflow: hidden; }
     .hcard-gallery img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .65s ease; }
     .hcard-gallery img.active { opacity: 1; }
@@ -107,87 +161,186 @@
     .hcard-arrows { position: absolute; bottom: 88px; right: 16px; z-index: 4; display: flex; gap: 6px; }
     .hcard-arr { background: rgba(255,255,255,.12); color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: .8rem; display: flex; align-items: center; justify-content: center; transition: background .25s; }
     .hcard-arr:hover { background: var(--accent); color: var(--black); }
-    .horiz-progress-bar { height: 2px; background: rgba(255,255,255,.1); position: relative; margin: 0 60px; margin-top: 24px; }
-    .horiz-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); transition: width .15s linear; border-radius: 2px; }
+    .horiz-progress-bar { height: 2px; background: rgba(0,0,0,.1); position: relative; margin: 0 60px; margin-top: 24px; }
+    .horiz-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--black); transition: width .15s linear; border-radius: 2px; }
     .horiz-site-nav { display: flex; gap: 16px; padding: 16px 60px 0; align-items: center; }
     .horiz-site-indicator { display: flex; gap: 8px; }
-    .horiz-site-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.2); transition: background .3s, width .3s; border: none; cursor: pointer; }
-    .horiz-site-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+    .horiz-site-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,.2); transition: background .3s, width .3s; border: none; cursor: pointer; }
+    .horiz-site-dot.active { background: var(--black); width: 24px; border-radius: 4px; }
     .horiz-site-label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .35; font-family: var(--font-display); }
 
+    /* Experience – light */
+    #experience { background: var(--white); }
+    #experience .section-label, #experience .horiz-company, #experience .horiz-company-sub { color: var(--black); }
+    /* Freelance – light gray */
     #freelance { background: var(--light-gray); }
     #freelance .section-label, #freelance .horiz-company, #freelance .horiz-company-sub { color: var(--black); }
-    #freelance .horiz-progress-bar { background: rgba(0,0,0,.1); }
-    #freelance .horiz-progress-fill { background: var(--accent); }
-    #freelance .horiz-site-dot { background: rgba(0,0,0,.2); }
-    #freelance .horiz-site-dot.active { background: var(--accent); }
+    #freelance .horiz-progress-fill { background: var(--black); }
+    #freelance .horiz-site-dot.active { background: var(--black); }
 
-    #experience { background: var(--light-gray); color: var(--black); }
-    #experience .section-label, #experience .horiz-company, #experience .horiz-company-sub { color: var(--black); }
+    /* ═══════════════════════════════════════════════════════
+       PROJECTS – REDESIGNED CARD STACK (NOT FULL-SCREEN)
+    ═══════════════════════════════════════════════════════ */
+    #projects { background: #0e0e0e; padding: 120px 60px; }
+    #projects .section-label { color: rgba(255,255,255,.35); }
+    .projects-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -.03em; margin-bottom: 64px; color: #fff; }
 
-    #projects { background: var(--light-gray); padding: 0; }
-    #projects .section-label, #projects .projects-heading { padding: 0 60px; color: var(--black); position: relative; z-index: 10; }
-    .projects-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -.03em; margin-bottom: 24px; padding: 0 60px; color: var(--white); }
-    .stack-outer { position: relative; height: calc(var(--card-count,8) * 70vh); }
-    .stack-viewport { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-    .stack-hint { text-align: center; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; opacity: .3; margin-top: 16px; padding: 0 0 48px; color: var(--black); position: absolute; bottom: 0; width: 100%; }
-    .stack-card { position: absolute; width: 100%; height: 100%; left: 0; top: 0; display: flex; flex-direction: column; will-change: transform, opacity; transform-origin: center center; overflow: hidden; }
-    .stack-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-    .color-overlay { position: absolute; inset: 0; mix-blend-mode: overlay; z-index: 1; opacity: 0.35; }
-    .stack-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%); z-index: 1; }
-    .stack-card-body { position: relative; z-index: 2; padding: 60px; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; color: #fff; }
-    .stack-card-num { font-family: var(--font-display); font-size: 5rem; font-weight: 800; line-height: 1; opacity: .2; letter-spacing: -.04em; margin-bottom: -16px; }
-    .stack-card-cat { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; opacity: .6; margin-bottom: 10px; }
-    .stack-card-title { font-family: var(--font-display); font-weight: 700; font-size: 2.5rem; letter-spacing: -.02em; margin-bottom: 10px; line-height: 1.2; max-width: 700px; }
-    .stack-card-desc { font-size: 1rem; line-height: 1.68; opacity: .8; margin-bottom: 22px; max-width: 600px; }
-    .stack-card-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
-    .stack-card-tag { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(255,255,255,.3); opacity: .9; }
-    .stack-card-link { font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; text-decoration: none; color: #fff; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,.4); padding-bottom: 2px; transition: gap .3s, border-color .3s; width: fit-content; }
-    .stack-card-link:hover { gap: 14px; border-color: #fff; }
+    /* Card palette – each project gets a unique accent */
+    :root {
+      --card-1: #8ab4f8;
+      --card-2: #c4f0a8;
+      --card-3: #f8c58a;
+      --card-4: #f8a8d4;
+      --card-5: #a8d4f8;
+      --card-6: #f0d4a8;
+      --card-7: #c8a8f8;
+      --card-8: #a8f8e8;
+      --card-9: #f8e8a8;
+    }
 
-    .cert-gallery { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-top: 2rem; }
-    .cert-item { width: 180px; cursor: pointer; border-radius: 12px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-    .cert-item:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-    .cert-item img { width: 100%; height: 140px; object-fit: cover; display: block; }
-    .cert-item .cert-label { padding: 8px; text-align: center; font-size: 0.75rem; font-weight: 600; background: #fff; color: #1a4972; border-top: 1px solid #eee; }
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 24px; }
 
+    .proj-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s;
+      aspect-ratio: 4/3;
+      background: #1c1c1c;
+    }
+    .proj-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,.7); }
+    .proj-card:nth-child(3) { grid-column: span 2; aspect-ratio: 16/7; }
+
+    .proj-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .proj-card:hover .proj-card-img { transform: scale(1.04); }
+    .proj-card-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,.3) 55%, transparent 100%);
+      transition: opacity .4s;
+    }
+    /* Colored top accent bar */
+    .proj-card-accent {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 4;
+    }
+    .proj-card:nth-child(1) .proj-card-accent { background: var(--card-1); }
+    .proj-card:nth-child(2) .proj-card-accent { background: var(--card-2); }
+    .proj-card:nth-child(3) .proj-card-accent { background: var(--card-3); }
+    .proj-card:nth-child(4) .proj-card-accent { background: var(--card-4); }
+    .proj-card:nth-child(5) .proj-card-accent { background: var(--card-5); }
+    .proj-card:nth-child(6) .proj-card-accent { background: var(--card-6); }
+    .proj-card:nth-child(7) .proj-card-accent { background: var(--card-7); }
+    .proj-card:nth-child(8) .proj-card-accent { background: var(--card-8); }
+    .proj-card:nth-child(9) .proj-card-accent { background: var(--card-9); }
+
+    /* Corner number badge */
+    .proj-num-badge {
+      position: absolute; top: 18px; right: 20px; z-index: 3;
+      font-family: var(--font-display); font-weight: 800; font-size: .7rem;
+      letter-spacing: .1em; color: rgba(255,255,255,.35);
+      background: rgba(0,0,0,.35);
+      padding: 3px 9px; border-radius: 100px;
+      backdrop-filter: blur(6px);
+    }
+
+    .proj-card-body { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 28px 28px 24px; }
+    .proj-card-cat { font-size: .64rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 8px; opacity: .55; color: #fff; }
+    .proj-card-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: -.02em; margin-bottom: 8px; color: #fff; line-height: 1.2; }
+    .proj-card-desc { font-size: .82rem; line-height: 1.6; opacity: .65; color: #fff; margin-bottom: 14px; }
+    .proj-card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .proj-card-tag { font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.65); }
+    .proj-card-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+      color: #fff; text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,.3); padding-bottom: 2px;
+      transition: gap .3s, border-color .3s;
+      background: none; border-top: none; border-left: none; border-right: none; cursor: pointer;
+      font-family: var(--font-body);
+    }
+    .proj-card-link:hover { gap: 14px; border-bottom-color: #fff; }
+    /* Colored glow on hover per card */
+    .proj-card:nth-child(1):hover { box-shadow: 0 40px 80px rgba(138,180,248,.25); }
+    .proj-card:nth-child(2):hover { box-shadow: 0 40px 80px rgba(196,240,168,.2); }
+    .proj-card:nth-child(3):hover { box-shadow: 0 40px 80px rgba(248,197,138,.2); }
+    .proj-card:nth-child(4):hover { box-shadow: 0 40px 80px rgba(248,168,212,.2); }
+    .proj-card:nth-child(5):hover { box-shadow: 0 40px 80px rgba(168,212,248,.2); }
+
+    /* ── EDUCATION ── */
     #education { background: var(--light-gray); color: var(--black); }
     #education .section-label { color: var(--black); }
     .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .edu-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 16px; padding: 32px; transition: background .3s; }
-    .edu-card:hover { background: rgba(255,255,255,.08); }
-    .edu-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 2rem; margin-bottom: 10px; }
-    .edu-card p { font-size: .8; opacity: .5; line-height: 1.7; }
-    .honors { margin-top: 8px; opacity: 1!important; color: var(--accent)!important; }
+    .edu-card { background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 20px; padding: 36px 32px; transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden; }
+    .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
+    .edu-card:nth-child(2)::before { background: var(--accent2); }
+    .edu-card:nth-child(3)::before { background: var(--accent3); }
+    .edu-card:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(0,0,0,.1); }
+    .edu-card h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; line-height: 1.3; }
+    .edu-card p { font-size: .85rem; opacity: .55; line-height: 1.7; }
+    .honors { margin-top: 8px; opacity: 1!important; color: #e6a800!important; font-size: .82rem!important; }
 
-    #certifications { background: var(--light-gray); }
-    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
-    .cert-item-old { background: var(--white); border-radius: 14px; padding: 24px; display: flex; align-items: flex-start; gap: 14px; transition: transform .25s; }
-    .cert-item-old:hover { transform: translateY(-2px); }
-    .cert-icon { width: 38px; height: 38px; border-radius: 50%; background: var(--black); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: .95rem; flex-shrink: 0; }
-    .cert-text strong { display: block; font-family: var(--font-display); font-size: .92rem; margin-bottom: 3px; }
-    .cert-text span { font-size: .8rem; opacity: .5; }
+    /* ── CERTIFICATIONS – WITH IMAGES ── */
+    #certifications { background: var(--white); padding: 120px 60px; }
+    #certifications .section-label { color: var(--black); }
+    .certs-heading { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.03em; margin-bottom: 56px; }
+    .cert-images-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-bottom: 40px; }
+    .cert-img-card {
+      border-radius: 16px; overflow: hidden; position: relative;
+      aspect-ratio: 4/3; background: var(--light-gray);
+      cursor: pointer; transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .cert-img-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 32px 64px rgba(0,0,0,.14); }
+    .cert-img-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .cert-img-card:hover img { transform: scale(1.05); }
+    .cert-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 60%);
+      z-index: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
+    }
+    .cert-img-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: #fff; z-index: 2; position: relative; }
+    .cert-img-sub { font-size: .75rem; color: rgba(255,255,255,.65); z-index: 2; position: relative; margin-top: 3px; }
+    .cert-zoom-icon { position: absolute; top: 14px; right: 14px; z-index: 2; width: 32px; height: 32px; background: rgba(255,255,255,.18); backdrop-filter: blur(6px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: .8rem; opacity: 0; transition: opacity .3s; }
+    .cert-img-card:hover .cert-zoom-icon { opacity: 1; }
+    /* Badge strip below images */
+    .cert-badges { display: flex; flex-wrap: wrap; gap: 12px; }
+    .cert-badge { display: flex; align-items: center; gap: 10px; background: var(--light-gray); border-radius: 100px; padding: 8px 18px 8px 10px; transition: background .2s; }
+    .cert-badge:hover { background: var(--mid-gray); }
+    .cert-badge-icon { width: 30px; height: 30px; border-radius: 50%; background: var(--black); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: .78rem; flex-shrink: 0; }
+    .cert-badge span { font-size: .78rem; font-weight: 400; letter-spacing: .04em; }
 
-    #contact { background: var(--black); color: var(--white); text-align: center; }
-    .contact-pre { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; opacity: .35; margin-bottom: 24px; }
-    .contact-heading { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -.04em; line-height: 1.1; margin-bottom: 52px; }
-    .contact-links { display: flex; gap: 28px; justify-content: center; margin-bottom: 44px; }
+    /* ── CONTACT ── */
+    #contact { background: var(--black); color: var(--white); text-align: center; position: relative; overflow: hidden; }
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(138,180,248,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-pre { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; opacity: .35; margin-bottom: 24px; position: relative; z-index: 1; }
+    .contact-heading { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -.04em; line-height: 1.1; margin-bottom: 52px; position: relative; z-index: 1; }
+    .contact-links { display: flex; gap: 28px; justify-content: center; margin-bottom: 44px; position: relative; z-index: 1; }
     .contact-link { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--white); opacity: .45; border-bottom: 1px solid rgba(255,255,255,.2); padding-bottom: 3px; transition: opacity .3s; }
     .contact-link:hover { opacity: 1; }
 
-    .fullscreen-modal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); display: none; align-items: center; justify-content: center; z-index: 6000; }
+    /* ── FULLSCREEN MODAL ── */
+    .fullscreen-modal { position: fixed; inset: 0; background: rgba(0,0,0,.96); display: none; align-items: center; justify-content: center; z-index: 6000; }
     .fullscreen-modal.active { display: flex; }
     .fullscreen-modal img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 12px; }
     .fullscreen-close { position: absolute; top: 20px; right: 28px; font-size: 1.8rem; color: white; background: none; border: none; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; }
     .fullscreen-close:hover { opacity: 1; }
-    .fs-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.15); color: #fff; border: none; font-size: 1.4rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; transition: background 0.25s; }
+    .fs-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.15); color: #fff; border: none; font-size: 1.4rem; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%; transition: background 0.25s; }
     .fs-nav:hover { background: var(--accent); color: var(--black); }
     .fs-prev { left: 20px; } .fs-next { right: 20px; }
-    .fs-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.8rem; }
+    .fs-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.7); font-size: 0.8rem; }
 
-    .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(219, 211, 211, 0.5); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
+    /* Other modals */
+    .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(219,211,211,0.5); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s; }
     .modal.on { opacity: 1; pointer-events: all; }
-    .modal-box { background: var(--white); border-radius: 16px; width: 90%; max-width: 680px; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+    .modal-box { background: var(--white); border-radius: 20px; width: 90%; max-width: 680px; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
     .modal-close { position: absolute; top: 18px; right: 22px; background: none; border: none; font-size: 1.5rem; cursor: pointer; opacity: .45; transition: opacity .2s; }
     .modal-close:hover { opacity: 1; }
     .m-gallery { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
@@ -208,26 +361,31 @@
     .close-video { position: absolute; top: 18px; right: 26px; color: white; background: none; border: none; font-size: 1.7rem; cursor: pointer; opacity: .6; }
     .close-video:hover { opacity: 1; }
 
+    /* ── DIVIDER ACCENT ── */
+    .section-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(0,0,0,.1), transparent); margin: 0 60px; }
+
+    /* ── RESPONSIVE ── */
     @media(max-width:1000px) {
       .exp-hcard { flex: 0 0 340px; height: 400px; }
-      .stack-card-body { padding: 30px; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .proj-card:nth-child(3) { grid-column: span 1; aspect-ratio: 4/3; }
     }
     @media(max-width:768px) {
       nav { padding: 20px 24px; }
       .nav-links { display: none; }
       #hero, section { padding: 100px 24px; }
+      #projects { padding: 100px 24px; }
+      #certifications { padding: 100px 24px; }
       .horiz-section { padding: 100px 0; }
-      #projects { padding: 0; }
       #three-canvas { width: 100%; opacity: .25; }
       .about-grid { grid-template-columns: 1fr; gap: 44px; }
       .exp-hcard { flex: 0 0 85vw; height: 440px; }
       .horiz-track { padding: 0 24px; }
-      .horiz-site-nav, .horiz-progress-bar, .horiz-intro, .horiz-track-wrap { padding-left: 24px; padding-right: 24px; }
+      .horiz-site-nav, .horiz-intro { padding-left: 24px; padding-right: 24px; }
       .horiz-progress-bar { margin: 0 24px; }
-      .projects-heading, .stack-hint { padding: 0 24px; }
       .bento-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-      .cert-item { width: 140px; }
-      .cert-item img { height: 100px; }
+      .hero-stats { display: none; }
+      .cert-images-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -248,6 +406,7 @@
     </ul>
   </nav>
 
+  <!-- ═══════════════ HERO ═══════════════ -->
   <section id="hero">
     <canvas id="three-canvas"></canvas>
     <div class="hero-content">
@@ -262,9 +421,25 @@
         <a href="#contact" class="btn btn-outline magnetic">Let's Talk</a>
       </div>
     </div>
+    <!-- Stats strip -->
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">2+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">9</div>
+        <div class="hero-stat-label">Case Studies</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">132kV</div>
+        <div class="hero-stat-label">Transmission Lines</div>
+      </div>
+    </div>
     <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
   </section>
 
+  <!-- ═══════════════ ABOUT ═══════════════ -->
   <section id="about">
     <div class="section-label reveal">About me</div>
     <div class="about-grid">
@@ -275,6 +450,7 @@
         <a href="cv.html" target="_blank" class="btn btn-dark magnetic reveal delay-3" style="margin-top:18px">Download CV</a>
       </div>
       <div class="about-image-wrap clip-reveal delay-2">
+        <div class="about-dot"></div>
         <img src="assets/profile.jpg" alt="Abhishek Karki" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="about-image-placeholder" style="display:none">Your Photo Here</div>
         <div class="about-accent-box"></div>
@@ -282,12 +458,16 @@
     </div>
   </section>
 
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════ SKILLS ═══════════════ -->
   <section id="skills">
     <div class="section-label">What I do</div>
     <h2 class="skills-heading reveal">Technical Competencies.</h2>
     <div class="bento-grid" id="bentoSkills"></div>
   </section>
 
+  <!-- ═══════════════ EXPERIENCE ═══════════════ -->
   <section id="experience" class="horiz-section">
     <div class="section-label reveal">Work history</div>
     <div class="horiz-intro reveal">
@@ -308,15 +488,14 @@
     </div>
   </section>
 
+  <!-- ═══════════════ PROJECTS – CARD GRID ═══════════════ -->
   <section id="projects">
-    <div class="section-label reveal">Portfolio</div>
+    <div class="section-label reveal" style="color:rgba(255,255,255,.35)">Portfolio</div>
     <h2 class="projects-heading reveal">Featured Case Studies.</h2>
-    <div class="stack-outer" id="stackOuter">
-      <div class="stack-viewport" id="stackViewport"></div>
-    </div>
-    <p class="stack-hint reveal">Scroll to navigate projects</p>
+    <div class="proj-grid" id="projGrid"></div>
   </section>
 
+  <!-- ═══════════════ FREELANCE ═══════════════ -->
   <section id="freelance" class="horiz-section">
     <div class="section-label reveal">Independent Work</div>
     <div class="horiz-intro reveal">
@@ -337,66 +516,59 @@
     </div>
   </section>
 
-  <!-- NEW CERTIFICATES GALLERY -->
-  <section id="certificates">
-    <div class="section-label reveal">Credentials & Certificates</div>
-    <div class="cert-gallery reveal">
-      <div class="cert-item" data-src="assets/Cerififcations/autocad.jpg" data-caption="AutoCAD Professional Certification">
-        <img src="assets/Cerififcations/autocad.jpg" alt="AutoCAD Certificate">
-        <div class="cert-label">AutoCAD Professional</div>
-      </div>
-      <div class="cert-item" data-src="assets/Cerififcations/IMG_4664.jpeg" data-caption="Heat Action Day 2026 – Youth Innovation Award (IFRC & NRCS)">
-        <img src="assets/Cerififcations/IMG_4664.jpeg" alt="Heat Action Day Certificate">
-        <div class="cert-label">Heat Action Day 2026</div>
-      </div>
-      <div class="cert-item" data-src="assets/Cerififcations/NEC.png" data-caption="Nepal Engineering Council Registration – Reg. No. 80593">
-        <img src="assets/Cerififcations/NEC.png" alt="NEC Certificate">
-        <div class="cert-label">NEC Registration</div>
-      </div>
-      <div class="cert-item" data-src="assets/Cerififcations/SAP.jpg" data-caption="SAP2000 Structural Analysis Training">
-        <img src="assets/Cerififcations/SAP.jpg" alt="SAP Training Certificate">
-        <div class="cert-label">SAP2000 Training</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="education">
+  <!-- ═══════════════ EDUCATION ═══════════════ -->
+  <section id="education" style="background:var(--light-gray)">
     <div class="section-label reveal">Academics</div>
     <div class="edu-grid">
-      <div class="edu-card reveal delay-1"><h3>MSc Disaster Risk Engineering and Management (DREM)</h3><p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p></div>
-      <div class="edu-card reveal delay-2"><h3>B.E. Civil Engineering</h3><p>Khwopa Engineering College · 2022<br>CGPA 3.43</p><p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p></div>
-      <div class="edu-card reveal delay-3"><h3>+2 Science (NEB)</h3><p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p></div>
+      <div class="edu-card reveal delay-1">
+        <h3>MSc Disaster Risk Engineering and Management (DREM)</h3>
+        <p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p>
+      </div>
+      <div class="edu-card reveal delay-2">
+        <h3>B.E. Civil Engineering</h3>
+        <p>Khwopa Engineering College · 2022<br>CGPA 3.43</p>
+        <p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p>
+      </div>
+      <div class="edu-card reveal delay-3">
+        <h3>+2 Science (NEB)</h3>
+        <p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p>
+      </div>
     </div>
   </section>
 
-  <section id="certifications" style="background:var(--light-gray)">
-    <div class="section-label reveal">Other Credentials</div>
-    <div class="cert-grid reveal" id="certGrid"></div>
+  <!-- ═══════════════ CERTIFICATIONS – WITH IMAGES ═══════════════ -->
+  <section id="certifications">
+    <div class="section-label reveal">Credentials</div>
+    <h2 class="certs-heading reveal">Certifications &amp; Licences.</h2>
+    <div class="cert-images-grid reveal" id="certImagesGrid"></div>
+    <div class="cert-badges reveal" id="certBadges"></div>
   </section>
 
+  <!-- ═══════════════ CONTACT ═══════════════ -->
   <section id="contact">
     <p class="contact-pre reveal">Get in touch</p>
     <h2 class="contact-heading reveal">Let's build<br><span class="scramble" data-text="something">something</span><br>great.</h2>
     <div class="contact-links reveal">
       <a href="mailto:abhishekkarki520@gmail.com" class="contact-link">Email</a>
-      <a href="https://linkedin.com/in/abhishek-karki-9b034524a" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="https://linkedin.com/in/abhishek-karki-9b034524a/" target="_blank" class="contact-link">LinkedIn</a>
     </div>
-    <a href="mailto:abhishekkarki520@gmail.com" class="btn reveal" style="background:var(--accent);color:var(--black);border:none;font-size:1rem;padding:20px 56px;border-radius:100px">Say Hello</a>
+    <a href="mailto:abhishekkarki520@gmail.com" class="btn reveal" style="background:var(--accent);color:var(--black);border:none;font-size:1rem;padding:20px 56px;border-radius:100px;position:relative;z-index:1">Say Hello</a>
   </section>
 
-  <footer style="background:var(--black);color:var(--white);text-align:center;padding:32px">
-    <span style="opacity:.35;font-size:.82rem">© 2026 Abhishek Karki</span>
+  <footer style="background:var(--black);color:var(--white);text-align:center;padding:32px;border-top:1px solid rgba(255,255,255,.06)">
+    <span style="opacity:.35;font-size:.82rem">© 2026 Abhishek Karki · Civil Engineer &amp; GIS Specialist</span>
   </footer>
 
-  <!-- Modals -->
-  <div class="fullscreen-modal" id="certModal">
-    <button class="fullscreen-close" onclick="closeCertModal()">&times;</button>
-    <button class="fs-nav fs-prev" onclick="certStep(-1)"><i class="fas fa-chevron-left"></i></button>
-    <img id="certFullImg" src="" alt="">
-    <button class="fs-nav fs-next" onclick="certStep(1)"><i class="fas fa-chevron-right"></i></button>
-    <div id="certCaption" class="fs-caption"></div>
+  <!-- Fullscreen modal -->
+  <div class="fullscreen-modal" id="fullscreenModal">
+    <button class="fullscreen-close" onclick="closeFull()">&times;</button>
+    <button class="fs-nav fs-prev" onclick="fsStep(-1)"><i class="fas fa-chevron-left"></i></button>
+    <img id="fullscreenImg" src="" alt="">
+    <button class="fs-nav fs-next" onclick="fsStep(1)"><i class="fas fa-chevron-right"></i></button>
+    <div id="fsCaption" class="fs-caption"></div>
   </div>
 
+  <!-- Freelance Detail Modal -->
   <div class="modal" id="flModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal('flModal')">&times;</button>
@@ -406,6 +578,7 @@
     </div>
   </div>
 
+  <!-- Project Detail Modal -->
   <div class="modal" id="projModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal('projModal')">&times;</button>
@@ -432,9 +605,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script>
-    // ============================================================
-    // DATA (full arrays)
-    // ============================================================
+    /* ═══════════════════════════════════════════════════════════
+       DATA
+    ═══════════════════════════════════════════════════════════ */
     var PROJECTS = [
       {id:1,title:"InSAR Time Series for Highway Subsidence",cat:"InSAR / Geotech",loc:"Sloterdijk to Rijksweg, Netherlands",
        short:"13 Sentinel‑1 images processed with SNAP+SNAPHU generating 12 displacement maps.",
@@ -469,7 +642,7 @@
          {type:"image",src:"assets/portfolio-photos/hospital/Screenshot 2026-04-28 114005.png",caption:"Unserved areas"},
          {type:"image",src:"assets/portfolio-photos/hospital/Screenshot 2026-04-28 152454.png",caption:"Coverage statistics"}
        ]},
-      {id:4,title:"Urban Sprawl Analysis of Kathmandu Valley",cat:"GIS / Remote Sensing",loc:"Kathmandu Valley",
+      {id:4,title:"Urban Sprawl Analysis – Kathmandu Valley",cat:"GIS / Remote Sensing",loc:"Kathmandu Valley",
        short:"Landsat 8/9 NDBI change detection with ALOS PALSAR slope filtering to isolate urban growth.",
        full:"NDBI change detection with DEM slope filtering to isolate growth on stable terrain.",
        tech:["Landsat","ALOS PALSAR","ArcGIS"],
@@ -527,13 +700,13 @@
          {type:"video",src:"assets/portfolio-photos/earthquake/Nepal EarthQuake ShakeMaps.mp4",caption:"ShakeMap animation"},
          {type:"image",src:"assets/portfolio-photos/earthquake/earthquake mainshocks.png",caption:"Mainshocks map"}
        ]},
-      {id:9,title:"Heat Action Day Event",cat:"Global heat map/ GIS",loc:"Global (2001-2024)",
-       short:"A 25 year global heat map and team effort to develop a low cost misting booth against these extreme heatwaves.",
-       full:"Processed 25 NASA MODIS Terra Land Surface Temperatures maps to create a single animated theme map of globe.",
+      {id:9,title:"Heat Action Day – Global Heat Map",cat:"Global GIS / Remote Sensing",loc:"Global (2001-2024)",
+       short:"25-year global heat map + low-cost misting booth design against extreme heatwaves.",
+       full:"Processed 25 NASA MODIS Terra Land Surface Temperature maps to create a single animated thematic map of the globe.",
        tech:["Google Earth Engine","Python"],pdf:"assets/portfolio-photos/Heat action day/GEE_to_HeatMap_Workflow.pdf",
        media:[
          {type:"video",src:"assets/portfolio-photos/Heat action day/Video Project 10.mp4",caption:"25 year global heat map"},
-         {type:"image",src:"assets/portfolio-photos/Heat action day/LST_AreaWeighted_Trend_v3.png",caption:"trend graph"}
+         {type:"image",src:"assets/portfolio-photos/Heat action day/LST_AreaWeighted_Trend_v3.png",caption:"Trend graph"}
        ]}
     ];
 
@@ -596,203 +769,279 @@
        folder:"assets/portfolio-photos/sisneri-landslide/",files:['Damage due to Landslide.JPG','Group Members.JPG','Landslide view.JPG','Location.JPG','Presentation Day.JPG','Drone deploy location.png','Solu Hydropower Tunnel.JPG','Stability analysis of Slope.jpg','UAV settings.jpg','With Supervisors.JPG'],captions:["Damage","Group","Landslide view","Location","Presentation Day","Drone deploy","Solu Hydropower Tunnel","Stability analysis","UAV settings","With Supervisors"],tags:["Geotech","Drone"],pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf"}
     ];
 
-    var CERTIFICATES = [
-      {icon:"fa-certificate",title:"SAP2000 Training",desc:"Advanced structural analysis"},
-      {icon:"fa-drafting-compass",title:"AutoCAD Professional",desc:"Design & drafting"},
-      {icon:"fa-id-card",title:"Nepal Engineering Council",desc:"Reg. No: 80593"},
-      {icon:"fa-layer-group",title:"ABI Pier Workshop",desc:"Seismic isolation design"}
+    /* ── Certificate image data ── */
+    var CERT_IMAGES = [
+      {src:"assets/Cerififcations/SAP.jpg",       title:"SAP2000 Training",          sub:"Advanced Structural Analysis"},
+      {src:"assets/Cerififcations/autocad.jpg",    title:"AutoCAD Professional",       sub:"Design & Drafting Certificate"},
+      {src:"assets/Cerififcations/NEC.png",        title:"Nepal Engineering Council",  sub:"Registration No. 80593"},
+      {src:"assets/Cerififcations/IMG_4664.jpeg",  title:"ABI Pier Workshop",          sub:"Seismic Isolation Design"}
     ];
 
-    // ============================================================
-    // HELPER FUNCTIONS
-    // ============================================================
-    function enc(p) { return encodeURI(p).replace(/#/g,'%23'); }
+    var CERT_BADGES = [
+      {icon:"fa-certificate",title:"SAP2000 Training",         desc:"Advanced structural analysis"},
+      {icon:"fa-drafting-compass",title:"AutoCAD Professional",desc:"Design & drafting"},
+      {icon:"fa-id-card",title:"Nepal Engineering Council",    desc:"Reg. No: 80593"},
+      {icon:"fa-layer-group",title:"ABI Pier Workshop",        desc:"Seismic isolation design"}
+    ];
 
-    // Cursor
-    function initCursor() {
-      var dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
-      var mx = 0, my = 0, rx = 0, ry = 0;
-      document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
-      document.addEventListener('mousedown', function() { document.body.classList.add('cursor-active'); });
-      document.addEventListener('mouseup', function() { document.body.classList.remove('cursor-active'); });
-      (function loop() { rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(loop); })();
-      document.addEventListener('mouseover', function(e) {
-        if (e.target.closest('a,button,.btn,.project-link,.fl-thumb,.m-media-wrap,.hcard-arr,.hcard-fs,.gal-dot,.stack-card-link'))
+    /* ═══════════════════════════════════════════════════════════
+       HELPERS
+    ═══════════════════════════════════════════════════════════ */
+    function enc(p){return encodeURI(p).replace(/#/g,'%23')}
+
+    /* ═══════════════════════════════════════════════════════════
+       CURSOR
+    ═══════════════════════════════════════════════════════════ */
+    function initCursor(){
+      var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+      var mx=0,my=0,rx=0,ry=0;
+      document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+      document.addEventListener('mousedown',function(){document.body.classList.add('cursor-active')});
+      document.addEventListener('mouseup',function(){document.body.classList.remove('cursor-active')});
+      (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+      document.addEventListener('mouseover',function(e){
+        if(e.target.closest('a,button,.btn,.proj-card,.fl-thumb,.m-media-wrap,.hcard-arr,.cert-img-card'))
           document.body.classList.add('cursor-hover');
         else document.body.classList.remove('cursor-hover');
       });
     }
 
-    // Three.js (background)
-    function initThree() {
-      var canvas = document.getElementById('three-canvas');
-      var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
-      camera.position.z = 4;
-      var geo = new THREE.TorusKnotGeometry(1.2, 0.38, 160, 20);
-      var mat = new THREE.MeshBasicMaterial({ color: 0x0e0e0e, wireframe: true, opacity: 0.11, transparent: true });
-      var mesh = new THREE.Mesh(geo, mat); scene.add(mesh);
-      var geoS = new THREE.TorusKnotGeometry(1.18, 0.36, 120, 18);
-      var matS = new THREE.MeshBasicMaterial({ color: 0xf5f4f0 });
-      var meshS = new THREE.Mesh(geoS, matS); scene.add(meshS);
-      var pg = new THREE.BufferGeometry(), pos = new Float32Array(600);
-      for (var i = 0; i < 600; i++) pos[i] = (Math.random() - 0.5) * 8;
-      pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-      scene.add(new THREE.Points(pg, new THREE.PointsMaterial({ color: 0x0e0e0e, size: 0.025, transparent: true, opacity: 0.28 })));
-      var mx = 0, my = 0, trx = 0, try_ = 0;
-      document.addEventListener('mousemove', function(e) { mx = (e.clientX / window.innerWidth - 0.5) * 2; my = -(e.clientY / window.innerHeight - 0.5) * 2; });
-      function resize() { var w = canvas.offsetWidth, h = canvas.offsetHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
-      resize(); window.addEventListener('resize', resize);
-      var t = 0;
-      (function animate() {
-        requestAnimationFrame(animate);
-        t += 0.005;
-        trx += (my * 0.4 - trx) * 0.05;
-        try_ += (mx * 0.4 - try_) * 0.05;
-        mesh.rotation.x = trx + t * 0.3;
-        mesh.rotation.y = try_ + t * 0.5;
-        meshS.rotation.x = mesh.rotation.x;
-        meshS.rotation.y = mesh.rotation.y;
-        mesh.position.y = Math.sin(t * 0.7) * 0.12;
-        meshS.position.y = mesh.position.y;
-        renderer.render(scene, camera);
-      })();
+    /* ═══════════════════════════════════════════════════════════
+       THREE.JS
+    ═══════════════════════════════════════════════════════════ */
+    function initThree(){
+      var canvas=document.getElementById('three-canvas');
+      var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+      var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.1,100);
+      camera.position.z=4;
+      var geo=new THREE.TorusKnotGeometry(1.2,.38,160,20);
+      var mat=new THREE.MeshBasicMaterial({color:0x0e0e0e,wireframe:true,opacity:.11,transparent:true});
+      var mesh=new THREE.Mesh(geo,mat);scene.add(mesh);
+      var geoS=new THREE.TorusKnotGeometry(1.18,.36,120,18);
+      var matS=new THREE.MeshBasicMaterial({color:0xf5f4f0});
+      var meshS=new THREE.Mesh(geoS,matS);scene.add(meshS);
+      var pg=new THREE.BufferGeometry(),pos=new Float32Array(600);
+      for(var i=0;i<600;i++)pos[i]=(Math.random()-.5)*8;
+      pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+      scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x0e0e0e,size:.025,transparent:true,opacity:.28})));
+      var mx=0,my=0,trx=0,try_=0;
+      document.addEventListener('mousemove',function(e){mx=(e.clientX/window.innerWidth-.5)*2;my=-(e.clientY/window.innerHeight-.5)*2});
+      function resize(){var w=canvas.offsetWidth,h=canvas.offsetHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+      resize();window.addEventListener('resize',resize);
+      var t=0;
+      (function animate(){requestAnimationFrame(animate);t+=.005;trx+=(my*.4-trx)*.05;try_+=(mx*.4-try_)*.05;
+        mesh.rotation.x=trx+t*.3;mesh.rotation.y=try_+t*.5;meshS.rotation.x=mesh.rotation.x;meshS.rotation.y=mesh.rotation.y;
+        mesh.position.y=Math.sin(t*.7)*.12;meshS.position.y=mesh.position.y;renderer.render(scene,camera)})();
     }
 
-    // Nav scroll effect
-    function initNav() {
-      var nav = document.getElementById('mainNav');
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 80) {
-          nav.style.background = 'rgba(245,244,240,.92)';
-          nav.style.backdropFilter = 'blur(16px)';
-          nav.style.borderBottom = '1px solid rgba(0,0,0,.06)';
-        } else {
-          nav.style.background = 'transparent';
-          nav.style.backdropFilter = '';
-          nav.style.borderBottom = 'none';
-        }
+    /* ═══════════════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════════════ */
+    function initNav(){
+      var nav=document.getElementById('mainNav');
+      window.addEventListener('scroll',function(){
+        if(window.scrollY>80){nav.style.background='rgba(245,244,240,.92)';nav.style.backdropFilter='blur(16px)';nav.style.borderBottom='1px solid rgba(0,0,0,.06)'}
+        else{nav.style.background='transparent';nav.style.backdropFilter='';nav.style.borderBottom='none'}
       });
     }
 
-    // Reveal on scroll
-    function initReveal() {
-      var io = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
-      document.querySelectorAll('.reveal,.clip-reveal').forEach(function(el) { io.observe(el); });
+    /* ═══════════════════════════════════════════════════════════
+       SCROLL REVEALS
+    ═══════════════════════════════════════════════════════════ */
+    function initReveal(){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+      },{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+      document.querySelectorAll('.reveal,.clip-reveal').forEach(function(el){io.observe(el)});
     }
 
-    // Skills bento
-    function buildSkills() {
-      document.getElementById('bentoSkills').innerHTML = SKILLS_DATA.map(function(s) {
-        return '<div class="bento-card reveal"><i class="fas ' + s.icon + '"></i><h3>' + s.name + '</h3></div>';
+    /* ═══════════════════════════════════════════════════════════
+       SKILLS
+    ═══════════════════════════════════════════════════════════ */
+    function buildSkills(){
+      document.getElementById('bentoSkills').innerHTML = SKILLS_DATA.map(function(s){
+        return '<div class="bento-card reveal">'
+          +'<i class="fas '+s.icon+'"></i>'
+          +'<h3>'+s.name+'</h3>'
+          +'</div>';
       }).join('');
     }
 
-    // Text certifications (original small cards)
-    function buildCerts() {
-      document.getElementById('certGrid').innerHTML = CERTIFICATES.map(function(c) {
-        return '<div class="cert-item-old"><div class="cert-icon"><i class="fas ' + c.icon + '"></i></div><div class="cert-text"><strong>' + c.title + '</strong><span>' + c.desc + '</span></div></div>';
-      }).join('');
-    }
-
-    // Horizontal gallery builder (experience + freelance)
-    function buildHorizontalGallery(prefix, items, folderFn, isFreelance) {
-      var outer = document.getElementById(prefix + 'StickyOuter');
-      var track = document.getElementById(prefix + 'Track');
-      var dotsCont = document.getElementById(prefix + 'SiteDots');
-      var labelEl = document.getElementById(prefix + 'SiteLabel');
-      var fillEl = document.getElementById(prefix + 'ProgressFill');
-      var N = items.length;
-      outer.style.setProperty('--n-sites', N);
-      outer.style.height = (N * 100 + 80) + 'vh';
-      track.innerHTML = items.map(function(item, i) {
-        var base = folderFn ? folderFn(item) : '';
-        var imgs = (item.files || []).map(function(f, j) {
-          var src = folderFn ? enc(base + f) : enc(f.src || f);
-          return '<img src="' + src + '" class="' + (j === 0 ? 'active' : '') + '" data-idx="' + j + '" alt="' + (item.captions ? item.captions[j] || '' : '') + '">';
-        }).join('');
-        var dots = (item.files || []).map(function(_, j) {
-          return '<button class="hcard-dot ' + (j === 0 ? 'active' : '') + '" data-idx="' + j + '"></button>';
-        }).join('');
-        var tags = (item.tags || []).map(function(t) { return '<span class="hcard-tag">' + t + '</span>'; }).join('');
-        var previewBtn = isFreelance ? '<button class="hcard-arr" style="position:absolute; top:16px; left:16px; z-index:4; background:rgba(0,0,0,.5); padding:6px 12px; border-radius:6px; font-size:.7rem; color:#fff; border:none; cursor:pointer;" onclick="openFlModal(\'' + item.id + '\')"><i class="fas fa-search-plus"></i> Preview</button>' : '';
-        return '<div class="exp-hcard" id="' + prefix + '-card-' + item.id + '">'
-          + '<div class="hcard-gallery">' + imgs + '</div>'
-          + '<div class="hcard-overlay"></div>'
-          + '<div class="hcard-dots">' + dots + '</div>'
-          + '<div class="hcard-arrows">'
-          + '<button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>'
-          + '<button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>'
+    /* ═══════════════════════════════════════════════════════════
+       CERTIFICATIONS WITH IMAGES
+    ═══════════════════════════════════════════════════════════ */
+    function buildCerts(){
+      // Image cards
+      document.getElementById('certImagesGrid').innerHTML = CERT_IMAGES.map(function(c, i) {
+        return '<div class="cert-img-card" onclick="openFullscreen([{src:\''+enc(c.src)+'\',caption:\''+c.title+'\'}], 0)">'
+          + '<img src="'+enc(c.src)+'" alt="'+c.title+'" loading="lazy">'
+          + '<div class="cert-img-overlay">'
+          + '<div class="cert-img-title">'+c.title+'</div>'
+          + '<div class="cert-img-sub">'+c.sub+'</div>'
           + '</div>'
-          + previewBtn
-          + '<div class="hcard-content">'
-          + '<div class="hcard-num">' + (item.num || ('0' + (i + 1))) + '</div>'
-          + '<div class="hcard-title">' + item.title + '</div>'
-          + '<div class="hcard-desc">' + (item.desc || item.short || '') + '</div>'
-          + '<div class="hcard-tags">' + tags + '</div>'
-          + (item.pdf ? '<a href="' + item.pdf + '" target="_blank" style="color:#fff;font-size:.75rem;text-decoration:underline;margin-top:8px;display:inline-block">Report →</a>' : '')
+          + '<div class="cert-zoom-icon"><i class="fas fa-expand-alt"></i></div>'
+          + '</div>';
+      }).join('');
+
+      // Badge strip
+      document.getElementById('certBadges').innerHTML = CERT_BADGES.map(function(c) {
+        return '<div class="cert-badge">'
+          +'<div class="cert-badge-icon"><i class="fas '+c.icon+'"></i></div>'
+          +'<span>'+c.title+'</span>'
+          +'</div>';
+      }).join('');
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PROJECT GRID (replaces full-screen stack)
+    ═══════════════════════════════════════════════════════════ */
+    function buildProjectGrid() {
+      var grid = document.getElementById('projGrid');
+      grid.innerHTML = PROJECTS.map(function(p, i) {
+        var firstImage = (p.media||[]).find(function(m){ return m.type === 'image'; });
+        var imgSrc = firstImage ? enc(firstImage.src) : '';
+        var tags = p.tech.map(function(t){ return '<span class="proj-card-tag">'+t+'</span>'; }).join('');
+        return '<div class="proj-card reveal" style="transition-delay:'+(i*0.07)+'s">'
+          + '<div class="proj-card-accent"></div>'
+          + (imgSrc ? '<img src="'+imgSrc+'" class="proj-card-img" alt="">' : '<div class="proj-card-img" style="background:#1e1e1e;"></div>')
+          + '<div class="proj-card-overlay"></div>'
+          + '<div class="proj-num-badge">0'+(i+1)+'</div>'
+          + '<div class="proj-card-body">'
+          + '<div class="proj-card-cat">'+p.cat+'&nbsp;·&nbsp;'+p.loc+'</div>'
+          + '<h3 class="proj-card-title">'+p.title+'</h3>'
+          + '<p class="proj-card-desc">'+p.short+'</p>'
+          + '<div class="proj-card-tags">'+tags+'</div>'
+          + '<button class="proj-card-link" onclick="event.stopPropagation();openProjModal('+p.id+')">View Project &rarr;</button>'
           + '</div>'
           + '</div>';
       }).join('');
-      dotsCont.innerHTML = items.map(function(_, i) {
-        return '<button class="horiz-site-dot' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '"></button>';
+
+      // Whole card also opens modal
+      grid.querySelectorAll('.proj-card').forEach(function(card, i) {
+        card.addEventListener('click', function(){ openProjModal(PROJECTS[i].id); });
+      });
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FREELANCE MODAL
+    ═══════════════════════════════════════════════════════════ */
+    window.openFlModal = function(id) {
+      var f = FREELANCE.find(function(x) { return x.id === id; });
+      if (!f) return;
+      document.getElementById('flModalHead').innerHTML = '<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+f.title+'</h3>'
+        + '<p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+f.date+'</p>';
+      document.getElementById('flModalDesc').innerHTML = '<p style="line-height:1.75;margin-bottom:12px">'+f.desc+'</p>';
+      var galleryHTML = (f.files||[]).map(function(file, i) {
+        var src = enc(f.folder + file);
+        var list = f.files.map(function(ff,j){ return {src:enc(f.folder+ff), caption:f.captions?.[j]||''}; });
+        return '<div class="m-media-wrap" onclick="openFullscreen(' + JSON.stringify(list).replace(/"/g,'&quot;') + ', ' + i + ')"><img src="'+src+'" alt="'+(f.captions?.[i]||'')+'" loading="lazy"></div>';
       }).join('');
-      labelEl.textContent = '01 / ' + String(N).padStart(2, '0');
+      document.getElementById('flModalGallery').innerHTML = galleryHTML;
+      document.getElementById('flModal').classList.add('on');
+    };
+
+    /* ═══════════════════════════════════════════════════════════
+       HORIZONTAL GALLERY BUILDER
+    ═══════════════════════════════════════════════════════════ */
+    function buildHorizontalGallery(prefix, items, folderFn, isFreelance) {
+      var outer = document.getElementById(prefix+'StickyOuter');
+      var track = document.getElementById(prefix+'Track');
+      var dotsCont = document.getElementById(prefix+'SiteDots');
+      var labelEl = document.getElementById(prefix+'SiteLabel');
+      var fillEl = document.getElementById(prefix+'ProgressFill');
+      var N = items.length;
+      outer.style.height = (N*100+80)+'vh';
+
+      track.innerHTML = items.map(function(item, i) {
+        var base = folderFn ? folderFn(item) : '';
+        var imgs = (item.files||[]).map(function(f, j) {
+          var src = folderFn ? enc(base+f) : enc(f.src||f);
+          return '<img src="'+src+'" class="'+(j===0?'active':'')+'" data-idx="'+j+'" alt="'+(item.captions?.[j]||'')+'">';
+        }).join('');
+        var dots = (item.files||[]).map(function(_, j) {
+          return '<button class="hcard-dot '+(j===0?'active':'')+'" data-idx="'+j+'"></button>';
+        }).join('');
+        var tags = (item.tags||[]).map(function(t) { return '<span class="hcard-tag">'+t+'</span>'; }).join('');
+        var previewBtn = isFreelance ? '<button class="hcard-arr" style="position:absolute;top:16px;left:16px;z-index:4;background:rgba(0,0,0,.5);padding:6px 12px;border-radius:6px;font-size:.7rem;color:#fff;border:none;cursor:pointer;" onclick="openFlModal(\''+item.id+'\')"><i class="fas fa-search-plus"></i> Preview</button>' : '';
+        return '<div class="exp-hcard" id="'+prefix+'-card-'+item.id+'">'
+          +'<div class="hcard-gallery">'+imgs+'</div>'
+          +'<div class="hcard-overlay"></div>'
+          +'<div class="hcard-dots">'+dots+'</div>'
+          +'<div class="hcard-arrows">'
+          +'<button class="hcard-arr hcard-prev"><i class="fas fa-chevron-left"></i></button>'
+          +'<button class="hcard-arr hcard-next"><i class="fas fa-chevron-right"></i></button>'
+          +'</div>'
+          + previewBtn
+          +'<div class="hcard-content">'
+          +'<div class="hcard-num">'+(item.num||('0'+(i+1)))+'</div>'
+          +'<div class="hcard-title">'+item.title+'</div>'
+          +'<div class="hcard-desc">'+(item.desc||item.short||'')+'</div>'
+          +'<div class="hcard-tags">'+tags+'</div>'
+          + (item.pdf ? '<a href="'+item.pdf+'" target="_blank" style="color:#fff;font-size:.75rem;text-decoration:underline;margin-top:8px;display:inline-block">Report →</a>' : '')
+          +'</div>'
+          +'</div>';
+      }).join('');
+
+      dotsCont.innerHTML = items.map(function(_, i) {
+        return '<button class="horiz-site-dot'+(i===0?' active':'')+'" data-idx="'+i+'"></button>';
+      }).join('');
+      labelEl.textContent = '01 / '+String(N).padStart(2,'0');
+
       var siteDots = dotsCont.querySelectorAll('.horiz-site-dot');
+
       function updateScroll() {
         var outerRect = outer.getBoundingClientRect();
         var totalH = outer.offsetHeight - window.innerHeight;
         var scrolled = -outerRect.top;
-        if (scrolled < 0) scrolled = 0;
-        if (scrolled > totalH) scrolled = totalH;
-        var progress = scrolled / totalH;
+        if (scrolled<0) scrolled=0;
+        if (scrolled>totalH) scrolled=totalH;
+        var progress = scrolled/totalH;
         var trackW = track.scrollWidth;
         var viewW = track.parentElement.offsetWidth;
         var maxTranslate = trackW - viewW + 120;
-        if (maxTranslate < 0) maxTranslate = 0;
-        track.style.transform = 'translateX(' + (-progress * maxTranslate) + 'px)';
-        var cardIdx = Math.min(Math.floor(progress * N), N - 1);
-        siteDots.forEach(function(d, i) { d.classList.toggle('active', i === cardIdx); });
-        labelEl.textContent = (items[cardIdx]?.num || ('0' + (cardIdx + 1))) + ' / ' + String(N).padStart(2, '0');
-        fillEl.style.width = (progress * 100) + '%';
+        if (maxTranslate<0) maxTranslate=0;
+        track.style.transform = 'translateX('+(-progress*maxTranslate)+'px)';
+        var cardIdx = Math.min(Math.floor(progress*N), N-1);
+        siteDots.forEach(function(d,i){ d.classList.toggle('active',i===cardIdx); });
+        labelEl.textContent = (items[cardIdx]?.num||('0'+(cardIdx+1)))+' / '+String(N).padStart(2,'0');
+        fillEl.style.width = (progress*100)+'%';
       }
-      window.addEventListener('scroll', updateScroll, { passive: true });
+
+      window.addEventListener('scroll', updateScroll, {passive:true});
       updateScroll();
-      siteDots.forEach(function(d, i) {
+
+      siteDots.forEach(function(d,i) {
         d.addEventListener('click', function() {
           var totalH = outer.offsetHeight - window.innerHeight;
-          var target = outer.offsetTop + (i / (N - 1)) * totalH;
-          window.scrollTo({ top: target, behavior: 'smooth' });
+          var target = outer.offsetTop + (i/(N-1))*totalH;
+          window.scrollTo({top:target, behavior:'smooth'});
         });
       });
+
       setTimeout(function() {
-        document.querySelectorAll('#' + prefix + 'Track .exp-hcard').forEach(function(card, idx) {
+        document.querySelectorAll('#'+prefix+'Track .exp-hcard').forEach(function(card, idx) {
           var imgs = card.querySelectorAll('.hcard-gallery img');
           var dots = card.querySelectorAll('.hcard-dot');
           var cur = 0, timer;
           function goTo(n, manual) {
             imgs[cur].classList.remove('active'); dots[cur].classList.remove('active');
-            cur = (n + imgs.length) % imgs.length;
+            cur = (n+imgs.length)%imgs.length;
             imgs[cur].classList.add('active'); dots[cur].classList.add('active');
             if (manual) { clearInterval(timer); startAuto(); }
           }
-          function startAuto() { timer = setInterval(function() { goTo(cur + 1, false); }, 3800); }
+          function startAuto() { timer = setInterval(function() { goTo(cur+1, false); }, 3800); }
           startAuto();
           dots.forEach(function(d) { d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx), true); }); });
-          card.querySelector('.hcard-prev').addEventListener('click', function() { goTo(cur - 1, true); });
-          card.querySelector('.hcard-next').addEventListener('click', function() { goTo(cur + 1, true); });
+          card.querySelector('.hcard-prev').addEventListener('click', function() { goTo(cur-1, true); });
+          card.querySelector('.hcard-next').addEventListener('click', function() { goTo(cur+1, true); });
           card.addEventListener('mouseenter', function() { clearInterval(timer); });
           card.addEventListener('mouseleave', function() { startAuto(); });
           imgs.forEach(function(img, i) {
             img.addEventListener('click', function() {
-              var list = (items[idx].files || items[idx].media || []).map(function(f, j) {
-                var src = folderFn ? enc((folderFn(items[idx])) + f) : enc(f.src || f);
-                return { src: src, caption: items[idx].captions ? items[idx].captions[j] || '' : '' };
+              var list = (items[idx].files||items[idx].media||[]).map(function(f, j) {
+                var src = folderFn ? enc((folderFn(items[idx]))+f) : enc(f.src||f);
+                return { src: src, caption: items[idx].captions?.[j] || '' };
               });
               openFullscreen(list, i);
             });
@@ -802,107 +1051,50 @@
       }, 120);
     }
 
-    function buildExperience() { buildHorizontalGallery('exp', WORK_SITES, function(item) { return 'assets/Professional Career/' + item.folder + '/'; }, false); }
-    function buildFreelance() { buildHorizontalGallery('fl', FREELANCE, function(item) { return item.folder; }, true); }
-
-    // Project stack (reduced height, color overlays)
-    function buildProjectStack() {
-      var viewport = document.getElementById('stackViewport');
-      var outer = document.getElementById('stackOuter');
-      var N = PROJECTS.length;
-      outer.style.setProperty('--card-count', N);
-      outer.style.height = (N * 70) + 'vh';
-      viewport.innerHTML = '';
-      PROJECTS.forEach(function(p, i) {
-        var card = document.createElement('div');
-        card.className = 'stack-card';
-        var firstImage = (p.media || []).find(function(m) { return m.type === 'image'; });
-        var imgSrc = firstImage ? enc(firstImage.src) : '';
-        var color = '#8ab4f8';
-        if (p.cat.includes('InSAR')) color = '#3a0ca3';
-        else if (p.cat.includes('Remote')) color = '#4cc9f0';
-        else if (p.cat.includes('GIS')) color = '#f72585';
-        else if (p.cat.includes('Civil')) color = '#ffb703';
-        else if (p.cat.includes('Seism')) color = '#fb8500';
-        card.innerHTML = (imgSrc ? '<img src="' + imgSrc + '" class="stack-card-img" alt="">' : '<div class="stack-card-img" style="background:#222;"></div>')
-          + '<div class="color-overlay" style="background: ' + color + ';"></div>'
-          + '<div class="stack-card-overlay"></div>'
-          + '<div class="stack-card-body">'
-          + '<div class="stack-card-num">0' + (i + 1) + '</div>'
-          + '<div class="stack-card-cat">' + p.cat + '</div>'
-          + '<h3 class="stack-card-title">' + p.title + '</h3>'
-          + '<p class="stack-card-desc">' + p.short + '</p>'
-          + '<div class="stack-card-tags">' + p.tech.map(function(t) { return '<span class="stack-card-tag">' + t + '</span>'; }).join('') + '</div>'
-          + '<span class="stack-card-link" onclick="openProjModal(' + p.id + ')">View Project &rarr;</span>'
-          + '</div>';
-        viewport.appendChild(card);
-      });
-      var cards = viewport.querySelectorAll('.stack-card');
-      function updateStack() {
-        var outerRect = outer.getBoundingClientRect();
-        var totalH = outer.offsetHeight - window.innerHeight;
-        var scrolled = -outerRect.top;
-        if (scrolled < 0) scrolled = 0;
-        if (scrolled > totalH) scrolled = totalH;
-        var progress = scrolled / totalH;
-        var activeIdx = Math.min(Math.floor(progress * N), N - 1);
-        var localProg = (progress * N) % 1;
-        cards.forEach(function(card, i) {
-          var diff = i - activeIdx;
-          var scale, ty, opacity, zIdx;
-          if (diff < 0) { scale = 0.85; ty = -60; opacity = 0; zIdx = i; }
-          else if (diff === 0) { scale = 1 - localProg * 0.08; ty = -localProg * 40; opacity = 1; zIdx = N + 1; }
-          else if (diff === 1) { scale = 0.9 + localProg * 0.1; ty = 60 * (1 - localProg); opacity = localProg; zIdx = N; }
-          else { scale = 0.85; ty = 100; opacity = 0; zIdx = i; }
-          card.style.cssText = 'transform: translateY(' + ty + 'px) scale(' + scale + '); opacity: ' + opacity + '; z-index: ' + zIdx + ';';
-        });
-      }
-      window.addEventListener('scroll', updateStack, { passive: true });
-      updateStack();
+    function buildExperience() {
+      buildHorizontalGallery('exp', WORK_SITES, function(item) {
+        return 'assets/Professional Career/'+item.folder+'/';
+      }, false);
     }
 
-    // Project modal
+    function buildFreelance() {
+      buildHorizontalGallery('fl', FREELANCE, function(item) {
+        return item.folder;
+      }, true);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PROJECT MODAL
+    ═══════════════════════════════════════════════════════════ */
     window.openProjModal = function(id) {
       var p = PROJECTS.find(function(x) { return x.id === id; });
       if (!p) return;
-      document.getElementById('mHead').innerHTML = '<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">' + p.title + '</h3><p style="opacity:.5;font-size:.8rem;margin-bottom:14px">' + p.loc + '</p>';
-      document.getElementById('mDesc').innerHTML = '<p style="line-height:1.75;margin-bottom:12px">' + p.full + '</p><p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> ' + (p.tech || []).join(', ') + '</p>';
-      document.getElementById('mGallery').innerHTML = (p.media || []).map(function(m, i) {
+      document.getElementById('mHead').innerHTML = '<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+p.title+'</h3>'
+        + '<p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+p.loc+'</p>';
+      document.getElementById('mDesc').innerHTML = '<p style="line-height:1.75;margin-bottom:12px">'+p.full+'</p>'
+        + '<p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> '+(p.tech||[]).join(', ')+'</p>';
+      document.getElementById('mGallery').innerHTML = (p.media||[]).map(function(m, i) {
         var s = enc(m.src);
-        if (m.type === 'image') return '<div class="m-media-wrap" onclick="openProjCarousel(' + id + ',' + i + ')" title="' + (m.caption || '') + '"><img src="' + s + '" alt="' + (m.caption || '') + '" loading="lazy"></div>';
-        return '<div class="m-media-wrap" onclick="openVideoModal(\'' + s + '\')" title="Play video" style="background:#111;display:flex;align-items:center;justify-content:center"><i class="fas fa-play" style="color:#fff;font-size:1.4rem;position:absolute"></i><video muted style="width:100%;height:100%;object-fit:cover"><source src="' + s + '" type="video/mp4"></video></div>';
+        if (m.type === 'image') return '<div class="m-media-wrap" onclick="openProjCarousel('+id+','+i+')" title="'+(m.caption||'')+'"><img src="'+s+'" alt="'+(m.caption||'')+'" loading="lazy"></div>';
+        return '<div class="m-media-wrap" onclick="openVideoModal(\''+s+'\')" title="Play video" style="background:#111;display:flex;align-items:center;justify-content:center"><i class="fas fa-play" style="color:#fff;font-size:1.4rem;position:absolute"></i><video muted style="width:100%;height:100%;object-fit:cover"><source src="'+s+'" type="video/mp4"></video></div>';
       }).join('');
-      document.getElementById('mPdf').innerHTML = p.pdf ? '<a href="' + p.pdf + '" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>' : '';
+      document.getElementById('mPdf').innerHTML = p.pdf ? '<a href="'+p.pdf+'" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>' : '';
       document.getElementById('projModal').classList.add('on');
     };
     window.closeModal = function(id) { document.getElementById(id).classList.remove('on'); };
     window.openProjCarousel = function(projId, startIdx) {
       var p = PROJECTS.find(function(x) { return x.id === projId; });
       if (!p) return;
-      var list = (p.media || []).filter(function(m) { return m.type === 'image'; }).map(function(m) { return { src: enc(m.src), caption: m.caption || '' }; });
+      var list = (p.media||[]).filter(function(m) { return m.type === 'image'; }).map(function(m) { return { src: enc(m.src), caption: m.caption||'' }; });
       openCarousel(list, startIdx);
     };
 
-    // Freelance modal
-    window.openFlModal = function(id) {
-      var f = FREELANCE.find(function(x) { return x.id === id; });
-      if (!f) return;
-      document.getElementById('flModalHead').innerHTML = '<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">' + f.title + '</h3><p style="opacity:.5;font-size:.8rem;margin-bottom:14px">' + f.date + '</p>';
-      document.getElementById('flModalDesc').innerHTML = '<p style="line-height:1.75;margin-bottom:12px">' + f.desc + '</p>';
-      var galleryHTML = (f.files || []).map(function(file, i) {
-        var src = enc(f.folder + file);
-        var list = f.files.map(function(ff, j) { return { src: enc(f.folder + ff), caption: f.captions ? f.captions[j] || '' : '' }; });
-        return '<div class="m-media-wrap" onclick="openFullscreen(' + JSON.stringify(list).replace(/"/g, '&quot;') + ', ' + i + ')"><img src="' + src + '" alt="' + (f.captions ? f.captions[i] || '' : '') + '" loading="lazy"></div>';
-      }).join('');
-      document.getElementById('flModalGallery').innerHTML = galleryHTML;
-      document.getElementById('flModal').classList.add('on');
-    };
-
-    // Fullscreen lightbox (general)
+    /* ═══════════════════════════════════════════════════════════
+       FULLSCREEN LIGHTBOX
+    ═══════════════════════════════════════════════════════════ */
     var _fsMedia = [], _fsIdx = 0;
     window.openFullscreen = function(list, idx) {
-      _fsMedia = list;
-      _fsIdx = idx || 0;
+      _fsMedia = list; _fsIdx = idx || 0;
       updateFS();
       document.getElementById('fullscreenModal').classList.add('active');
     };
@@ -911,33 +1103,30 @@
       document.getElementById('fullscreenImg').src = item.src;
       document.getElementById('fsCaption').textContent = (item.caption || '') + ' (' + (_fsIdx + 1) + '/' + _fsMedia.length + ')';
     }
-    window.fsStep = function(d) {
-      _fsIdx = (_fsIdx + d + _fsMedia.length) % _fsMedia.length;
-      updateFS();
-    };
+    window.fsStep = function(d) { _fsIdx = (_fsIdx + d + _fsMedia.length) % _fsMedia.length; updateFS(); };
     window.closeFull = function() { document.getElementById('fullscreenModal').classList.remove('active'); };
     document.getElementById('fullscreenModal').addEventListener('click', function(e) { if (e.target === this) closeFull(); });
 
-    // Carousel (for project images)
+    /* ═══════════════════════════════════════════════════════════
+       CAROUSEL
+    ═══════════════════════════════════════════════════════════ */
     var _carMedia = [], _carIdx = 0;
-    window.openCarousel = function(list, idx) {
-      _carMedia = list;
-      _carIdx = idx || 0;
+    function openCarousel(list, idx) {
+      _carMedia = list; _carIdx = idx || 0;
       updateCar();
       document.getElementById('carouselModal').classList.add('active');
-    };
+    }
     function updateCar() {
       var item = _carMedia[_carIdx];
       document.getElementById('carouselImage').src = item.src || item;
       document.getElementById('carouselCaption').textContent = item.caption || ((_carIdx + 1) + ' / ' + _carMedia.length);
     }
-    window.carStep = function(d) {
-      _carIdx = (_carIdx + d + _carMedia.length) % _carMedia.length;
-      updateCar();
-    };
+    window.carStep = function(d) { _carIdx = (_carIdx + d + _carMedia.length) % _carMedia.length; updateCar(); };
     window.closeCarousel = function() { document.getElementById('carouselModal').classList.remove('active'); };
 
-    // Video modal
+    /* ═══════════════════════════════════════════════════════════
+       VIDEO MODAL
+    ═══════════════════════════════════════════════════════════ */
     window.openVideoModal = function(src) {
       document.getElementById('videoPlayer').src = src;
       document.getElementById('videoModal').classList.add('active');
@@ -948,7 +1137,9 @@
       document.getElementById('videoModal').classList.remove('active');
     };
 
-    // Magnetic buttons
+    /* ═══════════════════════════════════════════════════════════
+       MAGNETIC BUTTONS
+    ═══════════════════════════════════════════════════════════ */
     function initMagnetic() {
       document.querySelectorAll('.magnetic').forEach(function(btn) {
         btn.addEventListener('mousemove', function(e) {
@@ -965,7 +1156,9 @@
       });
     }
 
-    // Card hover 3D effect
+    /* ═══════════════════════════════════════════════════════════
+       CARD HOVER 3D TILT
+    ═══════════════════════════════════════════════════════════ */
     function initCardHover() {
       document.addEventListener('mousemove', function(e) {
         document.querySelectorAll('.exp-hcard').forEach(function(card) {
@@ -993,7 +1186,9 @@
       });
     }
 
-    // Scramble text effect
+    /* ═══════════════════════════════════════════════════════════
+       TEXT SCRAMBLE
+    ═══════════════════════════════════════════════════════════ */
     function initScramble() {
       var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
       document.querySelectorAll('.scramble').forEach(function(el) {
@@ -1016,51 +1211,24 @@
       });
     }
 
-    // Certificate gallery lightbox (new)
-    var certImages = [];
-    function initCertModal() {
-      var items = document.querySelectorAll('.cert-item');
-      if (!items.length) return;
-      certImages = Array.from(items).map(function(el) { return { src: el.dataset.src, caption: el.dataset.caption }; });
-      items.forEach(function(item, idx) {
-        item.addEventListener('click', function() { openCertModal(idx); });
-      });
-    }
-    var currentCertIdx = 0;
-    function openCertModal(idx) {
-      currentCertIdx = idx;
-      var modal = document.getElementById('certModal');
-      var img = document.getElementById('certFullImg');
-      var cap = document.getElementById('certCaption');
-      img.src = certImages[currentCertIdx].src;
-      cap.textContent = certImages[currentCertIdx].caption + ' (' + (currentCertIdx + 1) + '/' + certImages.length + ')';
-      modal.classList.add('active');
-    }
-    window.closeCertModal = function() { document.getElementById('certModal').classList.remove('active'); };
-    window.certStep = function(delta) {
-      currentCertIdx = (currentCertIdx + delta + certImages.length) % certImages.length;
-      var img = document.getElementById('certFullImg');
-      var cap = document.getElementById('certCaption');
-      img.src = certImages[currentCertIdx].src;
-      cap.textContent = certImages[currentCertIdx].caption + ' (' + (currentCertIdx + 1) + '/' + certImages.length + ')';
-    };
-    document.getElementById('certModal').addEventListener('click', function(e) { if (e.target === this) closeCertModal(); });
-
-    // Keyboard escape
+    /* ═══════════════════════════════════════════════════════════
+       KEYBOARD
+    ═══════════════════════════════════════════════════════════ */
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         closeFull(); closeCarousel(); closeVideoModal();
         document.querySelectorAll('.modal.on').forEach(function(m) { m.classList.remove('on'); });
-        if (document.getElementById('certModal').classList.contains('active')) closeCertModal();
       }
     });
 
-    // Initialize everything on load
+    /* ═══════════════════════════════════════════════════════════
+       BOOT
+    ═══════════════════════════════════════════════════════════ */
     document.addEventListener('DOMContentLoaded', function() {
       buildSkills();
       buildExperience();
       buildFreelance();
-      buildProjectStack();
+      buildProjectGrid();
       buildCerts();
       initReveal();
       initCursor();
@@ -1069,7 +1237,6 @@
       initCardHover();
       initScramble();
       if (typeof THREE !== 'undefined') initThree();
-      initCertModal();
     });
   </script>
 </body>
