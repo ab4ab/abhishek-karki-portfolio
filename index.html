@@ -527,8 +527,7 @@
       </div>
       <div class="about-image-wrap clip-reveal delay-2">
         <div class="about-dot"></div>
-        <img src="assets/profile.jpg" alt="Abhishek Karki" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="about-image-placeholder" style="display:none">Your Photo Here</div>
+        <img src="./assets/profile.jpg" alt="Abhishek Karki">
         <div class="about-accent-box"></div>
       </div>
     </div>
@@ -811,11 +810,11 @@
       }
       geo.computeVertexNormals();
 
-      var mat = new THREE.MeshBasicMaterial({color: 0x75b2f3, wireframe: true, transparent: true, opacity: 0.4});
+      var mat = new THREE.MeshBasicMaterial({color: 0x090909, wireframe: true, transparent: true, opacity: 0.85});
       var mesh = new THREE.Mesh(geo, mat);
       scene.add(mesh);
 
-      var matSolid = new THREE.MeshBasicMaterial({color: 0xf1eed1, transparent: true, opacity: 0.8});
+      var matSolid = new THREE.MeshBasicMaterial({color: 0xf1eed1, transparent: true, opacity: 1.0});
       var meshSolid = new THREE.Mesh(geo, matSolid);
       scene.add(meshSolid);
 
