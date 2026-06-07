@@ -337,9 +337,152 @@
       .hero-stats{ display:none; }
       .cert-images-grid{ grid-template-columns:1fr 1fr; }
     }
+
+  /* ── OVERLAY ── */
+  #intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #05080f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1.2s ease;
+  }
+  #intro-overlay.fade-out { opacity: 0; pointer-events: none; }
+
+  /* Three.js canvas sits behind text */
+  #city-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* vignette so city doesn't bleed into text too hard */
+  #intro-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, #05080f 100%);
+    pointer-events: none;
+  }
+
+  /* ── SCAN BAR ── */
+  #scan-bar {
+    position: absolute;
+    top: 0;
+    left: -4px;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #75b2f3, #f8aa66, #75b2f3, transparent);
+    box-shadow: 0 0 18px 6px rgba(117,178,243,0.55);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* ── TEXT BLOCK ── */
+  #intro-text {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    user-select: none;
+  }
+
+  #name-row {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: nowrap;
+    margin-bottom: 18px;
+  }
+
+  .name-char {
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #e8eaf6;
+    opacity: 0;
+    text-shadow: 0 0 0 transparent;
+    transition: opacity 0s, text-shadow 0s;
+    white-space: pre;
+    font-family: var(--font-display, sans-serif);
+  }
+  .name-char.space { width: 0.4em; }
+  .name-char.revealed {
+    opacity: 1;
+    text-shadow:
+      0 0 8px rgba(117,178,243,0.9),
+      0 0 20px rgba(117,178,243,0.5),
+      0 0 40px rgba(117,178,243,0.25);
+    transition: opacity 0.12s ease, text-shadow 0.3s ease;
+  }
+  .name-char.dimmed {
+    text-shadow: none;
+    transition: text-shadow 0.8s ease;
+  }
+
+  #tagline {
+    font-size: clamp(0.85rem, 2vw, 1.05rem);
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #f8aa66;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    margin-bottom: 10px;
+    font-family: var(--font-body, sans-serif);
+  }
+  #tagline.show { opacity: 0.85; transform: translateY(0); }
+
+  #nec-line {
+    font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+    letter-spacing: 0.18em;
+    color: #75b2f3;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s;
+    font-family: var(--font-body, sans-serif);
+  }
+  #nec-line.show { opacity: 0.7; transform: translateY(0); }
+
+  /* horizontal rule accent */
+  #rule {
+    width: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #75b2f3, #f8aa66, #75b2f3, transparent);
+    margin: 0 auto 20px;
+    transition: width 0.6s ease;
+  }
+  #rule.expand { width: min(420px, 70vw); }
+
+  /* ── HERO SHOW ── */
+  body #hero {
+    opacity: 0;
+    transition: opacity 1s ease 0.4s;
+  }
+  body #hero.show {
+    opacity: 1;
+  }
   </style>
 </head>
-<body>
+<body style="overflow: hidden;">
+  <!-- ── INTRO OVERLAY ── -->
+  <div id="intro-overlay">
+    <canvas id="city-canvas"></canvas>
+    <div id="scan-bar"></div>
+
+    <div id="intro-text">
+      <div id="name-row" aria-label="Abhishek Karki"></div>
+      <div id="rule"></div>
+      <p id="tagline">Civil Engineer &nbsp;·&nbsp; GIS Analyst</p>
+      <p id="nec-line">NEC Reg. #80593</p>
+    </div>
+  </div>
+
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
  
@@ -932,6 +1075,238 @@
       initReveal(); initCursor(); initNav(); initMagnetic(); initCardHover(); initScramble();
       if(typeof THREE!=='undefined') initThree();
     });
+
+    /* ── INTRO ANIMATION ── */
+    (function() {
+      const canvas = document.getElementById('city-canvas');
+      if (!canvas) return;
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x05080f, 1);
+
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x05080f, 60, 160);
+
+      const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 300);
+      camera.position.set(0, 18, 55);
+      camera.lookAt(0, 8, 0);
+
+      /* Ambient + directional */
+      scene.add(new THREE.AmbientLight(0x1a2a4a, 3));
+      const dirLight = new THREE.DirectionalLight(0x75b2f3, 1.8);
+      dirLight.position.set(20, 40, 20);
+      scene.add(dirLight);
+      const dirLight2 = new THREE.DirectionalLight(0xf8aa66, 0.8);
+      dirLight2.position.set(-20, 30, -10);
+      scene.add(dirLight2);
+
+      /* Ground plane */
+      const groundGeo = new THREE.PlaneGeometry(300, 300);
+      const groundMat = new THREE.MeshStandardMaterial({ color: 0x060b14, roughness: 1 });
+      const ground = new THREE.Mesh(groundGeo, groundMat);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = -0.05;
+      scene.add(ground);
+
+      /* Grid lines on ground */
+      const gridHelper = new THREE.GridHelper(200, 40, 0x0d1a2e, 0x0d1a2e);
+      gridHelper.position.y = 0.01;
+      scene.add(gridHelper);
+
+      /* ── Building generator ── */
+      const amberEdge  = new THREE.Color(0xf8aa66);
+      const blueEdge   = new THREE.Color(0x75b2f3);
+      const darkBody   = new THREE.Color(0x080e1a);
+      const midBody    = new THREE.Color(0x0b1422);
+
+      const buildings = [];
+      const buildingGroup = new THREE.Group();
+      scene.add(buildingGroup);
+
+      function createBuilding(x, z, w, d, targetH, delay) {
+        const bodyGeo = new THREE.BoxGeometry(w, 1, d);
+        const useAmber = (Math.random() > 0.5);
+        const edgeCol  = useAmber ? amberEdge : blueEdge;
+        const bodyCol  = Math.random() > 0.4 ? darkBody : midBody;
+
+        const bodyMat = new THREE.MeshStandardMaterial({
+          color: bodyCol,
+          roughness: 0.85,
+          metalness: 0.15,
+          emissive: edgeCol,
+          emissiveIntensity: 0.04,
+        });
+        const mesh = new THREE.Mesh(bodyGeo, bodyMat);
+
+        /* Wireframe edge overlay */
+        const edgeGeo = new THREE.EdgesGeometry(bodyGeo);
+        const edgeMat = new THREE.LineBasicMaterial({ color: edgeCol, transparent: true, opacity: 0.45 });
+        const edges = new THREE.LineSegments(edgeGeo, edgeMat);
+        mesh.add(edges);
+
+        mesh.position.set(x, 0, z);
+        mesh.scale.y = 0.001;
+
+        buildingGroup.add(mesh);
+        buildings.push({ mesh, targetH, delay, risen: false, scaleY: 0.001 });
+      }
+
+      /* Scatter buildings in a rough city grid */
+      const rng = (a, b) => a + Math.random() * (b - a);
+      const cols = 18, rows = 10;
+      for (let c = 0; c < cols; c++) {
+        for (let r = 0; r < rows; r++) {
+          const x = (c - cols / 2) * 7 + rng(-1.5, 1.5);
+          const z = (r - rows / 2) * 7 + rng(-1.5, 1.5) - 5;
+          const w = rng(2.5, 5.5);
+          const d = rng(2.5, 5.5);
+          const h = rng(4, 32);
+          const delay = rng(0.2, 2.8); // seconds after animation start
+          createBuilding(x, z, w, d, h, delay);
+        }
+      }
+
+      /* ── Particle dust ── */
+      const particleCount = 400;
+      const pGeo = new THREE.BufferGeometry();
+      const pPos = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        pPos[i * 3]     = rng(-80, 80);
+        pPos[i * 3 + 1] = rng(0, 50);
+        pPos[i * 3 + 2] = rng(-60, 20);
+      }
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+      const pMat = new THREE.PointsMaterial({ color: 0x75b2f3, size: 0.18, transparent: true, opacity: 0.35 });
+      scene.add(new THREE.Points(pGeo, pMat));
+
+      /* ── Resize handler ── */
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      /* ── Animation loop ── */
+      let startTime = null;
+      let animRunning = true;
+
+      function animateScene(now) {
+        if (!animRunning) return;
+        requestAnimationFrame(animateScene);
+
+        if (!startTime) startTime = now;
+        const elapsed = (now - startTime) / 1000; // seconds
+
+        /* Slow camera drift */
+        camera.position.x = Math.sin(elapsed * 0.06) * 3;
+        camera.lookAt(0, 8, 0);
+
+        /* Rise buildings */
+        buildings.forEach(b => {
+          if (elapsed < b.delay) return;
+          const t = Math.min((elapsed - b.delay) / 1.2, 1);
+          const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; // ease-in-out
+          b.scaleY = 0.001 + eased * (b.targetH - 0.001);
+          b.mesh.scale.y = b.scaleY;
+          b.mesh.position.y = b.scaleY / 2;
+          b.mesh.children[0].scale.y = 1 / b.scaleY; // keep edge thickness stable
+        });
+
+        renderer.render(scene, camera);
+      }
+      requestAnimationFrame(animateScene);
+
+      /* ─────────────────────────────────────────
+         2. NAME LETTER REVEAL
+      ───────────────────────────────────────── */
+      const fullName = 'Abhishek Karki';
+      const nameRow  = document.getElementById('name-row');
+      const scanBar  = document.getElementById('scan-bar');
+      const rule     = document.getElementById('rule');
+      const tagline  = document.getElementById('tagline');
+      const necLine  = document.getElementById('nec-line');
+      const overlay  = document.getElementById('intro-overlay');
+      const hero     = document.getElementById('hero');
+
+      /* Build letter spans */
+      const charSpans = [];
+      fullName.split('').forEach(ch => {
+        const span = document.createElement('span');
+        span.className = 'name-char' + (ch === ' ' ? ' space' : '');
+        span.textContent = ch === ' ' ? '\u00a0' : ch;
+        nameRow.appendChild(span);
+        charSpans.push(span);
+      });
+
+      /* Measure total name width for scan timing */
+      function runIntro() {
+        const rowRect  = nameRow.getBoundingClientRect();
+        const rowLeft  = rowRect.left;
+        const rowRight = rowRect.right;
+        const vw       = window.innerWidth;
+
+        /* Scan bar: travel full viewport width */
+        const SCAN_DURATION = 2000; // ms for bar to cross screen
+        const SCAN_START    = 600;  // ms after page load
+
+        /* Show scan bar */
+        setTimeout(() => {
+          scanBar.style.opacity = '1';
+          scanBar.style.transition = `left ${SCAN_DURATION}ms linear`;
+          /* Tiny reflow to trigger transition */
+          scanBar.getBoundingClientRect();
+          scanBar.style.left = vw + 'px';
+
+          /* Reveal letters as bar sweeps over them */
+          charSpans.forEach(span => {
+            const rect = span.getBoundingClientRect();
+            const charCenter = rect.left + rect.width / 2;
+            /* fraction of bar travel when bar reaches this char */
+            const fraction = charCenter / vw;
+            const delay = fraction * SCAN_DURATION;
+
+            setTimeout(() => {
+              span.classList.add('revealed');
+            }, delay);
+
+            /* dim glow after bar passes */
+            setTimeout(() => {
+              span.classList.add('dimmed');
+            }, delay + 400);
+          });
+
+          /* Rule, tagline, nec after bar finishes */
+          setTimeout(() => {
+            rule.classList.add('expand');
+            setTimeout(() => { tagline.classList.add('show'); }, 200);
+            setTimeout(() => { necLine.classList.add('show'); }, 450);
+          }, SCAN_DURATION + 100);
+
+          /* Hide bar after it exits */
+          setTimeout(() => {
+            scanBar.style.opacity = '0';
+          }, SCAN_DURATION + 300);
+
+        }, SCAN_START);
+
+        /* Fade overlay after ~5 s total */
+        setTimeout(() => {
+          overlay.classList.add('fade-out');
+          if (hero) hero.classList.add('show');
+          document.body.style.overflow = '';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+            animRunning = false;
+          }, 1400);
+        }, 5200);
+      }
+
+      /* Wait for fonts / layout */
+      document.fonts.ready.then(() => {
+        requestAnimationFrame(() => requestAnimationFrame(runIntro));
+      });
+    })();
   </script>
 </body>
 </html>
