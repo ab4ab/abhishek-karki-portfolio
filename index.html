@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abhishek Karki | Civil Engineer & GIS Expert</title>
   <meta name="description" content="Portfolio of Abhishek Karki — Civil Engineer, GIS & Remote Sensing Specialist, MSc. DREM." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,25 +12,33 @@
   <style>
     /* ═══════════════════════════════════════════════════════
        PALETTE  — zero black, warm earth + deep teal dark
+       --ink       : deep slate-brown (replaces all blacks)
+       --paper     : warm cream
+       --sand      : light warm gray
+       --pebble    : mid warm gray
+       --teal-dark : dark section bg (deep teal, not black)
+       --amber     : primary accent (hover / cta)
+       --sage      : secondary accent
+       --coral     : tertiary accent
     ═══════════════════════════════════════════════════════ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --ink:        #090909fc;
-      --ink-soft:   #343235;
-      --paper:      #f1eed1;
-      --sand:       #ede9e1;
-      --pebble:     #eeccec;
-      --teal-dark:  #000000;
-      --teal-mid:   #adffff;
-      --amber:      #f8aaaa;
-      --amber-light:#75b2f3;
-      --sage:       #83f1af;
-      --coral:      #ffbcb4;
-      --sky:        #b0d7ec;
+      --ink:        #090909fc;   /* deep teal-charcoal — replaces all blacks */
+      --ink-soft:   #343235;   /* slightly lighter for secondary dark use  */
+      --paper:      #f1eed1;   /* warm cream */
+      --sand:       #ede9e1;   /* light warm section bg */
+      --pebble:     #eeccec;   /* borders / mid tones */
+      --teal-dark:  #000000;   /* featured projects bg — rich, not black   */
+      --teal-mid:   #adffff;   /* card backgrounds in dark section          */
+      --amber:      #f8aaaa;   /* primary hover / CTA accent                */
+      --amber-light:#75b2f3;   /* lighter amber                             */
+      --sage:       #83f1af;   /* secondary accent                          */
+      --coral:      #ffbcb4;   /* tertiary accent                           */
+      --sky:        #b0d7ec;   /* quaternary                                 */
       --font-display: 'Syne', sans-serif;
       --font-body:    'DM Sans', sans-serif;
     }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
     body {
       background: var(--paper);
       color: var(--ink);
@@ -85,122 +93,6 @@
     .delay-1 { transition-delay:.1s; }
     .delay-2 { transition-delay:.2s; }
     .delay-3 { transition-delay:.3s; }
- 
-    /* ── INTRO OVERLAY (SCAN NAME ANIMATION - FIXED) ── */
-    #intro-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      background: rgba(5, 8, 15, 0.96);
-      backdrop-filter: blur(4px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-      pointer-events: none;
-    }
-    #intro-overlay.fade-out {
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 1s ease, visibility 0.01s 1s;
-    }
-    #intro-overlay::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 55% at 50% 45%, transparent 30%, #03060c 95%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    #scan-bar {
-      position: absolute;
-      top: 0;
-      left: -6px;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(117,178,243,0) 0%, #75b2f3 25%, #f8aa66 55%, #75b2f3 80%, rgba(117,178,243,0) 100%);
-      box-shadow: 0 0 22px 5px rgba(117,178,243,0.65);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 10;
-      border-radius: 3px;
-    }
-    #intro-text {
-      position: relative;
-      z-index: 15;
-      text-align: center;
-      user-select: none;
-      padding: 1.5rem;
-      max-width: 95vw;
-    }
-    #name-row {
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      flex-wrap: nowrap;
-      margin-bottom: 20px;
-      letter-spacing: 0.02em;
-    }
-    .name-char {
-      font-size: clamp(2.2rem, 7vw, 5.2rem);
-      font-weight: 800;
-      font-family: 'Syne', var(--font-display);
-      letter-spacing: 0.06em;
-      color: #f0f3ff;
-      opacity: 0;
-      text-shadow: none;
-      transition: opacity 0.1s ease, text-shadow 0.35s ease;
-      white-space: pre;
-    }
-    .name-char.space { width: 0.45em; }
-    .name-char.revealed {
-      opacity: 1;
-      text-shadow: 0 0 6px #75b2f3, 0 0 18px rgba(117,178,243,0.7), 0 0 32px rgba(117,178,243,0.4);
-    }
-    .name-char.dimmed {
-      text-shadow: 0 0 2px rgba(248,170,102,0.3);
-      transition: text-shadow 0.9s ease;
-    }
-    #intro-rule {
-      width: 0;
-      height: 1.5px;
-      background: linear-gradient(90deg, transparent, #75b2f3, #f8aa66, #75b2f3, transparent);
-      margin: 0 auto 24px auto;
-      border-radius: 4px;
-      transition: width 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    }
-    #intro-rule.expand { width: min(560px, 72vw); }
-    #intro-tagline {
-      font-size: clamp(0.8rem, 2.2vw, 1rem);
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: #f8aa66;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-      margin-bottom: 12px;
-    }
-    #intro-tagline.show { opacity: 0.95; transform: translateY(0); }
-    #intro-nec {
-      font-size: clamp(0.7rem, 1.6vw, 0.9rem);
-      letter-spacing: 0.22em;
-      color: #9bbcf5;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
-    }
-    #intro-nec.show { opacity: 0.8; transform: translateY(0); }
- 
-    /* main content wrapper (initially hidden, revealed after intro) */
-    #main-portfolio {
-      opacity: 0;
-      transition: opacity 0.9s ease 0.2s;
-    }
-    #main-portfolio.visible {
-      opacity: 1;
-    }
  
     /* ── HERO ── */
     #hero { position:relative; height:100vh; display:flex; align-items:center; padding:0 60px; overflow:hidden; background:url('assets/background.jpg') center/cover no-repeat; }
@@ -288,20 +180,50 @@
     #projects .section-label { color:rgba(247,244,238,.35); }
     .projects-heading { font-family:var(--font-display); font-weight:700; font-size:clamp(2.5rem,5vw,4.5rem); letter-spacing:-.03em; margin-bottom:64px; color:var(--paper); }
  
+    /* per-card accent colours — all warm, no black */
+    :root {
+      --c1: var(--amber);
+      --c2: var(--sage);
+      --c3: var(--sky);
+      --c4: var(--coral);
+      --c5: var(--amber-light);
+      --c6: #a39bcc;  /* soft lavender */
+      --c7: var(--sage);
+      --c8: var(--coral);
+      --c9: var(--sky);
+    }
+ 
     .proj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(440px,1fr)); gap:24px; }
     .proj-card { border-radius:20px; overflow:hidden; position:relative; cursor:pointer; transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s; aspect-ratio:4/3; background:var(--teal-mid); }
     .proj-card:nth-child(3) { grid-column:span 2; aspect-ratio:16/7; }
     .proj-card:hover { transform:translateY(-8px) scale(1.01); }
+ 
     .proj-card-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
     .proj-card:hover .proj-card-img { transform:scale(1.05); }
     .proj-card-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(to top,rgba(26,48,48,.92) 0%,rgba(26,48,48,.25) 55%,transparent 100%); }
+ 
     .proj-card-accent { position:absolute; top:0; left:0; right:0; height:4px; z-index:4; }
-    .proj-card:nth-child(1) .proj-card-accent { background:var(--amber); }
-    .proj-card:nth-child(2) .proj-card-accent { background:var(--sage); }
-    .proj-card:nth-child(3) .proj-card-accent { background:var(--sky); }
-    .proj-card:nth-child(4) .proj-card-accent { background:var(--coral); }
-    .proj-card:nth-child(5) .proj-card-accent { background:var(--amber-light); }
-    .proj-card:nth-child(6) .proj-card-accent { background:#a39bcc; }
+    .proj-card:nth-child(1) .proj-card-accent { background:var(--c1); }
+    .proj-card:nth-child(2) .proj-card-accent { background:var(--c2); }
+    .proj-card:nth-child(3) .proj-card-accent { background:var(--c3); }
+    .proj-card:nth-child(4) .proj-card-accent { background:var(--c4); }
+    .proj-card:nth-child(5) .proj-card-accent { background:var(--c5); }
+    .proj-card:nth-child(6) .proj-card-accent { background:var(--c6); }
+    .proj-card:nth-child(7) .proj-card-accent { background:var(--c7); }
+    .proj-card:nth-child(8) .proj-card-accent { background:var(--c8); }
+    .proj-card:nth-child(9) .proj-card-accent { background:var(--c9); }
+ 
+    /* glow colours on hover */
+    .proj-card:nth-child(1):hover { box-shadow:0 40px 80px rgba(232,164,74,.25); }
+    .proj-card:nth-child(2):hover { box-shadow:0 40px 80px rgba(122,171,142,.22); }
+    .proj-card:nth-child(3):hover { box-shadow:0 40px 80px rgba(122,174,202,.22); }
+    .proj-card:nth-child(4):hover { box-shadow:0 40px 80px rgba(217,123,110,.22); }
+    .proj-card:nth-child(5):hover { box-shadow:0 40px 80px rgba(245,201,122,.22); }
+    .proj-card:nth-child(6):hover { box-shadow:0 40px 80px rgba(163,155,204,.22); }
+    .proj-card:nth-child(7):hover { box-shadow:0 40px 80px rgba(122,171,142,.22); }
+    .proj-card:nth-child(8):hover { box-shadow:0 40px 80px rgba(217,123,110,.22); }
+    .proj-card:nth-child(9):hover { box-shadow:0 40px 80px rgba(122,174,202,.22); }
+ 
     .proj-num-badge { position:absolute; top:18px; right:20px; z-index:3; font-family:var(--font-display); font-weight:800; font-size:.7rem; letter-spacing:.1em; color:rgba(255,255,255,.4); background:rgba(26,48,48,.5); padding:3px 10px; border-radius:100px; backdrop-filter:blur(6px); }
     .proj-card-body { position:absolute; bottom:0; left:0; right:0; z-index:2; padding:28px 28px 24px; }
     .proj-card-cat { font-size:.64rem; letter-spacing:.15em; text-transform:uppercase; margin-bottom:8px; opacity:.55; color:#fff; }
@@ -309,7 +231,7 @@
     .proj-card-desc { font-size:.82rem; line-height:1.6; opacity:.65; color:#fff; margin-bottom:14px; }
     .proj-card-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
     .proj-card-tag { font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:100px; border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.7); }
-    .proj-card-link { display:inline-flex; align-items:center; gap:8px; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.35); padding-bottom:2px; transition:gap .3s,border-color .3s,color .3s; background:none; cursor:pointer; font-family:var(--font-body); }
+    .proj-card-link { display:inline-flex; align-items:center; gap:8px; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:#fff; text-decoration:none; border-top:none; border-left:none; border-right:none; border-bottom:1px solid rgba(255,255,255,.35); padding-bottom:2px; transition:gap .3s,border-color .3s,color .3s; background:none; cursor:pointer; font-family:var(--font-body); }
     .proj-card-link:hover { gap:14px; border-bottom-color:var(--amber-light); color:var(--amber-light); }
  
     /* ── EDUCATION ── */
@@ -418,171 +340,155 @@
   </style>
 </head>
 <body>
-  <!-- INTRO OVERLAY WITH SCAN ANIMATION (FIXED) -->
-  <div id="intro-overlay">
-    <div id="scan-bar"></div>
-    <div id="intro-text">
-      <div id="name-row"></div>
-      <div id="intro-rule"></div>
-      <p id="intro-tagline">Civil Engineer &amp; GIS Expert</p>
-      <p id="intro-nec">NEC Reg. No. 80593 · Geospatial Intelligence</p>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+ 
+  <nav id="mainNav">
+    <a href="#" class="nav-logo">AK.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#freelance">Freelance</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="cv.html" target="_blank" class="nav-cta">Resume</a></li>
+    </ul>
+  </nav>
+ 
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="three-canvas"></canvas>
+    <div class="hero-content">
+      <span class="hero-tag">NEC Reg. #80593 · Civil Engineer</span>
+      <h1 class="hero-name">
+        <span class="line"><span class="word">Abhishek</span></span>
+        <span class="line"><span class="word">Karki</span></span>
+      </h1>
+      <p class="hero-subtitle">Civil Engineer &amp; GIS Analyst – merging field insight with satellite intelligence.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-dark magnetic">View Work</a>
+        <a href="#contact" class="btn btn-outline magnetic">Let's Talk</a>
+    <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
+  </section>
+ 
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label reveal">About me</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="about-heading reveal">GIS Analyst &amp; Remote Sensing.</h2>
+        <p class="about-text reveal delay-1">I'm a Civil Engineer with growing GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Engineering and Management. I combine field observations, satellite imagery, and computational models to tackle real‑world infrastructure challenges.</p>
+        <p class="about-text reveal delay-2">Using geospatial tools and risk models, I help build safer, more resilient communities.</p>
+        <a href="cv.html" target="_blank" class="btn btn-dark magnetic reveal delay-3" style="margin-top:18px">Download CV</a>
+      </div>
+      <div class="about-image-wrap clip-reveal delay-2">
+        <div class="about-dot"></div>
+        <img src="assets/profile.jpg" alt="Abhishek Karki" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="about-image-placeholder" style="display:none">Your Photo Here</div>
+        <div class="about-accent-box"></div>
+      </div>
     </div>
-  </div>
+  </section>
  
-  <!-- MAIN PORTFOLIO CONTENT (initially hidden) -->
-  <div id="main-portfolio">
-    <div id="cursor-dot"></div>
-    <div id="cursor-ring"></div>
+  <div class="section-divider"></div>
  
-    <nav id="mainNav">
-      <a href="#" class="nav-logo">AK.</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Work</a></li>
-        <li><a href="#freelance">Freelance</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#" class="nav-cta">Resume</a></li>
-      </ul>
-    </nav>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">What I do</div>
+    <h2 class="skills-heading reveal">Technical Competencies.</h2>
+    <div class="bento-grid" id="bentoSkills"></div>
+  </section>
  
-    <!-- HERO -->
-    <section id="hero">
-      <canvas id="three-canvas"></canvas>
-      <div class="hero-content">
-        <span class="hero-tag">NEC Reg. #80593 · Civil Engineer</span>
-        <h1 class="hero-name">
-          <span class="line"><span class="word">Abhishek</span></span>
-          <span class="line"><span class="word">Karki</span></span>
-        </h1>
-        <p class="hero-subtitle">Civil Engineer &amp; GIS Analyst – merging field insight with satellite intelligence.</p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-dark magnetic">View Work</a>
-          <a href="#contact" class="btn btn-outline magnetic">Let's Talk</a>
+  <!-- EXPERIENCE -->
+  <section id="experience" class="horiz-section">
+    <div class="section-label reveal">Work history</div>
+    <div class="horiz-intro reveal">
+      <div class="horiz-company">Civil Engineer</div>
+      <div class="horiz-company-sub">Sigma Con Pvt. Ltd &nbsp;·&nbsp; Aug 2023 – Jul 2025 &nbsp;·&nbsp; 132kV Transmission lines &amp; Substation Projects</div>
+    </div>
+    <div class="horiz-sticky-outer" id="expStickyOuter">
+      <div class="horiz-sticky-inner">
+        <div class="horiz-track-wrap"><div class="horiz-track" id="expTrack"></div></div>
+        <div class="horiz-site-nav">
+          <div class="horiz-site-indicator" id="expSiteDots"></div>
+          <span class="horiz-site-label" id="expSiteLabel">01 / 05</span>
         </div>
+        <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="expProgressFill"></div></div>
       </div>
-      <div class="scroll-hint"><div class="scroll-line"></div><span>Scroll</span></div>
-    </section>
+    </div>
+  </section>
  
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-label reveal">About me</div>
-      <div class="about-grid">
-        <div>
-          <h2 class="about-heading reveal">GIS Analyst &amp; Remote Sensing.</h2>
-          <p class="about-text reveal delay-1">I'm a Civil Engineer with growing GIS and remote sensing expertise, currently pursuing an MSc in Disaster Risk Engineering and Management. I combine field observations, satellite imagery, and computational models to tackle real‑world infrastructure challenges.</p>
-          <p class="about-text reveal delay-2">Using geospatial tools and risk models, I help build safer, resilient communities.</p>
-          <a href="#" class="btn btn-dark magnetic reveal delay-3" style="margin-top:18px">Download CV</a>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label reveal">Portfolio</div>
+    <h2 class="projects-heading reveal">Featured Case Studies.</h2>
+    <div class="proj-grid" id="projGrid"></div>
+  </section>
+ 
+  <!-- FREELANCE -->
+  <section id="freelance" class="horiz-section">
+    <div class="section-label reveal">Independent Work</div>
+    <div class="horiz-intro reveal">
+      <div class="horiz-company">Freelance &amp; Academic Projects</div>
+      <div class="horiz-company-sub">6 selected works — scroll to explore</div>
+    </div>
+    <div class="horiz-sticky-outer" id="flStickyOuter">
+      <div class="horiz-sticky-inner">
+        <div class="horiz-track-wrap"><div class="horiz-track" id="flTrack"></div></div>
+        <div class="horiz-site-nav">
+          <div class="horiz-site-indicator" id="flSiteDots"></div>
+          <span class="horiz-site-label" id="flSiteLabel">01 / 06</span>
         </div>
-        <div class="about-image-wrap clip-reveal delay-2">
-          <div class="about-dot"></div>
-          <img src="assets/profile.jpg" alt="Abhishek Karki" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="about-image-placeholder" style="display:none">Your Photo Here</div>
-          <div class="about-accent-box"></div>
-        </div>
+        <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="flProgressFill"></div></div>
       </div>
-    </section>
+    </div>
+  </section>
  
-    <div class="section-divider"></div>
- 
-    <!-- SKILLS -->
-    <section id="skills">
-      <div class="section-label">What I do</div>
-      <h2 class="skills-heading reveal">Technical Competencies.</h2>
-      <div class="bento-grid" id="bentoSkills"></div>
-    </section>
- 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="horiz-section">
-      <div class="section-label reveal">Work history</div>
-      <div class="horiz-intro reveal">
-        <div class="horiz-company">Civil Engineer</div>
-        <div class="horiz-company-sub">Sigma Con Pvt. Ltd &nbsp;·&nbsp; Aug 2023 – Jul 2025 &nbsp;·&nbsp; 132kV Transmission lines &amp; Substation Projects</div>
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label reveal">Academics</div>
+    <div class="edu-grid">
+      <div class="edu-card reveal delay-1">
+        <h3>MSc Disaster Risk Engineering and Management (DREM)</h3>
+        <p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p>
       </div>
-      <div class="horiz-sticky-outer" id="expStickyOuter">
-        <div class="horiz-sticky-inner">
-          <div class="horiz-track-wrap"><div class="horiz-track" id="expTrack"></div></div>
-          <div class="horiz-site-nav">
-            <div class="horiz-site-indicator" id="expSiteDots"></div>
-            <span class="horiz-site-label" id="expSiteLabel">01 / 05</span>
-          </div>
-          <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="expProgressFill"></div></div>
-        </div>
+      <div class="edu-card reveal delay-2">
+        <h3>B.E. Civil Engineering</h3>
+        <p>Khwopa Engineering College · 2022<br>CGPA 3.43</p>
+        <p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p>
       </div>
-    </section>
- 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="section-label reveal">Portfolio</div>
-      <h2 class="projects-heading reveal">Featured Case Studies.</h2>
-      <div class="proj-grid" id="projGrid"></div>
-    </section>
- 
-    <!-- FREELANCE -->
-    <section id="freelance" class="horiz-section">
-      <div class="section-label reveal">Independent Work</div>
-      <div class="horiz-intro reveal">
-        <div class="horiz-company">Freelance &amp; Academic Projects</div>
-        <div class="horiz-company-sub">6 selected works — scroll to explore</div>
+      <div class="edu-card reveal delay-3">
+        <h3>+2 Science (NEB)</h3>
+        <p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p>
       </div>
-      <div class="horiz-sticky-outer" id="flStickyOuter">
-        <div class="horiz-sticky-inner">
-          <div class="horiz-track-wrap"><div class="horiz-track" id="flTrack"></div></div>
-          <div class="horiz-site-nav">
-            <div class="horiz-site-indicator" id="flSiteDots"></div>
-            <span class="horiz-site-label" id="flSiteLabel">01 / 06</span>
-          </div>
-          <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="flProgressFill"></div></div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
  
-    <!-- EDUCATION -->
-    <section id="education">
-      <div class="section-label reveal">Academics</div>
-      <div class="edu-grid">
-        <div class="edu-card reveal delay-1">
-          <h3>MSc Disaster Risk Engineering and Management (DREM)</h3>
-          <p>Tribhuvan University, IOE Pulchowk<br>2026 – Present</p>
-        </div>
-        <div class="edu-card reveal delay-2">
-          <h3>B.E. Civil Engineering</h3>
-          <p>Khwopa Engineering College · 2022<br>CGPA 3.43</p>
-          <p class="honors">🏅 Ranked 1st in 7th &amp; 8th semesters</p>
-        </div>
-        <div class="edu-card reveal delay-3">
-          <h3>+2 Science (NEB)</h3>
-          <p>Sainik Awasiya Mahavidhyalaya<br>2074 BS</p>
-        </div>
-      </div>
-    </section>
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-label reveal">Credentials</div>
+    <h2 class="certs-heading reveal">Certifications &amp; Licences.</h2>
+    <div class="cert-images-grid reveal" id="certImagesGrid"></div>
+    <div class="cert-badges reveal" id="certBadges"></div>
+  </section>
  
-    <!-- CERTIFICATIONS -->
-    <section id="certifications">
-      <div class="section-label reveal">Credentials</div>
-      <h2 class="certs-heading reveal">Certifications &amp; Licences.</h2>
-      <div class="cert-images-grid reveal" id="certImagesGrid"></div>
-      <div class="cert-badges reveal" id="certBadges"></div>
-    </section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="contact-pre reveal">Get in touch</p>
+    <h2 class="contact-heading reveal">Let's build<br><span class="scramble" data-text="something">something</span><br>great.</h2>
+    <div class="contact-links reveal">
+      <a href="mailto:abhishekkarki520@gmail.com" class="contact-link">Email</a>
+      <a href="https://linkedin.com/in/abhishek-karki-9b034524a/" target="_blank" class="contact-link">LinkedIn</a>
+    </div>
+    <a href="mailto:abhishekkarki520@gmail.com" class="btn reveal" style="background:var(--amber);color:var(--ink);border:none;font-size:1rem;padding:20px 56px;border-radius:100px;position:relative;z-index:1;font-weight:600">Say Hello</a>
+  </section>
  
-    <!-- CONTACT -->
-    <section id="contact">
-      <p class="contact-pre reveal">Get in touch</p>
-      <h2 class="contact-heading reveal">Let's build<br><span class="scramble" data-text="something">something</span><br>great.</h2>
-      <div class="contact-links reveal">
-        <a href="mailto:abhishekkarki520@gmail.com" class="contact-link">Email</a>
-        <a href="#" target="_blank" class="contact-link">LinkedIn</a>
-      </div>
-      <a href="mailto:abhishekkarki520@gmail.com" class="btn reveal" style="background:var(--amber);color:var(--ink);border:none;font-size:1rem;padding:20px 56px;border-radius:100px;position:relative;z-index:1;font-weight:600">Say Hello</a>
-    </section>
+  <footer>
+    <span style="opacity:.35;font-size:.82rem">© 2026 Abhishek Karki · Civil Engineer &amp; GIS Specialist</span>
+  </footer>
  
-    <footer>
-      <span style="opacity:.35;font-size:.82rem">© 2026 Abhishek Karki · Civil Engineer &amp; GIS Specialist</span>
-    </footer>
-  </div>
- 
-  <!-- Modal elements (preserved) -->
+  <!-- Fullscreen modal -->
   <div class="fullscreen-modal" id="fullscreenModal">
     <button class="fullscreen-close" onclick="closeFull()">&times;</button>
     <button class="fs-nav fs-prev" onclick="fsStep(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -603,8 +509,7 @@
   <div class="modal" id="projModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal('projModal')">&times;</button>
-      <div id="mHead"></div>
-      <div id="mDesc"></div>
+      <div id="mHead"></div><div id="mDesc"></div>
       <div class="m-gallery" id="mGallery"></div>
       <div id="mPdf" style="margin-top:16px"></div>
     </div>
@@ -627,64 +532,7 @@
  
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script>
-    // ======================== INTRO SCAN NAME ANIMATION (FIXED) ========================
-    const fullName = 'Abhishek Karki';
-    const nameRow = document.getElementById('name-row');
-    const scanBar = document.getElementById('scan-bar');
-    const introRule = document.getElementById('intro-rule');
-    const introTagline = document.getElementById('intro-tagline');
-    const introNec = document.getElementById('intro-nec');
-    const introOverlay = document.getElementById('intro-overlay');
-    const mainPortfolio = document.getElementById('main-portfolio');
- 
-    // Build letter spans
-    fullName.split('').forEach(ch => {
-      const span = document.createElement('span');
-      span.className = 'name-char' + (ch === ' ' ? ' space' : '');
-      span.textContent = ch === ' ' ? '\u00A0' : ch;
-      nameRow.appendChild(span);
-    });
-    const charSpans = document.querySelectorAll('#name-row .name-char');
- 
-    function startScanAndReveal() {
-      const viewportWidth = window.innerWidth;
-      const SCAN_DURATION = 2100;
-      const SCAN_START_DELAY = 500;
- 
-      setTimeout(() => {
-        scanBar.style.opacity = '1';
-        scanBar.style.transition = `left ${SCAN_DURATION}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
-        scanBar.getBoundingClientRect();
-        scanBar.style.left = viewportWidth + 'px';
- 
-        charSpans.forEach(span => {
-          const rect = span.getBoundingClientRect();
-          if (rect.width === 0) return;
-          const centerX = rect.left + rect.width / 2;
-          const fraction = Math.min(Math.max(centerX / viewportWidth, 0), 1);
-          const delayMs = fraction * SCAN_DURATION;
-          setTimeout(() => span.classList.add('revealed'), delayMs);
-          setTimeout(() => span.classList.add('dimmed'), delayMs + 480);
-        });
- 
-        setTimeout(() => {
-          introRule.classList.add('expand');
-          setTimeout(() => introTagline.classList.add('show'), 210);
-          setTimeout(() => introNec.classList.add('show'), 480);
-        }, SCAN_DURATION + 80);
- 
-        setTimeout(() => { scanBar.style.opacity = '0'; }, SCAN_DURATION + 400);
-      }, SCAN_START_DELAY);
- 
-      setTimeout(() => {
-        introOverlay.classList.add('fade-out');
-        mainPortfolio.classList.add('visible');
-        document.body.style.overflow = '';
-        setTimeout(() => { introOverlay.style.display = 'none'; }, 1300);
-      }, 5400);
-    }
- 
-    // ======================== ORIGINAL JS DATA (FULL) ========================
+    /* ── DATA ── */
     var PROJECTS = [
       {id:1,title:"InSAR Time Series for Highway Subsidence",cat:"InSAR / Geotech",loc:"Sloterdijk to Rijksweg, Netherlands",
        short:"13 Sentinel‑1 images processed with SNAP+SNAPHU generating 12 displacement maps.",
@@ -761,12 +609,14 @@
       {id:"sisneri",title:"Sisneri Landslide Study",date:"2023 Final Year",desc:"Drone survey, geotechnical investigation and GeoStudio SLOPE/W stability analysis.",folder:"assets/portfolio-photos/sisneri-landslide/",files:['Damage due to Landslide.JPG','Group Members.JPG','Landslide view.JPG','Location.JPG','Presentation Day.JPG','Drone deploy location.png','Solu Hydropower Tunnel.JPG','Stability analysis of Slope.jpg','UAV settings.jpg','With Supervisors.JPG'],captions:["Damage","Group","Landslide view","Location","Presentation Day","Drone deploy","Solu Hydropower Tunnel","Stability analysis","UAV settings","With Supervisors"],tags:["Geotech","Drone"],pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf"}
     ];
  
+    /* ── CERTIFICATES — corrected titles ── */
     var CERT_IMAGES = [
       {src:"assets/Cerififcations/IMG_4664.jpeg", title:"Youth Innovation Award",                  sub:"Heat Action Day – Misting Booth Project"},
       {src:"assets/Cerififcations/ML in GIS.jpg", title:"ML in GIS",                              sub:"Certificate of Completion of Course by Katie Alison on Udemy"},   
       {src:"assets/Cerififcations/SAP.jpg",      title:"SAP2000 Training",                        sub:"Advanced Structural Analysis Certificate"},
       {src:"assets/Cerififcations/autocad.jpg",   title:"AutoCAD Professional",                    sub:"Design & Drafting Certificate"},
       {src:"assets/Cerififcations/NEC.png",       title:"Nepal Engineering Council",               sub:"Civil Engineer · Reg. No. 80593"}
+      
     ];
     var CERT_BADGES = [
       {icon:"fa-trophy",          title:"Youth Innovation Award",   desc:"Heat Action Day 2023"},
@@ -774,12 +624,13 @@
       {icon:"fa-certificate",     title:"SAP2000 Training",        desc:" structural analysis"},
       {icon:"fa-drafting-compass", title:"AutoCAD Professional",    desc:"Design & drafting"},
       {icon:"fa-id-card",         title:"Nepal Engineering Council",desc:"Reg. No: 80593"}
+      
     ];
  
-    // Helper
+    /* ── HELPERS ── */
     function enc(p){ return encodeURI(p).replace(/#/g,'%23'); }
  
-    // Cursor
+    /* ── CURSOR ── */
     function initCursor(){
       var dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring');
       var mx=0,my=0,rx=0,ry=0;
@@ -794,7 +645,7 @@
       });
     }
  
-    // Three.js city background
+    /* ── THREE.JS ── */
     function initThree(){
       var canvas=document.getElementById('three-canvas');
       var renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
@@ -821,7 +672,7 @@
         mesh.position.y=Math.sin(t*.7)*.12; meshS.position.y=mesh.position.y; renderer.render(scene,camera); })();
     }
  
-    // Nav scroll
+    /* ── NAV ── */
     function initNav(){
       var nav=document.getElementById('mainNav');
       window.addEventListener('scroll',function(){
@@ -830,7 +681,7 @@
       });
     }
  
-    // Reveal observer
+    /* ── REVEAL ── */
     function initReveal(){
       var io=new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
@@ -838,13 +689,14 @@
       document.querySelectorAll('.reveal,.clip-reveal').forEach(function(el){ io.observe(el); });
     }
  
-    // Build functions
+    /* ── SKILLS ── */
     function buildSkills(){
       document.getElementById('bentoSkills').innerHTML = SKILLS_DATA.map(function(s){
         return '<div class="bento-card reveal"><i class="fas '+s.icon+'"></i><h3>'+s.name+'</h3></div>';
       }).join('');
     }
  
+    /* ── CERTIFICATIONS ── */
     function buildCerts(){
       document.getElementById('certImagesGrid').innerHTML = CERT_IMAGES.map(function(c,i){
         var allList = CERT_IMAGES.map(function(cc){ return {src:enc(cc.src), caption:cc.title}; });
@@ -862,6 +714,7 @@
       }).join('');
     }
  
+    /* ── PROJECT GRID ── */
     function buildProjectGrid(){
       var grid=document.getElementById('projGrid');
       grid.innerHTML = PROJECTS.map(function(p,i){
@@ -887,28 +740,21 @@
       });
     }
  
-    window.openProjModal = function(id){
-      var p=PROJECTS.find(function(x){ return x.id===id; });
-      if(!p) return;
-      document.getElementById('mHead').innerHTML='<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+p.title+'</h3><p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+p.loc+'</p>';
-      document.getElementById('mDesc').innerHTML='<p style="line-height:1.75;margin-bottom:12px">'+p.full+'</p><p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> '+(p.tech||[]).join(', ')+'</p>';
-      document.getElementById('mGallery').innerHTML=(p.media||[]).map(function(m,i){
-        var s=enc(m.src);
-        if(m.type==='image') return '<div class="m-media-wrap" onclick="openProjCarousel('+id+','+i+')" title="'+(m.caption||'')+'"><img src="'+s+'" alt="'+(m.caption||'')+'" loading="lazy"></div>';
-        return '<div class="m-media-wrap" onclick="openVideoModal(\''+s+'\')" title="Play video" style="background:#1a3030;display:flex;align-items:center;justify-content:center"><i class="fas fa-play" style="color:#fff;font-size:1.4rem;position:absolute"></i><video muted style="width:100%;height:100%;object-fit:cover"><source src="'+s+'" type="video/mp4"></video></div>';
+    /* ── FREELANCE MODAL ── */
+    window.openFlModal = function(id){
+      var f=FREELANCE.find(function(x){ return x.id===id; });
+      if(!f) return;
+      document.getElementById('flModalHead').innerHTML='<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+f.title+'</h3><p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+f.date+'</p>';
+      document.getElementById('flModalDesc').innerHTML='<p style="line-height:1.75;margin-bottom:12px">'+f.desc+'</p>';
+      document.getElementById('flModalGallery').innerHTML=(f.files||[]).map(function(file,i){
+        var src=enc(f.folder+file);
+        var list=f.files.map(function(ff,j){ return {src:enc(f.folder+ff),caption:f.captions?.[j]||''}; });
+        return '<div class="m-media-wrap" onclick="openFullscreen('+JSON.stringify(list).replace(/"/g,'&quot;')+','+i+')"><img src="'+src+'" alt="'+(f.captions?.[i]||'')+'" loading="lazy"></div>';
       }).join('');
-      document.getElementById('mPdf').innerHTML=p.pdf ? '<a href="'+p.pdf+'" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>' : '';
-      document.getElementById('projModal').classList.add('on');
-    };
-    window.closeModal=function(id){ document.getElementById(id).classList.remove('on'); };
-    window.openProjCarousel=function(projId,startIdx){
-      var p=PROJECTS.find(function(x){ return x.id===projId; });
-      if(!p) return;
-      var list=(p.media||[]).filter(function(m){ return m.type==='image'; }).map(function(m){ return {src:enc(m.src),caption:m.caption||''}; });
-      openCarousel(list,startIdx);
+      document.getElementById('flModal').classList.add('on');
     };
  
-    // Horizontal gallery builder (full version)
+    /* ── HORIZONTAL GALLERY ── */
     function buildHorizontalGallery(prefix,items,folderFn,isFreelance){
       var outer=document.getElementById(prefix+'StickyOuter');
       var track=document.getElementById(prefix+'Track');
@@ -999,20 +845,29 @@
     function buildExperience(){ buildHorizontalGallery('exp',WORK_SITES,function(item){ return 'assets/Professional Career/'+item.folder+'/'; },false); }
     function buildFreelance(){ buildHorizontalGallery('fl',FREELANCE,function(item){ return item.folder; },true); }
  
-    window.openFlModal = function(id){
-      var f=FREELANCE.find(function(x){ return x.id===id; });
-      if(!f) return;
-      document.getElementById('flModalHead').innerHTML='<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+f.title+'</h3><p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+f.date+'</p>';
-      document.getElementById('flModalDesc').innerHTML='<p style="line-height:1.75;margin-bottom:12px">'+f.desc+'</p>';
-      document.getElementById('flModalGallery').innerHTML=(f.files||[]).map(function(file,i){
-        var src=enc(f.folder+file);
-        var list=f.files.map(function(ff,j){ return {src:enc(f.folder+ff),caption:f.captions?.[j]||''}; });
-        return '<div class="m-media-wrap" onclick="openFullscreen('+JSON.stringify(list).replace(/"/g,'&quot;')+','+i+')"><img src="'+src+'" alt="'+(f.captions?.[i]||'')+'" loading="lazy"></div>';
+    /* ── PROJECT MODAL ── */
+    window.openProjModal=function(id){
+      var p=PROJECTS.find(function(x){ return x.id===id; });
+      if(!p) return;
+      document.getElementById('mHead').innerHTML='<h3 style="font-family:var(--font-display);font-size:1.5rem;margin-bottom:4px">'+p.title+'</h3><p style="opacity:.5;font-size:.8rem;margin-bottom:14px">'+p.loc+'</p>';
+      document.getElementById('mDesc').innerHTML='<p style="line-height:1.75;margin-bottom:12px">'+p.full+'</p><p style="font-size:.86rem;opacity:.55"><strong>Technologies:</strong> '+(p.tech||[]).join(', ')+'</p>';
+      document.getElementById('mGallery').innerHTML=(p.media||[]).map(function(m,i){
+        var s=enc(m.src);
+        if(m.type==='image') return '<div class="m-media-wrap" onclick="openProjCarousel('+id+','+i+')" title="'+(m.caption||'')+'"><img src="'+s+'" alt="'+(m.caption||'')+'" loading="lazy"></div>';
+        return '<div class="m-media-wrap" onclick="openVideoModal(\''+s+'\')" title="Play video" style="background:#1a3030;display:flex;align-items:center;justify-content:center"><i class="fas fa-play" style="color:#fff;font-size:1.4rem;position:absolute"></i><video muted style="width:100%;height:100%;object-fit:cover"><source src="'+s+'" type="video/mp4"></video></div>';
       }).join('');
-      document.getElementById('flModal').classList.add('on');
+      document.getElementById('mPdf').innerHTML=p.pdf ? '<a href="'+p.pdf+'" target="_blank" class="btn btn-dark" style="padding:10px 22px;font-size:.78rem">PDF Report</a>' : '';
+      document.getElementById('projModal').classList.add('on');
+    };
+    window.closeModal=function(id){ document.getElementById(id).classList.remove('on'); };
+    window.openProjCarousel=function(projId,startIdx){
+      var p=PROJECTS.find(function(x){ return x.id===projId; });
+      if(!p) return;
+      var list=(p.media||[]).filter(function(m){ return m.type==='image'; }).map(function(m){ return {src:enc(m.src),caption:m.caption||''}; });
+      openCarousel(list,startIdx);
     };
  
-    // Fullscreen & carousel
+    /* ── FULLSCREEN ── */
     var _fsMedia=[],_fsIdx=0;
     window.openFullscreen=function(list,idx){ _fsMedia=list; _fsIdx=idx||0; updateFS(); document.getElementById('fullscreenModal').classList.add('active'); };
     function updateFS(){ var item=_fsMedia[_fsIdx]; document.getElementById('fullscreenImg').src=item.src; document.getElementById('fsCaption').textContent=(item.caption||'')+' ('+((_fsIdx+1)+'/')+_fsMedia.length+')'; }
@@ -1020,22 +875,26 @@
     window.closeFull=function(){ document.getElementById('fullscreenModal').classList.remove('active'); };
     document.getElementById('fullscreenModal').addEventListener('click',function(e){ if(e.target===this) closeFull(); });
  
+    /* ── CAROUSEL ── */
     var _carMedia=[],_carIdx=0;
     function openCarousel(list,idx){ _carMedia=list; _carIdx=idx||0; updateCar(); document.getElementById('carouselModal').classList.add('active'); }
     function updateCar(){ var item=_carMedia[_carIdx]; document.getElementById('carouselImage').src=item.src||item; document.getElementById('carouselCaption').textContent=item.caption||((_carIdx+1)+' / '+_carMedia.length); }
     window.carStep=function(d){ _carIdx=(_carIdx+d+_carMedia.length)%_carMedia.length; updateCar(); };
     window.closeCarousel=function(){ document.getElementById('carouselModal').classList.remove('active'); };
  
+    /* ── VIDEO ── */
     window.openVideoModal=function(src){ document.getElementById('videoPlayer').src=src; document.getElementById('videoModal').classList.add('active'); };
     window.closeVideoModal=function(){ var v=document.getElementById('videoPlayer'); v.pause(); v.src=''; document.getElementById('videoModal').classList.remove('active'); };
  
-    // Magnetic & card tilt
+    /* ── MAGNETIC ── */
     function initMagnetic(){
       document.querySelectorAll('.magnetic').forEach(function(btn){
         btn.addEventListener('mousemove',function(e){ var r=btn.getBoundingClientRect(); btn.style.transform='translate('+(e.clientX-r.left-r.width/2)*.3+'px,'+(e.clientY-r.top-r.height/2)*.3+'px)'; btn.style.transition='transform .25s ease'; });
         btn.addEventListener('mouseleave',function(){ btn.style.transform='translate(0,0)'; btn.style.transition='transform .6s cubic-bezier(.34,1.56,.64,1)'; });
       });
     }
+ 
+    /* ── CARD TILT ── */
     function initCardHover(){
       document.addEventListener('mousemove',function(e){
         document.querySelectorAll('.exp-hcard').forEach(function(card){
@@ -1051,6 +910,8 @@
         });
       });
     }
+ 
+    /* ── SCRAMBLE ── */
     function initScramble(){
       var CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%';
       document.querySelectorAll('.scramble').forEach(function(el){
@@ -1062,16 +923,14 @@
       });
     }
  
+    /* ── KEYBOARD ── */
     document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeFull(); closeCarousel(); closeVideoModal(); document.querySelectorAll('.modal.on').forEach(function(m){ m.classList.remove('on'); }); } });
  
-    // Bootstrap
+    /* ── BOOT ── */
     document.addEventListener('DOMContentLoaded',function(){
       buildSkills(); buildExperience(); buildFreelance(); buildProjectGrid(); buildCerts();
       initReveal(); initCursor(); initNav(); initMagnetic(); initCardHover(); initScramble();
       if(typeof THREE!=='undefined') initThree();
-      startScanAndReveal();
-      document.body.style.overflow = 'hidden';
-      setTimeout(function(){ if(mainPortfolio.classList.contains('visible')) document.body.style.overflow = ''; }, 5600);
     });
   </script>
 </body>
