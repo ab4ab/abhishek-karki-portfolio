@@ -343,7 +343,7 @@
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: #05080f;
+    background: var(--paper);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -365,7 +365,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, #05080f 100%);
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, var(--paper) 100%);
     pointer-events: none;
   }
 
@@ -403,7 +403,7 @@
     font-size: clamp(2.4rem, 6vw, 5rem);
     font-weight: 700;
     letter-spacing: 0.04em;
-    color: #e8eaf6;
+    color: var(--ink);
     opacity: 0;
     text-shadow: 0 0 0 transparent;
     transition: opacity 0s, text-shadow 0s;
@@ -414,9 +414,9 @@
   .name-char.revealed {
     opacity: 1;
     text-shadow:
-      0 0 8px rgba(117,178,243,0.9),
-      0 0 20px rgba(117,178,243,0.5),
-      0 0 40px rgba(117,178,243,0.25);
+      0 0 8px rgba(117,178,243,0.6),
+      0 0 20px rgba(117,178,243,0.3),
+      0 0 40px rgba(117,178,243,0.15);
     transition: opacity 0.12s ease, text-shadow 0.3s ease;
   }
   .name-char.dimmed {
@@ -429,7 +429,7 @@
     font-weight: 400;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #f8aa66;
+    color: var(--ink-soft);
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -441,7 +441,7 @@
   #nec-line {
     font-size: clamp(0.75rem, 1.6vw, 0.9rem);
     letter-spacing: 0.18em;
-    color: #75b2f3;
+    color: var(--ink-soft);
     opacity: 0;
     transform: translateY(8px);
     transition: opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s;
@@ -794,25 +794,63 @@
       var renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
       renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
       var scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(60,1,.1,100);
-      camera.position.z=4;
-      var geo=new THREE.TorusKnotGeometry(1.2,.38,160,20);
-      var mat=new THREE.MeshBasicMaterial({color:0x1e2a2a,wireframe:true,opacity:.1,transparent:true});
-      var mesh=new THREE.Mesh(geo,mat); scene.add(mesh);
-      var geoS=new THREE.TorusKnotGeometry(1.18,.36,120,18);
-      var matS=new THREE.MeshBasicMaterial({color:0xf7f4ee});
-      var meshS=new THREE.Mesh(geoS,matS); scene.add(meshS);
-      var pg=new THREE.BufferGeometry(), pos=new Float32Array(600);
-      for(var i=0;i<600;i++) pos[i]=(Math.random()-.5)*8;
-      pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+      camera.position.set(0, 2.5, 4);
+      camera.lookAt(0, 0, 0);
+
+      var geo = new THREE.PlaneGeometry(12, 12, 40, 40);
+      geo.rotateX(-Math.PI / 2);
+
+      var pos = geo.attributes.position;
+      var originalY = new Float32Array(pos.count);
+      for(var i=0; i<pos.count; i++) {
+        var vx = pos.getX(i);
+        var vz = pos.getZ(i);
+        var y = Math.sin(vx) * Math.cos(vz) * 0.5;
+        pos.setY(i, y);
+        originalY[i] = y;
+      }
+      geo.computeVertexNormals();
+
+      var mat = new THREE.MeshBasicMaterial({color: 0x75b2f3, wireframe: true, transparent: true, opacity: 0.4});
+      var mesh = new THREE.Mesh(geo, mat);
+      scene.add(mesh);
+
+      var matSolid = new THREE.MeshBasicMaterial({color: 0xf1eed1, transparent: true, opacity: 0.8});
+      var meshSolid = new THREE.Mesh(geo, matSolid);
+      scene.add(meshSolid);
+
+      var pg=new THREE.BufferGeometry(), pts=new Float32Array(600);
+      for(var i=0;i<600;i++) pts[i]=(Math.random()-.5)*8;
+      pg.setAttribute('position',new THREE.BufferAttribute(pts,3));
       scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x1e2a2a,size:.025,transparent:true,opacity:.22})));
+
       var mx=0,my=0,trx=0,try_=0;
       document.addEventListener('mousemove',function(e){ mx=(e.clientX/window.innerWidth-.5)*2; my=-(e.clientY/window.innerHeight-.5)*2; });
       function resize(){ var w=canvas.offsetWidth,h=canvas.offsetHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
       resize(); window.addEventListener('resize',resize);
+
       var t=0;
-      (function animate(){ requestAnimationFrame(animate); t+=.005; trx+=(my*.4-trx)*.05; try_+=(mx*.4-try_)*.05;
-        mesh.rotation.x=trx+t*.3; mesh.rotation.y=try_+t*.5; meshS.rotation.x=mesh.rotation.x; meshS.rotation.y=mesh.rotation.y;
-        mesh.position.y=Math.sin(t*.7)*.12; meshS.position.y=mesh.position.y; renderer.render(scene,camera); })();
+      (function animate(){
+        requestAnimationFrame(animate);
+        t+=.015;
+        trx+=(my*.2-trx)*.05; try_+=(mx*.2-try_)*.05;
+
+        var p = geo.attributes.position;
+        for(var i=0; i<p.count; i++) {
+          var vx = p.getX(i);
+          var vz = p.getZ(i);
+          var wave = Math.sin(vx * 2 + t) * Math.cos(vz * 2 + t) * 0.2;
+          p.setY(i, originalY[i] + wave);
+        }
+        p.needsUpdate = true;
+
+        mesh.rotation.x = trx;
+        mesh.rotation.z = try_;
+        meshSolid.rotation.x = trx;
+        meshSolid.rotation.z = try_;
+
+        renderer.render(scene,camera);
+      })();
     }
  
     /* ── NAV ── */
@@ -1083,10 +1121,10 @@
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x05080f, 1);
+      renderer.setClearColor(0xf1eed1, 1);
 
       const scene = new THREE.Scene();
-      scene.fog = new THREE.Fog(0x05080f, 60, 160);
+      scene.fog = new THREE.Fog(0xf1eed1, 60, 160);
 
       const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 300);
       camera.position.set(0, 18, 55);
@@ -1103,22 +1141,22 @@
 
       /* Ground plane */
       const groundGeo = new THREE.PlaneGeometry(300, 300);
-      const groundMat = new THREE.MeshStandardMaterial({ color: 0x060b14, roughness: 1 });
+      const groundMat = new THREE.MeshStandardMaterial({ color: 0xede9e1, roughness: 1 });
       const ground = new THREE.Mesh(groundGeo, groundMat);
       ground.rotation.x = -Math.PI / 2;
       ground.position.y = -0.05;
       scene.add(ground);
 
       /* Grid lines on ground */
-      const gridHelper = new THREE.GridHelper(200, 40, 0x0d1a2e, 0x0d1a2e);
+      const gridHelper = new THREE.GridHelper(200, 40, 0xcccccc, 0xcccccc);
       gridHelper.position.y = 0.01;
       scene.add(gridHelper);
 
       /* ── Building generator ── */
-      const amberEdge  = new THREE.Color(0xf8aa66);
+      const amberEdge  = new THREE.Color(0xf8aaaa);
       const blueEdge   = new THREE.Color(0x75b2f3);
-      const darkBody   = new THREE.Color(0x080e1a);
-      const midBody    = new THREE.Color(0x0b1422);
+      const darkBody   = new THREE.Color(0xffffff);
+      const midBody    = new THREE.Color(0xede9e1);
 
       const buildings = [];
       const buildingGroup = new THREE.Group();
@@ -1177,7 +1215,7 @@
         pPos[i * 3 + 2] = rng(-60, 20);
       }
       pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-      const pMat = new THREE.PointsMaterial({ color: 0x75b2f3, size: 0.18, transparent: true, opacity: 0.35 });
+      const pMat = new THREE.PointsMaterial({ color: 0x090909, size: 0.18, transparent: true, opacity: 0.15 });
       scene.add(new THREE.Points(pGeo, pMat));
 
       /* ── Resize handler ── */
