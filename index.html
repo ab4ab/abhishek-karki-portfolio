@@ -390,8 +390,6 @@ section { padding: 120px 64px; }
   font-family: var(--font-mono); font-size: 0.72rem;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 24px; display: block;
-  opacity: 0; transform: translateY(20px);
-  animation: heroFadeUp 0.8s var(--ease-expo) 0.2s forwards;
 }
 .hero-name {
   font-family: var(--font-display); font-weight: 400; font-style: italic;
@@ -401,23 +399,21 @@ section { padding: 120px 64px; }
 .hero-name .line { display: block; overflow: hidden; }
 .hero-name .word {
   display: inline-block;
-  opacity: 0; transform: translateY(110%);
-  animation: wordRise 0.9s var(--ease-expo) forwards;
+  opacity: 1; transform: translateY(0);
 }
-.hero-name .line:nth-child(1) .word { animation-delay: 0.35s; }
-.hero-name .line:nth-child(2) .word { animation-delay: 0.5s; }
 
 .hero-subtitle {
   font-size: clamp(1rem, 1.3vw, 1.12rem); line-height: 1.7;
   max-width: 420px; color: var(--text-secondary); margin-bottom: 48px;
-  opacity: 0; transform: translateY(16px);
-  animation: heroFadeUp 0.8s var(--ease-expo) 0.7s forwards;
+  opacity: 1; transform: translateY(0);
 }
 .hero-cta {
   display: inline-flex; gap: 14px;
-  opacity: 0; transform: translateY(16px);
-  animation: heroFadeUp 0.8s var(--ease-expo) 0.85s forwards;
+  opacity: 1; transform: translateY(0);
 }
+
+@keyframes heroFadeUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes wordRise { to { opacity: 1; transform: translateY(0); } }
 
 /* ═══════════════════════════════════════════════════════
    ABOUT
