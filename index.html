@@ -353,7 +353,7 @@ section { padding: 120px 64px; }
   position: relative; height: 100vh; min-height: 700px;
   display: flex; align-items: center;
   padding: 0 64px; overflow: hidden;
-  background: var(--bg);
+  background: linear-gradient(to right, rgba(8,11,15,0.85) 0%, rgba(8,11,15,0.65) 50%, rgba(8,11,15,0.4) 100%), url('assets/bkgrd.png') center/cover no-repeat;
 }
 
 /* Ambient gradient blobs */
@@ -975,14 +975,14 @@ footer {
   <div class="section-label reveal">Independent work</div>
   <div class="horiz-intro reveal">
     <div class="horiz-company">Freelance &amp; Academic Projects</div>
-    <div class="horiz-company-sub">6 selected works — scroll to explore</div>
+    <div class="horiz-company-sub">7 selected works — scroll to explore</div>
   </div>
   <div class="horiz-sticky-outer" id="flStickyOuter">
     <div class="horiz-sticky-inner">
       <div class="horiz-track-wrap"><div class="horiz-track" id="flTrack"></div></div>
       <div class="horiz-site-nav">
         <div class="horiz-site-indicator" id="flSiteDots"></div>
-        <span class="horiz-site-label" id="flSiteLabel">01 / 06</span>
+        <span class="horiz-site-label" id="flSiteLabel">01 / 07</span>
       </div>
       <div class="horiz-progress-bar"><div class="horiz-progress-fill" id="flProgressFill"></div></div>
     </div>
@@ -1131,7 +1131,7 @@ var PROJECTS = [
 var WORK_SITES = [
   {id:"balefi",num:"01",folder:"Balefi",files:['IMG_20230910_133439.jpg','IMG_20230913_111457.jpg','IMG_20230922_131952.jpg','IMG_20231014_080619.jpg'],captions:["Tower Erection","Tower Erection","Concreting Chimney","Completed Tower"],title:"Balefi 132kV Transmission Line",desc:"Tower erection, stub setting, chimney concreting and foundation works.",tags:["Transmission Line","Tower Erection","Foundation"]},
   {id:"lalbandi",num:"02",folder:"Salempur",files:['IMG-20241008-WA0003.jpg','IMG-20250129-WA0000.jpg','IMG-20250130-WA0002.jpg','IMG-20250204-WA0001.jpg','IMG_20231107_104434.jpg','IMG_20231108_172521.jpg','IMG_20240120_112353.jpg','IMG_20240122_113733.jpg','IMG_20240127_131102.jpg','IMG_20240127_223235.jpg','IMG_20240206_140830.jpg','IMG_20240216_123804.jpg','IMG_20240517_144952.jpg','IMG_20240609_174437.jpg','IMG_20240619_134602.jpg','IMG_20240627_191646.jpg','IMG_20241117_144300.jpg','Screenshot 2026-05-16 204535.png','Screenshot 2026-05-16 204630.png'],captions:["Salempur Substation","Plastering","Finishing","Switchyard","Surveying","Excavation","Rebar works","Control Room","DGPS survey","ROW works","Plinth beam","Anchor bolt","Slab rebar","Staff Quarter","Gantry foundation","Road excavation","Tower locations","Layout view"],title:"Lalbandi–Salempur 132kV + Substation",desc:"End-to-end substation works — control room, gantry foundation, tower survey.",tags:["Substation","132kV","Civil Works","Survey"]},
-  {id:"dhalkebar",num:"03",folder:"Balganga",files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','IMG_20250403_113259.jpg','IMG_20250427_143925.jpg','Screenshot 2026-05-16 204005.png','Screenshot 2026-05-16 204902.png'],captions:["Staff Quarter","Control Room","Formworks","Gantry foundation","Slab concreting","Layout view","Tower Locations"],title:"Dhalkebar–Balganga 132kV",desc:"Staff quarter foundation, control room structure, gantry foundation.",tags:["Substation","Foundation","132kV"]},
+  {id:"dhalkebar",num:"03",folder:"Balganga",files:['IMG-20250124-WA0003.jpg','IMG_20250326_152652.jpg','IMG_20250403_094117.jpg','IMG_20250403_113259.jpg','IMG_20250427_143925.jpg','WhatsApp Image 2026-05-25 at 07.24.08.jpeg','WhatsApp Image 2026-05-25 at 07.24.08 (1).jpeg','WhatsApp Image 2026-05-25 at 07.24.08 (2).jpeg','WhatsApp Image 2026-05-25 at 07.24.09.jpeg','WhatsApp Image 2026-05-25 at 07.24.19.jpeg','Screenshot 2026-05-16 204005.png','Screenshot 2026-05-16 204902.png'],captions:["Staff Quarter","Control Room","Formworks","Gantry foundation","Slab concreting","Site inspection","Foundation rebar","Substation site","Formwork alignment","Structural progress","Layout view","Tower Locations"],title:"Dhalkebar–Balganga 132kV",desc:"Staff quarter foundation, control room structure, gantry foundation.",tags:["Substation","Foundation","132kV"]},
   {id:"sandikharga",num:"04",folder:"Burtibang",files:['IMG_20231121_112353.jpg','IMG_20231127_150353.jpg','IMG_20231216_085522.jpg','IMG_20231217_120853.jpg','IMG_20231222_081630.jpg','Screenshot 2026-05-16 205216.png'],captions:["Tower Erection","Stub Setting","DGPS Survey","Tower Locations","Way to Tower","Tower Locations"],title:"Sandikharga–Burtibang 132kV",desc:"Tower erection, stub setting, and DGPS survey in mountainous terrain.",tags:["Transmission Line","DGPS","Tower Erection"]},
   {id:"tamghas",num:"05",folder:"Tamghas",files:['IMG_20231119_124336.jpg','IMG_20231121_121929.jpg','IMG_20231125_114431.jpg','IMG_20231129_102312.jpg'],captions:["Transformer","Survey","Survey","Switchyard"],title:"Tamghas Substation",desc:"Substation survey, switchyard layout and transformer foundation works.",tags:["Substation","Switchyard","Survey"]}
 ];
@@ -1149,8 +1149,9 @@ var SKILLS_DATA = [
 
 var FREELANCE = [
   {id:"hvac",title:"HVAC System Design",date:"2024",desc:"Complete HVAC system for a laboratory using HAP 6.0 – load calculation, duct sizing and equipment selection.",folder:"assets/freelance-photos/hvac/",files:['duct-layout.png'],captions:["HVAC duct layout"],tags:["HAP 6.0","HVAC"]},
-  {id:"3d",title:"3D Building Planning & Modeling",date:"2023–2024",desc:"Detailed architectural visualizations using SketchUp and Revit for residential and industrial projects.",folder:"assets/freelance-photos/3d-modeling/",files:['1.png','2.png','3.jpg','4.jpeg','5.jpg','6.jpg','7.jpg'],captions:["Staff Quarter","Control Room","Residential","Model 4","Model 5","Model 6","Model 7"],tags:["SketchUp","Revit"]},
+  {id:"3d",title:"3D Building Planning & Modeling",date:"2023–2024",desc:"Detailed architectural visualizations using SketchUp and Revit for residential and industrial projects.",folder:"assets/freelance-photos/3d-modeling/",files:['01.png','1.png','2.png','3.jpg','4.jpeg','5.jpg','6.jpg','7.jpg'],captions:["Architectural Model","Staff Quarter","Control Room","Residential","Model 4","Model 5","Model 6","Model 7"],tags:["SketchUp","Revit"]},
   {id:"struct",title:"Structural Analysis",date:"2024",desc:"STAAD Pro analysis ensuring compliance with load standards for client buildings.",folder:"assets/freelance-photos/structural-analysis/",files:['1.png','2.png','3.png','4.png'],captions:["STAAD model","Load analysis","Model 3","Model 4"],tags:["STAAD Pro"]},
+  {id:"roshi",title:"Roshi Khola Flyover Hydro-Geomorphology",date:"2024",desc:"Drone flyover inspection and hydro-geomorphological assessment of Roshi Khola flood hazards.",folder:"assets/portfolio-photos/RoshiKhola/",files:['flyover.mp4'],captions:["Roshi Khola Drone Flyover Inspection"],tags:["Hydro-GIS","Drone Flyover"]},
   {id:"draft",title:"2D Drafting (AutoCAD)",date:"2023–2025",desc:"Floor plans, sections, site layouts and detail drawings.",folder:"assets/freelance-photos/drafting/",files:['1.png','2.png','3.png','4.png','5.png','6.png','7.png','8.png','9.png','10.png','11.png','12.png','13.png','Screenshot 2026-05-17 083920.png','Screenshot 2026-05-17 084542.png'],captions:["Site layout","Plan","Tower","Drawing 4","Drawing 5","Drawing 6","Drawing 7","Drawing 8","Drawing 9","Drawing 10","Drawing 11","Drawing 12","Drawing 13","Screenshot 1","Screenshot 2"],tags:["AutoCAD"]},
   {id:"abi",title:"ABI Pier Workshop",date:"2023",desc:"Adjustable Base Isolation Pier prototype design on Earthquake Day.",folder:"assets/freelance-photos/abi/",files:['1.jpeg','WhatsApp Image 2026-05-25 at 07.23.50.jpeg','WhatsApp Image 2026-05-25 at 07.23.54.jpeg','WhatsApp Image 2026-05-25 at 07.23.55 (1).jpeg','WhatsApp Image 2026-05-25 at 07.23.55.jpeg'],captions:["Prototype","Workshop 1","Workshop 2","Workshop 3","Workshop 4"],tags:["Seismic Design"]},
   {id:"sisneri",title:"Sisneri Landslide Study",date:"2023 Final Year",desc:"Drone survey, geotechnical investigation and GeoStudio SLOPE/W stability analysis.",folder:"assets/portfolio-photos/sisneri-landslide/",files:['Damage due to Landslide.JPG','Group Members.JPG','Landslide view.JPG','Location.JPG','Presentation Day.JPG','Drone deploy location.png','Solu Hydropower Tunnel.JPG','Stability analysis of Slope.jpg','UAV settings.jpg','With Supervisors.JPG'],captions:["Damage","Group","Landslide view","Location","Presentation Day","Drone deploy","Solu Hydropower Tunnel","Stability analysis","UAV settings","With Supervisors"],tags:["Geotech","Drone"],pdf:"assets/portfolio-photos/sisneri-landslide/Sisneri_Landslide_Report.pdf"}
@@ -1393,7 +1394,9 @@ function buildHorizontalGallery(prefix,items,folderFn,isFreelance){
   track.innerHTML=items.map(function(item,i){
     var base=folderFn ? folderFn(item) : '';
     var imgs=(item.files||[]).map(function(f,j){
-      var src=folderFn ? enc(base+f) : enc(f.src||f);
+      var isVid = typeof f==='string' && f.endsWith('.mp4');
+      var src=folderFn ? enc(base+(f.src||f)) : enc(f.src||f);
+      if(isVid) return '<video src="'+src+'" class="'+(j===0?'active':'')+'" data-idx="'+j+'" autoplay loop muted playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:'+(j===0?1:0)+';transition:opacity .65s ease"></video>';
       return '<img src="'+src+'" class="'+(j===0?'active':'')+'" data-idx="'+j+'" alt="'+(item.captions?.[j]||'')+'" loading="lazy">';
     }).join('');
     var dots=(item.files||[]).map(function(_,j){ return '<button class="hcard-dot '+(j===0?'active':'')+'" data-idx="'+j+'"></button>'; }).join('');
@@ -1439,7 +1442,7 @@ function buildHorizontalGallery(prefix,items,folderFn,isFreelance){
   });
   setTimeout(function(){
     document.querySelectorAll('#'+prefix+'Track .exp-hcard').forEach(function(card,idx){
-      var imgs=card.querySelectorAll('.hcard-gallery img');
+      var imgs=card.querySelectorAll('.hcard-gallery img, .hcard-gallery video');
       var dots=card.querySelectorAll('.hcard-dot');
       var cur=0,timer;
       function goTo(n,manual){
