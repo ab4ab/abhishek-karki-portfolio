@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8" />
@@ -38,6 +38,8 @@
 
     /* macOS PURE BLACK & WHITE (DARK MODE - PURE MONOCHROME) */
     [data-theme="dark"] {
+      --menubar-text: #ffffff;
+      --menubar-text-sec: #b3b3b3;
       --macos-desktop: #000000;
       --macos-menubar: rgba(15, 15, 15, 0.85);
       --macos-window-bg: #0d0d0d;
@@ -65,33 +67,33 @@
       --macos-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.12);
     }
 
-    /* macOS PURE BLACK & WHITE (LIGHT MODE - PURE MONOCHROME) */
+    /* macOS LIGHT MODE (MATCHING CV) */
     [data-theme="light"] {
-      --macos-desktop: #f5f5f7;
-      --macos-menubar: rgba(255, 255, 255, 0.85);
+      --macos-desktop: #eef2f5;
+      --macos-menubar: rgba(26, 73, 114, 0.95);
       --macos-window-bg: #ffffff;
-      --macos-titlebar: #f0f0f2;
-      --macos-tabbar: #e5e5e8;
+      --macos-titlebar: #f8fafc;
+      --macos-tabbar: #f1f5f9;
       --macos-tab-active: #ffffff;
-      --macos-tab-hover: #ececee;
+      --macos-tab-hover: #e2e8f0;
       --macos-card: #ffffff;
-      --macos-card-hover: #f7f7f9;
-      --macos-card-elevated: #eeeeef;
+      --macos-card-hover: #f8fafc;
+      --macos-card-elevated: #f1f5f9;
 
-      --macos-border: rgba(0, 0, 0, 0.12);
-      --macos-border-bright: rgba(0, 0, 0, 0.22);
-      --macos-border-highlight: #000000;
+      --macos-border: rgba(0, 0, 0, 0.08);
+      --macos-border-bright: rgba(0, 0, 0, 0.15);
+      --macos-border-highlight: #1a4972;
 
-      --macos-text: #000000;
-      --macos-text-secondary: #4a4a4a;
+      --macos-text: #1e2a3e;
+      --macos-text-secondary: #5b6e8c;
       --macos-text-muted: #808080;
 
-      --macos-accent: #000000;
+      --macos-accent: #f4a261;
       --macos-accent-inverse: #ffffff;
 
-      --macos-dock-bg: rgba(255, 255, 255, 0.75);
-      --macos-dock-border: rgba(0, 0, 0, 0.15);
-      --macos-shadow: 0 25px 70px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.08);
+      --macos-dock-bg: rgba(255, 255, 255, 0.85);
+      --macos-dock-border: rgba(0, 0, 0, 0.1);
+      --macos-shadow: 0 20px 35px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.04);
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -116,7 +118,7 @@
 
     body {
       background: var(--macos-desktop);
-      color: var(--macos-text);
+      color: var(--menubar-text);
       font-family: var(--font-system);
       font-weight: 400;
       line-height: 1.55;
@@ -215,6 +217,8 @@
    macOS TOP MENU BAR
 ═══════════════════════════════════════════════════════ */
     .macos-menubar {
+      color: var(--macos-text);
+
       position: fixed;
       top: 0;
       left: 0;
@@ -241,16 +245,9 @@
       gap: 18px;
     }
 
-    .apple-logo {
-      font-size: 1rem;
-      color: var(--macos-text);
-      cursor: pointer;
-    }
+    .apple-logo { font-size: 1rem; color: var(--menubar-text); cursor: pointer; }
 
-    .menubar-app-name {
-      font-weight: 700;
-      color: var(--macos-text);
-    }
+    .menubar-app-name { font-weight: 700; color: var(--menubar-text); }
 
     .menubar-menu-items {
       display: flex;
@@ -259,13 +256,15 @@
     }
 
     .menubar-menu-items li {
+      color: var(--menubar-text-sec);
+
       color: var(--macos-text-secondary);
       cursor: pointer;
       transition: color 0.2s;
     }
 
     .menubar-menu-items li:hover {
-      color: var(--macos-text);
+      color: var(--menubar-text);
     }
 
     .menubar-right {
@@ -273,13 +272,13 @@
       align-items: center;
       gap: 14px;
       font-size: 0.8rem;
-      color: var(--macos-text-secondary);
+      color: var(--menubar-text-sec);
     }
 
     .btn-theme-toggle {
       background: transparent;
-      border: 1px solid var(--macos-border);
-      color: var(--macos-text);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--menubar-text);
       font-size: 0.78rem;
       padding: 2px 8px;
       border-radius: 4px;
@@ -557,583 +556,16 @@
     }
 
     @media (max-width: 900px) {
-      .macos-pane {
-        padding: 24px 16px 40px;
-      }
-
-      .url-capsule {
-        display: none;
-      }
-    }
-
-    .pane-section-header {
-      margin-bottom: 30px;
-    }
-
-    .pane-kicker {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--macos-text-muted);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .pane-kicker::before {
-      content: '';
-      width: 14px;
-      height: 1.5px;
-      background: var(--macos-text);
-    }
-
-    .pane-heading {
-      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      color: var(--macos-text);
-      line-height: 1.2;
-    }
-
-    .pane-lead {
-      font-size: 0.98rem;
-      color: var(--macos-text-secondary);
-      max-width: 720px;
-      margin-top: 6px;
-      line-height: 1.6;
-    }
-
-    /* ═══════════════════════════════════════════════════════
-   TAB 1: HERO & ABOUT (EXACT PRESERVED CONTENT)
-═══════════════════════════════════════════════════════ */
-    .hero-center-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 16px 0 36px;
-    }
-
-    .hero-tagline-capsule {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--macos-card-elevated);
-      border: 1px solid var(--macos-border);
-      padding: 5px 14px;
-      border-radius: 100px;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--macos-text-secondary);
-      margin-bottom: 24px;
-    }
-
-    /* Centered Photo with Clean Monochrome Frame */
-    .hero-photo-container {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      margin: 0 auto 26px;
-    }
-
-    .radar-ring-pulse {
-      position: absolute;
-      inset: -10px;
-      border-radius: 50%;
-      border: 1px dashed var(--macos-border-bright);
-      opacity: 0.5;
-      animation: radarSpin 24s linear infinite;
-    }
-
-    @keyframes radarSpin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .hero-photo-circle {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid var(--macos-text);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
-      background: var(--macos-card);
-    }
-
-    .hero-photo-circle img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-name-title {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(3.2rem, 6.5vw, 5.2rem);
-      line-height: 0.96;
-      letter-spacing: -0.03em;
-      color: var(--macos-text);
-      margin-bottom: 16px;
-    }
-
-    .hero-subtitle-text {
-      font-size: clamp(0.98rem, 1.25vw, 1.12rem);
-      line-height: 1.7;
-      color: var(--macos-text-secondary);
-      max-width: 580px;
-      margin: 0 auto 28px;
-    }
-
-    /* Original Stats from index.backup.html */
-    .hero-stats-row {
-      display: flex;
-      gap: 40px;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-
-    .hero-stat-item {
-      text-align: left;
-      padding-left: 16px;
-      border-left: 2px solid var(--macos-border-bright);
-    }
-
-    .stat-big-num {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 2.2rem;
-      line-height: 1;
-      color: var(--macos-text);
-    }
-
-    .stat-small-label {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--macos-text-muted);
-      margin-top: 4px;
-    }
-
-    /* Hero Action Buttons */
-    .hero-cta-bar {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .macos-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--macos-accent);
-      color: var(--macos-accent-inverse);
-      padding: 10px 22px;
-      border-radius: var(--radius-btn);
-      font-family: var(--font-system);
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      border: 1px solid var(--macos-accent);
-      transition: opacity 0.2s ease;
-    }
-
-    .macos-btn-primary:hover {
-      opacity: 0.85;
-    }
-
-    .macos-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--macos-card);
-      color: var(--macos-text);
-      padding: 10px 20px;
-      border-radius: var(--radius-btn);
-      font-family: var(--font-system);
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      border: 1px solid var(--macos-border-bright);
-      transition: all 0.2s ease;
-    }
-
-    .macos-btn-secondary:hover {
-      background: var(--macos-card-hover);
-      border-color: var(--macos-text);
-    }
-
-    /* ── Integrated About Section (Tab 1 lower part) ── */
-    .about-split-grid {
-      border-top: 1px solid var(--macos-border);
-      padding-top: 40px;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 46px;
-      align-items: center;
-      text-align: left;
-    }
-
-    .about-kicker-text {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--macos-text-muted);
-      margin-bottom: 10px;
-    }
-
-    .about-heading-text {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(2.2rem, 3.8vw, 3rem);
-      line-height: 1.1;
-      color: var(--macos-text);
-      margin-bottom: 18px;
-    }
-
-    .about-body-text {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--macos-text-secondary);
-      margin-bottom: 18px;
-    }
-
-    .about-photo-card {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 3 / 4;
-      border-radius: var(--radius-card);
-      overflow: visible;
-      background: var(--macos-card);
-      margin: 0 auto;
-      border: 1px solid var(--macos-border-bright);
-    }
-
-    .about-photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: var(--radius-card);
-    }
-
-    .about-accent-badge {
-      position: absolute;
-      bottom: 16px;
-      left: -14px;
-      background: var(--macos-card-elevated);
-      border: 1px solid var(--macos-border-bright);
-      padding: 6px 16px;
-      border-radius: 100px;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--macos-text);
-      white-space: nowrap;
-    }
-
-    .about-year-circle {
-      position: absolute;
-      top: 16px;
-      right: -12px;
-      background: var(--macos-accent);
-      color: var(--macos-accent-inverse);
-      border-radius: 50%;
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      text-align: center;
-      line-height: 1.3;
-      font-weight: 600;
-    }
-
-    @media (max-width: 900px) {
-      .about-split-grid {
+      .exp-site-showcase {
         grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
       }
-    }
-
-    /* ═══════════════════════════════════════════════════════
-   TAB 2: EDUCATION (LARGE TILES WITH REAL DETAILS)
-═══════════════════════════════════════════════════════ */
-    .edu-showcase-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    .edu-macos-card {
-      background: var(--macos-card);
-      border: 1px solid var(--macos-border);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 42% 58%;
-      transition: all 0.25s ease;
-    }
-
-    .edu-macos-card:hover {
-      border-color: var(--macos-border-bright);
-      transform: translateY(-2px);
-    }
-
-    .edu-card-media {
-      position: relative;
-      min-height: 320px;
-      background: #000;
-      overflow: hidden;
-    }
-
-    .edu-card-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: contrast(1.05);
-    }
-
-    .edu-period-badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      background: rgba(0, 0, 0, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-    }
-
-    .edu-card-info {
-      padding: 30px 34px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .edu-degree-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--macos-text);
-      line-height: 1.3;
-      margin-bottom: 4px;
-    }
-
-    .edu-institution-title {
-      font-size: 0.92rem;
-      color: var(--macos-text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .edu-honors-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--macos-card-elevated);
-      border: 1px solid var(--macos-border-bright);
-      color: var(--macos-text);
-      padding: 4px 12px;
-      border-radius: 5px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      font-family: var(--font-mono);
-      margin-bottom: 14px;
-      width: fit-content;
-    }
-
-    .edu-details-box {
-      border-top: 1px solid var(--macos-border);
-      padding-top: 14px;
-      margin-top: 4px;
-    }
-
-    .edu-details-subtitle {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--macos-text);
-      margin-bottom: 8px;
-    }
-
-    .edu-real-bullets {
-      list-style: none;
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: var(--macos-text-secondary);
-    }
-
-    .edu-real-bullets li {
-      margin-bottom: 6px;
-      padding-left: 16px;
-      position: relative;
-    }
-
-    .edu-real-bullets li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--macos-text);
-    }
-
-    @media (max-width: 900px) {
-      .edu-macos-card {
-        grid-template-columns: 1fr;
+      .site-viewer-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--macos-border);
       }
-
-      .edu-card-media {
-        min-height: 220px;
-      }
-
-      .edu-card-info {
-        padding: 22px 18px;
-      }
-    }
-
-    /* ═══════════════════════════════════════════════════════
-   TAB 3: WORK EXPERIENCE (PROMINENT & NOTICEABLE SELECTOR)
-═══════════════════════════════════════════════════════ */
-    .exp-macos-console {
-      background: var(--macos-card);
-      border: 1px solid var(--macos-border);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-    }
-
-    .exp-console-header {
-      background: var(--macos-titlebar);
-      border-bottom: 1px solid var(--macos-border);
-      padding: 18px 24px;
-    }
-
-    .exp-role-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--macos-text);
-    }
-
-    .exp-role-sub {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--macos-text-secondary);
-      margin-top: 2px;
-    }
-
-    /* PROMINENT SITE SELECTOR STRIP */
-    .site-selector-label-bar {
-      background: var(--macos-card-elevated);
-      border-bottom: 1px solid var(--macos-border);
-      padding: 8px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--macos-text-muted);
-    }
-
-    .site-selector-label-bar span {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .exp-sites-tabstrip {
-      background: var(--macos-tabbar);
-      border-bottom: 1px solid var(--macos-border);
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 8px;
-      padding: 12px 16px;
-    }
-
-    /* Big noticeable site button */
-    .site-pill-btn {
-      background: var(--macos-card);
-      border: 1.5px solid var(--macos-border);
-      padding: 12px 14px;
-      border-radius: 8px;
-      color: var(--macos-text-secondary);
-      font-family: var(--font-system);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.2s ease;
-    }
-
-    .site-pill-btn:hover {
-      background: var(--macos-card-hover);
-      color: var(--macos-text);
-      border-color: var(--macos-border-bright);
-      transform: translateY(-2px);
-    }
-
-    .site-pill-btn.active {
-      background: var(--macos-accent);
-      color: var(--macos-accent-inverse);
-      border-color: var(--macos-accent);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-    }
-
-    .site-pill-btn .site-btn-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .site-pill-btn .site-num-badge {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      background: rgba(125, 125, 125, 0.2);
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-
-    .site-pill-btn.active .site-num-badge {
-      background: var(--macos-accent-inverse);
-      color: var(--macos-accent);
-    }
-
-    /* Split Active Site Display */
-    .exp-site-showcase {
-      display: grid;
-      grid-template-columns: 58% 42%;
-      min-height: 520px;
-    }
-
-    .site-viewer-panel {
-      background: #000;
-      display: flex;
-      flex-direction: column;
-      border-right: 1px solid var(--macos-border);
-      position: relative;
+      /* Other panes will reuse this */
     }
 
     .site-main-photo-wrap {
@@ -1323,18 +755,17 @@
     }
 
     @media (max-width: 900px) {
-      .exp-sites-tabstrip {
-        grid-template-columns: 1fr;
-      }
-
       .exp-site-showcase {
         grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
       }
-
       .site-viewer-panel {
         border-right: none;
         border-bottom: 1px solid var(--macos-border);
       }
+      /* Other panes will reuse this */
+    }
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -2268,7 +1699,20 @@
       max-height: 85vh;
       border-radius: 8px;
     }
-  </style>
+  
+    @media (max-width: 600px) {
+      .hero-name-title { font-size: 2.8rem; }
+      .about-split-grid { padding-top: 20px; gap: 24px; }
+      .about-heading-text { font-size: 2rem; }
+      .hero-stats-row { gap: 20px; }
+      .macos-desktop-space { padding: 20px 10px 80px; }
+      .macos-pane { padding: 20px 16px; }
+      .site-pill-btn { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .site-nav-overlay-arrows { padding: 0 8px; }
+      .btn-site-arr { width: 32px; height: 32px; }
+    }
+
+</style>
 </head>
 
 <body>
@@ -2656,15 +2100,45 @@
             <p class="pane-lead"><span id="macProjCount">10</span> selected engineering &amp; GIS studies.</p>
           </div>
 
-          <div class="proj-filter-row" id="macProjFilters">
-            <button class="btn-filter-pill active" data-filter="all">All Projects</button>
-            <button class="btn-filter-pill" data-filter="insar">InSAR / Geotech</button>
-            <button class="btn-filter-pill" data-filter="remote sensing">Remote Sensing</button>
-            <button class="btn-filter-pill" data-filter="hydrology">Hydrology &amp; Flood</button>
-            <button class="btn-filter-pill" data-filter="civil 3d">Civil 3D</button>
+          <div class="exp-macos-console">
+            <div class="exp-console-header">
+              <div class="exp-role-title">Featured Case Studies</div>
+              <div class="exp-role-sub">10 selected engineering &amp; GIS studies.</div>
+            </div>
+            <div class="site-selector-label-bar">
+              <span><i class="fas fa-hand-pointer"></i> <strong>Select a Project Below:</strong></span>
+            </div>
+            <nav class="exp-sites-tabstrip" id="macProjTabs"></nav>
+            <div class="exp-site-showcase">
+              <div class="site-viewer-panel">
+                <div class="site-main-photo-wrap">
+                  <img id="macProjImg" src="" alt="Project media" onclick="zoomCurrentMacProj()" style="display:none;" />
+                  <video id="macProjVideo" src="" autoplay loop muted playsinline style="display:none; width:100%; height:100%; object-fit:cover;"></video>
+                  <div class="site-photo-caption-bar" id="macProjCaption">Caption</div>
+                  <div class="site-nav-overlay-arrows">
+                    <button class="btn-site-arr" onclick="stepMacProjPhoto(-1)" title="Previous"><i class="fas fa-chevron-left"></i></button>
+                    <button class="btn-site-arr" onclick="stepMacProjPhoto(1)" title="Next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="site-thumbs-strip" id="macProjThumbs"></div>
+              </div>
+              <div class="site-details-panel">
+                <div>
+                  <div class="site-num-kicker" id="macProjNum">01</div>
+                  <h3 class="site-dossier-heading" id="macProjTitle">Title</h3>
+                  <p class="site-dossier-paragraph" id="macProjDesc">Desc</p>
+                  <div class="site-real-tasks-box">
+                    <div class="site-tasks-heading">Project Details:</div>
+                    <p class="site-tasks-list" id="macProjFull" style="font-size: 0.82rem; color: var(--macos-text-secondary); line-height: 1.6;"></p>
+                    <div id="macProjPdf" style="margin-top: 12px;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="site-tags-wrap" id="macProjTags"></div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div class="proj-cards-grid" id="macProjGrid"></div>
         </section>
 
         <!-- ─────────────────────────────────────────────
@@ -2677,8 +2151,43 @@
             <p class="pane-lead">7 selected works in 3D modeling, structural analysis, HVAC, and drone surveying.</p>
           </div>
 
-          <!-- Cards now feature prominent preview images so you can see them immediately! -->
-          <div class="fl-cards-grid" id="macFreelanceGrid"></div>
+          <div class="exp-macos-console">
+            <div class="exp-console-header">
+              <div class="exp-role-title">Freelance &amp; Academic Projects</div>
+              <div class="exp-role-sub">7 selected works in 3D modeling, structural analysis, HVAC, and drone surveying.</div>
+            </div>
+            <div class="site-selector-label-bar">
+              <span><i class="fas fa-hand-pointer"></i> <strong>Select a Project Below:</strong></span>
+            </div>
+            <nav class="exp-sites-tabstrip" id="macFlTabs"></nav>
+            <div class="exp-site-showcase">
+              <div class="site-viewer-panel">
+                <div class="site-main-photo-wrap">
+                  <img id="macFlImg" src="" alt="Project media" onclick="zoomCurrentMacFl()" style="display:none;" />
+                  <video id="macFlVideo" src="" autoplay loop muted playsinline style="display:none; width:100%; height:100%; object-fit:cover;"></video>
+                  <div class="site-photo-caption-bar" id="macFlCaption">Caption</div>
+                  <div class="site-nav-overlay-arrows">
+                    <button class="btn-site-arr" onclick="stepMacFlPhoto(-1)" title="Previous"><i class="fas fa-chevron-left"></i></button>
+                    <button class="btn-site-arr" onclick="stepMacFlPhoto(1)" title="Next"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                </div>
+                <div class="site-thumbs-strip" id="macFlThumbs"></div>
+              </div>
+              <div class="site-details-panel">
+                <div>
+                  <div class="site-num-kicker" id="macFlNum">01</div>
+                  <h3 class="site-dossier-heading" id="macFlTitle">Title</h3>
+                  <p class="site-dossier-paragraph" id="macFlDesc">Desc</p>
+                  <div class="site-real-tasks-box" id="macFlPdfBox" style="display:none;">
+                    <div id="macFlPdf" style="margin-top: 12px;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="site-tags-wrap" id="macFlTags"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- ─────────────────────────────────────────────
@@ -2766,10 +2275,34 @@
             <p class="pane-lead">Official credentials, licences, and course completion certificates.</p>
           </div>
 
-          <div class="cert-cards-grid" id="macCertGrid"></div>
-
-          <div class="pane-kicker" style="margin-top:20px">Professional Licences &amp; Awards</div>
-          <div class="accreditation-ribbon" id="macBadgesRibbon"></div>
+          <div class="exp-macos-console">
+            <div class="exp-console-header">
+              <div class="exp-role-title">Certifications &amp; Credentials</div>
+              <div class="exp-role-sub">Official credentials, licences, and course completion certificates.</div>
+            </div>
+            <div class="site-selector-label-bar">
+              <span><i class="fas fa-hand-pointer"></i> <strong>Select a Certificate Below:</strong></span>
+            </div>
+            <nav class="exp-sites-tabstrip" id="macCertTabs"></nav>
+            <div class="exp-site-showcase">
+              <div class="site-viewer-panel">
+                <div class="site-main-photo-wrap">
+                  <img id="macCertImg" src="" alt="Certificate" onclick="zoomCurrentMacCert()" />
+                </div>
+              </div>
+              <div class="site-details-panel">
+                <div>
+                  <div class="site-num-kicker" id="macCertNum">01</div>
+                  <h3 class="site-dossier-heading" id="macCertTitle">Title</h3>
+                  <p class="site-dossier-paragraph" id="macCertDesc">Desc</p>
+                </div>
+                <div>
+                  <div class="pane-kicker" style="margin-top:20px; font-size: 0.8rem; margin-bottom: 8px;">Professional Licences &amp; Awards</div>
+                  <div class="accreditation-ribbon" id="macBadgesRibbon"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- ─────────────────────────────────────────────
@@ -3556,13 +3089,59 @@
     /* ────────────────────────────────────────────────────────
        CERTIFICATIONS & BADGES
     ──────────────────────────────────────────────────────── */
-    function initMacCertifications() {
-      var grid = document.getElementById('macCertGrid');
-      var ribbon = document.getElementById('macBadgesRibbon');
-      if (!grid || !ribbon) return;
+    var curCertIdx = 0;
 
+    function initMacCertifications() {
+      var tabstrip = document.getElementById('macCertTabs');
+      var ribbon = document.getElementById('macBadgesRibbon');
+      if (!tabstrip || !ribbon) return;
+
+      tabstrip.innerHTML = CERT_IMAGES.map(function (c, i) {
+        return '<button class="site-pill-btn ' + (i === 0 ? 'active' : '') + '" data-idx="' + i + '" title="Click to view ' + c.title + '">'
+          + '<div class="site-btn-left">'
+          + '<span class="site-num-badge">0' + (i + 1) + '</span>'
+          + '<span>' + c.title.substring(0, 18) + '...</span>'
+          + '</div>'
+          + '<i class="fas fa-chevron-right" style="font-size:0.7rem; opacity:0.6"></i>'
+          + '</button>';
+      }).join('');
+
+      tabstrip.querySelectorAll('.site-pill-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          tabstrip.querySelectorAll('.site-pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          loadMacCert(parseInt(btn.dataset.idx));
+        });
+      });
+
+      ribbon.innerHTML = CERT_BADGES.map(function (b) {
+        return '<div class="accreditation-pill">'
+          + '<i class="fas ' + b.icon + '"></i>'
+          + '<span><strong>' + b.title + '</strong> · ' + b.desc + '</span>'
+          + '</div>';
+      }).join('');
+
+      loadMacCert(0);
+    }
+
+    function loadMacCert(idx) {
+      curCertIdx = idx;
+      var c = CERT_IMAGES[idx];
+
+      document.getElementById('macCertNum').textContent = 'Cert 0' + (idx + 1);
+      document.getElementById('macCertTitle').textContent = c.title;
+      document.getElementById('macCertDesc').textContent = c.sub;
+
+      var src = encodeURI(c.src);
+      document.getElementById('macCertImg').src = src;
+    }
+
+    function zoomCurrentMacCert() {
       var allCerts = CERT_IMAGES.map(function (c) {
         return { src: encodeURI(c.src), caption: c.title + ' — ' + c.sub };
+      });
+      openMacLightbox(allCerts, curCertIdx);
+    };
       });
 
       grid.innerHTML = CERT_IMAGES.map(function (c, i) {
@@ -3648,7 +3227,7 @@
     updateMacClock();
 
     function initMacTheme() {
-      var saved = localStorage.getItem('mac_portfolio_theme') || 'dark';
+      var saved = localStorage.getItem('mac_portfolio_theme') || 'light';
       document.documentElement.setAttribute('data-theme', saved);
     }
     function toggleMacTheme() {
